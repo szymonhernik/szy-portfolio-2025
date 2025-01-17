@@ -144,7 +144,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        inter: ["var(--font-inter)"],
+        zimula: ["var(--font-zimula)"],
         apple: ["var(--font-apple)"],
       },
       borderRadius: {

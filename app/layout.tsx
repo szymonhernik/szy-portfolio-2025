@@ -6,15 +6,14 @@ import { Providers } from "@/components/providers";
 import { OpenGraph } from "@/lib/og";
 
 import clsx from "clsx";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 
 export const metadata: Metadata = {
   ...OpenGraph,
 };
 
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
+const zimula = localFont({
+  src: "./fonts/zimula-inkspot/ZimulaTrial-TrialRegInkSpot.ttf",
 });
 
 export default function RootLayout({
@@ -23,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={clsx(inter.className)} suppressHydrationWarning>
+    <html lang="en" className={clsx(zimula.className)} suppressHydrationWarning>
       <body>
         <Providers>
           <main className="mx-auto max-w-screen-sm overflow-x-hidden px-6 py-24 md:overflow-x-visible ">
