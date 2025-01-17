@@ -1,15 +1,9 @@
 @import url("@radix-ui/colors/gray.css");
 @import url("@radix-ui/colors/gray-alpha.css");
-@import url("@radix-ui/colors/gray-dark.css");
-@import url("@radix-ui/colors/gray-dark-alpha.css");
 @import url("@radix-ui/colors/pink.css");
 @import url("@radix-ui/colors/pink-alpha.css");
-@import url("@radix-ui/colors/pink-dark.css");
-@import url("@radix-ui/colors/pink-dark-alpha.css");
 @import url("@radix-ui/colors/yellow.css");
 @import url("@radix-ui/colors/yellow-alpha.css");
-@import url("@radix-ui/colors/yellow-dark.css");
-@import url("@radix-ui/colors/yellow-dark-alpha.css");
 @import url("@radix-ui/colors/black-alpha.css");
 @import url("@radix-ui/colors/white-alpha.css");
 
@@ -227,14 +221,6 @@
     code[data-theme*=" "] span {
       color: var(--shiki-light);
       background-color: var(--shiki-light-bg);
-    }
-
-    &.dark {
-      code[data-theme*=" "],
-      code[data-theme*=" "] span {
-        color: var(--shiki-dark);
-        background-color: var(--shiki-dark-bg);
-      }
     }
   }
 
