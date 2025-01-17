@@ -10,7 +10,7 @@ const Spacer = () => <div style={{ marginTop: "24px" }} />;
 export default function Home() {
   return (
     <FadeIn.Container>
-      <FadeIn.Item>
+      {/* <FadeIn.Item>
         <div className="flex justify-between">
           <div>
             <h1>Sylph</h1>
@@ -18,11 +18,11 @@ export default function Home() {
           </div>
         </div>
       </FadeIn.Item>
-      <Spacer />
+      <Spacer /> */}
       <FadeIn.Item>
         <Link href="/typography-tests/01">Typography Test</Link>
       </FadeIn.Item>
-      <FadeIn.Item>
+      {/* <FadeIn.Item>
         <Posts category="guides" />
       </FadeIn.Item>
       <FadeIn.Item>
@@ -32,7 +32,7 @@ export default function Home() {
       <FadeIn.Item>
         <Footer />
       </FadeIn.Item>
-      <DeployButton />
+      <DeployButton /> */}
     </FadeIn.Container>
   );
 }

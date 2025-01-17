@@ -152,6 +152,9 @@ const config: Config = {
         base: "var(--radius-base)",
         large: "var(--radius-large)",
       },
+      screens: {
+        "3xl": "1920px",
+      },
     },
   },
   plugins: [
@@ -161,10 +164,50 @@ const config: Config = {
           fontSize: "12px",
           letterSpacing: "0.01px",
         },
-        ".text-default": {
-          fontSize: "14px",
-          lineHeight: "21px",
-          letterSpacing: "-0.09px",
+
+        // ".text-default": {
+        //   // Smooth scaling between 1.125rem (18px) and 1.3125rem (21px)
+        //   fontSize: "clamp(1.125rem, 1.0125rem + 0.3vw, 1.3125rem)",
+        //   // Adjust line height proportionally
+        //   // lineHeight: "clamp(1.3rem, 1.19rem + 0.3vw, 1.38rem)",
+        //   lineHeight: "clamp(1.3em, 1.19em + 0.3vw, 1.38em)",
+        //   letterSpacing: "-0.0095rem",
+        //   // "@screen 3xl": {
+        //   //   fontSize: "clamp(1.3125rem, 1.2rem + 0.3vw, 1.5rem)",
+        //   //   lineHeight: "clamp(1.38rem, 1.25rem + 0.3vw, 1.6rem)",
+        //   // },
+        // },
+        // ".text-default-v2": {
+        //   fontSize: "max(1.125rem, 1vw)",
+        //   lineHeight: "max(1.3rem, 1.2vw)",
+        //   letterSpacing: "-0.0095rem",
+        // },
+        // ".text-default": {
+        //   // Smooth scaling between 1.125rem (18px) and 1.3125rem (21px)
+        //   fontSize: "clamp(1.125rem, 1.0125rem + 0.3vw, 1.3125rem)",
+        //   // Adjust line height proportionally
+        //   // lineHeight: "clamp(1.3rem, 1.19rem + 0.3vw, 1.38rem)",
+        //   lineHeight: "clamp(1.3em, 1.19em + 0.3vw, 1.38em)",
+        //   letterSpacing: "-0.0095rem",
+        //   // "@screen 3xl": {
+        //   //   fontSize: "clamp(1.3125rem, 1.2rem + 0.3vw, 1.5rem)",
+        //   //   lineHeight: "clamp(1.38rem, 1.25rem + 0.3vw, 1.6rem)",
+        //   // },
+        // },
+        // ".text-default-v2": {
+        //   fontSize: "max(1.125rem, 1.2vw)",
+        //   lineHeight: "max(1.3rem, 1.25vw)",
+        //   letterSpacing: "-0.0095rem",
+        // },
+        // ".text-default-v2": {
+        //   fontSize: "1.125rem",
+        //   lineHeight: "1.3rem",
+        //   letterSpacing: "-0.0095rem",
+        // },
+        ".text-default-v2": {
+          fontSize: "clamp(1.125rem, 1.0125rem + 0.3vw, 1.3125rem)",
+          lineHeight: "clamp(1.3rem, 1.19rem + 0.3vw, 1.38rem)",
+          letterSpacing: "-0.0095rem",
         },
       });
     }),

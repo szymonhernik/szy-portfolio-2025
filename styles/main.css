@@ -37,8 +37,8 @@
   }
 
   * {
-    --webkit-font-smoothing: antialiased;
-    --moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
     font-variant-ligatures: common-ligatures;
     text-wrap: pretty;
@@ -58,7 +58,8 @@
   }
 
   html {
-    @apply text-default text-foreground bg-background;
+    @apply text-default-v2 text-foreground bg-background;
+    /* @apply text-foreground bg-background; */
 
     h1,
     h2,
