@@ -205,8 +205,8 @@ const config: Config = {
         //   letterSpacing: "-0.0095rem",
         // },
         ".text-default-v2": {
-          fontSize: "clamp(1.125rem, 1.0125rem + 0.3vw, 1.3125rem)",
-          lineHeight: "clamp(1.35rem, 1.24rem + 0.3vw, 1.43rem)",
+          fontSize: "clamp(1rem, 0.9375rem + 0.4vw, 1.3125rem)",
+          lineHeight: "clamp(1.45rem, 1.24rem + 0.4vw, 1.53rem)",
           letterSpacing: "-0.0095rem",
         },
       });
