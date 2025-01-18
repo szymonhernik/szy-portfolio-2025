@@ -2,6 +2,7 @@ import "@/styles/main.css";
 
 import type { Metadata } from "next";
 
+import Navigation from "@/components/navigation";
 import { Providers } from "@/components/providers";
 import { OpenGraph } from "@/lib/og";
 
@@ -26,7 +27,10 @@ export default function RootLayout({
       <body>
         <Providers>
           <main className="px-4 py-4 ">
-            <article className="article">{children}</article>
+            <Navigation />
+            <article className="article grid grid-cols-12 items-start">
+              {children}
+            </article>
           </main>
         </Providers>
       </body>
