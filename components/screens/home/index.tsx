@@ -20,7 +20,7 @@ export default function Home() {
       </FadeIn.Item>
       <Spacer /> */}
       <FadeIn.Item>
-        <Link href="/typography-tests/01">Typography Test</Link>
+        <Link href="/information">Information</Link>
       </FadeIn.Item>
       {/* <FadeIn.Item>
         <Posts category="guides" />

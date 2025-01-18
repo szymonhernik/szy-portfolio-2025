@@ -1,4 +1,4 @@
-export default function Page() {
+export default function Information() {
   return (
     // 12 column grid
     <div className="">
