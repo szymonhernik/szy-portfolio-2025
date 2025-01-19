@@ -24,7 +24,7 @@ export default function Seed({
   };
 
   return (
-    <button onClick={handleClick} className={className}>
+    <button onClick={handleClick} className={className} type="button">
       {content}
     </button>
   );

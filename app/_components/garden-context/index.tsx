@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 
 import { OverlayList } from "../daily-inspirations";
 
@@ -22,10 +22,11 @@ export function GardenProvider({ children }: { children: React.ReactNode }) {
     setIsOpen(true);
   };
 
-  const closeGarden = () => {
+  const closeGarden = useCallback(() => {
     setIsOpen(false);
     setSelectedItemId(null);
-  };
+  }, []);
+
   useEffect(() => {
     const handlePopState = () => {
       closeGarden();
@@ -33,19 +34,12 @@ export function GardenProvider({ children }: { children: React.ReactNode }) {
 
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
-  }, []);
+  }, [closeGarden]);
 
   return (
-    <GardenContext.Provider
-      value={{ isOpen, selectedItemId, openGarden, closeGarden }}
-    >
+    <GardenContext.Provider value={{ isOpen, selectedItemId, openGarden, closeGarden }}>
       {children}
-      {isOpen && (
-        <OverlayList
-          onClose={closeGarden}
-          initialSelectedItemId={selectedItemId}
-        />
-      )}
+      {isOpen && <OverlayList onClose={closeGarden} initialSelectedItemId={selectedItemId} />}
     </GardenContext.Provider>
   );
 }
