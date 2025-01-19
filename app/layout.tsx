@@ -28,9 +28,7 @@ export default function RootLayout({
         <Providers>
           <main className="px-4 py-4 ">
             <Navigation />
-            <article className="article grid grid-cols-12 items-start">
-              {children}
-            </article>
+            <article className="article grid grid-cols-12 items-start">{children}</article>
           </main>
         </Providers>
       </body>

@@ -8,7 +8,7 @@ export default function NotFound() {
       <div className="">
         <h2>Page Not Found</h2>
 
-        <Link href="/" className="mt-4  transition hover:opacity-50">
+        <Link href="/" className="mt-4 transition hover:opacity-50">
           Go to homepage
         </Link>
       </div>

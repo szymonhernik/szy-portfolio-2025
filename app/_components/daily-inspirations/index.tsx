@@ -18,8 +18,7 @@ export default function DailyInspirations() {
         >
           unsorted list
         </button>{" "}
-        are: Paul B. Preciado's Can the monster speak?, Ian Cheng games, Kae
-        Tempest lyrics.{" "}
+        are: Paul B. Preciado's Can the monster speak?, Ian Cheng games, Kae Tempest lyrics.{" "}
       </p>
     </>
   );
@@ -35,44 +34,44 @@ function OverlayList({ onClose }: { onClose: () => void }) {
   const overlayRef = useRef<HTMLDivElement>(null);
 
   const items = [
-    "fresh apples",
-    "Ire's tomato soup",
-    "towering mountains",
-    "old books",
-    "wooden chairs",
-    "sharp pencils",
-    "playful dogs",
-    "sturdy bridges",
-    "sweet cupcakes",
-    "acoustic guitars",
-    "futuristic robots",
-    "Kae Tempest' lyrics",
-    "Paul B. Preciado's Can the monster speak?",
-    "Ian Cheng games",
-    "the hole in our living-room curtain",
-    "the sound of a train",
-    "the smell of rain",
-    "the taste of coffee",
-    "the feel of a soft pillow",
-    "the sound of a train",
-    "the smell of rain",
-    "the taste of coffee",
-    "sturdy bridges",
-    "sweet cupcakes",
-    "acoustic guitars",
-    "futuristic robots",
-    "Kae Tempest' lyrics",
-    "Paul B. Preciado's Can the monster speak?",
-    "Ian Cheng games",
-    "the hole in our living-room curtain",
-    "the sound of a train",
-    "the smell of rain",
-    "the taste of coffee",
-    "the feel of a soft pillow",
-    "the sound of a train",
-    "the smell of rain",
-    "the taste of coffee",
-    "the feel of a soft pillow",
+    { id: 1, text: "fresh apples" },
+    { id: 2, text: "Ire's tomato soup" },
+    { id: 3, text: "towering mountains" },
+    { id: 4, text: "old books" },
+    { id: 5, text: "wooden chairs" },
+    { id: 6, text: "sharp pencils" },
+    { id: 7, text: "playful dogs" },
+    { id: 8, text: "sturdy bridges" },
+    { id: 9, text: "sweet cupcakes" },
+    { id: 10, text: "acoustic guitars" },
+    { id: 11, text: "futuristic robots" },
+    { id: 12, text: "Kae Tempest' lyrics" },
+    { id: 13, text: "Paul B. Preciado's Can the monster speak?" },
+    { id: 14, text: "Ian Cheng games" },
+    { id: 15, text: "the hole in our living-room curtain" },
+    { id: 16, text: "the sound of a train" },
+    { id: 17, text: "the smell of rain" },
+    { id: 18, text: "the taste of coffee" },
+    { id: 19, text: "the feel of a soft pillow" },
+    { id: 20, text: "the sound of a train" },
+    { id: 21, text: "the smell of rain" },
+    { id: 22, text: "the taste of coffee" },
+    { id: 23, text: "sturdy bridges" },
+    { id: 24, text: "sweet cupcakes" },
+    { id: 25, text: "acoustic guitars" },
+    { id: 26, text: "futuristic robots" },
+    { id: 27, text: "Kae Tempest' lyrics" },
+    { id: 28, text: "Paul B. Preciado's Can the monster speak?" },
+    { id: 29, text: "Ian Cheng games" },
+    { id: 30, text: "the hole in our living-room curtain" },
+    { id: 31, text: "the sound of a train" },
+    { id: 32, text: "the smell of rain" },
+    { id: 33, text: "the taste of coffee" },
+    { id: 34, text: "the feel of a soft pillow" },
+    { id: 35, text: "the sound of a train" },
+    { id: 36, text: "the smell of rain" },
+    { id: 37, text: "the taste of coffee" },
+    { id: 38, text: "the feel of a soft pillow" },
   ];
 
   if (selectedItem) {
@@ -92,26 +91,24 @@ function OverlayList({ onClose }: { onClose: () => void }) {
   }
 
   return (
-    <div
-      ref={overlayRef}
-      className="fixed inset-0 bg-background z-[100] overscroll-none overflow-y-auto p-4"
-    >
+    <div ref={overlayRef} className="fixed inset-0 z-[100] overflow-y-auto overscroll-none bg-background p-4">
       <p>An overgrown garden of inspirations</p>
       <button className="fixed top-4 right-4" onClick={onClose} type="button">
         X
       </button>
       <div className="text-[3rem] leading-[1.2]">
-        {items.map((item, index) => (
+        {items.map((item) => (
           <button
-            key={index}
+            type="button"
+            key={item.id}
             onClick={() => {
               setScrollPosition(overlayRef.current?.scrollTop || 0);
-              setSelectedItem(item);
+              setSelectedItem(item.text);
             }}
             className="hover:text-secondary"
           >
-            {item}
-            {index < items.length - 1 && ", "}
+            {item.text}
+            {item !== items[items.length - 1] && ", "}
           </button>
         ))}
       </div>
@@ -127,11 +124,11 @@ function DetailOverlay({
   onClose: () => void;
 }) {
   return (
-    <div className="fixed inset-0 bg-background z-[200] overscroll-none overflow-y-auto p-4">
+    <div className="fixed inset-0 z-[200] overflow-y-auto overscroll-none bg-background p-4">
       <button className="fixed top-4 right-4" onClick={onClose} type="button">
         X
       </button>
-      <h2 className="text-[2rem] mb-4">{item}</h2>
+      <h2 className="mb-4 text-[2rem]">{item}</h2>
       <p>Detailed content about {item} goes here...</p>
     </div>
   );
