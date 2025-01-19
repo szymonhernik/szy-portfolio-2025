@@ -120,6 +120,8 @@ const config: Config = {
           a11: "var(--yellow-a11)",
           a12: "var(--yellow-a12)",
         },
+        primary: "#000000",
+        secondary: "#ADADAD",
         background: "var(--bg)",
         foreground: "var(--fg)",
         muted: "var(--muted)",

@@ -1,3 +1,4 @@
+import DailyInspirations from "@/app/_components/daily-inspirations";
 import { DeployButton } from "@/components/deploy";
 import { Footer } from "@/components/footer";
 import * as FadeIn from "@/components/motion/staggers/fade";
@@ -9,18 +10,40 @@ const Spacer = () => <div style={{ marginTop: "24px" }} />;
 
 export default function Home() {
   return (
-    <div className="col-span-10 lg:col-span-7">
-      <p>
-        Today’s three random inspirations from a rather unsorted list are: Paul
-        B. Preciado’s Can the monster speak?, Ian Cheng games, Kae Tempest
-        lyrics.{" "}
-      </p>
-      <p className="text-[3rem] leading-[1.2]">
-        Szymon Eda Hernik is a graphic designer and front-end web developer.
-        They also form half of isz szi studio, an artistic design studio based
-        in Brussels.
-      </p>
-    </div>
+    <>
+      <div className="col-span-12 md:col-span-10 flex flex-col md:flex-col-reverse gap-8">
+        <p className="text-[3rem] leading-[1.2] mt">
+          Szymon Eda Hernik is a graphic designer and front-end web developer.
+          They also form half of{" "}
+          <span className="text-secondary">isz szi studio</span>, an artistic
+          design studio based in Brussels.
+        </p>
+        <DailyInspirations />
+      </div>
+      <div className="col-span-12">
+        {/* test project items */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ">
+          <div className="flex flex-col ">
+            <div className="bg-red-500 h-[400px]"></div>
+          </div>
+          <div className="flex flex-col">
+            <div className="bg-red-500 h-[400px]"></div>
+          </div>
+          <div className="flex flex-col">
+            <div className="bg-red-500 h-[400px]"></div>
+          </div>
+          <div className="flex flex-col">
+            <div className="bg-red-500 h-[400px]"></div>
+          </div>
+          <div className="flex flex-col">
+            <div className="bg-red-500 h-[400px]"></div>
+          </div>
+          <div className="flex flex-col">
+            <div className="bg-red-500 h-[400px]"></div>
+          </div>
+        </div>
+      </div>
+    </>
   );
   // <FadeIn.Container>
   // {/* <FadeIn.Item>
