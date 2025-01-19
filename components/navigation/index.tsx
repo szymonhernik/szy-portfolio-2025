@@ -23,7 +23,7 @@ export function NavigationMobile() {
     <>
       <button
         className={clsx(
-          "text-large pl-4 fixed top-4 right-4 z-[100] md:hidden overscroll-none transition-transform duration-300",
+          "fixed top-4 right-4 z-[100] overscroll-none pl-4 text-large transition-transform duration-300 md:hidden",
           isOpen ? "translate-y-[calc(100svh-170px)]" : "translate-y-0",
         )}
         onClick={() => setIsOpen(true)}
@@ -49,19 +49,15 @@ function MobileSheet({
   return (
     <div
       className={clsx(
-        "fixed inset-0 h-screen w-screen bg-background z-[90] md:hidden overscroll-none flex flex-col justify-center items-center transition-transform duration-300 overscroll-y-contain",
+        "fixed inset-0 z-[90] flex h-screen w-screen flex-col items-center justify-center overscroll-none overscroll-y-contain bg-background transition-transform duration-300 md:hidden",
         "translate-y-0",
       )}
     >
-      <button
-        type="button"
-        className="absolute top-4 right-4 text-large "
-        onClick={() => toggle(false)}
-      >
+      <button type="button" className="absolute top-4 right-4 text-large " onClick={() => toggle(false)}>
         X
       </button>
       <nav>
-        <ul className="text-large list-none text-center">
+        <ul className="list-none text-center text-large">
           <li>Information</li>
           <li>Projects</li>
           <li>Garden</li>

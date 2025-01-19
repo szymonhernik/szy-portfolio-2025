@@ -10,10 +10,8 @@ export default function Home() {
           Szymon Eda Hernik is a graphic designer and front-end web developer.
           <br className="block md:hidden" />
           <br className="block md:hidden" />
-          <span className="block  md:inline ">
-            They also form half of{" "}
-            <span className="text-secondary">isz szi studio</span>, an artistic
-            design studio based in Brussels.
+          <span className="block md:inline ">
+            They also form half of <span className="text-secondary">isz szi studio</span>, an artistic design studio based in Brussels.
           </span>
         </p>
         <DailyInspirations />
