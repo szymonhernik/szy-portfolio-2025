@@ -1,12 +1,80 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import React, { useEffect, useRef, useState } from "react";
+
+const items = [
+  { id: 1, text: "fresh apples" },
+  { id: 2, text: "Ire's tomato soup" },
+  { id: 3, text: "towering mountains" },
+  { id: 4, text: "old books" },
+  { id: 5, text: "wooden chairs" },
+  { id: 6, text: "sharp pencils" },
+  { id: 7, text: "playful dogs" },
+  { id: 8, text: "sturdy bridges" },
+  { id: 9, text: "sweet cupcakes" },
+  { id: 10, text: "acoustic guitars" },
+  { id: 11, text: "futuristic robots" },
+  { id: 12, text: "Kae Tempest' lyrics" },
+  { id: 13, text: "Paul B. Preciado's Can the monster speak?" },
+  { id: 14, text: "Ian Cheng games" },
+  { id: 15, text: "the hole in our living-room curtain" },
+  { id: 16, text: "the sound of a train" },
+  { id: 17, text: "the smell of rain" },
+  { id: 18, text: "the taste of coffee" },
+  { id: 19, text: "the feel of a soft pillow" },
+  { id: 20, text: "the sound of a train" },
+  { id: 21, text: "the smell of rain" },
+  { id: 22, text: "the taste of coffee" },
+  { id: 23, text: "sturdy bridges" },
+  { id: 24, text: "sweet cupcakes" },
+  { id: 25, text: "acoustic guitars" },
+  { id: 26, text: "futuristic robots" },
+  { id: 27, text: "Kae Tempest' lyrics" },
+  { id: 28, text: "Paul B. Preciado's Can the monster speak?" },
+  { id: 29, text: "Ian Cheng games" },
+  { id: 30, text: "the hole in our living-room curtain" },
+  { id: 31, text: "the sound of a train" },
+  { id: 32, text: "the smell of rain" },
+  { id: 33, text: "the taste of coffee" },
+  { id: 34, text: "the feel of a soft pillow" },
+  { id: 35, text: "the sound of a train" },
+  { id: 36, text: "the smell of rain" },
+  { id: 37, text: "the taste of coffee" },
+  { id: 38, text: "the feel of a soft pillow" },
+];
 
 export default function DailyInspirations() {
+  const searchParams = useSearchParams();
+  const showGarden = searchParams.get("showGarden");
+
   const [displayList, setDisplayList] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (showGarden === "true") {
+      setDisplayList(true);
+    }
+  }, [showGarden]);
+
+  const handleItemClick = (text: string) => {
+    setDisplayList(true);
+    setSelectedItem(text);
+  };
+  const handleClose = () => {
+    setDisplayList(false);
+    setSelectedItem(null);
+    // Remove the showGarden parameter from URL
+    const url = new URL(window.location.href);
+    url.searchParams.delete("showGarden");
+    window.history.replaceState({}, "", url);
+  };
+
   return (
     <>
-      {displayList && <OverlayList onClose={() => setDisplayList(false)} />}
+      {displayList && (
+        <OverlayList onClose={handleClose} initialSelectedItem={selectedItem} />
+      )}
       <p className="mt-0">
         Today's three random inspirations from a rather{" "}
         <button
@@ -18,8 +86,22 @@ export default function DailyInspirations() {
         >
           unsorted list
         </button>{" "}
-        are: Paul B. Preciado's Can the monster speak?, Ian Cheng games, Kae
-        Tempest lyrics.{" "}
+        are:{" "}
+        {items
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 3)
+          .map((item, index) => (
+            <React.Fragment key={`${item.id}-random`}>
+              <button
+                type="button"
+                className="text-secondary"
+                onClick={() => handleItemClick(item.text)}
+              >
+                {item.text}
+              </button>
+              {index < 2 ? ", " : "."}
+            </React.Fragment>
+          ))}
       </p>
     </>
   );
@@ -29,51 +111,18 @@ export default function DailyInspirations() {
 // mobile: through the menu and the paragraph on the home page
 // desktop: through the paragraph on the home page
 
-function OverlayList({ onClose }: { onClose: () => void }) {
-  const [selectedItem, setSelectedItem] = useState<string | null>(null);
+function OverlayList({
+  onClose,
+  initialSelectedItem,
+}: {
+  onClose: () => void;
+  initialSelectedItem: string | null;
+}) {
+  const [selectedItem, setSelectedItem] = useState<string | null>(
+    initialSelectedItem,
+  );
   const [scrollPosition, setScrollPosition] = useState(0);
   const overlayRef = useRef<HTMLDivElement>(null);
-
-  const items = [
-    { id: 1, text: "fresh apples" },
-    { id: 2, text: "Ire's tomato soup" },
-    { id: 3, text: "towering mountains" },
-    { id: 4, text: "old books" },
-    { id: 5, text: "wooden chairs" },
-    { id: 6, text: "sharp pencils" },
-    { id: 7, text: "playful dogs" },
-    { id: 8, text: "sturdy bridges" },
-    { id: 9, text: "sweet cupcakes" },
-    { id: 10, text: "acoustic guitars" },
-    { id: 11, text: "futuristic robots" },
-    { id: 12, text: "Kae Tempest' lyrics" },
-    { id: 13, text: "Paul B. Preciado's Can the monster speak?" },
-    { id: 14, text: "Ian Cheng games" },
-    { id: 15, text: "the hole in our living-room curtain" },
-    { id: 16, text: "the sound of a train" },
-    { id: 17, text: "the smell of rain" },
-    { id: 18, text: "the taste of coffee" },
-    { id: 19, text: "the feel of a soft pillow" },
-    { id: 20, text: "the sound of a train" },
-    { id: 21, text: "the smell of rain" },
-    { id: 22, text: "the taste of coffee" },
-    { id: 23, text: "sturdy bridges" },
-    { id: 24, text: "sweet cupcakes" },
-    { id: 25, text: "acoustic guitars" },
-    { id: 26, text: "futuristic robots" },
-    { id: 27, text: "Kae Tempest' lyrics" },
-    { id: 28, text: "Paul B. Preciado's Can the monster speak?" },
-    { id: 29, text: "Ian Cheng games" },
-    { id: 30, text: "the hole in our living-room curtain" },
-    { id: 31, text: "the sound of a train" },
-    { id: 32, text: "the smell of rain" },
-    { id: 33, text: "the taste of coffee" },
-    { id: 34, text: "the feel of a soft pillow" },
-    { id: 35, text: "the sound of a train" },
-    { id: 36, text: "the smell of rain" },
-    { id: 37, text: "the taste of coffee" },
-    { id: 38, text: "the feel of a soft pillow" },
-  ];
 
   if (selectedItem) {
     return (

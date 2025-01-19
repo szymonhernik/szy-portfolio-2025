@@ -53,14 +53,22 @@ function MobileSheet({
         "translate-y-0",
       )}
     >
-      <button type="button" className="absolute top-4 right-4 text-large " onClick={() => toggle(false)}>
+      <button
+        type="button"
+        className="absolute top-4 right-4 text-large "
+        onClick={() => toggle(false)}
+      >
         X
       </button>
       <nav>
         <ul className="list-none text-center text-large">
           <li>Information</li>
           <li>Projects</li>
-          <li>Garden</li>
+          <li>
+            <Link href="/?showGarden=true" onClick={() => toggle(false)}>
+              Garden
+            </Link>
+          </li>
         </ul>
       </nav>
     </div>
