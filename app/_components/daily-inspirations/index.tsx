@@ -18,7 +18,8 @@ export default function DailyInspirations() {
         >
           unsorted list
         </button>{" "}
-        are: Paul B. Preciado's Can the monster speak?, Ian Cheng games, Kae Tempest lyrics.{" "}
+        are: Paul B. Preciado's Can the monster speak?, Ian Cheng games, Kae
+        Tempest lyrics.{" "}
       </p>
     </>
   );
@@ -91,7 +92,10 @@ function OverlayList({ onClose }: { onClose: () => void }) {
   }
 
   return (
-    <div ref={overlayRef} className="fixed inset-0 z-[100] overflow-y-auto overscroll-none bg-background p-4">
+    <div
+      ref={overlayRef}
+      className="fixed inset-0 z-[100] overflow-y-auto overscroll-none bg-background p-4"
+    >
       <p>An overgrown garden of inspirations</p>
       <button className="fixed top-4 right-4" onClick={onClose} type="button">
         X
@@ -111,11 +115,15 @@ function OverlayList({ onClose }: { onClose: () => void }) {
                 setSelectedItem(item.text);
               }
             }}
-            className="cursor-pointer hover:text-secondary"
+            className="hover:text-secondary cursor-pointer"
+            // role="button"
+            tabIndex={0}
             aria-label={`View details about ${item.text}`}
           >
             {item.text}
-            <span aria-hidden="true">{item !== items[items.length - 1] && ", "}</span>
+            <span aria-hidden="true">
+              {item !== items[items.length - 1] && ", "}
+            </span>
           </span>
         ))}
       </div>
