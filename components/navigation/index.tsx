@@ -27,6 +27,7 @@ export function NavigationMobile() {
           isOpen ? "translate-y-[calc(100svh-170px)]" : "translate-y-0",
         )}
         onClick={() => setIsOpen(true)}
+        type="button"
       >
         S<br />
         Z<br />Y
