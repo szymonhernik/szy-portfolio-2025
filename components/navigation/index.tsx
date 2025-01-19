@@ -5,6 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
+import Seed from "../seed";
+
 export default function NavigationDesktop() {
   return (
     <div className="fixed top-4 right-4 z-50 hidden md:block">
@@ -44,6 +46,7 @@ function MobileSheet({
   isOpen: boolean;
   toggle: (isOpen: boolean) => void;
 }) {
+  const pathname = usePathname();
   if (!isOpen) return null;
 
   return (
@@ -53,17 +56,33 @@ function MobileSheet({
         "translate-y-0",
       )}
     >
-      <button type="button" className="absolute top-4 right-4 text-large " onClick={() => toggle(false)}>
+      <button
+        type="button"
+        className="absolute top-4 right-4 text-large "
+        onClick={() => toggle(false)}
+      >
         X
       </button>
       <nav>
         <ul className="list-none text-center text-large">
-          <li>Information</li>
-          <li>Projects</li>
           <li>
-            <Link href="/?showGarden=true" onClick={() => toggle(false)}>
-              Garden
+            <Link href="/information" onClick={() => toggle(false)}>
+              Information
             </Link>
+          </li>
+          <li>
+            <Link href="/" onClick={() => toggle(false)}>
+              Projects
+            </Link>
+          </li>
+          <li>
+            <Seed content="Garden" onClick={() => toggle(false)} />
+            {/* <Link
+              href={`${pathname}?showGarden=true`}
+              onClick={() => toggle(false)}
+            >
+              Garden
+            </Link> */}
           </li>
         </ul>
       </nav>
