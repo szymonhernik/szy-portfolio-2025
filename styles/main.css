@@ -36,14 +36,14 @@
     --radius-large: 12px;
   }
 
-  /* * {
+  * {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     box-sizing: border-box;
     font-variant-ligatures: common-ligatures;
     text-wrap: pretty;
     text-rendering: optimizelegibility;
-  } */
+  }
 
   /* *::selection {
     color: var(--selection-foreground);

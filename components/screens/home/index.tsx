@@ -6,10 +6,15 @@ export default function Home() {
   return (
     <>
       <div className="col-span-12 flex flex-col gap-8 md:col-span-10 md:flex-col-reverse">
-        {/* on small screens it should be around 32 px */}
-        <p className="text-[2rem] leading-[1.5] md:text-[3rem] md:leading-[1.2] ">
-          Szymon Eda Hernik is a graphic designer and front-end web developer. They also form half of <span className="text-secondary">isz szi studio</span>, an
-          artistic design studio based in Brussels.
+        <p className="text-large">
+          Szymon Eda Hernik is a graphic designer and front-end web developer.
+          <br className="block md:hidden" />
+          <br className="block md:hidden" />
+          <span className="block  md:inline ">
+            They also form half of{" "}
+            <span className="text-secondary">isz szi studio</span>, an artistic
+            design studio based in Brussels.
+          </span>
         </p>
         <DailyInspirations />
       </div>

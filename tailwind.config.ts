@@ -208,8 +208,23 @@ const config: Config = {
         // },
         ".text-default-v2": {
           fontSize: "clamp(1rem, 0.9375rem + 0.4vw, 1.3125rem)",
-          lineHeight: "clamp(1.45rem, 1.24rem + 0.4vw, 1.53rem)",
+          lineHeight: "clamp(1.5rem, 1.24rem + 0.4vw, 1.53rem)",
           letterSpacing: "-0.0095rem",
+        },
+        ".text-large": {
+          // text-[2rem] leading-[1.5] md:text-[3rem] md:leading-[1.2]
+          fontSize: "2rem",
+          lineHeight: "1.3",
+          "@screen md": {
+            fontSize: "3rem",
+            lineHeight: "1.2",
+          },
+        },
+        ".font-outline-1": {
+          "-webkit-text-stroke": "1px black",
+        },
+        ".font-outline-0": {
+          "-webkit-text-stroke": "0px black",
         },
       });
     }),
