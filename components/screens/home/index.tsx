@@ -1,5 +1,7 @@
 import DailyInspirations from "@/app/_components/daily-inspirations";
 
+import { Suspense } from "react";
+
 const Spacer = () => <div style={{ marginTop: "24px" }} />;
 
 export default function Home() {
@@ -14,7 +16,9 @@ export default function Home() {
             They also form half of <span className="text-secondary">isz szi studio</span>, an artistic design studio based in Brussels.
           </span>
         </p>
-        <DailyInspirations />
+        <Suspense>
+          <DailyInspirations />
+        </Suspense>
       </div>
       <div className="col-span-12 mt-8">
         {/* test project items */}

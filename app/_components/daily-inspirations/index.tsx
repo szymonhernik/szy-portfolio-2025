@@ -72,9 +72,7 @@ export default function DailyInspirations() {
 
   return (
     <>
-      {displayList && (
-        <OverlayList onClose={handleClose} initialSelectedItem={selectedItem} />
-      )}
+      {displayList && <OverlayList onClose={handleClose} initialSelectedItem={selectedItem} />}
       <p className="mt-0">
         Today's three random inspirations from a rather{" "}
         <button
@@ -92,11 +90,7 @@ export default function DailyInspirations() {
           .slice(0, 3)
           .map((item, index) => (
             <React.Fragment key={`${item.id}-random`}>
-              <button
-                type="button"
-                className="text-secondary"
-                onClick={() => handleItemClick(item.text)}
-              >
+              <button type="button" className="text-secondary" onClick={() => handleItemClick(item.text)}>
                 {item.text}
               </button>
               {index < 2 ? ", " : "."}
@@ -118,9 +112,7 @@ function OverlayList({
   onClose: () => void;
   initialSelectedItem: string | null;
 }) {
-  const [selectedItem, setSelectedItem] = useState<string | null>(
-    initialSelectedItem,
-  );
+  const [selectedItem, setSelectedItem] = useState<string | null>(initialSelectedItem);
   const [scrollPosition, setScrollPosition] = useState(0);
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -141,10 +133,7 @@ function OverlayList({
   }
 
   return (
-    <div
-      ref={overlayRef}
-      className="fixed inset-0 z-[100] overflow-y-auto overscroll-none bg-background p-4"
-    >
+    <div ref={overlayRef} className="fixed inset-0 z-[100] overflow-y-auto overscroll-none bg-background p-4">
       <p>An overgrown garden of inspirations</p>
       <button className="fixed top-4 right-4" onClick={onClose} type="button">
         X
@@ -164,15 +153,11 @@ function OverlayList({
                 setSelectedItem(item.text);
               }
             }}
-            className="hover:text-secondary cursor-pointer"
-            // role="button"
-            tabIndex={0}
+            className="cursor-pointer hover:text-secondary"
             aria-label={`View details about ${item.text}`}
           >
             {item.text}
-            <span aria-hidden="true">
-              {item !== items[items.length - 1] && ", "}
-            </span>
+            <span aria-hidden="true">{item !== items[items.length - 1] && ", "}</span>
           </span>
         ))}
       </div>
