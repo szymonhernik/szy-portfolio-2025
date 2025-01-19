@@ -10,6 +10,7 @@ export default function DailyInspirations() {
       <p className="mt-0">
         Today's three random inspirations from a rather{" "}
         <button
+          type="button"
           className="text-secondary"
           onClick={() => {
             setDisplayList(true);
@@ -96,7 +97,7 @@ function OverlayList({ onClose }: { onClose: () => void }) {
       className="fixed inset-0 bg-background z-[100] overscroll-none overflow-y-auto p-4"
     >
       <p>An overgrown garden of inspirations</p>
-      <button className="fixed top-4 right-4" onClick={onClose}>
+      <button className="fixed top-4 right-4" onClick={onClose} type="button">
         X
       </button>
       <div className="text-[3rem] leading-[1.2]">
@@ -127,7 +128,7 @@ function DetailOverlay({
 }) {
   return (
     <div className="fixed inset-0 bg-background z-[200] overscroll-none overflow-y-auto p-4">
-      <button className="fixed top-4 right-4" onClick={onClose}>
+      <button className="fixed top-4 right-4" onClick={onClose} type="button">
         X
       </button>
       <h2 className="text-[2rem] mb-4">{item}</h2>

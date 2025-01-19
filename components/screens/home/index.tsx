@@ -20,26 +20,26 @@ export default function Home() {
         </p>
         <DailyInspirations />
       </div>
-      <div className="col-span-12">
+      <div className="col-span-12 mt-8">
         {/* test project items */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ">
           <div className="flex flex-col ">
-            <div className="bg-red-500 h-[400px]"></div>
+            <div className="bg-stone-200 h-[400px]"></div>
           </div>
           <div className="flex flex-col">
-            <div className="bg-red-500 h-[400px]"></div>
+            <div className="bg-stone-200 h-[400px]"></div>
           </div>
           <div className="flex flex-col">
-            <div className="bg-red-500 h-[400px]"></div>
+            <div className="bg-stone-200 h-[400px]"></div>
           </div>
           <div className="flex flex-col">
-            <div className="bg-red-500 h-[400px]"></div>
+            <div className="bg-stone-200 h-[400px]"></div>
           </div>
           <div className="flex flex-col">
-            <div className="bg-red-500 h-[400px]"></div>
+            <div className="bg-stone-200 h-[400px]"></div>
           </div>
           <div className="flex flex-col">
-            <div className="bg-red-500 h-[400px]"></div>
+            <div className="bg-stone-200 h-[400px]"></div>
           </div>
         </div>
       </div>
