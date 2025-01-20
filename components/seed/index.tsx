@@ -52,17 +52,15 @@ export default function Seed({
 
           <div>
             {items.map((item) => (
-              <>
-                <ItemDialog
-                  key={item.id}
-                  item={item}
-                  showComma={item.id !== items.length}
-                  open={selectedItemId === item.id}
-                  onOpenChange={(open) => {
-                    setSelectedItemId(open ? item.id : null);
-                  }}
-                />
-              </>
+              <ItemDialog
+                key={item.id}
+                item={item}
+                showComma={item.id !== items.length}
+                open={selectedItemId === item.id}
+                onOpenChange={(open) => {
+                  setSelectedItemId(open ? item.id : null);
+                }}
+              />
             ))}
           </div>
         </Dialog.Content>
