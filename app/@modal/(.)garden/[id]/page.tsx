@@ -8,9 +8,7 @@ export default async function PhotoModal({
   const itemId = (await params).id;
   return (
     <Modal>
-      <div className="w-96 h-96 bg-red-500  p-4 flex flex-col gap-4">
-        {itemId}
-      </div>
+      <div className="flex h-96 w-96 flex-col gap-4 bg-red-500 p-4">{itemId}</div>
     </Modal>
   );
 }
