@@ -4,8 +4,6 @@
 @import url("@radix-ui/colors/pink-alpha.css");
 @import url("@radix-ui/colors/yellow.css");
 @import url("@radix-ui/colors/yellow-alpha.css");
-@import url("@radix-ui/colors/black-alpha.css");
-@import url("@radix-ui/colors/white-alpha.css");
 
 @tailwind base;
 @tailwind components;
@@ -324,6 +322,7 @@
       border-radius: var(--radius-base);
     }
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -356,6 +355,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }

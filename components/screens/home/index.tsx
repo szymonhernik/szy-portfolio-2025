@@ -1,5 +1,4 @@
 import Seed from "@/components/seed";
-import SeedAlt from "@/components/seed/alt-implementation";
 
 const Spacer = () => <div style={{ marginTop: "24px" }} />;
 
@@ -12,16 +11,12 @@ export default function Home() {
           <br className="block md:hidden" />
           <br className="block md:hidden" />
           <span className="block md:inline ">
-            They also form half of{" "}
-            <span className="text-secondary">isz szi studio</span>, an artistic
-            design studio based in Brussels.
+            They also form half of <span className="text-secondary">isz szi studio</span>, an artistic design studio based in Brussels.
           </span>
         </p>
         <p className="mt-0 ">
-          Today’s three random inspirations from a rather{" "}
-          <SeedAlt content="unsorted list" /> are:{" "}
-          <SeedAlt content="number 3" itemId="3" /> and{" "}
-          <SeedAlt content="number 4" itemId="4" />
+          Today’s three random inspirations from a rather <Seed content="unsorted list" className="text-secondary" /> are:{" "}
+          <Seed content="number 3" itemId="3" className="text-secondary" /> and <Seed content="number 4" itemId="4" className="text-secondary" />
         </p>
       </div>
       <div className="col-span-12 mt-8">

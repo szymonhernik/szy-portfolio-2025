@@ -1,11 +1,11 @@
 "use client";
 
+import Seed from "@/components/seed";
+
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-
-import SeedAlt from "../seed/alt-implementation";
 
 export default function NavigationDesktop() {
   return (
@@ -56,11 +56,7 @@ function MobileSheet({
         "translate-y-0",
       )}
     >
-      <button
-        type="button"
-        className="absolute top-4 right-4 text-large "
-        onClick={() => toggle(false)}
-      >
+      <button type="button" className="absolute top-4 right-4 text-large " onClick={() => toggle(false)}>
         X
       </button>
       <nav>
@@ -76,7 +72,7 @@ function MobileSheet({
             </Link>
           </li>
           <li>
-            <SeedAlt content="Garden" onClick={() => toggle(false)} />
+            <Seed content="Garden" onClick={() => toggle(false)} />
             {/* <Link
               href={`${pathname}?showGarden=true`}
               onClick={() => toggle(false)}
