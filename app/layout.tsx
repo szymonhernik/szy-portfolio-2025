@@ -28,12 +28,15 @@ export default function RootLayout({
     <html lang="en" className={clsx(zimula.className)} suppressHydrationWarning>
       <body>
         <Providers>
+          {modal}
+          <div id="modal-root" />
           <main className="px-4 py-4 ">
             <NavigationMobile />
             <NavigationDesktop />
-            <article className="article grid grid-cols-12 items-start">{children}</article>
+            <article className="article grid grid-cols-12 items-start">
+              {children}
+            </article>
           </main>
-          {modal}
         </Providers>
       </body>
     </html>

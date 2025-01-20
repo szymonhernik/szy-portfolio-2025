@@ -1,4 +1,9 @@
-import { items } from "@/app/_test-data/items";
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  let slugs = ["1", "2", "3", "4", "5", "6"];
+  return slugs.map((slug) => ({ id: slug }));
+}
 
 export default async function Page({
   params,
@@ -6,9 +11,5 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const id = (await params).id;
-  return (
-    <div>
-      My Post: {id} and its content {items.find((item) => item.id === Number.parseInt(id))?.text}
-    </div>
-  );
+  return <div>{id}</div>;
 }

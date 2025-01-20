@@ -1,13 +1,21 @@
-import GardenItem from "./_components/GardenItem";
-import GardenModal from "./_components/GardenModal";
+import Link from "next/link";
 
-export default async function Page(props: {
-  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
-  const searchParams = await props.searchParams;
-  const id = searchParams?.id as string;
+import { Modal } from "./[id]/modal";
+
+export default async function Photos() {
+  let photos = Array.from({ length: 6 }, (_, i) => i + 1);
 
   return (
-    <div className="fixed inset-0 z-[120] flex flex-col gap-4 overflow-y-auto overscroll-none bg-background p-4">{id ? <GardenItem /> : <GardenModal />}</div>
+    <Modal>
+      <section className="w-screen h-screen p-4 flex flex-col gap-4">
+        {photos.map((id) => (
+          <div>
+            <Link className="" key={id} href={`/garden/${id}`} passHref>
+              {id}
+            </Link>
+          </div>
+        ))}
+      </section>
+    </Modal>
   );
 }
