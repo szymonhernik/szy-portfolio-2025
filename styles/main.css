@@ -87,6 +87,10 @@
     margin: 0;
   }
 
+  /* *:focus:not(ol) {
+    @apply outline-none ring-2 ring-black ring-opacity-100 ring-offset-2;
+  } */
+
   html {
     @apply text-default-v2 text-foreground bg-background;
 
