@@ -31,7 +31,6 @@ export default function RootLayout({
             <NavigationDesktop />
             <article className="article grid grid-cols-12 items-start">{children}</article>
           </main>
-          {/* <GardenOverlay /> */}
         </Providers>
       </body>
     </html>

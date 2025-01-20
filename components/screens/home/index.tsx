@@ -1,6 +1,4 @@
-import DailyInspirations from "@/app/_components/daily-inspirations";
-
-import { Suspense } from "react";
+import Seed from "@/components/seed";
 
 const Spacer = () => <div style={{ marginTop: "24px" }} />;
 
@@ -16,9 +14,10 @@ export default function Home() {
             They also form half of <span className="text-secondary">isz szi studio</span>, an artistic design studio based in Brussels.
           </span>
         </p>
-        <Suspense>
-          <DailyInspirations />
-        </Suspense>
+        <p className="mt-0 ">
+          Today’s three random inspirations from a rather <Seed content="unsorted list" /> are: <Seed content="number 3" itemId="3" /> and{" "}
+          <Seed content="number 4" itemId="4" />
+        </p>
       </div>
       <div className="col-span-12 mt-8">
         {/* test project items */}
