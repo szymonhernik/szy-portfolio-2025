@@ -1,4 +1,4 @@
-import Seed from "@/components/seed";
+import Link from "next/link";
 
 export default function Information() {
   return (
@@ -18,10 +18,11 @@ export default function Information() {
         Szy hones their multifaceted workspace to remain a site of perpetual inquiry. Their workspace is blessed to have welcomed collaborations with: maok
         (soliloquy), warm winters, braids journal, and studio rgbdog.
       </p>
-      <p>
-        You can open a garden by clicking <Seed content="Garden" className="text-secondary" /> or view directly{" "}
+      <Link href="/garden">Open a Garden from information page!</Link>
+      {/* <p>
+        <Seed content="list" className="text-secondary" /> or view directly{" "}
         <Seed content="Item 5" itemId="5" className="text-secondary" />. directly <Seed content="Item 5" itemId="5" className="text-secondary" />.
-      </p>
+      </p> */}
 
       {/* below text will be 48px size but make it relative to 16px */}
       <p className="text-large">

@@ -1,4 +1,6 @@
-import Seed from "@/components/seed";
+import OpenedCarousel from "@/components/opencarouseltest";
+
+import Link from "next/link";
 
 const Spacer = () => <div style={{ marginTop: "24px" }} />;
 
@@ -14,10 +16,16 @@ export default function Home() {
             They also form half of <span className="text-secondary">isz szi studio</span>, an artistic design studio based in Brussels.
           </span>
         </p>
-        <p className="mt-0 ">
-          Today’s three random inspirations from a rather <Seed content="unsorted list" className="text-secondary" /> are:{" "}
-          <Seed content="number 3" itemId="3" className="text-secondary" /> and <Seed content="number 4" itemId="4" className="text-secondary" />
-        </p>
+        <OpenedCarousel />
+        <div>
+          <Link href="/garden">Open a Garden modal from home!</Link>
+        </div>
+        {/* <p className="mt-0 ">
+          Today’s three random inspirations from a rather{" "}
+          <Seed content="unsorted list" className="text-secondary" /> are:{" "}
+          <Seed content="number 3" itemId="3" className="text-secondary" /> and{" "}
+          <Seed content="number 4" itemId="4" className="text-secondary" />
+        </p> */}
       </div>
       <div className="col-span-12 mt-8">
         {/* test project items */}

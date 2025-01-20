@@ -1,7 +1,5 @@
 "use client";
 
-import Seed from "@/components/seed";
-
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -72,7 +70,7 @@ function MobileSheet({
             </Link>
           </li>
           <li>
-            <Seed content="Garden" onClick={() => toggle(false)} />
+            <Link href="/garden">Open a garden modal from mobile!</Link>
           </li>
         </ul>
       </nav>
