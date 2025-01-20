@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-import Seed from "../seed";
 import SeedAlt from "../seed/alt-implementation";
 
 export default function NavigationDesktop() {
