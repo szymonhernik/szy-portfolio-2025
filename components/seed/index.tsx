@@ -7,22 +7,23 @@ import { useEffect, useRef, useState } from "react";
 const SelectedItemOverlay = ({
   item,
   onClose,
+  closeRef,
 }: {
   item: (typeof items)[0];
   onClose: () => void;
+  closeRef: React.RefObject<HTMLButtonElement>;
 }) => (
   <div
-    className="fixed bg-background inset-0 z-[130] h-screen w-screen overflow-y-auto overscroll-none  p-4"
+    className="fixed  inset-0 bg-background  z-[130] h-screen w-screen overflow-y-auto overscroll-none  p-4"
     role="dialog"
     aria-modal="true"
-    // Add inert to background elements
-    inert={true}
   >
     <div className="">
       <div className="mb-4 flex justify-between"></div>
       <div className="text-large">{item.text}</div>
     </div>
     <button
+      ref={closeRef}
       type="button"
       onClick={onClose}
       className="fixed top-4 right-4 text-large md:text-default-v2"
@@ -49,6 +50,8 @@ export default function Seed({
 
   // Create a ref map to store references to all items
   const itemRefs = useRef<Map<number, HTMLSpanElement>>(new Map());
+  // Add ref for the selected item overlay close button
+  const selectedOverlayCloseRef = useRef<HTMLButtonElement>(null);
 
   // Add keyboard event handler
   useEffect(() => {
@@ -98,7 +101,21 @@ export default function Seed({
   const selectedItemData = items.find((item) => item.id === selectedItem);
 
   const handleItemClick = (id: number) => {
-    setSelectedItem(id);
+    // If there's already a selected item, close it first
+    if (selectedItem !== null) {
+      setSelectedItem(null);
+      // Wait for the current overlay to close before opening the new one
+      setTimeout(() => {
+        setSelectedItem(id);
+        selectedOverlayCloseRef.current?.focus();
+      }, 0);
+    } else {
+      // If no item is selected, just open the new one
+      setSelectedItem(id);
+      setTimeout(() => {
+        selectedOverlayCloseRef.current?.focus();
+      }, 0);
+    }
   };
 
   return (
@@ -113,11 +130,11 @@ export default function Seed({
 
       {isOpen && (
         <div
-          className="fixed bg-background inset-0 z-[120] h-screen w-screen overflow-y-auto overscroll-none  p-4"
+          className="fixed inset-0 z-[120] h-screen w-screen overflow-y-auto overscroll-none p-4 bg-background"
           role="dialog"
           aria-modal="true"
-          // Add inert to background elements
-          inert={true}
+          inert={selectedItemData ? true : undefined}
+          tabIndex={-1}
         >
           <div className="">
             <div className="mb-4 flex justify-between">
@@ -127,6 +144,7 @@ export default function Seed({
                 role="button"
                 onClick={handleClose}
                 className="fixed top-4 right-4 text-large md:text-default-v2"
+                tabIndex={selectedItemData ? -1 : 0}
               >
                 X
               </button>
@@ -148,7 +166,10 @@ export default function Seed({
                   tabIndex={selectedItemData ? -1 : 0}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
-                      handleItemClick(item.id);
+                      // allow opening the selected item overlay only if no item is selected
+                      if (selectedItem === null) {
+                        handleItemClick(item.id);
+                      }
                     }
                   }}
                 >
@@ -162,7 +183,11 @@ export default function Seed({
       )}
 
       {selectedItemData && (
-        <SelectedItemOverlay item={selectedItemData} onClose={handleClose} />
+        <SelectedItemOverlay
+          item={selectedItemData}
+          onClose={handleClose}
+          closeRef={selectedOverlayCloseRef}
+        />
       )}
     </>
   );
