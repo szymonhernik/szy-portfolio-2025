@@ -27,6 +27,7 @@ export default function Seed({
     } else if (!open) {
       // When closing the main dialog, close any open item dialog
       setSelectedItemId(null);
+      onClick?.();
     }
   };
 
@@ -40,8 +41,12 @@ export default function Seed({
 
       <Dialog.Portal>
         <Dialog.Content className=" fixed inset-0 z-[120] flex max-h-screen w-screen flex-col gap-8 overflow-y-auto bg-background p-4 text-black">
-          <Dialog.Title className="">An overgrown garden of inspirations</Dialog.Title>
-          <Dialog.Close className="fixed top-2 right-2 p-2 text-large md:text-default-v2">X</Dialog.Close>
+          <Dialog.Title className="">
+            An overgrown garden of inspirations
+          </Dialog.Title>
+          <Dialog.Close className="fixed top-2 right-2 p-2 text-large md:text-default-v2">
+            X
+          </Dialog.Close>
 
           <div>
             {items.map((item) => (
@@ -65,11 +70,17 @@ export default function Seed({
                     {item.text}
                   </span>
                 </Dialog.Trigger>
-                <span className="text-large">{item.id !== items.length && ", "}</span>
+                <span className="text-large">
+                  {item.id !== items.length && ", "}
+                </span>
                 <Dialog.Portal>
                   <Dialog.Content className="fixed inset-0 z-[140] bg-white p-4 ">
-                    <Dialog.Close className="fixed top-2 right-2 p-2 text-large md:text-default-v2">X</Dialog.Close>
-                    <Dialog.Title className="text-large">{item.text}</Dialog.Title>
+                    <Dialog.Close className="fixed top-2 right-2 p-2 text-large md:text-default-v2">
+                      X
+                    </Dialog.Close>
+                    <Dialog.Title className="text-large">
+                      {item.text}
+                    </Dialog.Title>
                     <div>{item.text}</div>
                   </Dialog.Content>
                 </Dialog.Portal>
