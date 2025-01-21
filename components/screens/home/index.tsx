@@ -13,12 +13,15 @@ export default function Home() {
           <br className="block md:hidden" />
           <br className="block md:hidden" />
           <span className="block md:inline ">
-            They also form half of <span className="text-secondary">isz szi studio</span>, an artistic design studio based in Brussels.
+            They also form half of{" "}
+            <span className="text-secondary">isz szi studio</span>, an artistic
+            design studio based in Brussels.
           </span>
         </p>
         <OpenedCarousel />
         <div>
           <Link href="/garden">Open a Garden modal from home!</Link>
+          <Link href="/garden/8">Open an item in a garden.</Link>
         </div>
         {/* <p className="mt-0 ">
           Today’s three random inspirations from a rather{" "}
