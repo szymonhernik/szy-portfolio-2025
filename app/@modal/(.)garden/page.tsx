@@ -1,18 +1,19 @@
+import { items } from "@/app/_test-data/items";
+
 import Link from "next/link";
 
 import { Modal } from "./[id]/modal";
 
 export default async function Photos() {
-  const photos = Array.from({ length: 6 }, (_, i) => i + 1);
-
   return (
     <Modal>
-      <section className="flex h-screen w-screen flex-col gap-4 p-4">
-        {photos.map((id) => (
-          <div key={id}>
-            <Link className="" href={`/garden/${id}`} passHref>
-              {id}
+      <section className="">
+        {items.map((item, index) => (
+          <div key={item.id} className="inline text-large">
+            <Link className="" href={`/garden/${item.id}`} passHref>
+              {item.text}
             </Link>
+            {index < items.length - 1 && `, `}
           </div>
         ))}
       </section>
