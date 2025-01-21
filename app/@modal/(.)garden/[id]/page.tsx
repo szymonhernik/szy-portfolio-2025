@@ -1,6 +1,7 @@
 "use client";
 
 import { items } from "@/app/_test-data/items";
+import { FixModalCloseBug } from "@/components/fix-modal-close-bug";
 
 import { clearAllBodyScrollLocks, disableBodyScroll } from "body-scroll-lock";
 import { useEffect, useRef } from "react";
@@ -24,13 +25,12 @@ export default function PhotoModal({ params }: { params: { id: string } }) {
   }, []);
 
   return (
-    <Modal>
-      <div
-        ref={targetRef}
-        className="-webkit-overflow-scrolling-touch overflow-y-auto"
-      >
-        <h1 className="">{item?.text}</h1>
-      </div>
-    </Modal>
+    <FixModalCloseBug expectedPath={`/garden/${itemId}`}>
+      <Modal>
+        <div ref={targetRef} className="-webkit-overflow-scrolling-touch overflow-y-auto">
+          <h1 className="">{item?.text}</h1>
+        </div>
+      </Modal>
+    </FixModalCloseBug>
   );
 }

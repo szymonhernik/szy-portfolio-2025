@@ -1,3 +1,5 @@
+import { OpenGardenItem } from "@/components/open-garden-item";
+
 import Link from "next/link";
 
 export default function Information() {
@@ -23,6 +25,7 @@ export default function Information() {
         <Seed content="list" className="text-secondary" /> or view directly{" "}
         <Seed content="Item 5" itemId="5" className="text-secondary" />. directly <Seed content="Item 5" itemId="5" className="text-secondary" />.
       </p> */}
+      <OpenGardenItem itemId="5">Item 5</OpenGardenItem>
 
       {/* below text will be 48px size but make it relative to 16px */}
       <p className="text-large">
