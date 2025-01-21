@@ -24,7 +24,12 @@ export default function GardenListModal() {
   return (
     <FixModalCloseBug expectedPath="/garden">
       <Modal>
-        <GardenList />
+        <div
+          ref={targetRef}
+          className="-webkit-overflow-scrolling-touch overflow-y-auto"
+        >
+          <GardenList />
+        </div>
       </Modal>
     </FixModalCloseBug>
   );
