@@ -18,7 +18,6 @@
   :root {
     --bg: #edf0f0;
     --secondary: #adadad;
-
     --fg: var(--gray-12);
     --muted: 0 0% 96.1%;
     --border: 0 0% 89.8%;
@@ -42,7 +41,6 @@
     --popover-foreground: 0 0% 3.9%;
     --primary: 0 0% 9%;
     --primary-foreground: 0 0% 98%;
-
     --secondary-foreground: 0 0% 9%;
     --muted-foreground: 0 0% 45.1%;
     --accent: 0 0% 96.1%;
@@ -124,7 +122,13 @@
     }
 
     a {
-      @apply transition hover:opacity-50;
+      /* @apply transition hover:opacity-50; */
+      /* @apply transition hover: */
+      /* @apply transition; */
+    }
+
+    a:hover {
+      /* -webkit-text-stroke: 1px var(--secondary); */
     }
 
     ol {
@@ -151,6 +155,14 @@
       box-shadow: 0 0 0 1px var(--kbd-border);
     }
   }
+
+  /* .link-sec:hover {
+    @apply font-outline-1-secondary text-link;
+  }
+
+  .link-black:hover {
+    @apply font-outline-1-black;
+  } */
 
   article {
     h1 + h2 {

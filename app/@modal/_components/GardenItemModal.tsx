@@ -32,10 +32,7 @@ export default function GardenItemModal({
   return (
     <FixModalCloseBug expectedPath={`/garden/${itemId}`}>
       <Modal>
-        <div
-          ref={targetRef}
-          className="-webkit-overflow-scrolling-touch overflow-y-auto"
-        >
+        <div ref={targetRef} className="-webkit-overflow-scrolling-touch overflow-y-auto">
           <GardenItem params={params} />
         </div>
       </Modal>

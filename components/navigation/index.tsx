@@ -54,27 +54,23 @@ function MobileSheet({
         "translate-y-0",
       )}
     >
-      <button
-        type="button"
-        className="absolute top-4 right-4 text-large "
-        onClick={() => toggle(false)}
-      >
+      <button type="button" className="absolute top-4 right-4 text-large hover:font-outline-1-black" onClick={() => toggle(false)}>
         X
       </button>
       <nav>
         <ul className="list-none text-center text-large">
           <li>
-            <Link href="/information" onClick={() => toggle(false)}>
+            <Link href="/information" onClick={() => toggle(false)} className="hover:font-outline-1-black">
               Information
             </Link>
           </li>
           <li>
-            <Link href="/" onClick={() => toggle(false)}>
+            <Link href="/" onClick={() => toggle(false)} className="hover:font-outline-1-black">
               Projects
             </Link>
           </li>
           <li>
-            <Link href="/garden" onClick={() => toggle(false)}>
+            <Link href="/garden" onClick={() => toggle(false)} className="hover:font-outline-1-black">
               Garden
             </Link>
           </li>
@@ -90,8 +86,15 @@ function MobileSheet({
 function NavLink() {
   const pathname = usePathname();
   if (pathname === "/") {
-    return <Link href="/information">Information</Link>;
-  } else {
-    return <Link href="/">Projects</Link>;
+    return (
+      <Link href="/information" className="hover:font-outline-1-black">
+        Information
+      </Link>
+    );
   }
+  return (
+    <Link href="/" className="hover:font-outline-1-black">
+      Projects
+    </Link>
+  );
 }

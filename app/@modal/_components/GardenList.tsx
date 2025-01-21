@@ -10,7 +10,7 @@ export default function GardenList() {
       <p>An overgrown garden of inspirations</p>
       <div>
         {items.map((item, index) => (
-          <div key={item.id} className="inline text-large">
+          <div key={item.id} className="inline text-large hover:font-outline-1-black">
             <Link className="" href={`/garden/${item.id}`} passHref>
               {item.text}
             </Link>

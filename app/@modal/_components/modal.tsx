@@ -37,16 +37,8 @@ export function Modal({ children }: { children: React.ReactNode }) {
   if (!modalRoot) throw new Error("Modal root element not found");
 
   return createPortal(
-    <dialog
-      ref={dialogRef}
-      className="m-0 h-screen w-screen bg-background p-4 overscroll-none"
-      onClose={onDismiss}
-    >
-      <button
-        type="button"
-        onClick={onDismiss}
-        className="fixed top-0 right-0 p-4 text-large md:text-default-v2"
-      >
+    <dialog ref={dialogRef} className="m-0 h-screen w-screen overscroll-none bg-background p-4" onClose={onDismiss}>
+      <button type="button" onClick={onDismiss} className="fixed top-0 right-0 p-4 text-large hover:font-outline-1-black md:text-default-v2">
         X
       </button>
       {children}

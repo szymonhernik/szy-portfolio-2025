@@ -44,7 +44,7 @@ export default function Seed({
       <Dialog.Portal>
         <Dialog.Content className=" fixed inset-0 z-[120] flex max-h-screen w-screen flex-col gap-8 overflow-y-auto bg-background p-4 text-black">
           <Dialog.Title className="">An overgrown garden of inspirations</Dialog.Title>
-          <Dialog.Close className="fixed top-2 right-2 p-2 text-large md:text-default-v2">X</Dialog.Close>
+          <Dialog.Close className="fixed top-2 right-2 p-2 text-large hover:font-outline-1-black md:text-default-v2">X</Dialog.Close>
 
           <div>
             {items.map((item) => (

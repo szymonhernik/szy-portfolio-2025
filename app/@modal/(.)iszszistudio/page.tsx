@@ -1,10 +1,6 @@
 "use client";
 
-import { items } from "@/app/_test-data/items";
-import { FixModalCloseBug } from "@/components/fix-modal-close-bug";
-
 import { clearAllBodyScrollLocks, disableBodyScroll } from "body-scroll-lock";
-import Link from "next/link";
 import { useEffect, useRef } from "react";
 
 import { Modal } from "../_components/modal";

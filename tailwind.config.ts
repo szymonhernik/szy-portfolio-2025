@@ -194,12 +194,16 @@ const config: Config = {
             lineHeight: "1.2",
           },
         },
-        ".font-outline-1": {
+
+        ".font-outline-1-secondary": {
+          "-webkit-text-stroke": "1px var(--secondary)",
+        },
+        ".font-outline-1-black": {
           "-webkit-text-stroke": "1px black",
         },
-        ".font-outline-0": {
-          "-webkit-text-stroke": "0px black",
-        },
+        // ".font-outline-0": {
+        //   "-webkit-text-stroke": "0px #adadad",
+        // },
       });
     }),
   ],

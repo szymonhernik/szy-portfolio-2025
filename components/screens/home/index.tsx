@@ -1,5 +1,5 @@
+import PortfolioGrid from "@/components/PortfolioGrid";
 import { OpenGardenItem } from "@/components/open-garden-item";
-import OpenedCarousel from "@/components/opencarouseltest";
 
 import Link from "next/link";
 
@@ -15,7 +15,7 @@ export default function Home() {
           <br className="block md:hidden" />
           <span className="block md:inline ">
             They also form half of{" "}
-            <Link href="/iszszistudio" className="text-link">
+            <Link href="/iszszistudio" className="text-link hover:font-outline-1-secondary">
               isz szi studio
             </Link>
             , an artistic design studio based in Brussels.
@@ -24,18 +24,17 @@ export default function Home() {
 
         <p className="mt-0 ">
           Today’s three random inspirations from a rather{" "}
-          <Link href="/garden" className="text-secondary">
+          <Link href="/garden" className="text-secondary hover:font-outline-1-secondary">
             unsorted list
           </Link>{" "}
-          are: Paul B. Preciado’s{" "}
-          <OpenGardenItem itemId="1">Can the monster speak?</OpenGardenItem>,
-          Ian Cheng's <OpenGardenItem itemId="2">games</OpenGardenItem>, and Kae
-          Tempest <OpenGardenItem itemId="3">lyrics</OpenGardenItem>.
+          are: Paul B. Preciado’s <OpenGardenItem itemId="1">Can the monster speak?</OpenGardenItem>, Ian Cheng's{" "}
+          <OpenGardenItem itemId="2">games</OpenGardenItem>, and Kae Tempest <OpenGardenItem itemId="3">lyrics</OpenGardenItem>.
         </p>
       </div>
       <div className="col-span-12 mt-8">
+        <PortfolioGrid />
         {/* test project items */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
+        {/* <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
           <div className="flex flex-col ">
             <div className="h-[400px] bg-stone-200" />
           </div>
@@ -54,7 +53,7 @@ export default function Home() {
           <div className="flex flex-col">
             <div className="h-[400px] bg-stone-200" />
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
