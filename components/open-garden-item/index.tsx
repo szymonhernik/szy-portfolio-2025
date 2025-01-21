@@ -12,5 +12,12 @@ export function OpenGardenItem({
 }) {
   const currentPath = usePathname();
 
-  return <Link href={`/garden/${itemId}?from=${currentPath}&to=garden`}>{children}</Link>;
+  return (
+    <Link
+      href={`/garden/${itemId}?from=${currentPath}&to=garden`}
+      className="text-link"
+    >
+      {children}
+    </Link>
+  );
 }

@@ -94,11 +94,12 @@ const config: Config = {
           a12: "var(--yellow-a12)",
         },
         primary: "#000000",
-        secondary: "#ADADAD",
+        secondary: "var(--secondary)",
         background: "var(--bg)",
         foreground: "var(--fg)",
         muted: "var(--muted)",
         hover: "var(--hover)",
+        link: "var(--secondary)",
         border: "var(--border)",
         scrollbar: {
           thumb: "var(--scrollbar-thumb)",

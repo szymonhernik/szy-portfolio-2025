@@ -17,6 +17,8 @@
 
   :root {
     --bg: #edf0f0;
+    --secondary: #adadad;
+
     --fg: var(--gray-12);
     --muted: 0 0% 96.1%;
     --border: 0 0% 89.8%;
@@ -40,7 +42,7 @@
     --popover-foreground: 0 0% 3.9%;
     --primary: 0 0% 9%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
+
     --secondary-foreground: 0 0% 9%;
     --muted-foreground: 0 0% 45.1%;
     --accent: 0 0% 96.1%;

@@ -54,7 +54,11 @@ function MobileSheet({
         "translate-y-0",
       )}
     >
-      <button type="button" className="absolute top-4 right-4 text-large " onClick={() => toggle(false)}>
+      <button
+        type="button"
+        className="absolute top-4 right-4 text-large "
+        onClick={() => toggle(false)}
+      >
         X
       </button>
       <nav>
@@ -70,7 +74,9 @@ function MobileSheet({
             </Link>
           </li>
           <li>
-            <Link href="/garden">Open a garden modal from mobile!</Link>
+            <Link href="/garden" onClick={() => toggle(false)}>
+              Garden
+            </Link>
           </li>
         </ul>
       </nav>
@@ -83,8 +89,9 @@ function MobileSheet({
 
 function NavLink() {
   const pathname = usePathname();
-  if (pathname === "/information" || pathname === "/garden") {
+  if (pathname === "/") {
+    return <Link href="/information">Information</Link>;
+  } else {
     return <Link href="/">Projects</Link>;
   }
-  return <Link href="/information">Information</Link>;
 }
