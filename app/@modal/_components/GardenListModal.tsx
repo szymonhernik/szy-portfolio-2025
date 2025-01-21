@@ -26,7 +26,6 @@ export default function GardenListModal() {
   return (
     <FixModalCloseBug expectedPath="/garden">
       <Modal>
-        "MODAL"
         <GardenList />
       </Modal>
     </FixModalCloseBug>
