@@ -78,7 +78,7 @@ const items: GridItem[] = [
 
 export default function PortfolioGrid() {
   return (
-    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
       {items.map((item) => (
         <Link
           key={`portfolio-item-${item.id}`}
@@ -97,7 +97,7 @@ export default function PortfolioGrid() {
                 className=""
               />
             </div>
-            <div className="h-24">
+            <div className="">
               <h3 className="">{item.title}</h3>
               <p className="mt-0 text-secondary">{item.subtitle}</p>
             </div>
