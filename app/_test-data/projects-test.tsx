@@ -1,17 +1,16 @@
-import Image from "next/image";
-import Link from "next/link";
-
-interface GridItem {
+export interface GridItem {
   id: number;
+  slug: string;
   title: string;
   subtitle: string;
   imageUrl: string;
   aspectRatio: string; // Add aspect ratio property
 }
 
-const items: GridItem[] = [
+export const projects: GridItem[] = [
   {
     id: 1,
+    slug: "teatr-komuna-warszawa",
     title: "Teatr Komuna Warszawa",
     subtitle: "CMS based website for a non-profit arts institution in Warsaw.",
     imageUrl:
@@ -20,6 +19,7 @@ const items: GridItem[] = [
   },
   {
     id: 2,
+    slug: "lux-cache",
     title: "Lux Cache",
     subtitle: "Collaborations between 2020–2024.",
     imageUrl:
@@ -28,6 +28,7 @@ const items: GridItem[] = [
   },
   {
     id: 3,
+    slug: "narges-mohammadi",
     title: "Narges Mohammadi",
     subtitle: "Web application for an educational music platform.",
     imageUrl:
@@ -36,14 +37,16 @@ const items: GridItem[] = [
   },
   {
     id: 4,
+    slug: "teatr-komuna-warszawa",
     title: "Teatr Komuna Warszawa",
-    subtitle: "",
+    subtitle: "CMS based website for a non-profit arts institution in Warsaw.",
     imageUrl:
       "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3hqTDLlyNczUngGyAl50MJtR2YVxkvwEDNKisP",
     aspectRatio: "4/3", // Shorter, wider aspect ratio
   },
   {
     id: 5,
+    slug: "lux-cache",
     title: "Lux Cache",
     subtitle: "Collaborations between 2020–2024.",
     imageUrl:
@@ -52,6 +55,7 @@ const items: GridItem[] = [
   },
   {
     id: 6,
+    slug: "narges-mohammadi",
     title: "Narges Mohammadi",
     subtitle: "Web application for an educational music platform.",
     imageUrl:
@@ -60,6 +64,7 @@ const items: GridItem[] = [
   },
   {
     id: 7,
+    slug: "teatr-komuna-warszawa",
     title: "Teatr Komuna Warszawa",
     subtitle: "Website for a non-profit arts institution in Warsaw.",
     imageUrl:
@@ -68,6 +73,7 @@ const items: GridItem[] = [
   },
   {
     id: 8,
+    slug: "lux-cache",
     title: "Lux Cache",
     subtitle: "Collaborations between 2020–2024.",
     imageUrl:
@@ -75,35 +81,3 @@ const items: GridItem[] = [
     aspectRatio: "1/1",
   },
 ];
-
-export default function PortfolioGrid() {
-  return (
-    <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
-      {items.map((item) => (
-        <Link
-          key={`portfolio-item-${item.id}`}
-          href="#"
-          className="group block"
-        >
-          <div className="flex h-full flex-col justify-end">
-            <div
-              className="relative mb-4 w-full"
-              style={{ aspectRatio: item.aspectRatio }}
-            >
-              <Image
-                src={item.imageUrl || "/placeholder.svg"}
-                alt={item.title}
-                fill
-                className=""
-              />
-            </div>
-            <div className="">
-              <h3 className="">{item.title}</h3>
-              <p className="mt-0 text-secondary">{item.subtitle}</p>
-            </div>
-          </div>
-        </Link>
-      ))}
-    </div>
-  );
-}

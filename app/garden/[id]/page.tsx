@@ -7,11 +7,7 @@ export const dynamicParams = false;
 //   // return slugs.map((slug) => ({ id: slug }));
 // }
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const id = (await params).id;
+export default async function Page({ params }: { params: { id: string } }) {
+  const id = params.id;
   return <GardenItem params={{ id }} />;
 }
