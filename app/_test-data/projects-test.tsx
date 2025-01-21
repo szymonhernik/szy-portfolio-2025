@@ -13,8 +13,7 @@ export const projects: GridItem[] = [
     slug: "teatr-komuna-warszawa",
     title: "Teatr Komuna Warszawa",
     subtitle: "CMS based website for a non-profit arts institution in Warsaw.",
-    imageUrl:
-      "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3h0tajKEQjxyeDUGSL6shz8biAqZE7mlRkpw0C",
+    imageUrl: "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3h0tajKEQjxyeDUGSL6shz8biAqZE7mlRkpw0C",
     aspectRatio: "3/4", // Taller aspect ratio
   },
   {
@@ -22,8 +21,7 @@ export const projects: GridItem[] = [
     slug: "lux-cache",
     title: "Lux Cache",
     subtitle: "Collaborations between 2020–2024.",
-    imageUrl:
-      "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3hqTDLlyNczUngGyAl50MJtR2YVxkvwEDNKisP",
+    imageUrl: "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3hqTDLlyNczUngGyAl50MJtR2YVxkvwEDNKisP",
     aspectRatio: "4/3", // Shorter, wider aspect ratio
   },
   {
@@ -31,8 +29,7 @@ export const projects: GridItem[] = [
     slug: "narges-mohammadi",
     title: "Narges Mohammadi",
     subtitle: "Web application for an educational music platform.",
-    imageUrl:
-      "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3hW8EASnzx4ovsSlAE0LG7u523RPgFefYOI8U9",
+    imageUrl: "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3hW8EASnzx4ovsSlAE0LG7u523RPgFefYOI8U9",
     aspectRatio: "1/1",
   },
   {
@@ -40,8 +37,7 @@ export const projects: GridItem[] = [
     slug: "teatr-komuna-warszawa",
     title: "Teatr Komuna Warszawa",
     subtitle: "CMS based website for a non-profit arts institution in Warsaw.",
-    imageUrl:
-      "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3hqTDLlyNczUngGyAl50MJtR2YVxkvwEDNKisP",
+    imageUrl: "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3hqTDLlyNczUngGyAl50MJtR2YVxkvwEDNKisP",
     aspectRatio: "4/3", // Shorter, wider aspect ratio
   },
   {
@@ -49,8 +45,7 @@ export const projects: GridItem[] = [
     slug: "lux-cache",
     title: "Lux Cache",
     subtitle: "Collaborations between 2020–2024.",
-    imageUrl:
-      "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3hW8EASnzx4ovsSlAE0LG7u523RPgFefYOI8U9",
+    imageUrl: "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3hW8EASnzx4ovsSlAE0LG7u523RPgFefYOI8U9",
     aspectRatio: "1/1",
   },
   {
@@ -58,8 +53,7 @@ export const projects: GridItem[] = [
     slug: "narges-mohammadi",
     title: "Narges Mohammadi",
     subtitle: "Web application for an educational music platform.",
-    imageUrl:
-      "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3h0tajKEQjxyeDUGSL6shz8biAqZE7mlRkpw0C",
+    imageUrl: "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3h0tajKEQjxyeDUGSL6shz8biAqZE7mlRkpw0C",
     aspectRatio: "3/4", // Taller aspect ratio
   },
   {
@@ -67,8 +61,7 @@ export const projects: GridItem[] = [
     slug: "teatr-komuna-warszawa",
     title: "Teatr Komuna Warszawa",
     subtitle: "Website for a non-profit arts institution in Warsaw.",
-    imageUrl:
-      "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3hqTDLlyNczUngGyAl50MJtR2YVxkvwEDNKisP",
+    imageUrl: "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3hqTDLlyNczUngGyAl50MJtR2YVxkvwEDNKisP",
     aspectRatio: "4/3", // Shorter, wider aspect ratio
   },
   {
@@ -76,8 +69,7 @@ export const projects: GridItem[] = [
     slug: "lux-cache",
     title: "Lux Cache",
     subtitle: "Collaborations between 2020–2024.",
-    imageUrl:
-      "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3hW8EASnzx4ovsSlAE0LG7u523RPgFefYOI8U9",
+    imageUrl: "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3hW8EASnzx4ovsSlAE0LG7u523RPgFefYOI8U9",
     aspectRatio: "1/1",
   },
 ];

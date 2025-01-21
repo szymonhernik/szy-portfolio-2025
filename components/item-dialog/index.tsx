@@ -39,7 +39,7 @@ export default function ItemDialog({
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Content className="fixed inset-0 z-[140] bg-white p-4">
-          <Dialog.Close className="fixed top-0 right-0 p-4 text-large hover:font-outline-1-black md:text-default-v2">X</Dialog.Close>
+          <Dialog.Close className="fixed top-0 right-0 p-4 text-large hover:font-outline-1-black md:text-default">X</Dialog.Close>
           <Dialog.Title className="text-large">{item.text}</Dialog.Title>
           <div>{item.text}</div>
         </Dialog.Content>

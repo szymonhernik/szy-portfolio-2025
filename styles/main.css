@@ -97,7 +97,7 @@
   } */
 
   html {
-    @apply text-default-v2 text-foreground bg-background;
+    @apply text-default text-foreground bg-background;
 
     /* @apply text-foreground bg-background; */
 
