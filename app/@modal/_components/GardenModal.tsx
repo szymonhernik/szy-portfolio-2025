@@ -25,19 +25,11 @@ function ItemModal({ item, onClose }: ItemModalProps) {
 
   return (
     <FocusLock returnFocus>
-      <div
-        aria-modal="true"
-        aria-labelledby="modal-title"
-        className="fixed inset-0 z-50 bg-white"
-      >
+      <div aria-modal="true" aria-labelledby="modal-title" className="fixed inset-0 z-50 bg-white">
         <div className="p-4 ">
           {/* breadcrumbs to navigate between garden and items */}
           <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={handleGardenClick}
-              className="hover:font-outline-1-black"
-            >
+            <button type="button" onClick={handleGardenClick} className="hover:font-outline-1-black">
               garden
             </button>
             <span>→</span>
@@ -69,18 +61,14 @@ function ItemModal({ item, onClose }: ItemModalProps) {
 export default function GardenModal() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [selectedItem, setSelectedItem] = useState<(typeof items)[0] | null>(
-    null,
-  );
+  const [selectedItem, setSelectedItem] = useState<(typeof items)[0] | null>(null);
 
   useEffect(() => {
     const itemSlug = searchParams.get("item");
     if (itemSlug) {
       const item = items.find((i) => i.slug === itemSlug);
       if (!item) {
-        console.warn(
-          `No item found for slug: "${itemSlug}". Available slugs are: ${items.map((i) => i.slug).join(", ")}`,
-        );
+        console.warn(`No item found for slug: "${itemSlug}". Available slugs are: ${items.map((i) => i.slug).join(", ")}`);
       }
       setSelectedItem(item || null);
     } else {
