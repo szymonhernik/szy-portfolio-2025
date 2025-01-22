@@ -1,7 +1,5 @@
 "use client";
 
-import { FixModalCloseBug } from "@/components/fix-modal-close-bug";
-
 import { clearAllBodyScrollLocks, disableBodyScroll } from "body-scroll-lock";
 import { useEffect, useRef } from "react";
 
@@ -22,10 +20,8 @@ export default function GardenListModal() {
   }, []);
 
   return (
-    <FixModalCloseBug expectedPath="/garden">
-      <Modal>
-        <GardenList />
-      </Modal>
-    </FixModalCloseBug>
+    <Modal>
+      <GardenList />
+    </Modal>
   );
 }

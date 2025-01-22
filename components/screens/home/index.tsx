@@ -1,10 +1,7 @@
 import HomeGrid from "@/components/home-grid";
 import * as FadeIn from "@/components/motion/staggers/fade";
-import { OpenGardenItem } from "@/components/open-garden-item";
 
 import Link from "next/link";
-
-const Spacer = () => <div style={{ marginTop: "24px" }} />;
 
 function IntroText() {
   return (
@@ -25,12 +22,17 @@ function IntroText() {
 function ListSeed() {
   return (
     <p className="mt-0 ">
-      Today’s three random inspirations from a rather{" "}
+      One random inspiration from a rather{" "}
       <Link href="/garden" className="text-secondary hover:font-outline-1-secondary">
         unsorted list
       </Link>{" "}
-      are: Paul B. Preciado’s <OpenGardenItem itemId="1">Can the monster speak?</OpenGardenItem>, Ian Cheng's <OpenGardenItem itemId="2">games</OpenGardenItem>,
-      and Kae Tempest <OpenGardenItem itemId="3">lyrics</OpenGardenItem>.
+      is: Paul B. Preciado’s{" "}
+      <Link
+        href="/garden?item=4" // Add an identifier for the specific item
+        className="text-secondary hover:font-outline-1-secondary"
+      >
+        Can the monster speak?
+      </Link>
     </p>
   );
 }
