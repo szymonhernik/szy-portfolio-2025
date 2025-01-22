@@ -2,14 +2,12 @@
 
 import type { ElementRef } from "react";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
 export function Modal({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
   const dialogRef = useRef<ElementRef<"dialog">>(null);
 
   useEffect(() => {
@@ -19,18 +17,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
   }, []);
 
   function onDismiss() {
-    const from = searchParams.get("from");
-    const to = searchParams.get("to");
-
-    if (to === "garden") {
-      // If we need to show the garden modal first
-      router.push(`/garden?from=${from}`);
-    } else if (from !== null) {
-      // Normal back behavior
-      router.push(from || "/");
-    } else {
-      router.back();
-    }
+    router.back();
   }
 
   const modalRoot = document.getElementById("modal-root");

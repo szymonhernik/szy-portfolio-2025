@@ -2,7 +2,7 @@
 
 import { items } from "@/app/_test-data/items";
 
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import FocusLock from "react-focus-lock";
 
@@ -25,6 +25,14 @@ function ItemModal({ item, onClose }: ItemModalProps) {
           }}
         />
         <div className="relative m-4 w-full max-w-2xl rounded-lg bg-white p-8">
+          {/* breadcrumbs to navigate between garden and items */}
+          <div className="flex items-center gap-2">
+            <button type="button" onClick={onClose}>
+              garden
+            </button>
+            <span>→</span>
+            <span>{item.text}</span>
+          </div>
           <h2 id="modal-title" className="mb-4 font-bold text-xl">
             {item.text}
           </h2>
@@ -50,6 +58,7 @@ function ItemModal({ item, onClose }: ItemModalProps) {
 
 export default function GardenList() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const [selectedItem, setSelectedItem] = useState<(typeof items)[0] | null>(null);
 
   useEffect(() => {
@@ -59,8 +68,22 @@ export default function GardenList() {
       if (item) {
         setSelectedItem(item);
       }
+    } else {
+      setSelectedItem(null);
     }
   }, [searchParams]);
+
+  const handleItemSelect = (item: (typeof items)[0]) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("item", item.id.toString());
+    router.replace(`?${params.toString()}`);
+  };
+
+  const handleClose = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("item");
+    router.replace(`?${params.toString()}`);
+  };
 
   return (
     <section className="flex flex-col gap-4">
@@ -68,7 +91,7 @@ export default function GardenList() {
       <div>
         {items.map((item, index) => (
           <div key={item.id} className="inline text-large hover:font-outline-1-black">
-            <button type="button" onClick={() => setSelectedItem(item)}>
+            <button type="button" onClick={() => handleItemSelect(item)}>
               {item.text}
             </button>
             {index < items.length - 1 && ", "}
@@ -76,7 +99,7 @@ export default function GardenList() {
         ))}
       </div>
 
-      {selectedItem && <ItemModal item={selectedItem} onClose={() => setSelectedItem(null)} />}
+      {selectedItem && <ItemModal item={selectedItem} onClose={handleClose} />}
     </section>
   );
 }
