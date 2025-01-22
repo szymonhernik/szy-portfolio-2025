@@ -1,6 +1,7 @@
 "use client";
 
 import { items } from "@/app/_test-data/items";
+import * as FadeIn from "@/components/motion/staggers/fade";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -86,20 +87,26 @@ export default function GardenList() {
   };
 
   return (
-    <section className="flex flex-col gap-4">
-      <p>An overgrown garden of inspirations</p>
-      <div>
-        {items.map((item, index) => (
-          <div key={item.id} className="inline text-large hover:font-outline-1-black">
-            <button type="button" onClick={() => handleItemSelect(item)}>
-              {item.text}
-            </button>
-            {index < items.length - 1 && ", "}
+    <FadeIn.Container>
+      <section className="flex flex-col gap-4">
+        <FadeIn.Item>
+          <p>An overgrown garden of inspirations</p>
+        </FadeIn.Item>
+        <FadeIn.Item>
+          <div>
+            {items.map((item, index) => (
+              <div key={item.id} className="inline text-large hover:font-outline-1-black">
+                <button type="button" onClick={() => handleItemSelect(item)}>
+                  {item.text}
+                </button>
+                {index < items.length - 1 && ", "}
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </FadeIn.Item>
 
-      {selectedItem && <ItemModal item={selectedItem} onClose={handleClose} />}
-    </section>
+        {selectedItem && <ItemModal item={selectedItem} onClose={handleClose} />}
+      </section>
+    </FadeIn.Container>
   );
 }

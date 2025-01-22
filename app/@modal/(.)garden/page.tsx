@@ -4,7 +4,7 @@ import GardenListModal from "../_components/GardenListModal";
 
 export default async function Page() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense>
       <GardenListModal />
     </Suspense>
   );
