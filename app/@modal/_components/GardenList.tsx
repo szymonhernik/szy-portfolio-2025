@@ -77,23 +77,24 @@ export default function GardenList() {
     }
   }, [searchParams]);
 
-  // Separate useEffect to monitor selectedItem changes
-  useEffect(() => {
-    console.log("selectedItem state:", selectedItem);
-  }, [selectedItem]);
-
   const handleItemSelect = (item: (typeof items)[0]) => {
-    console.log("handleItemSelect called with:", item);
     const params = new URLSearchParams(searchParams.toString());
     params.set("item", item.slug);
-    console.log("Setting URL to:", `?${params.toString()}`);
+
     router.replace(`?${params.toString()}`);
   };
 
   const handleClose = () => {
     const params = new URLSearchParams(searchParams.toString());
+    const isDirect = params.get("direct") === "true";
+    params.delete("direct");
     params.delete("item");
-    router.replace(`?${params.toString()}`);
+
+    if (isDirect) {
+      router.back();
+    } else {
+      router.replace(`?${params.toString()}`);
+    }
   };
 
   return (

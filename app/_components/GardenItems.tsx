@@ -20,9 +20,20 @@ export function GardenItems({ mode, onItemSelect }: GardenItemsProps) {
             {items.map((item, index) => (
               <div key={item.slug} className="inline text-large hover:font-outline-1-black">
                 {mode === "modal" ? (
-                  <button type="button" onClick={() => onItemSelect?.(item)}>
+                  // biome-ignore lint/a11y/useSemanticElements: using span for interactive element
+                  <span
+                    role="button"
+                    tabIndex={0}
+                    aria-roledescription="select item"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        onItemSelect?.(item);
+                      }
+                    }}
+                    onClick={() => onItemSelect?.(item)}
+                  >
                     {item.text}
-                  </button>
+                  </span>
                 ) : (
                   <Link href={`/garden/${item.slug}`}>{item.text}</Link>
                 )}
