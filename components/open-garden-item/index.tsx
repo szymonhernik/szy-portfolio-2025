@@ -1,19 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 export function OpenGardenItem({
-  itemId,
+  slug,
   children,
 }: {
-  itemId: string;
+  slug: string;
   children: React.ReactNode;
 }) {
-  const currentPath = usePathname();
-
   return (
-    <Link href={`/garden/${itemId}?from=${currentPath}&to=garden`} className="text-link hover:font-outline-1-secondary">
+    <Link href={`/garden?item=${slug}`} className="text-link hover:font-outline-1-secondary">
       {children}
     </Link>
   );

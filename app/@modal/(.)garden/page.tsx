@@ -1,11 +1,14 @@
 import { Suspense } from "react";
 
-import GardenListModal from "../_components/GardenListModal";
+import GardenList from "../_components/GardenList";
+import { Modal } from "../_components/modal";
 
 export default async function Page() {
   return (
     <Suspense>
-      <GardenListModal />
+      <Modal>
+        <GardenList />
+      </Modal>
     </Suspense>
   );
 }

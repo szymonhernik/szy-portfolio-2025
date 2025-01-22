@@ -1,5 +1,6 @@
 import HomeGrid from "@/components/home-grid";
 import * as FadeIn from "@/components/motion/staggers/fade";
+import { OpenGardenItem } from "@/components/open-garden-item";
 
 import Link from "next/link";
 
@@ -26,13 +27,7 @@ function ListSeed() {
       <Link href="/garden" className="text-secondary hover:font-outline-1-secondary">
         unsorted list
       </Link>{" "}
-      is: Paul B. Preciado’s{" "}
-      <Link
-        href="/garden?item=4" // Add an identifier for the specific item
-        className="text-secondary hover:font-outline-1-secondary"
-      >
-        Can the monster speak?
-      </Link>
+      is: Paul B. Preciado’s <OpenGardenItem slug="paul-b-preciados-can-the-monster-speak">Can the monster speak?</OpenGardenItem>
     </p>
   );
 }

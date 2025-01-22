@@ -85,7 +85,8 @@ function MobileSheet({
 
 function NavLink() {
   const pathname = usePathname();
-  if (pathname === "/") {
+  // or pathname starts with garden
+  if (pathname === "/" || pathname.startsWith("/garden")) {
     return (
       <Link href="/information" className="hover:font-outline-1-black">
         Information

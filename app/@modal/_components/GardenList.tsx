@@ -1,7 +1,7 @@
 "use client";
 
+import { GardenItems } from "@/app/_components/GardenItems";
 import { items } from "@/app/_test-data/items";
-import * as FadeIn from "@/components/motion/staggers/fade";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -13,6 +13,8 @@ interface ItemModalProps {
 }
 
 function ItemModal({ item, onClose }: ItemModalProps) {
+  console.log("item", item);
+
   return (
     <FocusLock returnFocus>
       <div aria-modal="true" aria-labelledby="modal-title" className="fixed inset-0 z-50 flex items-center justify-center">
@@ -63,20 +65,28 @@ export default function GardenList() {
   const [selectedItem, setSelectedItem] = useState<(typeof items)[0] | null>(null);
 
   useEffect(() => {
-    const itemId = searchParams.get("item");
-    if (itemId) {
-      const item = items.find((i) => i.id === Number(itemId));
-      if (item) {
-        setSelectedItem(item);
+    const itemSlug = searchParams.get("item");
+    if (itemSlug) {
+      const item = items.find((i) => i.slug === itemSlug);
+      if (!item) {
+        console.warn(`No item found for slug: "${itemSlug}". Available slugs are: ${items.map((i) => i.slug).join(", ")}`);
       }
+      setSelectedItem(item || null);
     } else {
       setSelectedItem(null);
     }
   }, [searchParams]);
 
+  // Separate useEffect to monitor selectedItem changes
+  useEffect(() => {
+    console.log("selectedItem state:", selectedItem);
+  }, [selectedItem]);
+
   const handleItemSelect = (item: (typeof items)[0]) => {
+    console.log("handleItemSelect called with:", item);
     const params = new URLSearchParams(searchParams.toString());
-    params.set("item", item.id.toString());
+    params.set("item", item.slug);
+    console.log("Setting URL to:", `?${params.toString()}`);
     router.replace(`?${params.toString()}`);
   };
 
@@ -87,26 +97,9 @@ export default function GardenList() {
   };
 
   return (
-    <FadeIn.Container>
-      <section className="flex flex-col gap-4">
-        <FadeIn.Item>
-          <p>An overgrown garden of inspirations</p>
-        </FadeIn.Item>
-        <FadeIn.Item>
-          <div>
-            {items.map((item, index) => (
-              <div key={item.id} className="inline text-large hover:font-outline-1-black">
-                <button type="button" onClick={() => handleItemSelect(item)}>
-                  {item.text}
-                </button>
-                {index < items.length - 1 && ", "}
-              </div>
-            ))}
-          </div>
-        </FadeIn.Item>
-
-        {selectedItem && <ItemModal item={selectedItem} onClose={handleClose} />}
-      </section>
-    </FadeIn.Container>
+    <>
+      <GardenItems mode="modal" onItemSelect={handleItemSelect} />
+      {selectedItem && <ItemModal item={selectedItem} onClose={handleClose} />}
+    </>
   );
 }

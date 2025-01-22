@@ -1,11 +1,5 @@
-import { Suspense } from "react";
+import { GardenItems } from "@/app/_components/GardenItems";
 
-import GardenList from "../@modal/_components/GardenList";
-
-export default function Page() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <GardenList />
-    </Suspense>
-  );
+export default function GardenPage() {
+  return <GardenItems mode="static" />;
 }
