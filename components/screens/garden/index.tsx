@@ -2,7 +2,7 @@ import { GardenItems } from "@/app/_components/GardenItems";
 
 import { redirect } from "next/navigation";
 
-export default async function Page(props: {
+export default async function GardenPage(props: {
   params: Promise<{ item: string }>;
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {

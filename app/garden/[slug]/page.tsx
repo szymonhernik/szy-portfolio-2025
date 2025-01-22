@@ -1,5 +1,5 @@
-import GardenItem from "@/app/@modal/_components/GardenItem";
 import { items } from "@/app/_test-data/items";
+import GardenItem from "@/app/@modal/_components/GardenItem";
 
 export const dynamicParams = false;
 
@@ -18,7 +18,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
   return (
     <div>
       <div>
-        <a href="/garden">Garden</a> <span>&gt;</span> <span>{item.text}</span>
+        <a href="/garden">garden</a>{" "}
+        <span>
+          <span>→</span>
+        </span>{" "}
+        <span>{item.text}</span>
       </div>
       <GardenItem params={{ slug }} />
     </div>

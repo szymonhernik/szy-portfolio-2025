@@ -13,36 +13,43 @@ interface ItemModalProps {
 }
 
 function ItemModal({ item, onClose }: ItemModalProps) {
-  console.log("item", item);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const handleGardenClick = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("item");
+    params.delete("direct");
+    router.replace(`?${params.toString()}`);
+  };
 
   return (
     <FocusLock returnFocus>
-      <div aria-modal="true" aria-labelledby="modal-title" className="fixed inset-0 z-50 flex items-center justify-center">
-        <div
-          className="fixed inset-0 bg-black/50"
-          onClick={onClose}
-          onKeyDown={(e) => {
-            if (e.key === "Escape") {
-              onClose();
-            }
-          }}
-        />
-        <div className="relative m-4 w-full max-w-2xl rounded-lg bg-white p-8">
+      <div
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        className="fixed inset-0 z-50 bg-white"
+      >
+        <div className="p-4 ">
           {/* breadcrumbs to navigate between garden and items */}
           <div className="flex items-center gap-2">
-            <button type="button" onClick={onClose}>
+            <button
+              type="button"
+              onClick={handleGardenClick}
+              className="hover:font-outline-1-black"
+            >
               garden
             </button>
             <span>→</span>
             <span>{item.text}</span>
           </div>
-          <h2 id="modal-title" className="mb-4 font-bold text-xl">
+          <h2 id="modal-title" className="">
             {item.text}
           </h2>
           {/* Add more item details here */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4"
+            className="fixed top-0 right-0 z-[20] p-4 text-large hover:font-outline-1-black md:text-default"
             aria-label="Close dialog"
             type="button"
             onKeyDown={(e) => {
@@ -51,7 +58,7 @@ function ItemModal({ item, onClose }: ItemModalProps) {
               }
             }}
           >
-            ×
+            X
           </button>
         </div>
       </div>
@@ -59,17 +66,21 @@ function ItemModal({ item, onClose }: ItemModalProps) {
   );
 }
 
-export default function GardenList() {
+export default function GardenModal() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [selectedItem, setSelectedItem] = useState<(typeof items)[0] | null>(null);
+  const [selectedItem, setSelectedItem] = useState<(typeof items)[0] | null>(
+    null,
+  );
 
   useEffect(() => {
     const itemSlug = searchParams.get("item");
     if (itemSlug) {
       const item = items.find((i) => i.slug === itemSlug);
       if (!item) {
-        console.warn(`No item found for slug: "${itemSlug}". Available slugs are: ${items.map((i) => i.slug).join(", ")}`);
+        console.warn(
+          `No item found for slug: "${itemSlug}". Available slugs are: ${items.map((i) => i.slug).join(", ")}`,
+        );
       }
       setSelectedItem(item || null);
     } else {
