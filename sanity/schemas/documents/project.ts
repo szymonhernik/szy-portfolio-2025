@@ -1,9 +1,9 @@
 import { DocumentTextIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
-export const postType = defineType({
-  name: "post",
-  title: "Post",
+export const project = defineType({
+  name: "project",
+  title: "Project ",
   type: "document",
   icon: DocumentTextIcon,
   fields: [
@@ -18,11 +18,26 @@ export const postType = defineType({
         source: "title",
       },
     }),
+    // select option field with options: "has subprojects", "single project", with default to single project
     defineField({
-      name: "author",
-      type: "reference",
-      to: { type: "author" },
+      title: "Multi-Project Container",
+      name: "hasSubprojects",
+      description:
+        "Enable this if this project contains multiple subprojects that should be displayed sequentially on the project page",
+      type: "boolean",
+      initialValue: false,
     }),
+    // if hasSubprojects is true, add a field for the subprojects
+    // hide this field if hasSubprojects is false
+    defineField({
+      name: "subprojects",
+      type: "array",
+      of: [
+        defineArrayMember({ type: "reference", to: { type: "subproject" } }),
+      ],
+      hidden: ({ parent }) => !parent?.hasSubprojects,
+    }),
+
     defineField({
       name: "mainImage",
       type: "image",
@@ -50,16 +65,23 @@ export const postType = defineType({
       name: "body",
       type: "blockContent",
     }),
+    defineField({
+      name: "blocks",
+      type: "array",
+      of: [
+        { type: "section-header" },
+        { type: "carousel" },
+        // { type: "section-content" },
+      ],
+    }),
   ],
   preview: {
     select: {
       title: "title",
-      author: "author.name",
       media: "mainImage",
     },
     prepare(selection) {
-      const { author } = selection;
-      return { ...selection, subtitle: author && `by ${author}` };
+      return { ...selection };
     },
   },
 });
