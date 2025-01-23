@@ -71,7 +71,7 @@ export const project = defineType({
       of: [
         { type: "section-header" },
         { type: "carousel" },
-        // { type: "section-content" },
+        { type: "section-content" },
       ],
     }),
   ],

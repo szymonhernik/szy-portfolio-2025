@@ -1,6 +1,7 @@
 import type { SchemaTypeDefinition } from "sanity";
 
 import { carousel } from "./blocks/carousel";
+import { sectionContent } from "./blocks/section-content";
 import { sectionHeader } from "./blocks/section-header";
 import { blockContent } from "./blocks/shared/blockContent";
 import { author } from "./documents/author";
@@ -17,5 +18,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     author,
     sectionHeader,
     carousel,
+    sectionContent,
   ],
 };

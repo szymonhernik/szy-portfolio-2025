@@ -45,6 +45,36 @@ export const carousel = defineType({
             },
           ],
         },
+        // mux video type and preview but dont play the video
+        {
+          type: "object",
+          name: "videoSlide",
+          title: "Video Slide",
+          fields: [
+            {
+              name: "video",
+              type: "mux.video",
+              title: "Video",
+            },
+            {
+              name: "caption",
+              type: "string",
+              title: "Caption",
+              description: "Add a caption for this video",
+            },
+          ],
+          preview: {
+            select: {
+              caption: "caption",
+            },
+            prepare({ caption }) {
+              return {
+                title: caption || "Video slide",
+                subtitle: "Video slide",
+              };
+            },
+          },
+        },
         // Block content type
         {
           type: "object",

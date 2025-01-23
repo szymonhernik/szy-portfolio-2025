@@ -58,6 +58,7 @@
     "remark-rehype": "^11.1.1",
     "remark-toc": "^9.0.0",
     "sanity": "3",
+    "sanity-plugin-mux-input": "^2.4.0",
     "shiki": "^1.22.0",
     "styled-components": "6",
     "tailwind-highlightjs": "^2.0.1",
