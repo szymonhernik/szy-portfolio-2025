@@ -1,4 +1,4 @@
-import type { GridItem } from "@/app/_test-data/projects-test";
+import type { GridItem } from "@/app/(web)/_test-data/projects-test";
 
 export default function ProjectPage({ project }: { project: GridItem }) {
   return (

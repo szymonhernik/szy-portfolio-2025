@@ -1,4 +1,4 @@
-import { GardenItems } from "@/app/_components/GardenItems";
+import { GardenItems } from "@/app/(web)/_components/GardenItems";
 
 import { redirect } from "next/navigation";
 

@@ -1,4 +1,4 @@
-import { projects } from "@/app/_test-data/projects-test";
+import { projects } from "@/app/(web)/_test-data/projects-test";
 
 import Image from "next/image";
 import Link from "next/link";

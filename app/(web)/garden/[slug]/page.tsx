@@ -1,5 +1,5 @@
-import GardenItem from "@/app/@modal/_components/GardenItem";
-import { items } from "@/app/_test-data/items";
+import GardenItem from "@/app/(web)/@modal/_components/GardenItem";
+import { items } from "@/app/(web)/_test-data/items";
 
 export const dynamicParams = false;
 

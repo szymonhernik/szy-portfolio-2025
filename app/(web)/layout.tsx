@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 const zimula = localFont({
-  src: "./fonts/zimula-inkspot/ZimulaTrial-TrialRegInkSpot.ttf",
+  src: ".././fonts/zimula-inkspot/ZimulaTrial-TrialRegInkSpot.ttf",
 });
 
 export default function RootLayout({

@@ -1,7 +1,7 @@
 "use client";
 
-import { GardenItems } from "@/app/_components/GardenItems";
-import { items } from "@/app/_test-data/items";
+import { GardenItems } from "@/app/(web)/_components/GardenItems";
+import { items } from "@/app/(web)/_test-data/items";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";

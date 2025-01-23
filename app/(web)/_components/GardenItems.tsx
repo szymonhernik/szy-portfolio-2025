@@ -1,4 +1,4 @@
-import { items } from "@/app/_test-data/items";
+import { items } from "@/app/(web)/_test-data/items";
 
 import Link from "next/link";
 
