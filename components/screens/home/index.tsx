@@ -1,5 +1,6 @@
+import type { ProjectQueryResult } from "@/sanity.types";
+
 import HomeGrid from "@/components/home-grid";
-import * as FadeIn from "@/components/motion/staggers/fade";
 import { OpenGardenItem } from "@/components/open-garden-item";
 
 import Link from "next/link";
@@ -32,26 +33,26 @@ function ListSeed() {
   );
 }
 
-export default function Home() {
+export default function Home({ projects }: { projects: ProjectQueryResult }) {
   return (
-    <FadeIn.Container>
-      <section className="grid grid-cols-12 items-start">
-        <div className="col-span-12 md:col-span-10 ">
-          <FadeIn.Item>
-            <div className="flex flex-col gap-8 md:flex-col-reverse">
-              <IntroText />
-              <ListSeed />
-            </div>
-          </FadeIn.Item>
+    // <FadeIn.Container>
+    <section className="grid grid-cols-12 items-start">
+      <div className="col-span-12 md:col-span-10 ">
+        {/* <FadeIn.Item> */}
+        <div className="flex flex-col gap-8 md:flex-col-reverse">
+          <IntroText />
+          <ListSeed />
         </div>
+        {/* </FadeIn.Item> */}
+      </div>
 
-        <div className="col-span-12 mt-8">
-          <FadeIn.Item>
-            <HomeGrid />
-          </FadeIn.Item>
-        </div>
-      </section>
-    </FadeIn.Container>
+      <div className="col-span-12 mt-8">
+        {/* <FadeIn.Item> */}
+        <HomeGrid projects={projects} />
+        {/* </FadeIn.Item> */}
+      </div>
+    </section>
+    // </FadeIn.Container>
   );
   // <FadeIn.Container>
   // {/* <FadeIn.Item>

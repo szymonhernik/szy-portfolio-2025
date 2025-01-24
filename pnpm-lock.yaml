@@ -32,6 +32,9 @@ dependencies:
   "@rehype-pretty/transformers":
     specifier: ^0.13.2
     version: 0.13.2
+  "@sanity/client":
+    specifier: ^6.27.1
+    version: 6.27.1(debug@4.4.0)
   "@sanity/icons":
     specifier: ^3.5.7
     version: 3.5.7(react@18.3.1)

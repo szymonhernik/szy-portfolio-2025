@@ -25,7 +25,7 @@
     }
   },
   "linter": {
-    "ignore": [".next"],
+    "ignore": [".next", "sanity.types.ts"],
     "enabled": true,
     "rules": {
       "recommended": true,
@@ -33,7 +33,8 @@
         "useSortedClasses": "info"
       },
       "correctness": {
-        "noUnusedImports": "error"
+        "noUnusedImports": "error",
+        "noInvalidUseBeforeDeclaration": "off"
       },
       "a11y": {
         "noSvgWithoutTitle": "off"

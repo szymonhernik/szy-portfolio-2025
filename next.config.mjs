@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "gmri4o54mi.ufs.sh",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
     ],
   },
 };
