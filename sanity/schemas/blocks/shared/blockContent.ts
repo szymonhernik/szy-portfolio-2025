@@ -54,6 +54,19 @@ export const blockContent = defineType({
               },
             ],
           },
+          {
+            title: "Garden Item",
+            name: "garden-item",
+            type: "object",
+            fields: [
+              {
+                title: "Item ID",
+                name: "itemId",
+                type: "string",
+                description: "Enter the garden item identifier",
+              },
+            ],
+          },
         ],
       },
     }),

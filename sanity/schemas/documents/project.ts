@@ -18,6 +18,17 @@ export const project = defineType({
         source: "title",
       },
     }),
+    defineField({
+      name: "seoOverview",
+      title: "SEO Overview",
+      type: "text",
+      rows: 3,
+      description: "A brief overview of this project for SEO purposes",
+      validation: (Rule) =>
+        Rule.max(300).warning(
+          "SEO descriptions work best when kept under 300 characters",
+        ),
+    }),
     // select option field with options: "has subprojects", "single project", with default to single project
     defineField({
       title: "Multi-Project Container",
@@ -37,6 +48,13 @@ export const project = defineType({
       ],
       hidden: ({ parent }) => !parent?.hasSubprojects,
     }),
+    defineField({
+      name: "categories",
+      description: "Select the categories for this project.",
+      type: "array",
+      of: [defineArrayMember({ type: "reference", to: { type: "category" } })],
+      hidden: ({ parent }) => parent?.hasSubprojects,
+    }),
 
     defineField({
       name: "mainImage",
@@ -52,15 +70,7 @@ export const project = defineType({
         }),
       ],
     }),
-    defineField({
-      name: "categories",
-      type: "array",
-      of: [defineArrayMember({ type: "reference", to: { type: "category" } })],
-    }),
-    defineField({
-      name: "publishedAt",
-      type: "datetime",
-    }),
+
     defineField({
       name: "body",
       type: "blockContent",

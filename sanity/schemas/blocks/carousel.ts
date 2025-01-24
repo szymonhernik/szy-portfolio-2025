@@ -8,6 +8,13 @@ export const carousel = defineType({
   title: "Carousel",
   fields: [
     defineField({
+      name: "caption",
+      type: "string",
+      title: "Default Caption",
+      description:
+        "This caption will be used as a fallback if individual slides don't have captions",
+    }),
+    defineField({
       name: "items",
       type: "array",
       title: "Carousel Items",
@@ -21,10 +28,18 @@ export const carousel = defineType({
             select: {
               image: "image",
               alt: "image.alt",
+              caption: "caption",
             },
-            prepare({ image, alt }) {
+            prepare({ image, alt, caption }) {
+              const block = (caption || [])[0] || {};
+              const captionText =
+                block.children
+                  ?.filter((child) => child._type === "span")
+                  ?.map((span) => span.text)
+                  ?.join(" ") || "";
+
               return {
-                title: alt || "No alt text",
+                title: captionText || alt || "No caption/alt text",
                 subtitle: "Image slide",
                 media: image,
               };
@@ -43,6 +58,12 @@ export const carousel = defineType({
                 },
               ],
             },
+            {
+              name: "caption",
+              type: "blockContent",
+              title: "Caption",
+              description: "Add a caption for this image",
+            },
           ],
         },
         // mux video type and preview but dont play the video
@@ -58,7 +79,7 @@ export const carousel = defineType({
             },
             {
               name: "caption",
-              type: "string",
+              type: "blockContent",
               title: "Caption",
               description: "Add a caption for this video",
             },
@@ -68,8 +89,15 @@ export const carousel = defineType({
               caption: "caption",
             },
             prepare({ caption }) {
+              const block = (caption || [])[0] || {};
+              const captionText =
+                block.children
+                  ?.filter((child) => child._type === "span")
+                  ?.map((span) => span.text)
+                  ?.join(" ") || "";
+
               return {
-                title: caption || "Video slide",
+                title: captionText || "Video slide",
                 subtitle: "Video slide",
               };
             },
@@ -83,19 +111,29 @@ export const carousel = defineType({
           preview: {
             select: {
               content: "content",
+              caption: "caption",
             },
-            prepare({ content }) {
-              const block = (content || [])[0] || {};
+            prepare({ content, caption }) {
+              const contentBlock = (content || [])[0] || {};
+              const captionBlock = (caption || [])[0] || {};
+
               const plainText =
-                block.children
+                contentBlock.children
+                  ?.filter((child) => child._type === "span")
+                  ?.map((span) => span.text)
+                  ?.join(" ") || "";
+
+              const captionText =
+                captionBlock.children
                   ?.filter((child) => child._type === "span")
                   ?.map((span) => span.text)
                   ?.join(" ") || "";
 
               return {
                 title:
+                  captionText ||
                   plainText.substring(0, 50) +
-                  (plainText.length > 50 ? "..." : ""),
+                    (plainText.length > 50 ? "..." : ""),
                 subtitle: "Content slide",
               };
             },
@@ -106,6 +144,12 @@ export const carousel = defineType({
               title: "Content",
               type: "blockContent",
             },
+            {
+              name: "caption",
+              type: "blockContent",
+              title: "Caption",
+              description: "Add a caption for this content slide",
+            },
           ],
         },
       ],
@@ -115,11 +159,13 @@ export const carousel = defineType({
     select: {
       imageAlt: "items.0.image.alt",
       type: "items.0._type",
+      caption: "caption",
     },
-    prepare({ imageAlt, type }) {
+    prepare({ imageAlt, type, caption }) {
       return {
         title: "Carousel",
-        subtitle: type === "imageSlide" ? imageAlt : "Content slide",
+        subtitle:
+          caption || (type === "imageSlide" ? imageAlt : "Content slide"),
       };
     },
   },

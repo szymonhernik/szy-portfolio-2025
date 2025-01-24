@@ -19,6 +19,17 @@ export const subProject = defineType({
       },
     }),
     defineField({
+      name: "seoOverview",
+      title: "SEO Overview",
+      type: "text",
+      rows: 3,
+      description: "A brief overview of this subproject for SEO purposes",
+      validation: (Rule) =>
+        Rule.max(300).warning(
+          "SEO descriptions work best when kept under 300 characters",
+        ),
+    }),
+    defineField({
       name: "mainImage",
       type: "image",
       options: {
@@ -37,9 +48,15 @@ export const subProject = defineType({
       type: "array",
       of: [defineArrayMember({ type: "reference", to: { type: "category" } })],
     }),
+
     defineField({
-      name: "body",
-      type: "blockContent",
+      name: "blocks",
+      type: "array",
+      of: [
+        { type: "section-header" },
+        { type: "carousel" },
+        { type: "section-content" },
+      ],
     }),
   ],
   preview: {
