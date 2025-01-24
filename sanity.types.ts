@@ -710,7 +710,7 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: projectQuery
-// Query: *[_type == "project"] {  _id,  _createdAt,  title,  "slug": slug.current,  mainImage {    "image": asset->url,    "lqip": asset->metadata.lqip,    "aspectRatio": asset->metadata.dimensions.aspectRatio,    alt,  },}
+// Query: *[_type == "project"] {  _id,  _createdAt,  title,  "slug": slug.current,  mainImage {    "image": asset->url,    "lqip": asset->metadata.lqip,    "aspectRatio": asset->metadata.dimensions.aspectRatio,    alt,  }, }
 export type ProjectQueryResult = Array<{
   _id: string;
   _createdAt: string;
@@ -724,14 +724,60 @@ export type ProjectQueryResult = Array<{
   } | null;
 }>;
 // Variable: singleProjectQuery
-// Query: *[_type == "project" && slug.current == $slug][0] {  title}
+// Query: *[_type == "project" && slug.current == $slug][0] {  _id,  title,  hasSubprojects,  body,  categories[]->{    title,    "slug": slug.current  },}
 export type SingleProjectQueryResult = {
+  _id: string;
   title: string | null;
+  hasSubprojects: boolean | null;
+  body: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+        listItem?: "bullet";
+        markDefs?: Array<
+          | {
+              itemId?: string;
+              _type: "garden-item";
+              _key: string;
+            }
+          | {
+              href?: string;
+              _type: "link";
+              _key: string;
+            }
+        >;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+        _key: string;
+      }
+  > | null;
+  categories: Array<{
+    title: string | null;
+    slug: string | null;
+  }> | null;
 } | null;
 
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "project"] {\n  _id,\n  _createdAt,\n  title,\n  "slug": slug.current,\n  mainImage {\n    "image": asset->url,\n    "lqip": asset->metadata.lqip,\n    "aspectRatio": asset->metadata.dimensions.aspectRatio,\n    alt,\n  },\n}': ProjectQueryResult;
-    '*[_type == "project" && slug.current == $slug][0] {\n  title\n}': SingleProjectQueryResult;
+    '*[_type == "project"] {\n  _id,\n  _createdAt,\n  title,\n  "slug": slug.current,\n  mainImage {\n    "image": asset->url,\n    "lqip": asset->metadata.lqip,\n    "aspectRatio": asset->metadata.dimensions.aspectRatio,\n    alt,\n  },\n \n}': ProjectQueryResult;
+    '*[_type == "project" && slug.current == $slug][0] {\n  _id,\n  title,\n  hasSubprojects,\n  body,\n  categories[]->{\n    title,\n    "slug": slug.current\n  },\n}': SingleProjectQueryResult;
   }
 }

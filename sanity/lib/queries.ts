@@ -11,8 +11,16 @@ export const projectQuery = groq`*[_type == "project"] {
     "aspectRatio": asset->metadata.dimensions.aspectRatio,
     alt,
   },
+ 
 }`;
 
 export const singleProjectQuery = groq`*[_type == "project" && slug.current == $slug][0] {
-  title
+  _id,
+  title,
+  hasSubprojects,
+  body,
+  categories[]->{
+    title,
+    "slug": slug.current
+  },
 }`;
