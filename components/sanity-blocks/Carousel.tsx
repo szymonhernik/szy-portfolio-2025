@@ -6,22 +6,13 @@ import type { MuxVideoAssetOwn } from "@/types/mux";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 
 import Image from "next/image";
-import { useState } from "react";
 
 import MuxPlayerWrapper from "../mux-player-wrapper";
 
 type CarouselBlock = Extract<NonNullable<NonNullable<SingleProjectQueryResult>["blocks"]>[number], { _type: "carousel" }>;
 
 export default function Carousel({ caption, items }: CarouselBlock) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === (items?.length || 0) - 1 ? 0 : prevIndex + 1));
-  };
-
-  const previousSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? (items?.length || 0) - 1 : prevIndex - 1));
-  };
+  if (!items?.length) return null;
 
   const renderSlide = (slide: NonNullable<CarouselBlock["items"]>[number]) => {
     if (!slide) return null;
@@ -76,33 +67,14 @@ export default function Carousel({ caption, items }: CarouselBlock) {
     return null;
   };
 
-  if (!items?.length) return null;
-
   return (
     <div className="relative w-full">
-      {/* {caption && <h3 className="">{caption}</h3>} */}
-
-      <div className="relative mt-4 mb-4 overflow-hidden">
-        {renderSlide(items[currentIndex])}
-
-        {/* Navigation buttons */}
-        <button
-          type="button"
-          onClick={previousSlide}
-          className="-translate-y-1/2 absolute top-1/2 left-2 rounded-full bg-white/80 p-2 shadow-lg hover:bg-white"
-          aria-label="Previous slide"
-        >
-          &lt;
-        </button>
-
-        <button
-          onClick={nextSlide}
-          type="button"
-          className="-translate-y-1/2 absolute top-1/2 right-2 rounded-full bg-white/80 p-2 shadow-lg hover:bg-white"
-          aria-label="Next slide"
-        >
-          &gt;
-        </button>
+      <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4">
+        {items.map((slide) => (
+          <div key={slide._key} className="w-full flex-none snap-center">
+            {renderSlide(slide)}
+          </div>
+        ))}
       </div>
     </div>
   );

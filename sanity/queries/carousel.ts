@@ -6,6 +6,7 @@ export const carouselFragment = `
   caption,
   items[]{
     _type == "imageSlide" => {
+      _key,
       caption,
       image {
         _type,
@@ -22,6 +23,7 @@ export const carouselFragment = `
       }
     },
     _type == "videoSlide" => {
+    _key,
       caption,
       video {
         asset->{
@@ -31,6 +33,7 @@ export const carouselFragment = `
       }
     },
     _type == "contentSlide" => {
+    _key,
       caption,
       content
     },

@@ -724,11 +724,10 @@ export type ProjectQueryResult = Array<{
   } | null;
 }>;
 // Variable: singleProjectQuery
-// Query: *[_type == "project" && slug.current == $slug][0] {  _id,  title,  hasSubprojects,  body,  categories[]->{    title,    "slug": slug.current  },  blocks[]{    _type == "section-content" => {        _type,  body,    },    _type == "section-header" => {        _type,  _key,  title,    },    _type == "carousel" => {        _type,  _key,  caption,  items[]{    _type == "imageSlide" => {      caption,      image {        _type,        alt,        asset-> {          url,          metadata {            lqip,            dimensions {              aspectRatio            }          }        }      }    },    _type == "videoSlide" => {      caption,      video {        asset->{            playbackId,            "aspectRatio": data.aspect_ratio        }      }    },    _type == "contentSlide" => {      caption,      content    },  }    },  },}
+// Query: *[_type == "project" && slug.current == $slug][0] {  _id,  title,  body,  categories[]->{    title,    "slug": slug.current  },  blocks[]{    _type == "section-content" => {        _type,  body,    },    _type == "section-header" => {        _type,  _key,  title,    },    _type == "carousel" => {        _type,  _key,  caption,  items[]{    _type == "imageSlide" => {      _key,      caption,      image {        _type,        alt,        asset-> {          url,          metadata {            lqip,            dimensions {              aspectRatio            }          }        }      }    },    _type == "videoSlide" => {    _key,      caption,      video {        asset->{            playbackId,            "aspectRatio": data.aspect_ratio        }      }    },    _type == "contentSlide" => {    _key,      caption,      content    },  }    },  },  hasSubprojects,  subprojects[]->{    ...,  }  }
 export type SingleProjectQueryResult = {
   _id: string;
   title: string | null;
-  hasSubprojects: boolean | null;
   body: Array<
     | {
         children?: Array<{
@@ -780,6 +779,7 @@ export type SingleProjectQueryResult = {
         caption: string | null;
         items: Array<
           | {
+              _key: string;
               caption: Array<
                 | {
                     children?: Array<{
@@ -862,6 +862,7 @@ export type SingleProjectQueryResult = {
               > | null;
             }
           | {
+              _key: string;
               caption: Array<
                 | {
                     children?: Array<{
@@ -917,6 +918,7 @@ export type SingleProjectQueryResult = {
               } | null;
             }
           | {
+              _key: string;
               caption: Array<
                 | {
                     children?: Array<{
@@ -1012,11 +1014,52 @@ export type SingleProjectQueryResult = {
         > | null;
       }
   > | null;
+  hasSubprojects: boolean | null;
+  subprojects: Array<{
+    _id: string;
+    _type: "subproject";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    slug?: Slug;
+    seoOverview?: string;
+    mainImage?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+    categories?: Array<{
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      _key: string;
+      [internalGroqTypeReferenceTo]?: "category";
+    }>;
+    blocks?: Array<
+      | ({
+          _key: string;
+        } & Carousel)
+      | ({
+          _key: string;
+        } & SectionContent)
+      | ({
+          _key: string;
+        } & SectionHeader)
+    >;
+  }> | null;
 } | null;
 
 declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type == "project"] {\n  _id,\n  _createdAt,\n  title,\n  "slug": slug.current,\n  mainImage {\n    "image": asset->url,\n    "lqip": asset->metadata.lqip,\n    "aspectRatio": asset->metadata.dimensions.aspectRatio,\n    alt,\n  },\n \n}': ProjectQueryResult;
-    '*[_type == "project" && slug.current == $slug][0] {\n  _id,\n  title,\n  hasSubprojects,\n  body,\n  categories[]->{\n    title,\n    "slug": slug.current\n  },\n  blocks[]{\n    _type == "section-content" => {\n      \n  _type,\n  body,\n\n    },\n    _type == "section-header" => {\n      \n  _type,\n  _key,\n  title,\n\n    },\n    _type == "carousel" => {\n      \n  _type,\n  _key,\n  caption,\n  items[]{\n    _type == "imageSlide" => {\n      caption,\n      image {\n        _type,\n        alt,\n        asset-> {\n          url,\n          metadata {\n            lqip,\n            dimensions {\n              aspectRatio\n            }\n          }\n        }\n      }\n    },\n    _type == "videoSlide" => {\n      caption,\n      video {\n        asset->{\n            playbackId,\n            "aspectRatio": data.aspect_ratio\n        }\n      }\n    },\n    _type == "contentSlide" => {\n      caption,\n      content\n    },\n  }\n\n    },\n  },\n}': SingleProjectQueryResult;
+    '*[_type == "project" && slug.current == $slug][0] {\n  _id,\n  title,\n  body,\n  categories[]->{\n    title,\n    "slug": slug.current\n  },\n  blocks[]{\n    _type == "section-content" => {\n      \n  _type,\n  body,\n\n    },\n    _type == "section-header" => {\n      \n  _type,\n  _key,\n  title,\n\n    },\n    _type == "carousel" => {\n      \n  _type,\n  _key,\n  caption,\n  items[]{\n    _type == "imageSlide" => {\n      _key,\n      caption,\n      image {\n        _type,\n        alt,\n        asset-> {\n          url,\n          metadata {\n            lqip,\n            dimensions {\n              aspectRatio\n            }\n          }\n        }\n      }\n    },\n    _type == "videoSlide" => {\n    _key,\n      caption,\n      video {\n        asset->{\n            playbackId,\n            "aspectRatio": data.aspect_ratio\n        }\n      }\n    },\n    _type == "contentSlide" => {\n    _key,\n      caption,\n      content\n    },\n  }\n\n    },\n  },\n  hasSubprojects,\n  subprojects[]->{\n    ...,\n  }\n  \n}': SingleProjectQueryResult;
   }
 }

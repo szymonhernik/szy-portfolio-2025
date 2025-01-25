@@ -21,7 +21,6 @@ export const projectQuery = groq`*[_type == "project"] {
 export const singleProjectQuery = groq`*[_type == "project" && slug.current == $slug][0] {
   _id,
   title,
-  hasSubprojects,
   body,
   categories[]->{
     title,
@@ -38,4 +37,9 @@ export const singleProjectQuery = groq`*[_type == "project" && slug.current == $
       ${carouselFragment}
     },
   },
+  hasSubprojects,
+  subprojects[]->{
+    ...,
+  }
+  
 }`;

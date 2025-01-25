@@ -10,7 +10,7 @@ export default function ProjectPage({
 }) {
   return (
     <article className="grid grid-cols-12 items-start">
-      <div className="col-span-10 lg:col-span-7">
+      <div className="col-span-12 lg:col-span-7">
         <h1 className="text-large">{project.title}</h1>
         {project.categories && <div className="text-secondary text-sm">{project.categories.map((category) => category.title).join(", ")}</div>}
         {project.body && <PortableTextRenderer value={project.body} />}
