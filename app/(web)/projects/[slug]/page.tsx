@@ -1,8 +1,8 @@
 import type { SingleProjectQueryResult } from "@/sanity.types";
 
 import ProjectPage from "@/components/screens/project";
-import { singleProjectQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/sanity.client";
+import { singleProjectQuery } from "@/sanity/queries/page";
 
 import { notFound } from "next/navigation";
 

@@ -1,0 +1,38 @@
+import { groq } from "next-sanity";
+
+export const carouselFragment = `
+  _type,
+  _key,
+  caption,
+  items[]{
+    _type == "imageSlide" => {
+      caption,
+      image {
+        _type,
+        alt,
+        asset-> {
+          url,
+          metadata {
+            lqip,
+            dimensions {
+              aspectRatio
+            }
+          }
+        }
+      }
+    },
+    _type == "videoSlide" => {
+      caption,
+      video {
+        asset->{
+            playbackId,
+            "aspectRatio": data.aspect_ratio
+        }
+      }
+    },
+    _type == "contentSlide" => {
+      caption,
+      content
+    },
+  }
+`;

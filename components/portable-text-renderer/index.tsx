@@ -1,4 +1,6 @@
-import { PortableText, type PortableTextProps } from "@portabletext/react";
+import type { PortableTextProps } from "@portabletext/react";
+
+import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import Link from "next/link";
 

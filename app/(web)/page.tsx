@@ -1,8 +1,8 @@
 import type { ProjectQueryResult } from "@/sanity.types";
 
 import Home from "@/components/screens/home";
-import { projectQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/sanity.client";
+import { projectQuery } from "@/sanity/queries/page";
 
 export default async function Page() {
   const projects: ProjectQueryResult = await sanityFetch({

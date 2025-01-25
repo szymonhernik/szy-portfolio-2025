@@ -1,5 +1,9 @@
 import { groq } from "next-sanity";
 
+import { carouselFragment } from "./carousel";
+import { sectionContentFragment } from "./section-content";
+import { sectionHeaderFragment } from "./section-header";
+
 export const projectQuery = groq`*[_type == "project"] {
   _id,
   _createdAt,
@@ -22,5 +26,16 @@ export const singleProjectQuery = groq`*[_type == "project" && slug.current == $
   categories[]->{
     title,
     "slug": slug.current
+  },
+  blocks[]{
+    _type == "section-content" => {
+      ${sectionContentFragment}
+    },
+    _type == "section-header" => {
+      ${sectionHeaderFragment}
+    },
+    _type == "carousel" => {
+      ${carouselFragment}
+    },
   },
 }`;
