@@ -4,6 +4,7 @@ import type { SingleProjectQueryResult } from "@/sanity.types";
 import type { MuxVideoAssetOwn } from "@/types/mux";
 
 import PortableTextRenderer from "@/components/portable-text-renderer";
+import { useCarousel } from "@/contexts/CarouselContext";
 
 import Image from "next/image";
 
@@ -12,6 +13,8 @@ import MuxPlayerWrapper from "../mux-player-wrapper";
 type CarouselBlock = Extract<NonNullable<NonNullable<SingleProjectQueryResult>["blocks"]>[number], { _type: "carousel" }>;
 
 export default function Carousel({ caption, items }: CarouselBlock) {
+  const { openFullScreen, allSlides } = useCarousel();
+
   if (!items?.length) return null;
 
   const renderSlide = (slide: NonNullable<CarouselBlock["items"]>[number]) => {
@@ -67,16 +70,25 @@ export default function Carousel({ caption, items }: CarouselBlock) {
     return null;
   };
 
+  // Find the starting index for this carousel's slides within all slides
+  const getGlobalIndex = (localIndex: number) => {
+    if (!items?.[0]?._key || !allSlides) return localIndex;
+    const firstSlideKey = items[0]._key;
+    const globalStartIndex = allSlides.findIndex((slide) => slide._key === firstSlideKey);
+    return globalStartIndex + localIndex;
+  };
+
   return (
     <div className="relative w-full">
       <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4">
-        {items.map((slide) => (
-          <div key={slide._key} className="w-full flex-none snap-center">
+        {items.map((slide, index) => (
+          //biome-ignore lint/a11y/useKeyWithClickEvents: this is just for testing right now
+          <div key={slide._key} className="w-full flex-none cursor-pointer snap-center" onClick={() => openFullScreen(allSlides, getGlobalIndex(index))}>
             {renderSlide(slide)}
           </div>
         ))}
       </div>
-      <span className="text-secondary text-sm">Click to view full-screen</span>
+      {/* <span className="text-secondary text-sm">Click to view full-screen</span> */}
     </div>
   );
 }
