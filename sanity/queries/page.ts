@@ -39,7 +39,21 @@ export const singleProjectQuery = groq`*[_type == "project" && slug.current == $
   },
   hasSubprojects,
   subprojects[]->{
-    ...,
+    _id,
+    _key,
+    title,
+    "slug": slug.current,
+    blocks[]{
+      _type == "section-content" => {
+      ${sectionContentFragment}
+      },
+      _type == "section-header" => {
+        ${sectionHeaderFragment}
+      },
+      _type == "carousel" => {
+        ${carouselFragment}
+      },
+    }
   }
   
 }`;

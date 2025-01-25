@@ -17,8 +17,28 @@ export default function ProjectPage({
         {/* ignore ts warning in the line below */}
         {/* @ts-ignore */}
         {project.blocks && <Blocks blocks={project.blocks} />}
+        {project.hasSubprojects && project.subprojects && project.subprojects.length > 0 && (
+          <div className="">
+            {project.subprojects.map((subproject) => (
+              <Subproject key={subproject._id} subproject={subproject} />
+            ))}
+          </div>
+        )}
         {/* <p className="text-[16px] text-secondary">Web Design, Full-Stack Development, Wordpress, Editorial Design, Graphic Design</p> */}
       </div>
     </article>
+  );
+}
+
+function Subproject({
+  subproject,
+}: {
+  subproject: NonNullable<NonNullable<SingleProjectQueryResult>["subprojects"]>[number];
+}) {
+  return (
+    <>
+      {/* @ts-ignore */}
+      {subproject.blocks && <Blocks blocks={subproject.blocks} />}
+    </>
   );
 }

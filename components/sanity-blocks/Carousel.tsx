@@ -76,6 +76,7 @@ export default function Carousel({ caption, items }: CarouselBlock) {
           </div>
         ))}
       </div>
+      <span className="text-secondary text-sm">Click to view full-screen</span>
     </div>
   );
 }
