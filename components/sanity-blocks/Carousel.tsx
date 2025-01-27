@@ -6,14 +6,23 @@ import type { MuxVideoAssetOwn } from "@/types/mux";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import { useCarousel } from "@/contexts/CarouselContext";
 
+import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 
+import { DotButton, useDotButton } from "../carousel-embla/EmblaCarouselDotButton";
 import MuxPlayerWrapper from "../mux-player-wrapper";
 
 type CarouselBlock = Extract<NonNullable<NonNullable<SingleProjectQueryResult>["blocks"]>[number], { _type: "carousel" }>;
 
 export default function Carousel({ caption, items }: CarouselBlock) {
   const { openFullScreen, allSlides } = useCarousel();
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: "start",
+  });
+
+  // Add the dots hook
+  const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi);
 
   if (!items?.length) return null;
 
@@ -22,7 +31,7 @@ export default function Carousel({ caption, items }: CarouselBlock) {
 
     if ("image" in slide) {
       return (
-        <div className="relative h-[400px] w-full">
+        <div className="relative aspect-[3/2] w-full">
           <Image
             src={slide.image?.asset?.url || ""}
             alt={slide.image?.alt || ""}
@@ -43,7 +52,7 @@ export default function Carousel({ caption, items }: CarouselBlock) {
 
     if ("video" in slide && (slide.video?.asset as unknown as MuxVideoAssetOwn)?.playbackId) {
       return (
-        <div className="relative h-[400px] w-full">
+        <div className="relative aspect-[3/2] w-full">
           <MuxPlayerWrapper video={slide.video?.asset as unknown as MuxVideoAssetOwn} />
           {slide.caption && (
             <div className="absolute right-0 bottom-0 left-0 bg-black/50 p-2 text-white">
@@ -56,7 +65,7 @@ export default function Carousel({ caption, items }: CarouselBlock) {
 
     if ("content" in slide) {
       return (
-        <div className="h-[400px] w-full bg-gray-100 p-4">
+        <div className="aspect-[3/2] w-full bg-gray-100 p-4">
           {slide.content && <PortableTextRenderer value={slide.content} />}
           {slide.caption && (
             <div className="mt-4 text-gray-600 text-sm">
@@ -80,15 +89,33 @@ export default function Carousel({ caption, items }: CarouselBlock) {
 
   return (
     <div className="relative w-full">
-      <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4">
-        {items.map((slide, index) => (
-          //biome-ignore lint/a11y/useKeyWithClickEvents: this is just for testing right now
-          <div key={slide._key} className="w-full flex-none cursor-pointer snap-center" onClick={() => openFullScreen(allSlides, getGlobalIndex(index))}>
-            {renderSlide(slide)}
+      <div className="embla">
+        <div className="embla__viewport" ref={emblaRef}>
+          <div className="embla__container">
+            {items.map((slide, index) => (
+              // biome-ignore lint/a11y/useKeyWithClickEvents: testing
+              <div key={slide._key} className="embla__slide cursor-pointer" onClick={() => openFullScreen(allSlides, getGlobalIndex(index))}>
+                {renderSlide(slide)}
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+
+        <div className="embla__controls">
+          <div className="embla__dots">
+            {scrollSnaps.map((scrollSnap, index) => {
+              return (
+                // biome-ignore lint/a11y/useKeyWithClickEvents: testing
+                <DotButton
+                  key={scrollSnap}
+                  onClick={() => onDotButtonClick(index)}
+                  className={`embla__dot${index === selectedIndex ? " embla__dot--selected" : ""}`}
+                />
+              );
+            })}
+          </div>
+        </div>
       </div>
-      {/* <span className="text-secondary text-sm">Click to view full-screen</span> */}
     </div>
   );
 }
