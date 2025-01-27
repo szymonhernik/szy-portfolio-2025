@@ -9,7 +9,7 @@ import { useCarousel } from "@/contexts/CarouselContext";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 
-import { DotButton, useDotButton } from "../carousel-embla/EmblaCarouselDotButton";
+import { useDotButton } from "../carousel-embla/EmblaCarouselDotButton";
 import MuxPlayerWrapper from "../mux-player-wrapper";
 
 type CarouselBlock = Extract<NonNullable<NonNullable<SingleProjectQueryResult>["blocks"]>[number], { _type: "carousel" }>;
@@ -22,7 +22,7 @@ export default function Carousel({ caption, items }: CarouselBlock) {
   });
 
   // Add the dots hook
-  const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi);
+  const { selectedIndex } = useDotButton(emblaApi);
 
   if (!items?.length) return null;
 
@@ -88,32 +88,23 @@ export default function Carousel({ caption, items }: CarouselBlock) {
   };
 
   return (
-    <div className="relative w-full">
-      <div className="embla">
+    <div className="relative my-4 w-full">
+      <div className="embla flex flex-col gap-2">
         <div className="embla__viewport" ref={emblaRef}>
           <div className="embla__container">
             {items.map((slide, index) => (
               // biome-ignore lint/a11y/useKeyWithClickEvents: testing
-              <div key={slide._key} className="embla__slide cursor-pointer" onClick={() => openFullScreen(allSlides, getGlobalIndex(index))}>
+              <div key={slide._key} className="embla__slide cursor-pointer">
                 {renderSlide(slide)}
               </div>
             ))}
           </div>
         </div>
-
-        <div className="embla__controls">
-          <div className="embla__dots">
-            {scrollSnaps.map((scrollSnap, index) => {
-              return (
-                // biome-ignore lint/a11y/useKeyWithClickEvents: testing
-                <DotButton
-                  key={scrollSnap}
-                  onClick={() => onDotButtonClick(index)}
-                  className={`embla__dot${index === selectedIndex ? " embla__dot--selected" : ""}`}
-                />
-              );
-            })}
-          </div>
+        <div className="flex justify-between text-xs">
+          <button className="text-secondary" type="button" onClick={() => openFullScreen(allSlides, getGlobalIndex(selectedIndex))}>
+            Click to view full-screen
+          </button>
+          <span className="">{`${selectedIndex + 1}–${items.length}`}</span>
         </div>
       </div>
     </div>

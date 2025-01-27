@@ -15,7 +15,7 @@ const componentMap: { [key: string]: React.ComponentType<any> } = {
 
 export default function Blocks({ blocks }: { blocks?: Block[] }) {
   return (
-    <>
+    <div className="">
       {blocks?.map((block) => {
         const Component = componentMap[block._type];
         if (!Component) {
@@ -24,6 +24,6 @@ export default function Blocks({ blocks }: { blocks?: Block[] }) {
         }
         return <Component {...block} key={block._key} />;
       })}
-    </>
+    </div>
   );
 }

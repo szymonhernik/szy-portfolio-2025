@@ -43,20 +43,19 @@ export default function ProjectPage({
   return (
     <CarouselProvider initialSlides={getAllSlides()}>
       <article className="grid grid-cols-12 items-start">
-        <div className="col-span-12 lg:col-span-7">
-          <h1 className="text-large">{project.title}</h1>
-          {project.categories && <div className="text-secondary text-sm">{project.categories.map((category) => category.title).join(", ")}</div>}
-          {project.body && <PortableTextRenderer value={project.body} />}
+        <div className="col-span-12 flex flex-col gap-24 lg:col-span-7">
+          <section className="">
+            <h1 className="text-large">{project.title}</h1>
+            {project.categories && <div className="text-secondary text-sm">{project.categories.map((category) => category.title).join(", ")}</div>}
+            {project.body && <PortableTextRenderer value={project.body} />}
+          </section>
           {/* ignore ts warning in the line below */}
           {/* @ts-ignore */}
           {project.blocks && <Blocks blocks={project.blocks} />}
-          {project.hasSubprojects && project.subprojects && project.subprojects.length > 0 && (
-            <div className="">
-              {project.subprojects.map((subproject) => (
-                <Subproject key={subproject._id} subproject={subproject} />
-              ))}
-            </div>
-          )}
+          {project.hasSubprojects &&
+            project.subprojects &&
+            project.subprojects.length > 0 &&
+            project.subprojects.map((subproject) => <Subproject key={subproject._id} subproject={subproject} />)}
           {/* <p className="text-[16px] text-secondary">Web Design, Full-Stack Development, Wordpress, Editorial Design, Graphic Design</p> */}
         </div>
       </article>

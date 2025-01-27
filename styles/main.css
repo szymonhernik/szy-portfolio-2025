@@ -392,6 +392,7 @@
 
   max-width: 48rem;
   margin: auto;
+  margin-left: 0;
 }
 
 .embla__viewport {

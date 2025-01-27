@@ -9,8 +9,8 @@ import { useCarousel } from "@/contexts/CarouselContext";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import { useEffect } from "react";
-
-import { DotButton, useDotButton } from "./carousel-embla/EmblaCarouselDotButton";
+import { NextButton, PrevButton, usePrevNextButtons } from "./carousel-embla/EmblaCarouselArrowButtons";
+import { useDotButton } from "./carousel-embla/EmblaCarouselDotButton";
 
 export default function FullScreenCarousel() {
   const { allSlides, currentSlideIndex, isFullScreen, closeFullScreen } = useCarousel();
@@ -33,6 +33,8 @@ export default function FullScreenCarousel() {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isFullScreen, closeFullScreen, emblaApi]);
+
+  const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } = usePrevNextButtons(emblaApi);
 
   if (!isFullScreen || !allSlides?.length) return null;
 
@@ -99,7 +101,7 @@ export default function FullScreenCarousel() {
         <div className="embla h-full">
           <div className="embla__viewport h-full" ref={emblaRef}>
             <div className="embla__container h-full">
-              {allSlides.map((slide, index) => (
+              {allSlides.map((slide) => (
                 <div key={slide._key} className="embla__slide">
                   <div className="flex h-full w-full items-center justify-center">{renderSlide(slide)}</div>
                 </div>
@@ -109,13 +111,19 @@ export default function FullScreenCarousel() {
 
           <div className="embla__controls -translate-x-1/2 absolute bottom-4 left-1/2">
             <div className="embla__dots">
-              {scrollSnaps.map((scrollSnap, index) => (
+              {/* <ArrowLeft />
+                  <ArrowRight /> */}
+              <div className="embla__buttons">
+                <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+                <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+              </div>
+              {/* {scrollSnaps.map((scrollSnap, index) => (
                 <DotButton
                   key={scrollSnap}
                   onClick={() => onDotButtonClick(index)}
                   className={`embla__dot${index === selectedIndex ? " embla__dot--selected" : ""}`}
                 />
-              ))}
+              ))} */}
             </div>
           </div>
         </div>
