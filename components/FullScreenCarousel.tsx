@@ -6,29 +6,37 @@ import MuxPlayerWrapper from "@/components/mux-player-wrapper";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import { useCarousel } from "@/contexts/CarouselContext";
 
+import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import { useEffect } from "react";
 
+import { DotButton, useDotButton } from "./carousel-embla/EmblaCarouselDotButton";
+
 export default function FullScreenCarousel() {
-  const { allSlides, currentSlideIndex, isFullScreen, closeFullScreen, nextSlide, previousSlide } = useCarousel();
+  const { allSlides, currentSlideIndex, isFullScreen, closeFullScreen } = useCarousel();
+
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    startIndex: currentSlideIndex,
+    loop: true,
+  });
+
+  const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (!isFullScreen) return;
+      if (!isFullScreen || !emblaApi) return;
       if (e.key === "Escape") closeFullScreen();
-      if (e.key === "ArrowRight") nextSlide();
-      if (e.key === "ArrowLeft") previousSlide();
+      if (e.key === "ArrowRight") emblaApi.scrollNext();
+      if (e.key === "ArrowLeft") emblaApi.scrollPrev();
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isFullScreen, closeFullScreen, nextSlide, previousSlide]);
+  }, [isFullScreen, closeFullScreen, emblaApi]);
 
   if (!isFullScreen || !allSlides?.length) return null;
 
-  const currentSlide = allSlides[currentSlideIndex];
-
-  const renderSlide = (slide: typeof currentSlide) => {
+  const renderSlide = (slide: (typeof allSlides)[number]) => {
     if (!slide) return null;
 
     if ("image" in slide) {
@@ -82,18 +90,35 @@ export default function FullScreenCarousel() {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black">
+    <div className="fixed inset-0 z-50 bg-background">
       <div className="relative h-full w-full">
-        <button type="button" onClick={closeFullScreen} className="absolute top-4 right-4 z-10 p-2 text-white">
+        <button type="button" onClick={closeFullScreen} className="absolute top-4 right-4 z-10 p-2">
           Close
         </button>
-        <button type="button" onClick={previousSlide} className="-translate-y-1/2 absolute top-1/2 left-4 z-10 p-2 text-white">
-          Previous
-        </button>
-        <button type="button" onClick={nextSlide} className="-translate-y-1/2 absolute top-1/2 right-4 z-10 p-2 text-white">
-          Next
-        </button>
-        <div className="flex h-full w-full items-center justify-center">{renderSlide(currentSlide)}</div>
+
+        <div className="embla h-full">
+          <div className="embla__viewport h-full" ref={emblaRef}>
+            <div className="embla__container h-full">
+              {allSlides.map((slide, index) => (
+                <div key={slide._key} className="embla__slide">
+                  <div className="flex h-full w-full items-center justify-center">{renderSlide(slide)}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="embla__controls -translate-x-1/2 absolute bottom-4 left-1/2">
+            <div className="embla__dots">
+              {scrollSnaps.map((scrollSnap, index) => (
+                <DotButton
+                  key={scrollSnap}
+                  onClick={() => onDotButtonClick(index)}
+                  className={`embla__dot${index === selectedIndex ? " embla__dot--selected" : ""}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
