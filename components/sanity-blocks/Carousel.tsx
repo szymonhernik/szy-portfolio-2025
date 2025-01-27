@@ -36,16 +36,16 @@ export default function Carousel({ caption, items }: CarouselBlock) {
             src={slide.image?.asset?.url || ""}
             alt={slide.image?.alt || ""}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
             className="object-cover"
             placeholder="blur"
             blurDataURL={slide.image?.asset?.metadata?.lqip || ""}
           />
-          {slide.caption && (
+          {/* {slide.caption && (
             <div className="absolute right-0 bottom-0 left-0 bg-black/50 p-2 text-white">
               <PortableTextRenderer value={slide.caption} />
             </div>
-          )}
+          )} */}
         </div>
       );
     }
@@ -54,11 +54,11 @@ export default function Carousel({ caption, items }: CarouselBlock) {
       return (
         <div className="relative aspect-[3/2] w-full">
           <MuxPlayerWrapper video={slide.video?.asset as unknown as MuxVideoAssetOwn} />
-          {slide.caption && (
+          {/* {slide.caption && (
             <div className="absolute right-0 bottom-0 left-0 bg-black/50 p-2 text-white">
               <PortableTextRenderer value={slide.caption} />
             </div>
-          )}
+          )} */}
         </div>
       );
     }
@@ -67,11 +67,11 @@ export default function Carousel({ caption, items }: CarouselBlock) {
       return (
         <div className="aspect-[3/2] w-full bg-gray-100 p-4">
           {slide.content && <PortableTextRenderer value={slide.content} />}
-          {slide.caption && (
+          {/* {slide.caption && (
             <div className="mt-4 text-gray-600 text-sm">
               <PortableTextRenderer value={slide.caption} />
             </div>
-          )}
+          )} */}
         </div>
       );
     }
@@ -94,7 +94,7 @@ export default function Carousel({ caption, items }: CarouselBlock) {
           <div className="embla__container">
             {items.map((slide, index) => (
               // biome-ignore lint/a11y/useKeyWithClickEvents: testing
-              <div key={slide._key} className="embla__slide cursor-pointer">
+              <div key={slide._key} className="embla__slide ">
                 {renderSlide(slide)}
               </div>
             ))}
