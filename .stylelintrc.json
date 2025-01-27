@@ -9,6 +9,7 @@
         "except": ["blockless-after-same-name-blockless", "first-nested"]
       }
     ],
+    "selector-class-pattern": null,
     "comment-empty-line-before": [
       "always",
       {
