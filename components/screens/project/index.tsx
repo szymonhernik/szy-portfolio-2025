@@ -6,6 +6,8 @@ import Blocks from "@/components/blocks";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import { CarouselProvider } from "@/contexts/CarouselContext";
 
+import Link from "next/link";
+
 export default function ProjectPage({
   project,
 }: {
@@ -63,11 +65,29 @@ export default function ProjectPage({
               <div className="text-secondary text-xs">
                 {project.subprojects
                   .flatMap((subproject) => subproject.categories)
-                  .map((category) => category?.title ?? "")
-                  .join(", ")}
+                  .filter((category): category is NonNullable<typeof category> => category !== null)
+                  .map((category, index, array) => (
+                    <>
+                      <Link href={`/tags-search?q=${category.slug}`} key={category.slug}>
+                        {category.title}
+                      </Link>
+                      {index < array.length - 1 ? ", " : ""}
+                    </>
+                  ))}
               </div>
             ) : (
-              project.categories && <div className="text-secondary text-xs">{project.categories.map((category) => category.title).join(", ")}</div>
+              project.categories && (
+                <div className="text-secondary text-xs">
+                  {project.categories.map((category, index, array) => (
+                    <>
+                      <Link href={`/tags-search?q=${category.slug}`} key={category.slug}>
+                        {category.title}
+                      </Link>
+                      {index < array.length - 1 ? ", " : ""}
+                    </>
+                  ))}
+                </div>
+              )
             )}
             {project.body && <PortableTextRenderer value={project.body} />}
           </section>
@@ -92,9 +112,9 @@ function Subproject({
   subproject: NonNullable<NonNullable<SingleProjectQueryResult>["subprojects"]>[number];
 }) {
   return (
-    <>
+    <div id={subproject.slug && subproject.slug !== "" ? subproject.slug : undefined}>
       {/* @ts-ignore */}
       {subproject.blocks && <Blocks blocks={subproject.blocks} />}
-    </>
+    </div>
   );
 }

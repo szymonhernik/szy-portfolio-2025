@@ -724,7 +724,7 @@ export type ProjectQueryResult = Array<{
   } | null;
 }>;
 // Variable: projectsAndSubprojectsQuery
-// Query: *[_type == "project" || _type == "subproject"] {  _id,  _type,  title,  "slug": slug.current,  categories[]->{    title,    "slug": slug.current  },  mainImage {    "image": asset->url,    "lqip": asset->metadata.lqip,    "aspectRatio": asset->metadata.dimensions.aspectRatio,    alt,  },}
+// Query: *[_type == "project" || _type == "subproject"] {  _id,  _type,  title,  "slug": slug.current,  categories[]->{    title,    "slug": slug.current  },  mainImage {    "image": asset->url,    "lqip": asset->metadata.lqip,    "aspectRatio": asset->metadata.dimensions.aspectRatio,    alt,  },  "parentSlug": select(    _type == "subproject" => *[_type == "project" && references(^._id)][0].slug.current,    null  ),}
 export type ProjectsAndSubprojectsQueryResult = Array<
   | {
       _id: string;
@@ -741,6 +741,7 @@ export type ProjectsAndSubprojectsQueryResult = Array<
         aspectRatio: number | null;
         alt: string | null;
       } | null;
+      parentSlug: null;
     }
   | {
       _id: string;
@@ -757,6 +758,7 @@ export type ProjectsAndSubprojectsQueryResult = Array<
         aspectRatio: number | null;
         alt: string | null;
       } | null;
+      parentSlug: string | null;
     }
 >;
 // Variable: singleProjectQuery
@@ -1312,7 +1314,7 @@ export type SingleProjectQueryResult = {
 declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type == "project"] {\n  _id,\n  _createdAt,\n  title,\n  "slug": slug.current,\n  mainImage {\n    "image": asset->url,\n    "lqip": asset->metadata.lqip,\n    "aspectRatio": asset->metadata.dimensions.aspectRatio,\n    alt,\n  },\n \n}': ProjectQueryResult;
-    '*[_type == "project" || _type == "subproject"] {\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  categories[]->{\n    title,\n    "slug": slug.current\n  },\n  mainImage {\n    "image": asset->url,\n    "lqip": asset->metadata.lqip,\n    "aspectRatio": asset->metadata.dimensions.aspectRatio,\n    alt,\n  },\n}': ProjectsAndSubprojectsQueryResult;
+    '*[_type == "project" || _type == "subproject"] {\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  categories[]->{\n    title,\n    "slug": slug.current\n  },\n  mainImage {\n    "image": asset->url,\n    "lqip": asset->metadata.lqip,\n    "aspectRatio": asset->metadata.dimensions.aspectRatio,\n    alt,\n  },\n  "parentSlug": select(\n    _type == "subproject" => *[_type == "project" && references(^._id)][0].slug.current,\n    null\n  ),\n}': ProjectsAndSubprojectsQueryResult;
     '*[_type == "project" && slug.current == $slug][0] {\n  _id,\n  title,\n  body,\n  categories[]->{\n    title,\n    "slug": slug.current\n  },\n  blocks[]{\n    _type == "section-content" => {\n      \n  _type,\n  body,\n\n    },\n    _type == "section-header" => {\n      \n  _type,\n  _key,\n  title,\n\n    },\n    _type == "carousel" => {\n      \n  _type,\n  _key,\n  defaultCaption,\n  items[]{\n    _type == "imageSlide" => {\n      _key,\n      caption,\n      image {\n        _type,\n        alt,\n        asset-> {\n          url,\n          metadata {\n            lqip,\n            dimensions {\n              width,\n              height,\n              aspectRatio\n            }\n          }\n        }\n      }\n    },\n    _type == "videoSlide" => {\n    _key,\n      caption,\n      video {\n        asset->{\n            playbackId,\n            "aspectRatio": data.aspect_ratio\n        }\n      }\n    },\n    _type == "contentSlide" => {\n    _key,\n      caption,\n      content\n    },\n  }\n\n    },\n  },\n  hasSubprojects,\n  subprojects[]->{\n    _id,\n    _key,\n    title,\n    categories[]->{\n      title,\n      "slug": slug.current\n    },\n    "slug": slug.current,\n    blocks[]{\n      _type == "section-content" => {\n      \n  _type,\n  body,\n\n      },\n      _type == "section-header" => {\n        \n  _type,\n  _key,\n  title,\n\n      },\n      _type == "carousel" => {\n        \n  _type,\n  _key,\n  defaultCaption,\n  items[]{\n    _type == "imageSlide" => {\n      _key,\n      caption,\n      image {\n        _type,\n        alt,\n        asset-> {\n          url,\n          metadata {\n            lqip,\n            dimensions {\n              width,\n              height,\n              aspectRatio\n            }\n          }\n        }\n      }\n    },\n    _type == "videoSlide" => {\n    _key,\n      caption,\n      video {\n        asset->{\n            playbackId,\n            "aspectRatio": data.aspect_ratio\n        }\n      }\n    },\n    _type == "contentSlide" => {\n    _key,\n      caption,\n      content\n    },\n  }\n\n      },\n    }\n  }\n  \n}': SingleProjectQueryResult;
   }
 }

@@ -2,10 +2,12 @@
 
 import type { ProjectsAndSubprojectsQueryResult } from "@/sanity.types";
 
+import HomeGrid from "@/components/home-grid";
+
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 
 // GOALS:
 // Add "Click to randomise selection" button that will randomise the selection of filters
@@ -32,10 +34,14 @@ export default function TagsSearchPage({
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
-  // q=filter1,filter2
   const q = searchParams.get("q");
   const filters = q?.split(",") ?? [];
   const allCategories = getUniqueCategories(projects);
+
+  const filteredProjects = useMemo(() => {
+    return projects.filter((item) => (filters.length === 0 ? true : filters.every((filter) => item.categories?.some((category) => category.slug === filter))));
+  }, [projects, filters]);
+
   const createQueryString = useCallback(
     (name: string, value: string, isRandomized?: boolean) => {
       if (isRandomized) {
@@ -53,6 +59,7 @@ export default function TagsSearchPage({
     },
     [q],
   );
+
   const randomiseFilters = () => {
     const MIN_FILTERS = 1;
     const MAX_FILTERS = 3;
@@ -90,46 +97,32 @@ export default function TagsSearchPage({
   };
 
   return (
-    <section className="grid grid-cols-12 gap-8">
-      <div className="col-span-12 md:col-span-11 ">
-        <button className="text-secondary" type="button" onClick={() => randomiseFilters()}>
-          Click to randomise selection
-        </button>
-        <div className="">
-          {allCategories.map((category, index) => {
-            if (!category.slug || !category.title) return null;
-            return (
-              <>
-                <Link
-                  key={category.slug}
-                  href={`${pathname}?${createQueryString("q", category.slug)}`}
-                  className={clsx("text-large text-secondary", filters.includes(category.slug) && "text-primary")}
-                >
-                  {category.title}
-                </Link>
-                {index < allCategories.length - 1 && <span>, </span>}
-              </>
-            );
-          })}
+    <section>
+      <div className="mb-56 grid grid-cols-12 gap-8">
+        <div className="col-span-12 md:col-span-11 ">
+          <button className="text-secondary" type="button" onClick={() => randomiseFilters()}>
+            Click to randomise selection
+          </button>
+          <div className="">
+            {allCategories.map((category, index) => {
+              if (!category.slug || !category.title) return null;
+              return (
+                <>
+                  <Link
+                    key={category.slug}
+                    href={`${pathname}?${createQueryString("q", category.slug)}`}
+                    className={clsx("text-large", filters.includes(category.slug) ? "text-primary" : "text-secondary")}
+                  >
+                    {category.title}
+                  </Link>
+                  {index < allCategories.length - 1 && <span>, </span>}
+                </>
+              );
+            })}
+          </div>
         </div>
-        <ul>
-          {/* display only projects that have all the filters */}
-          {projects
-            .filter((item) => filters.every((filter) => item.categories?.some((category) => category.slug === filter)))
-            .map((item) => (
-              <li key={item._id}>
-                {item.title}
-                <div className="text-xs">
-                  {item.categories?.map(
-                    (category) =>
-                      // if category slug or title are null, skip rendering
-                      category.slug && category.title && <div>#{category.title}</div>,
-                  )}
-                </div>
-              </li>
-            ))}
-        </ul>
       </div>
+      <HomeGrid projects={filteredProjects} from="tags-search" />
     </section>
   );
 }

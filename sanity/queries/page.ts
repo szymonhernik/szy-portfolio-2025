@@ -33,6 +33,10 @@ export const projectsAndSubprojectsQuery = groq`*[_type == "project" || _type ==
     "aspectRatio": asset->metadata.dimensions.aspectRatio,
     alt,
   },
+  "parentSlug": select(
+    _type == "subproject" => *[_type == "project" && references(^._id)][0].slug.current,
+    null
+  ),
 }`;
 
 export const singleProjectQuery = groq`*[_type == "project" && slug.current == $slug][0] {
