@@ -3,7 +3,7 @@ import { groq } from "next-sanity";
 export const carouselFragment = `
   _type,
   _key,
-  caption,
+  defaultCaption,
   items[]{
     _type == "imageSlide" => {
       _key,

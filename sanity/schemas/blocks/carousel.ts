@@ -8,7 +8,7 @@ export const carousel = defineType({
   title: "Carousel",
   fields: [
     defineField({
-      name: "caption",
+      name: "defaultCaption",
       type: "string",
       title: "Default Caption",
       description:
@@ -159,13 +159,14 @@ export const carousel = defineType({
     select: {
       imageAlt: "items.0.image.alt",
       type: "items.0._type",
-      caption: "caption",
+      defaultCaption: "defaultCaption",
     },
-    prepare({ imageAlt, type, caption }) {
+    prepare({ imageAlt, type, defaultCaption }) {
       return {
         title: "Carousel",
         subtitle:
-          caption || (type === "imageSlide" ? imageAlt : "Content slide"),
+          defaultCaption ||
+          (type === "imageSlide" ? imageAlt : "Content slide"),
       };
     },
   },

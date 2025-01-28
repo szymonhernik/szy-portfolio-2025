@@ -13,13 +13,19 @@ export default function ProjectPage({
 }) {
   // When the project page loads, it collects ALL slides from ALL carousels (both main project and subprojects)
   const getAllSlides = () => {
-    const slides: CarouselBlock["items"] = [];
+    const slides: (NonNullable<CarouselBlock["items"]>[number] & {
+      defaultCaption?: string;
+    })[] = [];
 
     // Collect slides from main project blocks
     if (project.blocks) {
       for (const block of project.blocks) {
         if (block._type === "carousel" && block.items) {
-          slides.push(...block.items);
+          const slidesWithCaption = block.items.map((slide) => ({
+            ...slide,
+            defaultCaption: block.defaultCaption ?? undefined,
+          }));
+          slides.push(...slidesWithCaption);
         }
       }
     }
@@ -30,7 +36,13 @@ export default function ProjectPage({
         if (subproject.blocks) {
           for (const block of subproject.blocks) {
             if (block._type === "carousel" && block.items) {
-              slides.push(...block.items);
+              // Add caption to each slide from this carousel
+              const slidesWithCaption = block.items.map((slide) => ({
+                ...slide,
+                defaultCaption: block.defaultCaption || undefined,
+              }));
+
+              slides.push(...slidesWithCaption);
             }
           }
         }

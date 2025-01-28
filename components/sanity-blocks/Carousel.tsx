@@ -12,9 +12,11 @@ import Image from "next/image";
 import { useDotButton } from "../carousel-embla/EmblaCarouselDotButton";
 import MuxPlayerWrapper from "../mux-player-wrapper";
 
-type CarouselBlock = Extract<NonNullable<NonNullable<SingleProjectQueryResult>["blocks"]>[number], { _type: "carousel" }>;
+type CarouselBlock = Extract<NonNullable<NonNullable<SingleProjectQueryResult>["blocks"]>[number], { _type: "carousel" }> & {
+  defaultCaption?: string;
+};
 
-export default function Carousel({ caption, items }: CarouselBlock) {
+export default function Carousel({ defaultCaption, items }: CarouselBlock) {
   const { openFullScreen, allSlides } = useCarousel();
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,

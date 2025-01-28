@@ -637,7 +637,7 @@
             "value": "carousel"
           }
         },
-        "caption": {
+        "defaultCaption": {
           "type": "objectAttribute",
           "value": {
             "type": "string"

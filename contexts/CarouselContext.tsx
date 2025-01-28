@@ -5,8 +5,12 @@ import type { ReactNode } from "react";
 
 import { createContext, useContext, useState } from "react";
 
+type CarouselSlide = NonNullable<CarouselBlock["items"]>[number] & {
+  defaultCaption?: string;
+};
+
 type CarouselContextType = {
-  allSlides: CarouselBlock["items"];
+  allSlides: CarouselSlide[];
   currentSlideIndex: number;
   isFullScreen: boolean;
   openFullScreen: (slides: CarouselBlock["items"], initialIndex: number) => void;
@@ -50,7 +54,7 @@ export function CarouselProvider({
   return (
     <CarouselContext.Provider
       value={{
-        allSlides: slides,
+        allSlides: slides as CarouselSlide[],
         currentSlideIndex,
         isFullScreen,
         openFullScreen,

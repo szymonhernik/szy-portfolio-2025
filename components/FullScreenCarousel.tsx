@@ -11,20 +11,14 @@ import { clearAllBodyScrollLocks, disableBodyScroll } from "body-scroll-lock";
 import Fade from "embla-carousel-fade";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useRef } from "react";
 import FocusLock from "react-focus-lock";
 
-import {
-  NextButton,
-  PrevButton,
-  usePrevNextButtons,
-} from "./carousel-embla/EmblaCarouselArrowButtons";
+import { NextButton, PrevButton, usePrevNextButtons } from "./carousel-embla/EmblaCarouselArrowButtons";
 import { useDotButton } from "./carousel-embla/EmblaCarouselDotButton";
 
 export default function FullScreenCarousel() {
-  const { allSlides, currentSlideIndex, isFullScreen, closeFullScreen } =
-    useCarousel();
+  const { allSlides, currentSlideIndex, isFullScreen, closeFullScreen } = useCarousel();
 
   const dialogRef = useRef<ElementRef<"dialog">>(null);
 
@@ -36,8 +30,7 @@ export default function FullScreenCarousel() {
     [Fade()],
   );
 
-  const { selectedIndex, scrollSnaps, onDotButtonClick } =
-    useDotButton(emblaApi);
+  const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi);
 
   // Update the scroll lock effect
   useEffect(() => {
@@ -61,10 +54,7 @@ export default function FullScreenCarousel() {
       if (!isFullScreen || !emblaApi) return;
 
       // Only handle Escape if there's no modal dialog open
-      if (
-        e.key === "Escape" &&
-        !document.querySelector('dialog[data-dialog-type="modal"][open]')
-      ) {
+      if (e.key === "Escape" && !document.querySelector('dialog[data-dialog-type="modal"][open]')) {
         closeFullScreen();
       }
       if (e.key === "ArrowRight") emblaApi.scrollNext();
@@ -75,12 +65,7 @@ export default function FullScreenCarousel() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isFullScreen, closeFullScreen, emblaApi]);
 
-  const {
-    prevBtnDisabled,
-    nextBtnDisabled,
-    onPrevButtonClick,
-    onNextButtonClick,
-  } = usePrevNextButtons(emblaApi);
+  const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } = usePrevNextButtons(emblaApi);
 
   if (!isFullScreen || !allSlides?.length) return null;
 
@@ -108,15 +93,10 @@ export default function FullScreenCarousel() {
       );
     }
 
-    if (
-      "video" in slide &&
-      (slide.video?.asset as unknown as MuxVideoAssetOwn)?.playbackId
-    ) {
+    if ("video" in slide && (slide.video?.asset as unknown as MuxVideoAssetOwn)?.playbackId) {
       return (
         <div className="relative h-screen w-full">
-          <MuxPlayerWrapper
-            video={slide.video?.asset as unknown as MuxVideoAssetOwn}
-          />
+          <MuxPlayerWrapper video={slide.video?.asset as unknown as MuxVideoAssetOwn} />
           {slide.caption && (
             <div className="absolute right-0 bottom-0 left-0 bg-black/50 p-2 text-white">
               <PortableTextRenderer value={slide.caption} />
@@ -151,11 +131,7 @@ export default function FullScreenCarousel() {
         className="fixed inset-0 z-50 h-screen w-screen overflow-y-auto overscroll-y-none bg-background"
       >
         <div className="relative h-full w-full">
-          <button
-            type="button"
-            onClick={closeFullScreen}
-            className="fixed top-0 right-0 z-[20] p-4 text-large hover:font-outline-1-black md:text-default"
-          >
+          <button type="button" onClick={closeFullScreen} className="fixed top-0 right-0 z-[20] p-4 text-large hover:font-outline-1-black md:text-default">
             X
           </button>
 
@@ -164,29 +140,23 @@ export default function FullScreenCarousel() {
               <div className="embla__container h-full">
                 {allSlides.map((slide) => (
                   <div key={slide._key} className="embla__slide">
-                    <div className="h-full w-full py-4 pl-4">
-                      {renderSlide(slide)}
-                    </div>
+                    <div className="h-full w-full py-4 pl-4">{renderSlide(slide)}</div>
                   </div>
                 ))}
               </div>
+
+              {/* Original caption code */}
+              {typeof allSlides[selectedIndex]?.defaultCaption === "string" && (
+                <p className="fixed bottom-4 left-4 text-xs">{allSlides[selectedIndex].defaultCaption}</p>
+              )}
             </div>
 
             <div className="absolute right-8 bottom-4">
               <div className="embla__dots">
                 <div className="embla__buttons flex gap-2">
-                  <PrevButton
-                    onClick={onPrevButtonClick}
-                    disabled={prevBtnDisabled}
-                  />
-                  <NextButton
-                    onClick={onNextButtonClick}
-                    disabled={nextBtnDisabled}
-                  />
+                  <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+                  <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
                 </div>
-                <Link href="/garden?item=fresh-apples&direct=true">
-                  Open garden modal
-                </Link>
               </div>
             </div>
           </div>
