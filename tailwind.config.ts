@@ -132,9 +132,18 @@ const config: Config = {
         "3xl": "1920px",
       },
       fontSize: {
-        "fluid-base": ["clamp(1rem, 0.9375rem + 0.4vw, 1.3125rem)", { lineHeight: "clamp(1.5rem, 1.24rem + 0.4vw, 1.53rem)" }],
-        "fluid-lg": ["clamp(1.5rem, 1.125rem + 0.8vw, 1.75rem)", { lineHeight: "1.5" }],
-        "fluid-xl": ["clamp(2rem, 1.375rem + 1.2vw, 2.5rem)", { lineHeight: "1.3" }],
+        "fluid-base": [
+          "clamp(1rem, 0.9375rem + 0.4vw, 1.3125rem)",
+          { lineHeight: "clamp(1.5rem, 1.24rem + 0.4vw, 1.53rem)" },
+        ],
+        "fluid-lg": [
+          "clamp(1.5rem, 1.125rem + 0.8vw, 1.75rem)",
+          { lineHeight: "1.5" },
+        ],
+        "fluid-xl": [
+          "clamp(2rem, 1.5rem + 1.5vw, 2.5rem)",
+          { lineHeight: "1.3" },
+        ],
       },
     },
   },
