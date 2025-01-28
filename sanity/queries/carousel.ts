@@ -16,6 +16,8 @@ export const carouselFragment = `
           metadata {
             lqip,
             dimensions {
+              width,
+              height,
               aspectRatio
             }
           }

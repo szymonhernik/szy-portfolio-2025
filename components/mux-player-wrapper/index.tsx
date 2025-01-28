@@ -7,5 +7,18 @@ export default function MuxPlayerWrapper({
 }: {
   video: MuxVideoAssetOwn;
 }) {
-  return <MuxPlayer playbackId={video.playbackId} />;
+  return (
+    <MuxPlayer
+      className="h-full w-full object-contain"
+      playbackId={video.playbackId}
+      style={{
+        // Ensure the player takes up the full space of its container
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+      }}
+    />
+  );
 }

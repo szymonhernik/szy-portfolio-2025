@@ -6,6 +6,7 @@ import type { ElementRef } from "react";
 import MuxPlayerWrapper from "@/components/mux-player-wrapper";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import { useCarousel } from "@/contexts/CarouselContext";
+import { decimalToRatio } from "@/lib/calculating";
 
 import { clearAllBodyScrollLocks, disableBodyScroll } from "body-scroll-lock";
 import Fade from "embla-carousel-fade";
@@ -71,37 +72,42 @@ export default function FullScreenCarousel() {
 
   const renderSlide = (slide: (typeof allSlides)[number]) => {
     if (!slide) return null;
-
     if ("image" in slide) {
+      // this comes like this: 1.4361851332398317
+      // we need to convert it to this: x / y
+      const aspectRatio = slide.image?.asset?.metadata?.dimensions?.aspectRatio ? decimalToRatio(slide.image.asset.metadata.dimensions.aspectRatio) : "16/9";
+
       return (
-        <div className="relative h-screen w-full ">
+        <div className="relative max-h-[90vh] w-full overflow-hidden" style={{ aspectRatio: aspectRatio }}>
           <Image
             src={slide.image?.asset?.url || ""}
             alt={slide.image?.alt || ""}
             fill
             sizes="100vw"
-            className="object-contain object-left-top"
+            className={"object-contain object-left-top "}
             placeholder="blur"
             blurDataURL={slide.image?.asset?.metadata?.lqip || ""}
           />
-          {slide.caption && (
+          {/* {slide.caption && (
             <div className="absolute right-0 bottom-0 left-0 bg-black/50 p-2 text-white">
               <PortableTextRenderer value={slide.caption} />
             </div>
-          )}
+          )} */}
         </div>
       );
     }
 
     if ("video" in slide && (slide.video?.asset as unknown as MuxVideoAssetOwn)?.playbackId) {
+      const aspectRatio = (slide.video?.asset as unknown as MuxVideoAssetOwn).aspectRatio?.replace(":", "/");
+
       return (
-        <div className="relative h-screen w-full">
+        <div className="relative max-h-[90vh] w-full overflow-hidden" style={{ aspectRatio: aspectRatio }}>
           <MuxPlayerWrapper video={slide.video?.asset as unknown as MuxVideoAssetOwn} />
-          {slide.caption && (
+          {/* {slide.caption && (
             <div className="absolute right-0 bottom-0 left-0 bg-black/50 p-2 text-white">
               <PortableTextRenderer value={slide.caption} />
             </div>
-          )}
+          )} */}
         </div>
       );
     }
@@ -110,11 +116,11 @@ export default function FullScreenCarousel() {
       return (
         <div className="h-screen w-full overflow-auto bg-gray-100 p-4">
           {slide.content && <PortableTextRenderer value={slide.content} />}
-          {slide.caption && (
+          {/* {slide.caption && (
             <div className="mt-4 text-gray-600 text-sm">
               <PortableTextRenderer value={slide.caption} />
             </div>
-          )}
+          )} */}
         </div>
       );
     }
@@ -145,9 +151,13 @@ export default function FullScreenCarousel() {
                 ))}
               </div>
 
-              {/* Original caption code */}
-              {typeof allSlides[selectedIndex]?.defaultCaption === "string" && (
-                <p className="fixed bottom-4 left-4 text-xs">{allSlides[selectedIndex].defaultCaption}</p>
+              {/* Caption display logic */}
+              {allSlides[selectedIndex]?.caption ? (
+                <div className="fixed bottom-4 left-4 mb-0 text-xs [&>p]:mb-0">
+                  <PortableTextRenderer value={allSlides[selectedIndex].caption} />
+                </div>
+              ) : (
+                allSlides[selectedIndex]?.defaultCaption && <p className="fixed bottom-4 left-4 mb-0 text-xs">{allSlides[selectedIndex].defaultCaption}</p>
               )}
             </div>
 

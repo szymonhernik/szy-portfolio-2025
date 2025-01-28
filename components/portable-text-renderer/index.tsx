@@ -4,6 +4,8 @@ import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { OpenGardenItem } from "../open-garden-item";
+
 // import { YouTubeEmbed } from "@next/third-parties/google";
 
 const portableTextComponents: PortableTextProps["components"] = {
@@ -65,6 +67,10 @@ const portableTextComponents: PortableTextProps["components"] = {
           {children}
         </Link>
       );
+    },
+    "garden-item": ({ value, children }) => {
+      const { itemId } = value;
+      return <OpenGardenItem slug={itemId}>{children}</OpenGardenItem>;
     },
   },
   list: {
