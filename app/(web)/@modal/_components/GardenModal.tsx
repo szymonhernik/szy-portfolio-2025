@@ -41,7 +41,7 @@ function ItemModal({ item, onClose }: ItemModalProps) {
           {/* Add more item details here */}
           <button
             onClick={onClose}
-            className="fixed top-0 right-0 z-[20] p-4 text-large hover:font-outline-1-black md:text-default"
+            className="fixed top-0 right-0 z-[20] p-4 text-fluid-xl hover:font-outline-1-black md:text-fluid-base"
             aria-label="Close dialog"
             type="button"
             onKeyDown={(e) => {

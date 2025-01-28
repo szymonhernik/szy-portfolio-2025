@@ -19,7 +19,7 @@ export default function Information() {
         </p>
 
         {/* below text will be 48px size but make it relative to 16px */}
-        <p className="text-large">
+        <p className="text-fluid-xl">
           And outside, the night, <br />
           and inside, <br />
           the last hurrah <br />

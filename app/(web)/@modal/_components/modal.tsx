@@ -43,7 +43,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
 
   return createPortal(
     <dialog ref={dialogRef} data-dialog-type="modal" className="m-0 h-screen w-screen bg-background p-4" onClose={onDismiss}>
-      <button type="button" onClick={onDismiss} className="fixed top-0 right-0 z-[20] p-4 text-large hover:font-outline-1-black md:text-default">
+      <button type="button" onClick={onDismiss} className="fixed top-0 right-0 z-[20] p-4 text-fluid-xl hover:font-outline-1-black md:text-fluid-base">
         X
       </button>
       {/* content ref to disable body scroll */}

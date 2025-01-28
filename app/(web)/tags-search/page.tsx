@@ -16,7 +16,7 @@ export default async function Page() {
     return notFound();
   }
   return (
-    <Suspense>
+    <Suspense fallback={<div>🌱</div>}>
       <TagsSearchPage data={data} />
     </Suspense>
   );

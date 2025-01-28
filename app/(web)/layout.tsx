@@ -31,7 +31,7 @@ export default function RootLayout({
         <Providers>
           {modal}
           <div id="modal-root" />
-          <main className="px-4 py-4 ">
+          <main className="px-4 py-4">
             <NavigationMobile />
             <NavigationDesktop />
             <article className="article ">{children}</article>

@@ -50,9 +50,15 @@ const portableTextComponents: PortableTextProps["components"] = {
     h5: ({ children }) => <h5 style={{ marginBottom: "1rem", marginTop: "1rem" }}>{children}</h5>,
     blockquote: ({ children }) => (
       <blockquote
-        style={{
-          marginLeft: "var(--quote-margin-left)",
-        }}
+        style={
+          {
+            marginLeft: "var(--quote-margin-left-md)",
+            "@media (min-width: 768px)": {
+              marginLeft: "var(--quote-margin-left)",
+            },
+            // biome-ignore lint/suspicious/noExplicitAny: im sure of this
+          } as any
+        }
       >
         {children}
       </blockquote>

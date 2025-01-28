@@ -114,7 +114,7 @@ export default function FullScreenCarousel() {
 
     if ("content" in slide) {
       return (
-        <div className="h-screen w-full overflow-auto text-large">
+        <div className="h-screen w-full overflow-auto text-fluid-xl">
           {slide.content && <PortableTextRenderer value={slide.content} />}
           {/* {slide.caption && (
             <div className="mt-4 text-gray-600 text-sm">
@@ -134,19 +134,19 @@ export default function FullScreenCarousel() {
         open={isFullScreen}
         ref={dialogRef}
         data-dialog-type="carousel"
-        className="fixed inset-0 z-50 h-screen w-screen overflow-y-auto overscroll-y-none bg-background"
+        className="fixed inset-0 z-[300] h-screen w-screen overflow-y-auto overscroll-y-none bg-background"
       >
         <div className="relative h-full w-full">
-          <button type="button" onClick={closeFullScreen} className="fixed top-0 right-0 z-[20] p-4 text-large hover:font-outline-1-black md:text-default">
+          <button type="button" onClick={closeFullScreen} className="fixed top-0 right-0 p-4 text-fluid-xl hover:font-outline-1-black md:text-fluid-base">
             X
           </button>
 
-          <div className="embla h-full w-3/4 max-w-screen">
+          <div className="embla h-full w-full max-w-screen md:w-3/4">
             <div className="embla__viewport h-full" ref={emblaRef}>
               <div className="embla__container h-full">
                 {allSlides.map((slide) => (
                   <div key={slide._key} className="embla__slide">
-                    <div className="h-full w-full py-4 pl-4">{renderSlide(slide)}</div>
+                    <div className="flex h-full w-full flex-col justify-center py-4 pr-4 pl-4 md:justify-start md:pr-0">{renderSlide(slide)}</div>
                   </div>
                 ))}
               </div>
@@ -161,11 +161,11 @@ export default function FullScreenCarousel() {
               )}
             </div>
 
-            <div className="absolute right-8 bottom-4">
+            <div className="absolute right-2 bottom-2">
               <div className="embla__dots">
-                <div className="embla__buttons flex gap-2">
-                  <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-                  <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+                <div className="embla__buttons flex gap-2 ">
+                  <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} className="p-2" />
+                  <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} className="p-2" />
                 </div>
               </div>
             </div>

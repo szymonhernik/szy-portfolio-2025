@@ -7,7 +7,7 @@ import Link from "next/link";
 
 function IntroText() {
   return (
-    <p className="text-large">
+    <p className="text-fluid-xl">
       Szymon Eda Hernik is a graphic designer and front-end web developer.
       <br className="block md:hidden" />
       <br className="block md:hidden" />

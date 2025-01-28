@@ -131,30 +131,16 @@ const config: Config = {
       screens: {
         "3xl": "1920px",
       },
+      fontSize: {
+        "fluid-base": ["clamp(1rem, 0.9375rem + 0.4vw, 1.3125rem)", { lineHeight: "clamp(1.5rem, 1.24rem + 0.4vw, 1.53rem)" }],
+        "fluid-lg": ["clamp(1.5rem, 1.125rem + 0.8vw, 1.75rem)", { lineHeight: "1.5" }],
+        "fluid-xl": ["clamp(2rem, 1.375rem + 1.2vw, 2.5rem)", { lineHeight: "1.3" }],
+      },
     },
   },
   plugins: [
     plugin(({ addUtilities }) => {
       addUtilities({
-        ".text-small": {
-          // should be the same as text-default but 16px always at 16px
-          // letterSpacing: "0.01px",
-        },
-        ".text-default": {
-          fontSize: "clamp(1rem, 0.9375rem + 0.4vw, 1.3125rem)",
-          lineHeight: "clamp(1.5rem, 1.24rem + 0.4vw, 1.53rem)",
-          letterSpacing: "-0.0095rem",
-        },
-        ".text-large": {
-          // text-[2rem] leading-[1.5] md:text-[3rem] md:leading-[1.2]
-          fontSize: "2rem",
-          lineHeight: "1.3",
-          "@screen md": {
-            fontSize: "3rem",
-            lineHeight: "1.2",
-          },
-        },
-
         ".font-outline-1-secondary": {
           "-webkit-text-stroke": "1px var(--secondary)",
         },

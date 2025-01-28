@@ -5,7 +5,6 @@ import type { ProjectsAndSubprojectsQueryResult } from "@/sanity.types";
 import HomeGrid from "@/components/home-grid";
 
 import clsx from "clsx";
-import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useMemo } from "react";
 
@@ -93,14 +92,14 @@ export default function TagsSearchPage({
     }
 
     const randomisedQueryString = createQueryString("q", randomFilters.map((filter) => filter.slug).join(","), true);
-    router.push(`${pathname}?${randomisedQueryString}`);
+    router.replace(`${pathname}?${randomisedQueryString}`);
   };
 
   return (
     <section>
       <div className="mb-56 grid grid-cols-12 gap-8">
-        <div className="col-span-12 md:col-span-11 ">
-          <button className="text-secondary" type="button" onClick={() => randomiseFilters()}>
+        <div className="col-span-12 flex flex-col items-start justify-start gap-4 md:col-span-11">
+          <button className="" type="button" onClick={() => randomiseFilters()}>
             Click to randomise selection
           </button>
           <div className="">
@@ -108,13 +107,18 @@ export default function TagsSearchPage({
               if (!category.slug || !category.title) return null;
               return (
                 <>
-                  <Link
+                  <button
                     key={category.slug}
-                    href={`${pathname}?${createQueryString("q", category.slug)}`}
-                    className={clsx("text-large", filters.includes(category.slug) ? "text-primary" : "text-secondary")}
+                    type="button"
+                    onClick={() => {
+                      if (category.slug) {
+                        router.replace(`${pathname}?${createQueryString("q", category.slug)}`);
+                      }
+                    }}
+                    className={clsx("text-fluid-xl", filters.includes(category.slug) ? "text-primary" : "text-secondary")}
                   >
                     {category.title}
-                  </Link>
+                  </button>
                   {index < allCategories.length - 1 && <span>, </span>}
                 </>
               );

@@ -9,7 +9,7 @@ export default function NavigationDesktop() {
   return (
     <div className="fixed top-4 right-4 z-50 hidden md:block">
       <nav className="">
-        <h1>
+        <h1 className="">
           <NavLink />
         </h1>
       </nav>
@@ -23,7 +23,7 @@ export function NavigationMobile() {
     <>
       <button
         className={clsx(
-          "fixed top-4 right-4 z-[100] overscroll-none pl-4 text-large transition-transform duration-300 md:hidden",
+          "fixed top-4 right-4 z-[100] overscroll-none pl-4 text-fluid-xl transition-transform duration-300 md:hidden",
           isOpen ? "translate-y-[calc(100svh-170px)]" : "translate-y-0",
         )}
         onClick={() => setIsOpen(true)}
@@ -54,11 +54,11 @@ function MobileSheet({
         "translate-y-0",
       )}
     >
-      <button type="button" className="absolute top-4 right-4 text-large hover:font-outline-1-black" onClick={() => toggle(false)}>
+      <button type="button" className="absolute top-4 right-4 text-fluid-xl hover:font-outline-1-black" onClick={() => toggle(false)}>
         X
       </button>
       <nav>
-        <ul className="list-none text-center text-large">
+        <ul className="list-none text-center text-fluid-xl">
           <li>
             <Link href="/information" onClick={() => toggle(false)} className="hover:font-outline-1-black">
               Information

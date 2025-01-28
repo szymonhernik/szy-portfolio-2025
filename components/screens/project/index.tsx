@@ -59,10 +59,10 @@ export default function ProjectPage({
       <article className="grid grid-cols-12 items-start">
         <div className="col-span-12 flex flex-col gap-24 lg:col-span-7">
           <section className="">
-            <h1 className="text-large">{project.title}</h1>
+            <h1 className="text-fluid-xl">{project.title}</h1>
             {/* if project has subprojects dont check categories on project but on subprojects and combine them into an array */}
             {project.hasSubprojects && project.subprojects && project.subprojects.length > 0 ? (
-              <div className="text-secondary text-xs">
+              <div className="text-secondary text-sm lg:text-xs">
                 {project.subprojects
                   .flatMap((subproject) => subproject.categories)
                   .filter((category): category is NonNullable<typeof category> => category !== null)
@@ -77,7 +77,7 @@ export default function ProjectPage({
               </div>
             ) : (
               project.categories && (
-                <div className="text-secondary text-xs">
+                <div className="text-secondary text-sm lg:text-xs">
                   {project.categories.map((category, index, array) => (
                     <>
                       <Link href={`/tags-search?q=${category.slug}`} key={category.slug}>

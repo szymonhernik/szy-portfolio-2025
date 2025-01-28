@@ -118,7 +118,7 @@ export default function Carousel({ defaultCaption, items }: CarouselBlock) {
             ))}
           </div>
         </div>
-        <div className="flex justify-between text-xs">
+        <div className="flex justify-between text-sm lg:text-xs">
           <button className="text-secondary" type="button" onClick={() => openFullScreen(allSlides, getGlobalIndex(selectedIndex))}>
             Click to view full-screen
           </button>
