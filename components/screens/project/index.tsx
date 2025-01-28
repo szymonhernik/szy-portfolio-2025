@@ -58,7 +58,17 @@ export default function ProjectPage({
         <div className="col-span-12 flex flex-col gap-24 lg:col-span-7">
           <section className="">
             <h1 className="text-large">{project.title}</h1>
-            {project.categories && <div className="text-secondary text-sm">{project.categories.map((category) => category.title).join(", ")}</div>}
+            {/* if project has subprojects dont check categories on project but on subprojects and combine them into an array */}
+            {project.hasSubprojects && project.subprojects && project.subprojects.length > 0 ? (
+              <div className="text-secondary text-xs">
+                {project.subprojects
+                  .flatMap((subproject) => subproject.categories)
+                  .map((category) => category?.title ?? "")
+                  .join(", ")}
+              </div>
+            ) : (
+              project.categories && <div className="text-secondary text-xs">{project.categories.map((category) => category.title).join(", ")}</div>
+            )}
             {project.body && <PortableTextRenderer value={project.body} />}
           </section>
           {/* ignore ts warning in the line below */}

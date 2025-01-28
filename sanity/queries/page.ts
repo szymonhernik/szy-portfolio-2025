@@ -42,6 +42,10 @@ export const singleProjectQuery = groq`*[_type == "project" && slug.current == $
     _id,
     _key,
     title,
+    categories[]->{
+      title,
+      "slug": slug.current
+    },
     "slug": slug.current,
     blocks[]{
       _type == "section-content" => {
