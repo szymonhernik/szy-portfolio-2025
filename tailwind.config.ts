@@ -141,7 +141,7 @@ const config: Config = {
           { lineHeight: "1.5" },
         ],
         "fluid-xl": [
-          "clamp(2rem, 1.5rem + 1.5vw, 2.5rem)",
+          "clamp(2rem, 1.5rem + 1.5vw, 2.75rem)",
           { lineHeight: "1.3" },
         ],
       },
