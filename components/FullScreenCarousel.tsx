@@ -87,31 +87,32 @@ export default function FullScreenCarousel() {
   const renderSlide = (slide: (typeof allSlides)[number]) => {
     if (!slide) return null;
     if ("image" in slide) {
-      // this comes like this: 1.4361851332398317
-      // we need to convert it to this: x / y
       const aspectRatio = slide.image?.asset?.metadata?.dimensions?.aspectRatio
         ? decimalToRatio(slide.image.asset.metadata.dimensions.aspectRatio)
         : "16/9";
 
       return (
         <div
-          className="relative max-h-[90vh] w-full overflow-hidden"
-          style={{ aspectRatio: aspectRatio }}
+          className="relative w-full h-auto max-h-[90vh]"
+          style={{
+            aspectRatio: aspectRatio,
+            maxWidth: `calc(90vh * ${aspectRatio
+              .split("/")
+              .map(Number)
+              .reduce((a, b) => a / b)
+              .toString()})`,
+          }}
         >
           <Image
             src={slide.image?.asset?.url || ""}
             alt={slide.image?.alt || ""}
             fill
             sizes="100vw"
-            className={"object-contain object-left-top "}
+            className="object-contain object-left-top"
             placeholder="blur"
             blurDataURL={slide.image?.asset?.metadata?.lqip || ""}
+            // priority
           />
-          {/* {slide.caption && (
-            <div className="absolute right-0 bottom-0 left-0 bg-black/50 p-2 text-white">
-              <PortableTextRenderer value={slide.caption} />
-            </div>
-          )} */}
         </div>
       );
     }
@@ -132,11 +133,6 @@ export default function FullScreenCarousel() {
           <MuxPlayerWrapper
             video={slide.video?.asset as unknown as MuxVideoAssetOwn}
           />
-          {/* {slide.caption && (
-            <div className="absolute right-0 bottom-0 left-0 bg-black/50 p-2 text-white">
-              <PortableTextRenderer value={slide.caption} />
-            </div>
-          )} */}
         </div>
       );
     }
@@ -145,11 +141,6 @@ export default function FullScreenCarousel() {
       return (
         <div className="h-screen w-full overflow-auto text-fluid-xl">
           {slide.content && <PortableTextRenderer value={slide.content} />}
-          {/* {slide.caption && (
-            <div className="mt-4 text-gray-600 text-sm">
-              <PortableTextRenderer value={slide.caption} />
-            </div>
-          )} */}
         </div>
       );
     }
@@ -178,8 +169,8 @@ export default function FullScreenCarousel() {
             <div className="embla__viewport h-full" ref={emblaRef}>
               <div className="embla__container h-full">
                 {allSlides.map((slide) => (
-                  <div key={slide._key} className="embla__slide">
-                    <div className="flex h-full w-full flex-col justify-center py-4 pr-4 pl-4 md:justify-start md:pr-0">
+                  <div key={slide._key} className="embla__slide ">
+                    <div className="flex h-full w-full items-start justify-start py-4 px-4 md:justify-start md:pr-0">
                       {renderSlide(slide)}
                     </div>
                   </div>
