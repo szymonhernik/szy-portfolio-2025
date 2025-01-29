@@ -144,6 +144,7 @@ const config: Config = {
           "clamp(2rem, 1.65rem + 1.65vw, 2.6rem)",
           { lineHeight: "1.3" },
         ],
+        small: "0.9rem",
       },
     },
   },

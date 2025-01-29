@@ -64,7 +64,7 @@ export default function ProjectPage({
             {project.hasSubprojects &&
             project.subprojects &&
             project.subprojects.length > 0 ? (
-              <div className="text-secondary text-base md:text-[.9rem] ">
+              <div className="text-secondary text-small lg:text-xs">
                 {project.subprojects
                   .flatMap((subproject) => subproject.categories)
                   .filter(
@@ -85,7 +85,7 @@ export default function ProjectPage({
               </div>
             ) : (
               project.categories && (
-                <div className="text-secondary text-[.9rem] lg:text-xs">
+                <div className="text-secondary text-small lg:text-xs">
                   {project.categories.map((category, index, array) => (
                     <>
                       <Link

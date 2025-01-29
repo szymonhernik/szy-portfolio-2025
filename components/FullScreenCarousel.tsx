@@ -179,14 +179,14 @@ export default function FullScreenCarousel() {
 
               {/* Caption display logic */}
               {allSlides[selectedIndex]?.caption ? (
-                <div className="fixed bottom-4 left-4 mb-0  [&>p]:mb-0">
+                <div className="fixed bottom-4 left-4 mb-0  [&>p]:mb-0 text-small">
                   <PortableTextRenderer
                     value={allSlides[selectedIndex].caption}
                   />
                 </div>
               ) : (
                 allSlides[selectedIndex]?.defaultCaption && (
-                  <p className="fixed bottom-4 left-4 mb-0 ">
+                  <p className="fixed bottom-4 left-4 mb-0 text-small">
                     {allSlides[selectedIndex].defaultCaption}
                   </p>
                 )
