@@ -1,7 +1,7 @@
 export default function Information() {
   return (
     <section className="grid grid-cols-12 items-start">
-      <div className="text-fluid-xl mb-36">SZY</div>
+      <div className="text-fluid-xl mb-36 md:hidden">SZY</div>
       <div className="col-span-12 md:col-span-10 lg:col-span-7 flex flex-col gap-24 ">
         <div>
           <p>
