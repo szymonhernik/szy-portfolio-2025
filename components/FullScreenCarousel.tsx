@@ -15,11 +15,16 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import FocusLock from "react-focus-lock";
 
-import { NextButton, PrevButton, usePrevNextButtons } from "./carousel-embla/EmblaCarouselArrowButtons";
+import {
+  NextButton,
+  PrevButton,
+  usePrevNextButtons,
+} from "./carousel-embla/EmblaCarouselArrowButtons";
 import { useDotButton } from "./carousel-embla/EmblaCarouselDotButton";
 
 export default function FullScreenCarousel() {
-  const { allSlides, currentSlideIndex, isFullScreen, closeFullScreen } = useCarousel();
+  const { allSlides, currentSlideIndex, isFullScreen, closeFullScreen } =
+    useCarousel();
 
   const dialogRef = useRef<ElementRef<"dialog">>(null);
 
@@ -31,7 +36,8 @@ export default function FullScreenCarousel() {
     [Fade()],
   );
 
-  const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi);
+  const { selectedIndex, scrollSnaps, onDotButtonClick } =
+    useDotButton(emblaApi);
 
   // Update the scroll lock effect
   useEffect(() => {
@@ -55,7 +61,10 @@ export default function FullScreenCarousel() {
       if (!isFullScreen || !emblaApi) return;
 
       // Only handle Escape if there's no modal dialog open
-      if (e.key === "Escape" && !document.querySelector('dialog[data-dialog-type="modal"][open]')) {
+      if (
+        e.key === "Escape" &&
+        !document.querySelector('dialog[data-dialog-type="modal"][open]')
+      ) {
         closeFullScreen();
       }
       if (e.key === "ArrowRight") emblaApi.scrollNext();
@@ -66,7 +75,12 @@ export default function FullScreenCarousel() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isFullScreen, closeFullScreen, emblaApi]);
 
-  const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } = usePrevNextButtons(emblaApi);
+  const {
+    prevBtnDisabled,
+    nextBtnDisabled,
+    onPrevButtonClick,
+    onNextButtonClick,
+  } = usePrevNextButtons(emblaApi);
 
   if (!isFullScreen || !allSlides?.length) return null;
 
@@ -75,10 +89,15 @@ export default function FullScreenCarousel() {
     if ("image" in slide) {
       // this comes like this: 1.4361851332398317
       // we need to convert it to this: x / y
-      const aspectRatio = slide.image?.asset?.metadata?.dimensions?.aspectRatio ? decimalToRatio(slide.image.asset.metadata.dimensions.aspectRatio) : "16/9";
+      const aspectRatio = slide.image?.asset?.metadata?.dimensions?.aspectRatio
+        ? decimalToRatio(slide.image.asset.metadata.dimensions.aspectRatio)
+        : "16/9";
 
       return (
-        <div className="relative max-h-[90vh] w-full overflow-hidden" style={{ aspectRatio: aspectRatio }}>
+        <div
+          className="relative max-h-[90vh] w-full overflow-hidden"
+          style={{ aspectRatio: aspectRatio }}
+        >
           <Image
             src={slide.image?.asset?.url || ""}
             alt={slide.image?.alt || ""}
@@ -97,12 +116,22 @@ export default function FullScreenCarousel() {
       );
     }
 
-    if ("video" in slide && (slide.video?.asset as unknown as MuxVideoAssetOwn)?.playbackId) {
-      const aspectRatio = (slide.video?.asset as unknown as MuxVideoAssetOwn).aspectRatio?.replace(":", "/");
+    if (
+      "video" in slide &&
+      (slide.video?.asset as unknown as MuxVideoAssetOwn)?.playbackId
+    ) {
+      const aspectRatio = (
+        slide.video?.asset as unknown as MuxVideoAssetOwn
+      ).aspectRatio?.replace(":", "/");
 
       return (
-        <div className="relative max-h-[90vh] w-full overflow-hidden" style={{ aspectRatio: aspectRatio }}>
-          <MuxPlayerWrapper video={slide.video?.asset as unknown as MuxVideoAssetOwn} />
+        <div
+          className="relative max-h-[90vh] w-full overflow-hidden"
+          style={{ aspectRatio: aspectRatio }}
+        >
+          <MuxPlayerWrapper
+            video={slide.video?.asset as unknown as MuxVideoAssetOwn}
+          />
           {/* {slide.caption && (
             <div className="absolute right-0 bottom-0 left-0 bg-black/50 p-2 text-white">
               <PortableTextRenderer value={slide.caption} />
@@ -137,7 +166,11 @@ export default function FullScreenCarousel() {
         className="fixed inset-0 z-[300] h-screen w-screen overflow-y-auto overscroll-y-none bg-background"
       >
         <div className="relative h-full w-full">
-          <button type="button" onClick={closeFullScreen} className="fixed top-0 right-0 p-4 text-fluid-xl hover:font-outline-1-black md:text-fluid-base">
+          <button
+            type="button"
+            onClick={closeFullScreen}
+            className="fixed top-0 right-0 p-4 z-[310] text-fluid-xl hover:font-outline-1-black md:text-fluid-base"
+          >
             X
           </button>
 
@@ -146,26 +179,42 @@ export default function FullScreenCarousel() {
               <div className="embla__container h-full">
                 {allSlides.map((slide) => (
                   <div key={slide._key} className="embla__slide">
-                    <div className="flex h-full w-full flex-col justify-center py-4 pr-4 pl-4 md:justify-start md:pr-0">{renderSlide(slide)}</div>
+                    <div className="flex h-full w-full flex-col justify-center py-4 pr-4 pl-4 md:justify-start md:pr-0">
+                      {renderSlide(slide)}
+                    </div>
                   </div>
                 ))}
               </div>
 
               {/* Caption display logic */}
               {allSlides[selectedIndex]?.caption ? (
-                <div className="fixed bottom-4 left-4 mb-0 text-xs [&>p]:mb-0">
-                  <PortableTextRenderer value={allSlides[selectedIndex].caption} />
+                <div className="fixed bottom-4 left-4 mb-0  [&>p]:mb-0">
+                  <PortableTextRenderer
+                    value={allSlides[selectedIndex].caption}
+                  />
                 </div>
               ) : (
-                allSlides[selectedIndex]?.defaultCaption && <p className="fixed bottom-4 left-4 mb-0 text-xs">{allSlides[selectedIndex].defaultCaption}</p>
+                allSlides[selectedIndex]?.defaultCaption && (
+                  <p className="fixed bottom-4 left-4 mb-0 ">
+                    {allSlides[selectedIndex].defaultCaption}
+                  </p>
+                )
               )}
             </div>
 
             <div className="absolute right-2 bottom-2">
               <div className="embla__dots">
                 <div className="embla__buttons flex gap-2 ">
-                  <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} className="p-2" />
-                  <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} className="p-2" />
+                  <PrevButton
+                    onClick={onPrevButtonClick}
+                    disabled={prevBtnDisabled}
+                    className="p-2"
+                  />
+                  <NextButton
+                    onClick={onNextButtonClick}
+                    disabled={nextBtnDisabled}
+                    className="p-2"
+                  />
                 </div>
               </div>
             </div>

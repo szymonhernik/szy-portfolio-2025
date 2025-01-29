@@ -133,15 +133,15 @@ const config: Config = {
       },
       fontSize: {
         "fluid-base": [
-          "clamp(1rem, 0.9375rem + 0.4vw, 1.3125rem)",
-          { lineHeight: "clamp(1.5rem, 1.24rem + 0.4vw, 1.53rem)" },
+          "clamp(1rem, 0.9375rem + 0.3vw, 1.35rem)",
+          { lineHeight: "1.5" },
         ],
         "fluid-lg": [
           "clamp(1.5rem, 1.125rem + 0.8vw, 1.75rem)",
-          { lineHeight: "1.5" },
+          { lineHeight: "1.4" },
         ],
         "fluid-xl": [
-          "clamp(2rem, 1.5rem + 1.5vw, 2.75rem)",
+          "clamp(2rem, 1.65rem + 1.65vw, 2.6rem)",
           { lineHeight: "1.3" },
         ],
       },
