@@ -1,5 +1,8 @@
+import type { SingleGardenItemQueryResult } from "@/sanity.types";
+
 import GardenItem from "@/app/(web)/@modal/_components/GardenItem";
-import { items } from "@/app/(web)/_test-data/items";
+import { sanityFetch } from "@/sanity/lib/sanity.client";
+import { singleGardenItemQuery } from "@/sanity/queries/page";
 
 export const dynamicParams = false;
 
@@ -10,8 +13,13 @@ export const dynamicParams = false;
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const slug = params.slug;
-  const item = items.find((item) => item.slug === slug);
-  if (!item) {
+  const gardenItem: SingleGardenItemQueryResult = await sanityFetch({
+    query: singleGardenItemQuery,
+    tags: [`gardenItem:${params.slug}`],
+    qParams: { slug }, // add slug from next-js params
+  });
+
+  if (!gardenItem) {
     return <div>Item not found</div>;
   }
 
@@ -22,8 +30,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
         <span>
           <span>→</span>
         </span>{" "}
-        <span>{item.text}</span>
+        <span>{gardenItem.title}</span>
       </div>
+      {/* TODO: render garden blocks */}
       <GardenItem params={{ slug }} />
     </div>
   );

@@ -1,14 +1,15 @@
 "use client";
 
+import type { GardenItemsQueryResult } from "@/sanity.types";
+
 import { GardenItems } from "@/app/(web)/_components/GardenItems";
-import { items } from "@/app/(web)/_test-data/items";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import FocusLock from "react-focus-lock";
 
 interface ItemModalProps {
-  item: (typeof items)[0];
+  item: GardenItemsQueryResult[0];
   onClose: () => void;
 }
 
@@ -33,10 +34,10 @@ function ItemModal({ item, onClose }: ItemModalProps) {
               garden
             </button>
             <span>→</span>
-            <span>{item.text}</span>
+            <span>{item.title}</span>
           </div>
           <h2 id="modal-title" className="">
-            {item.text}
+            {item.title}
           </h2>
           {/* Add more item details here */}
           <button
@@ -58,10 +59,14 @@ function ItemModal({ item, onClose }: ItemModalProps) {
   );
 }
 
-export default function GardenModal() {
+export default function GardenModal({
+  items,
+}: {
+  items: GardenItemsQueryResult;
+}) {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [selectedItem, setSelectedItem] = useState<(typeof items)[0] | null>(null);
+  const [selectedItem, setSelectedItem] = useState<GardenItemsQueryResult[0] | null>(null);
 
   useEffect(() => {
     const itemSlug = searchParams.get("item");
@@ -74,13 +79,15 @@ export default function GardenModal() {
     } else {
       setSelectedItem(null);
     }
-  }, [searchParams]);
+  }, [searchParams, items]);
 
-  const handleItemSelect = (item: (typeof items)[0]) => {
+  const handleItemSelect = (item: GardenItemsQueryResult[0]) => {
     const params = new URLSearchParams(searchParams.toString());
-    params.set("item", item.slug);
-
-    router.replace(`?${params.toString()}`);
+    if (item.slug) {
+      // Add null check
+      params.set("item", item.slug);
+      router.replace(`?${params.toString()}`);
+    }
   };
 
   const handleClose = () => {
@@ -98,7 +105,7 @@ export default function GardenModal() {
 
   return (
     <>
-      <GardenItems mode="modal" onItemSelect={handleItemSelect} />
+      <GardenItems mode="modal" onItemSelect={handleItemSelect} items={items} />
       {selectedItem && <ItemModal item={selectedItem} onClose={handleClose} />}
     </>
   );

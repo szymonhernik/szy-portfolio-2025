@@ -1,13 +1,16 @@
-import { items } from "@/app/(web)/_test-data/items";
+"use client";
+
+import type { GardenItemsQueryResult } from "@/sanity.types";
 
 import Link from "next/link";
 
 interface GardenItemsProps {
   mode: "modal" | "static";
-  onItemSelect?: (item: (typeof items)[0]) => void;
+  onItemSelect?: (item: GardenItemsQueryResult[0]) => void;
+  items: GardenItemsQueryResult;
 }
 
-export function GardenItems({ mode, onItemSelect }: GardenItemsProps) {
+export function GardenItems({ mode, onItemSelect, items }: GardenItemsProps) {
   return (
     <section className="flex flex-col gap-4">
       <p>An overgrown garden of inspirations</p>
@@ -28,10 +31,10 @@ export function GardenItems({ mode, onItemSelect }: GardenItemsProps) {
                 }}
                 onClick={() => onItemSelect?.(item)}
               >
-                {item.text}
+                {item.title}
               </span>
             ) : (
-              <Link href={`/garden/${item.slug}`}>{item.text}</Link>
+              <Link href={`/garden/${item.slug}`}>{item.title}</Link>
             )}
             {index < items.length - 1 && ", "}
           </div>

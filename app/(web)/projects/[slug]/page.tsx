@@ -11,7 +11,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   // Revalidate document when "project" is changed
   const project: SingleProjectQueryResult = await sanityFetch({
     query: singleProjectQuery,
-    tags: ["project"],
+    tags: [`project:${params.slug}`],
     qParams: { slug: params.slug }, // add slug from next-js params
   });
 

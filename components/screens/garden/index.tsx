@@ -1,5 +1,3 @@
-import { GardenItems } from "@/app/(web)/_components/GardenItems";
-
 import { redirect } from "next/navigation";
 
 export default async function GardenPage(props: {
@@ -13,7 +11,7 @@ export default async function GardenPage(props: {
   if (item) {
     redirect(`/garden/${item}`);
   }
-
+  return <div>Garden</div>;
   // read search params
-  return <GardenItems mode="static" />;
+  // return <GardenItems mode="static" />;
 }

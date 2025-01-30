@@ -3,6 +3,7 @@
 ### General
 
 - [?] the SZY element moves outside of the viewport -> work on the calculation
+- [ ] clean the project code
 
 ### Garden
 
