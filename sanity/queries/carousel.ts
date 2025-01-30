@@ -22,12 +22,33 @@ export const carouselFragment = `
             }
           }
         }
+      },
+      mobileImage {
+        _type,
+        alt,
+        asset-> {
+          url,
+          metadata {
+            lqip,
+            dimensions {
+              width,
+              height,
+              aspectRatio
+            }
+          }
+        }
       }
     },
     _type == "videoSlide" => {
     _key,
       caption,
       video {
+        asset->{
+            playbackId,
+            "aspectRatio": data.aspect_ratio
+        }
+      },
+      mobileVideo {
         asset->{
             playbackId,
             "aspectRatio": data.aspect_ratio

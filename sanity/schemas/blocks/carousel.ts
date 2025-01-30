@@ -59,6 +59,19 @@ export const carousel = defineType({
               ],
             },
             {
+              name: "mobileImage",
+              type: "image",
+              title: "Mobile Image (Optional)",
+              description: "Alternative image to display on mobile devices",
+              fields: [
+                {
+                  name: "alt",
+                  type: "string",
+                  title: "Alternative Text",
+                },
+              ],
+            },
+            {
               name: "caption",
               type: "blockContent",
               title: "Caption",
@@ -76,6 +89,12 @@ export const carousel = defineType({
               name: "video",
               type: "mux.video",
               title: "Video",
+            },
+            {
+              name: "mobileVideo",
+              type: "mux.video",
+              title: "Mobile Video (Optional)",
+              description: "Alternative video to display on mobile devices",
             },
             {
               name: "caption",

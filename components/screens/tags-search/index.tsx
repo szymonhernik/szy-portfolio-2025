@@ -12,18 +12,10 @@ import { useCallback, useMemo } from "react";
 // Add "Click to randomise selection" button that will randomise the selection of filters
 // // Make sure that there is at least one result for each random selection of filters
 
-const getUniqueCategories = (
-  data: NonNullable<ProjectsAndSubprojectsQueryResult>,
-) => {
-  return Array.from(
-    new Set(
-      data.flatMap((item) => item.categories || []).map((cat) => cat.slug),
-    ),
-  )
+const getUniqueCategories = (data: NonNullable<ProjectsAndSubprojectsQueryResult>) => {
+  return Array.from(new Set(data.flatMap((item) => item.categories || []).map((cat) => cat.slug)))
     .map((slug) => {
-      const category = data
-        .flatMap((item) => item.categories || [])
-        .find((cat) => cat.slug === slug);
+      const category = data.flatMap((item) => item.categories || []).find((cat) => cat.slug === slug);
       if (!category) {
         return { slug: "", title: "" }; // or handle this case differently
       }
@@ -46,13 +38,7 @@ export default function TagsSearchPage({
   const allCategories = getUniqueCategories(projects);
 
   const filteredProjects = useMemo(() => {
-    return projects.filter((item) =>
-      filters.length === 0
-        ? true
-        : filters.every((filter) =>
-            item.categories?.some((category) => category.slug === filter),
-          ),
-    );
+    return projects.filter((item) => (filters.length === 0 ? true : filters.every((filter) => item.categories?.some((category) => category.slug === filter))));
   }, [projects, filters]);
 
   const createQueryString = useCallback(
@@ -86,21 +72,13 @@ export default function TagsSearchPage({
 
     while (!validCombinationFound) {
       // Random number between MIN_FILTERS and MAX_FILTERS (inclusive)
-      const numberOfFilters =
-        Math.floor(Math.random() * (MAX_FILTERS - MIN_FILTERS + 1)) +
-        MIN_FILTERS;
+      const numberOfFilters = Math.floor(Math.random() * (MAX_FILTERS - MIN_FILTERS + 1)) + MIN_FILTERS;
 
       // Get random filters
-      randomFilters = allCategories
-        .sort(() => Math.random() - 0.5)
-        .slice(0, numberOfFilters);
+      randomFilters = allCategories.sort(() => Math.random() - 0.5).slice(0, numberOfFilters);
 
       // Check if this combination returns any projects
-      const hasResults = projects.some((item) =>
-        randomFilters.every((filter) =>
-          item.categories?.some((category) => category.slug === filter.slug),
-        ),
-      );
+      const hasResults = projects.some((item) => randomFilters.every((filter) => item.categories?.some((category) => category.slug === filter.slug)));
 
       // Compare new combination with current filters
       const newFilterSlugs = randomFilters
@@ -113,11 +91,7 @@ export default function TagsSearchPage({
       }
     }
 
-    const randomisedQueryString = createQueryString(
-      "q",
-      randomFilters.map((filter) => filter.slug).join(","),
-      true,
-    );
+    const randomisedQueryString = createQueryString("q", randomFilters.map((filter) => filter.slug).join(","), true);
     router.replace(`${pathname}?${randomisedQueryString}`);
   };
 
@@ -132,26 +106,19 @@ export default function TagsSearchPage({
             {allCategories.map((category, index) => {
               if (!category.slug || !category.title) return null;
               return (
-                <div key={category.slug} className="text-fluid-xl inline">
+                <div key={category.slug} className="inline text-fluid-xl">
                   <button
                     type="button"
                     onClick={() => {
                       if (category.slug) {
-                        router.replace(
-                          `${pathname}?${createQueryString("q", category.slug)}`,
-                        );
+                        router.replace(`${pathname}?${createQueryString("q", category.slug)}`);
                       }
                     }}
-                    className={clsx(
-                      "",
-                      filters.includes(category.slug)
-                        ? "text-primary"
-                        : "text-secondary",
-                    )}
+                    className={clsx("", filters.includes(category.slug) ? "text-primary" : "text-secondary")}
                   >
                     {category.title}
                   </button>
-                  {index < allCategories.length - 1 && <span>,{` `}</span>}
+                  {index < allCategories.length - 1 && <span>, </span>}
                 </div>
               );
             })}

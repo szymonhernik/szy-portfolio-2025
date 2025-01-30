@@ -2,7 +2,7 @@
 
 ### General
 
-- [ ] the SZY element moves outside of the viewport -> work on the calculation
+- [?] the SZY element moves outside of the viewport -> work on the calculation
 
 ### Garden
 
@@ -17,11 +17,12 @@
 ### Carousels
 
 - [x] style full page carousel
-- [ ] in sanity, add a mobile alternative for video and image types
+- [ ] TODO: in sanity, add a mobile alternative for video and image types
 - [x] add captions in the full page carousel
+- [ ] styling video player and behaviour
 
 ---
 
 ### Project page
 
-- [ ] render categories as links to the filters page
+- [x] render categories as links to the filters page

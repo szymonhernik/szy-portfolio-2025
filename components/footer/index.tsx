@@ -1,9 +1,7 @@
-import Link from "@/components/link";
-
 const Footer = () => {
   return (
     <div className="pt-24 ">
-      <div className="text-small text-secondary">2025 © Szymon Hernik</div>
+      <div className="text-secondary text-small">2025 © Szymon Hernik</div>
     </div>
   );
 };
