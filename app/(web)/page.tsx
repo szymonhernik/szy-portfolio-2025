@@ -4,6 +4,11 @@ import Home from "@/components/screens/home";
 import { sanityFetch } from "@/sanity/lib/sanity.client";
 import { projectQuery } from "@/sanity/queries/page";
 
+export async function generateMetadata() {
+  return {
+    title: "Projects | Szymon Eda Hernik",
+  };
+}
 export default async function Page() {
   const projects: ProjectQueryResult = await sanityFetch({
     query: projectQuery,

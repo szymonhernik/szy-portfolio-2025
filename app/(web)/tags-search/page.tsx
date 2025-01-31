@@ -7,6 +7,12 @@ import { projectsAndSubprojectsQuery } from "@/sanity/queries/page";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
+export async function generateMetadata() {
+  return {
+    title: "Tags Search | Szymon Eda Hernik",
+    description: "Search for projects by tags",
+  };
+}
 export default async function Page() {
   const data: ProjectsAndSubprojectsQueryResult = await sanityFetch({
     query: projectsAndSubprojectsQuery,

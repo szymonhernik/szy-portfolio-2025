@@ -71,7 +71,9 @@ export const projectsAndSubprojectsQuery = groq`*[_type == "project" || _type ==
 export const singleProjectQuery = groq`*[_type == "project" && slug.current == $slug][0] {
   _id,
   title,
+  seoOverview,
   body,
+  mainImage,
   categories[]->{
     title,
     "slug": slug.current

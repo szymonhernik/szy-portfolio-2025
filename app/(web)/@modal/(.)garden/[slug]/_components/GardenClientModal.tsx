@@ -1,9 +1,10 @@
 "use client";
 
+import type { SingleGardenItemQueryResult } from "@/sanity.types";
+
 import { Modal } from "@/app/(web)/@modal/_components/modal";
 import { GardenBreadcrumb } from "@/components/breadcrumb/garden";
 import GardenBlocks from "@/components/gardenblocks";
-import type { SingleGardenItemQueryResult } from "@/sanity.types";
 
 import { useRouter } from "next/navigation";
 

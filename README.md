@@ -3,8 +3,9 @@
 ### General
 
 - [?] the SZY element moves outside of the viewport -> work on the calculation
-- [ ] clean the project code
-- [ ] export static sites for dynamic pages (garden, project)
+- [x] clean the project code
+- [x] export static sites for dynamic pages (garden, project)
+- [x] metadata for all routes
 
 ### Garden
 
@@ -12,7 +13,7 @@
 - [x] decide if you want to have a static route for each garden item /garden/[id]
 - [x] add breadcrumbs to the garden list page (in modal navigate between garden and items)
 - [x] fix the modal and the static route for the garden list /garden
-- [ ] TODO: design the garden item page (with images and videos)
+- [x] design the garden item page (with images and videos)
 
 ---
 

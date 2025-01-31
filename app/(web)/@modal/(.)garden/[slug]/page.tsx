@@ -1,4 +1,5 @@
 import type { SingleGardenItemQueryResult } from "@/sanity.types";
+
 import { sanityFetch } from "@/sanity/lib/sanity.client";
 import { singleGardenItemQuery } from "@/sanity/queries/page";
 
