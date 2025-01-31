@@ -10,7 +10,7 @@ export function OpenGardenItem({
   children: React.ReactNode;
 }) {
   return (
-    <Link href={`/garden?item=${slug}&direct=true`} className="text-link hover:font-outline-1-secondary">
+    <Link href={`/garden/${slug}`} className="text-link hover:font-outline-1-secondary">
       {children}
     </Link>
   );

@@ -22,7 +22,7 @@ export default function Page() {
     <QueryWrapper>
       <Modal>
         {/* plant emoji */}
-        <Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
           <GardenData />
         </Suspense>
       </Modal>
