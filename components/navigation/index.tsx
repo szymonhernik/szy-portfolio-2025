@@ -54,39 +54,23 @@ function MobileSheet({
         "translate-y-0",
       )}
     >
-      <button
-        type="button"
-        className="absolute top-4 right-4 text-fluid-xl hover:font-outline-1-black"
-        onClick={() => toggle(false)}
-      >
+      <button type="button" className="absolute top-4 right-4 text-fluid-xl hover:font-outline-1-black" onClick={() => toggle(false)}>
         X
       </button>
       <nav>
         <ul className="list-none text-center text-fluid-xl">
           <li>
-            <Link
-              href="/information"
-              onClick={() => toggle(false)}
-              className="hover:font-outline-1-black"
-            >
+            <Link href="/information" onClick={() => toggle(false)} className="hover:font-outline-1-black">
               Information
             </Link>
           </li>
           <li>
-            <Link
-              href="/"
-              onClick={() => toggle(false)}
-              className="hover:font-outline-1-black"
-            >
+            <Link href="/" onClick={() => toggle(false)} className="hover:font-outline-1-black">
               Projects
             </Link>
           </li>
           <li>
-            <Link
-              href="/garden"
-              onClick={() => toggle(false)}
-              className="hover:font-outline-1-black"
-            >
+            <Link href="/garden" onClick={() => toggle(false)} className="hover:font-outline-1-black">
               Garden
             </Link>
           </li>

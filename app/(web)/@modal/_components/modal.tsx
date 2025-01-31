@@ -55,17 +55,8 @@ export function Modal({ children }: { children: React.ReactNode }) {
   if (!modalRoot) throw new Error("Modal root element not found");
 
   return createPortal(
-    <dialog
-      ref={dialogRef}
-      data-dialog-type="modal"
-      className="m-0 h-[100dvh] z-[10] w-screen bg-background p-4 overflow-y-scroll"
-      onClose={onDismiss}
-    >
-      <button
-        type="button"
-        onClick={onDismiss}
-        className="fixed top-0 right-0 z-[20] p-4 text-fluid-xl hover:font-outline-1-black md:text-fluid-base"
-      >
+    <dialog ref={dialogRef} data-dialog-type="modal" className="z-[10] m-0 h-[100dvh] w-screen overflow-y-scroll bg-background p-4" onClose={onDismiss}>
+      <button type="button" onClick={onDismiss} className="fixed top-0 right-0 z-[20] p-4 text-fluid-xl hover:font-outline-1-black md:text-fluid-base">
         X
       </button>
       {/* content ref to disable body scroll */}

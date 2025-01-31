@@ -24,10 +24,7 @@ export default function GardenClientModal({
 
   return (
     <Modal>
-      <GardenBreadcrumb
-        title={gardenItem.title}
-        onClick={() => router.replace("/garden")}
-      />
+      <GardenBreadcrumb title={gardenItem.title} onClick={() => router.replace("/garden")} />
       <GardenBlocks blocks={gardenItem.gardenBlocks} />
     </Modal>
   );
