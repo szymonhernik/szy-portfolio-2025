@@ -144,28 +144,12 @@ export default function Carousel({ defaultCaption, items }: CarouselBlock) {
           </div>
 
           {/* Left Arrow Overlay */}
-          <div className="absolute top-0 bottom-0 left-0 flex w-1/4 items-center justify-start hover:opacity-100 lg:opacity-0 ">
-            <button
-              type="button"
-              onClick={scrollPrev}
-              className="m-4 flex h-10 w-10 items-center justify-center rounded-full p-2 text-white"
-              aria-label="Previous slide"
-            >
-              <span className="h-3 w-3 rotate-[-135deg] border-white border-t-2 border-r-2 mix-blend-difference" />
-            </button>
-          </div>
+          {/* biome-ignore lint/a11y/useKeyWithClickEvents: not needed */}
+          <div className="absolute top-0 bottom-0 left-0 flex w-1/2 cursor-w-resize items-center" onClick={scrollPrev} />
 
           {/* Right Arrow Overlay */}
-          <div className="absolute top-0 right-0 bottom-0 flex w-1/4 items-center justify-end hover:opacity-100 lg:opacity-0 ">
-            <button
-              type="button"
-              onClick={scrollNext}
-              className="m-4 flex h-10 w-10 items-center justify-center rounded-full p-2 text-white"
-              aria-label="Next slide"
-            >
-              <span className="h-3 w-3 rotate-45 border-white border-t-2 border-r-2 mix-blend-difference" />
-            </button>
-          </div>
+          {/* biome-ignore lint/a11y/useKeyWithClickEvents: not needed */}
+          <div className="absolute top-0 right-0 bottom-0 flex w-1/2 cursor-e-resize items-center" onClick={scrollNext} />
         </div>
         <div className="flex justify-between text-small lg:text-xs">
           <button className="text-secondary" type="button" onClick={() => openFullScreen(allSlides, getGlobalIndex(selectedIndex))}>
