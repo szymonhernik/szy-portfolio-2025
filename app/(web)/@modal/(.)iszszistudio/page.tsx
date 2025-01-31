@@ -1,5 +1,7 @@
 "use client";
 
+import { IszSziStudioContent } from "@/components/screens/iszszistudio";
+
 import { clearAllBodyScrollLocks, disableBodyScroll } from "body-scroll-lock";
 import { useEffect, useRef } from "react";
 
@@ -20,9 +22,7 @@ export default function Page() {
 
   return (
     <Modal>
-      <section className="flex flex-col gap-4">
-        <p>isz szi studio</p>
-      </section>
+      <IszSziStudioContent />
     </Modal>
   );
 }

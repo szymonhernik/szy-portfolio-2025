@@ -1,8 +1,10 @@
 "use client";
 
-import type { GardenItemsQueryResult } from "@/sanity.types";
+import type { GardenItemsQueryResult, SingleGardenItemQueryResult } from "@/sanity.types";
 
 import { GardenItems } from "@/app/(web)/_components/GardenItems";
+import GardenBlocks from "@/components/gardenblocks";
+import { useGardenItem } from "@/lib/queries/react-query/garden";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -13,9 +15,18 @@ interface ItemModalProps {
   onClose: () => void;
 }
 
-function ItemModal({ item, onClose }: ItemModalProps) {
+function ItemModal({ item: initialItem, onClose }: ItemModalProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
+  if (!initialItem.slug) {
+    return null;
+  }
+  // fetch data for the item client side (using tanstack query)
+  const { data: item } = useGardenItem(initialItem.slug);
+  if (!item) {
+    return null;
+  }
+  console.log("item", item);
 
   const handleGardenClick = () => {
     const params = new URLSearchParams(searchParams.toString());
@@ -26,7 +37,7 @@ function ItemModal({ item, onClose }: ItemModalProps) {
 
   return (
     <FocusLock returnFocus>
-      <div aria-modal="true" aria-labelledby="modal-title" className="fixed inset-0 z-50 bg-white">
+      <div aria-modal="true" aria-labelledby="modal-title" className="fixed inset-0 z-50 overflow-y-auto bg-white">
         <div className="p-4 ">
           {/* breadcrumbs to navigate between garden and items */}
           <div className="flex items-center gap-2">
@@ -36,9 +47,7 @@ function ItemModal({ item, onClose }: ItemModalProps) {
             <span>→</span>
             <span>{item.title}</span>
           </div>
-          <h2 id="modal-title" className="">
-            {item.title}
-          </h2>
+          <GardenModalContent item={item} />
           {/* Add more item details here */}
           <button
             onClick={onClose}
@@ -57,6 +66,14 @@ function ItemModal({ item, onClose }: ItemModalProps) {
       </div>
     </FocusLock>
   );
+}
+
+function GardenModalContent({
+  item,
+}: {
+  item: NonNullable<SingleGardenItemQueryResult>;
+}) {
+  return <GardenBlocks blocks={item.gardenBlocks} />;
 }
 
 export default function GardenModal({
