@@ -1,3 +1,5 @@
+import TagLink from "@/components/tag-link";
+
 export default function Information() {
   return (
     <section className="grid grid-cols-12 items-start">
@@ -13,7 +15,8 @@ export default function Information() {
           </p>
           <p>
             As a designer, Szy specialises in motion design, graphic design, art direction, web design, editorial design and identity design. As a developer,
-            Szy’s fluency extends to UX and UI design, user testing, front-end development and back-end development.
+            Szy’s fluency extends to <TagLink slug="ux-and-ui-design">UX and UI design</TagLink>, <TagLink slug="user-testing">user testing</TagLink>,{" "}
+            <TagLink slug="front-end-development">front-end development</TagLink>, and <TagLink slug="back-end-development">back-end development</TagLink>.
           </p>
           <p>
             Szy hones their multifaceted workspace to remain a site of perpetual inquiry. Their workspace is blessed to have welcomed collaborations with: maok
@@ -22,29 +25,50 @@ export default function Information() {
         </div>
 
         {/* below text will be 48px size but make it relative to 16px */}
-        <div>
-          <h1 className="text-fluid-xl">Contact</h1>
-          <p>Say hello via hello@szymonhernik.com. It’s 13:35 in Brussels. Szy will get back to you very soon.</p>
+        {/* contact div on md screens will go after experience and education divs */}
+        <div className="md:order-last ">
+          <h1 className="mb-6 text-fluid-xl md:mb-0 md:hidden md:text-fluid-base">Contact</h1>
+
+          <p>
+            Say hello via{" "}
+            <a href="mailto:hello@szymonhernik.com" className="text-link hover:font-outline-1-secondary">
+              hello@szymonhernik.com
+            </a>
+            . I will get back to you very soon.
+          </p>
         </div>
-        <div>
-          <h1 className="text-fluid-xl">Experience</h1>
-          <div>
-            <p>
-              isz szi studio (2020 — present)
-              <br />
-              Co-founder and Designer, Brussel
-            </p>
-            <p>
-              NMR.CC (2021)
-              <br />
-              Graphic Design Intern, Athens
-            </p>
+        {/* eqal columns */}
+        <div className="flex flex-col gap-24 md:mt-36 md:flex-row">
+          <div className="flex-1">
+            <h1 className="mb-6 text-fluid-xl md:mb-0 md:text-fluid-base">Experience</h1>
+            <div>
+              <p>
+                <a href="https://iszszistudio.com" className="text-link hover:font-outline-1-secondary">
+                  isz szi studio (2020 — present)
+                </a>
+                <br />
+                Co-founder and Designer, Brussel
+              </p>
+              <p>
+                <a href="https://nmr.cc" className="text-link hover:font-outline-1-secondary">
+                  NMR.CC (2021)
+                </a>
+                <br />
+                Graphic Design Intern, Athens
+              </p>
+            </div>
           </div>
-        </div>
-        <div>
-          <h1 className="text-fluid-xl">Education</h1>
-          <div>
-            <p>BA Graphic Design (2018 – 2022) The Royal Academy of Art, The Hague</p>
+          <div className="flex-1">
+            <h1 className="mb-6 text-fluid-xl md:mb-0 md:text-fluid-base">Education</h1>
+            <div>
+              <p>
+                {/* https://kabk.nl/ */}
+                BA Graphic Design (2018 – 2022){" "}
+                <a href="https://kabk.nl/" className="text-link hover:font-outline-1-secondary">
+                  The Royal Academy of Art, The Hague
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </div>

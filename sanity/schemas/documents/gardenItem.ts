@@ -8,6 +8,7 @@ export const gardenItem = defineType({
     defineField({
       name: "title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "slug",
@@ -15,6 +16,7 @@ export const gardenItem = defineType({
       options: {
         source: "title",
       },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "gardenBlocks",

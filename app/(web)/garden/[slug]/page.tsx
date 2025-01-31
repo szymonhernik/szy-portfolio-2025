@@ -1,10 +1,9 @@
 import type { SingleGardenItemQueryResult } from "@/sanity.types";
 
-import GardenItem from "@/app/(web)/@modal/_components/GardenItem";
+import { GardenBreadcrumb } from "@/components/breadcrumb/garden";
+import GardenItem from "@/components/screens/garden/gardenItem";
 import { sanityFetch } from "@/sanity/lib/sanity.client";
 import { singleGardenItemQuery } from "@/sanity/queries/page";
-
-export const dynamicParams = false;
 
 // export function generateStaticParams() {
 //   // const slugs = ["1", "2", "3", "4", "5", "6"];
@@ -24,16 +23,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
   }
 
   return (
-    <div>
-      <div>
-        <a href="/garden">garden</a>{" "}
-        <span>
-          <span>→</span>
-        </span>{" "}
-        <span>{gardenItem.title}</span>
-      </div>
-      {/* TODO: render garden blocks */}
-      <GardenItem params={{ slug }} />
+    <div className="">
+      <GardenBreadcrumb title={gardenItem.title} />
+
+      <GardenItem item={gardenItem} />
     </div>
   );
 }

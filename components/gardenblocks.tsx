@@ -33,12 +33,12 @@ function ImageWithCaption({ image, caption }: ImageWithCaptionBlock) {
     <div className="fixed bottom-4 left-4 flex flex-col gap-4 ">
       {image?.image && <Image className="w-64" src={image?.image} alt={image?.alt || ""} width={1000} height={1000} />}
 
-      {caption && <p className="text-small">{caption}</p>}
+      {caption && <p className="mt-0 text-small">{caption}</p>}
     </div>
   );
 }
 
 type TextGardenBlock = Extract<NonNullable<NonNullable<SingleGardenItemQueryResult>["gardenBlocks"]>[number], { _type: "textGarden" }>;
 function TextGarden({ text }: TextGardenBlock) {
-  return <div className="text-fluid-xl">{text && <PortableTextRenderer value={text} />}</div>;
+  return <div className="mt-4 text-fluid-xl">{text && <PortableTextRenderer value={text} />}</div>;
 }

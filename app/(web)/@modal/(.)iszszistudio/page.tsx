@@ -22,7 +22,9 @@ export default function Page() {
 
   return (
     <Modal>
-      <IszSziStudioContent />
+      <article>
+        <IszSziStudioContent />
+      </article>
     </Modal>
   );
 }

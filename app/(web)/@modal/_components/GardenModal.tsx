@@ -3,11 +3,12 @@
 import type { GardenItemsQueryResult, SingleGardenItemQueryResult } from "@/sanity.types";
 
 import { GardenItems } from "@/app/(web)/_components/GardenItems";
+import { GardenBreadcrumb } from "@/components/breadcrumb/garden";
 import GardenBlocks from "@/components/gardenblocks";
 import { useGardenItem } from "@/lib/queries/react-query/garden";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import FocusLock from "react-focus-lock";
 
 interface ItemModalProps {
@@ -40,14 +41,12 @@ function ItemModal({ item: initialItem, onClose }: ItemModalProps) {
       <div aria-modal="true" aria-labelledby="modal-title" className="fixed inset-0 z-50 overflow-y-auto bg-white">
         <div className="p-4 ">
           {/* breadcrumbs to navigate between garden and items */}
-          <div className="flex items-center gap-2">
-            <button type="button" onClick={handleGardenClick} className="hover:font-outline-1-black">
-              garden
-            </button>
-            <span>→</span>
-            <span>{item.title}</span>
-          </div>
-          <GardenModalContent item={item} />
+          <GardenBreadcrumb title={item.title} onClick={handleGardenClick} />
+          <article>
+            {/* plant emoji */}
+
+            <GardenModalContent item={item} />
+          </article>
           {/* Add more item details here */}
           <button
             onClick={onClose}
@@ -122,8 +121,16 @@ export default function GardenModal({
 
   return (
     <>
-      <GardenItems mode="modal" onItemSelect={handleItemSelect} items={items} />
-      {selectedItem && <ItemModal item={selectedItem} onClose={handleClose} />}
+      {!selectedItem && (
+        <Suspense fallback={<div>🌱</div>}>
+          <GardenItems mode="modal" onItemSelect={handleItemSelect} items={items} />
+        </Suspense>
+      )}
+      {selectedItem && (
+        <Suspense fallback={<div>🌱</div>}>
+          <ItemModal item={selectedItem} onClose={handleClose} />
+        </Suspense>
+      )}
     </>
   );
 }

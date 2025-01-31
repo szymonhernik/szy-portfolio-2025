@@ -1273,7 +1273,13 @@ export type SingleProjectQueryResult = {
                         _type: "span";
                         _key: string;
                       }>;
-                      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+                      style?:
+                        | "blockquote"
+                        | "h1"
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "normal";
                       listItem?: "bullet";
                       markDefs?: Array<
                         | {
@@ -1313,7 +1319,13 @@ export type SingleProjectQueryResult = {
                         _type: "span";
                         _key: string;
                       }>;
-                      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+                      style?:
+                        | "blockquote"
+                        | "h1"
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "normal";
                       listItem?: "bullet";
                       markDefs?: Array<
                         | {
@@ -1356,7 +1368,13 @@ export type SingleProjectQueryResult = {
                         _type: "span";
                         _key: string;
                       }>;
-                      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+                      style?:
+                        | "blockquote"
+                        | "h1"
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "normal";
                       listItem?: "bullet";
                       markDefs?: Array<
                         | {
@@ -1429,7 +1447,13 @@ export type SingleProjectQueryResult = {
                         _type: "span";
                         _key: string;
                       }>;
-                      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+                      style?:
+                        | "blockquote"
+                        | "h1"
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "normal";
                       listItem?: "bullet";
                       markDefs?: Array<
                         | {

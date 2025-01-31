@@ -106,7 +106,7 @@ export default function TagsSearchPage({
             {allCategories.map((category, index) => {
               if (!category.slug || !category.title) return null;
               return (
-                <div key={category.slug} className="inline text-fluid-xl">
+                <div key={category.slug} className="inline whitespace-nowrap text-fluid-xl">
                   <button
                     type="button"
                     onClick={() => {

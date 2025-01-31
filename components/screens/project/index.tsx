@@ -4,9 +4,8 @@ import type { CarouselBlock } from "@/types/blocks";
 import FullScreenCarousel from "@/components/FullScreenCarousel";
 import Blocks from "@/components/blocks";
 import PortableTextRenderer from "@/components/portable-text-renderer";
+import TagLink from "@/components/tag-link";
 import { CarouselProvider } from "@/contexts/CarouselContext";
-
-import Link from "next/link";
 
 export default function ProjectPage({
   project,
@@ -68,9 +67,10 @@ export default function ProjectPage({
                   .filter((category): category is NonNullable<typeof category> => category !== null)
                   .map((category, index, array) => (
                     <>
-                      <Link href={`/tags-search?q=${category.slug}`} key={category.slug}>
+                      {/* biome-ignore lint/style/noNonNullAssertion: this is not null */}
+                      <TagLink slug={category.slug!} key={category.slug}>
                         {category.title}
-                      </Link>
+                      </TagLink>
                       {index < array.length - 1 ? ", " : ""}
                     </>
                   ))}
@@ -80,9 +80,10 @@ export default function ProjectPage({
                 <div className="text-secondary text-small lg:text-xs">
                   {project.categories.map((category, index, array) => (
                     <>
-                      <Link href={`/tags-search?q=${category.slug}`} key={category.slug}>
+                      {/* biome-ignore lint/style/noNonNullAssertion: this is not null */}
+                      <TagLink slug={category.slug!} key={category.slug}>
                         {category.title}
-                      </Link>
+                      </TagLink>
                       {index < array.length - 1 ? ", " : ""}
                     </>
                   ))}

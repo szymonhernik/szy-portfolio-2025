@@ -12,5 +12,9 @@ export function useGardenItem(slug: string) {
       const data = await client.fetch(singleGardenItemQuery, { slug });
       return data;
     },
+    // Keep cached data for 10 minutes after becoming inactive
+    gcTime: 1000 * 60 * 10,
+    // Consider the data fresh for 5 minutes before refetching
+    staleTime: 1000 * 60 * 5,
   });
 }

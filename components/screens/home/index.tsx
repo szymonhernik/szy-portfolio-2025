@@ -28,7 +28,7 @@ function ListSeed() {
       <Link href="/garden" className="text-secondary hover:font-outline-1-secondary">
         unsorted list
       </Link>{" "}
-      is: Paul B. Preciado’s <OpenGardenItem slug="paul-b-preciado-s-can-the-monster-speak">Can the monster speak?</OpenGardenItem>
+      is: <OpenGardenItem slug="27-30-covers">27 30 @ Covers</OpenGardenItem>
     </p>
   );
 }
