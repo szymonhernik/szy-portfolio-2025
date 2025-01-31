@@ -23,9 +23,11 @@
 - [x] in sanity, add a mobile alternative for video and image types
 - [x] add captions in the full page carousel
 - [ ] styling video player and behaviour
+- [ ] style captions especially on mobile
 
 ---
 
 ### Project page
 
 - [x] render categories as links to the filters page
+- [ ] TODO: fix the carousel on the project page (the fill vs width/height for Image components),
