@@ -13,7 +13,10 @@ function IntroText() {
       <br className="block md:hidden" />
       <span className="block md:inline ">
         They also form half of{" "}
-        <Link href="/iszszistudio" className="text-link hover:font-outline-1-secondary">
+        <Link
+          href="/iszszistudio"
+          className="text-link hover:font-outline-1-secondary"
+        >
           isz szi studio
         </Link>
         , an artistic design studio based in Brussels.
@@ -25,7 +28,10 @@ function ListSeed() {
   return (
     <p className="mt-0 ">
       One random inspiration from a rather{" "}
-      <Link href="/garden" className="text-secondary hover:font-outline-1-secondary">
+      <Link
+        href="/garden"
+        className="text-secondary hover:font-outline-1-secondary"
+      >
         unsorted list
       </Link>{" "}
       is: <OpenGardenItem slug="27-30-covers">27 30 @ Covers</OpenGardenItem>
@@ -46,7 +52,7 @@ export default function Home({ projects }: { projects: ProjectQueryResult }) {
         {/* </FadeIn.Item> */}
       </div>
 
-      <div className="col-span-12 mt-8">
+      <div className="col-span-12 mt-24">
         {/* <FadeIn.Item> */}
         <HomeGrid projects={projects} />
         {/* </FadeIn.Item> */}
