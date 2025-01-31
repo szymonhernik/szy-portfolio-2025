@@ -15,7 +15,7 @@ const config: ClientConfig = {
   token,
 };
 
-const client = createClient(config);
+export const client = createClient(config);
 
 export async function sanityFetch<QueryResponse>({
   query,

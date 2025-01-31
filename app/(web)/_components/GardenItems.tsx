@@ -3,6 +3,8 @@
 import type { GardenItemsQueryResult } from "@/sanity.types";
 
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 interface GardenItemsProps {
   mode: "modal" | "static";
@@ -11,6 +13,15 @@ interface GardenItemsProps {
 }
 
 export function GardenItems({ mode, onItemSelect, items }: GardenItemsProps) {
+  const router = useRouter();
+  const searchParams = mode === "static" ? useSearchParams() : undefined;
+
+  useEffect(() => {
+    const item = searchParams?.get("item");
+    if (item) {
+      router.push(`/garden/${item}`);
+    }
+  }, [searchParams, router]);
   return (
     <section className="flex flex-col gap-4">
       <p>An overgrown garden of inspirations</p>
