@@ -4,7 +4,7 @@ import type { ElementRef } from "react";
 
 import { clearAllBodyScrollLocks, disableBodyScroll } from "body-scroll-lock";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
 export function Modal({ children }: { children: React.ReactNode }) {
@@ -21,11 +21,24 @@ export function Modal({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  // disable body scroll
-  useEffect(() => {
-    const targetElement = contentRef.current;
-    if (targetElement) {
-      disableBodyScroll(targetElement);
+  // Update the scroll lock effect
+  useLayoutEffect(() => {
+    if (dialogRef.current) {
+      // Store original requestAnimationFrame
+      const storedRequestAnimationFrame = window.requestAnimationFrame;
+
+      // Temporarily override requestAnimationFrame
+      window.requestAnimationFrame = () => 42;
+
+      disableBodyScroll(dialogRef.current, {
+        reserveScrollBarGap: true,
+        allowTouchMove: (el) => {
+          return el.classList.contains("overflow-auto");
+        },
+      });
+
+      // Restore original requestAnimationFrame
+      window.requestAnimationFrame = storedRequestAnimationFrame;
     }
 
     return () => {
@@ -42,8 +55,17 @@ export function Modal({ children }: { children: React.ReactNode }) {
   if (!modalRoot) throw new Error("Modal root element not found");
 
   return createPortal(
-    <dialog ref={dialogRef} data-dialog-type="modal" className="m-0 h-screen w-screen bg-background p-4" onClose={onDismiss}>
-      <button type="button" onClick={onDismiss} className="fixed top-0 right-0 z-[20] p-4 text-fluid-xl hover:font-outline-1-black md:text-fluid-base">
+    <dialog
+      ref={dialogRef}
+      data-dialog-type="modal"
+      className="m-0 h-[100dvh] z-[10] w-screen bg-background p-4 overflow-y-scroll"
+      onClose={onDismiss}
+    >
+      <button
+        type="button"
+        onClick={onDismiss}
+        className="fixed top-0 right-0 z-[20] p-4 text-fluid-xl hover:font-outline-1-black md:text-fluid-base"
+      >
         X
       </button>
       {/* content ref to disable body scroll */}
