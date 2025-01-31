@@ -68,22 +68,23 @@ export default function Carousel({ defaultCaption, items }: CarouselBlock) {
         : "16/9";
       return (
         <div
-          className="relative h-full "
+          className="relative h-full max-w-full"
           style={{
             aspectRatio: aspectRatio,
-            maxWidth: `calc(90vh * ${aspectRatio
-              .split("/")
-              .map(Number)
-              .reduce((a, b) => a / b)
-              .toString()})`,
+            // maxWidth: `calc(90vh * ${aspectRatio
+            //   .split("/")
+            //   .map(Number)
+            //   .reduce((a, b) => a / b)
+            //   .toString()})`,
           }}
         >
           <Image
             src={slide.image?.asset?.url || ""}
             alt={slide.image?.alt || ""}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
-            className="object-contain object-left-top"
+            width={1000}
+            height={1000}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-contain object-left-top w-full h-full"
             placeholder="blur"
             blurDataURL={slide.image?.asset?.metadata?.lqip || ""}
           />
@@ -142,8 +143,8 @@ export default function Carousel({ defaultCaption, items }: CarouselBlock) {
   };
 
   return (
-    <div className="relative my-4 w-full">
-      <div className="embla flex flex-col gap-2">
+    <div className="relative my-4 w-full max-w-screen-lg ">
+      <div className="embla flex flex-col gap-2 max-h-[800px]">
         <div
           className="embla__viewport"
           ref={emblaRef}
