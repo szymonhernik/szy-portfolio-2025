@@ -60,7 +60,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
         X
       </button>
       {/* content ref to disable body scroll */}
-      <div ref={contentRef} className="">
+      <div ref={contentRef} className="flex h-full flex-col justify-between">
         {children}
       </div>
     </dialog>,

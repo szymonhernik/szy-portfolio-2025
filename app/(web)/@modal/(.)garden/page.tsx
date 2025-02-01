@@ -1,6 +1,5 @@
 import type { GardenItemsQueryResult } from "@/sanity.types";
 
-import QueryWrapper from "@/components/providers/query-wrapper";
 import { sanityFetch } from "@/sanity/lib/sanity.client";
 import { gardenItemsQuery } from "@/sanity/queries/page";
 
@@ -19,13 +18,11 @@ async function GardenData() {
 
 export default function Page() {
   return (
-    <QueryWrapper>
-      <Modal>
-        {/* plant emoji */}
-        <Suspense fallback={<div>Loading...</div>}>
-          <GardenData />
-        </Suspense>
-      </Modal>
-    </QueryWrapper>
+    <Modal>
+      {/* plant emoji */}
+      <Suspense fallback={<div>Loading...</div>}>
+        <GardenData />
+      </Suspense>
+    </Modal>
   );
 }

@@ -25,15 +25,31 @@ export default function GardenBlocks({
 const componentMap: { [key: string]: React.ComponentType<any> } = {
   imageWithCaption: ImageWithCaption,
   textGarden: TextGarden,
+  richTextAndImageWithCaption: RichTextAndImageWithCaption,
 };
 
 type ImageWithCaptionBlock = Extract<NonNullable<NonNullable<SingleGardenItemQueryResult>["gardenBlocks"]>[number], { _type: "imageWithCaption" }>;
+
+type RichTextAndImageWithCaptionBlock = Extract<
+  NonNullable<NonNullable<SingleGardenItemQueryResult>["gardenBlocks"]>[number],
+  { _type: "richTextAndImageWithCaption" }
+>;
+
 function ImageWithCaption({ image, caption }: ImageWithCaptionBlock) {
   return (
-    <div className="fixed bottom-4 left-4 flex flex-col gap-4 ">
-      {image?.image && <Image className="w-64" src={image?.image} alt={image?.alt || ""} width={1000} height={1000} />}
+    <div
+    // className="flex flex-col justify-end"
+    // style={{ minHeight: "calc(100dvh - 2rem)" }}
+    >
+      <div>
+        {image?.image && <Image src={image.image} alt={image.alt || ""} width={600} height={600} className="w-1/2 lg:w-1/3" />}
 
-      {caption && <p className="mt-0 text-small">{caption}</p>}
+        {caption && (
+          <div className="mt-0 text-small [&_p]:mb-0">
+            <PortableTextRenderer value={caption} />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -41,4 +57,29 @@ function ImageWithCaption({ image, caption }: ImageWithCaptionBlock) {
 type TextGardenBlock = Extract<NonNullable<NonNullable<SingleGardenItemQueryResult>["gardenBlocks"]>[number], { _type: "textGarden" }>;
 function TextGarden({ text }: TextGardenBlock) {
   return <div className="mt-4 text-fluid-xl">{text && <PortableTextRenderer value={text} />}</div>;
+}
+
+function RichTextAndImageWithCaption({ text, image, caption }: RichTextAndImageWithCaptionBlock) {
+  return (
+    <div className="flex h-full flex-col justify-between">
+      {text && (
+        <div className="mt-4 grid grid-cols-12">
+          <div className="col-span-12 md:col-span-10 lg:col-span-7">
+            <PortableTextRenderer value={text} />
+          </div>
+        </div>
+      )}
+      {image?.image && (
+        <div className="flex flex-col gap-2">
+          <Image src={image.image} alt={image.alt || ""} width={600} height={600} className="w-1/2 lg:w-1/3" />
+
+          {caption && (
+            <p className="mt-0 text-small [&_p]:mb-0">
+              <PortableTextRenderer value={caption} />
+            </p>
+          )}
+        </div>
+      )}
+    </div>
+  );
 }

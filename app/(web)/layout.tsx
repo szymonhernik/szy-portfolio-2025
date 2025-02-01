@@ -1,10 +1,9 @@
 import "@/styles/main.css";
 
-import type { Metadata } from "next";
-
 import NavigationDesktop, { NavigationMobile } from "@/components/navigation";
 import { Providers } from "@/components/providers";
 import { OpenGraph } from "@/lib/og";
+import type { Metadata } from "next";
 
 import clsx from "clsx";
 import localFont from "next/font/local";
@@ -30,12 +29,14 @@ export default function RootLayout({
       <body>
         <Providers>
           {modal}
+
           <div id="modal-root" />
           <main className="px-4 py-4">
             <NavigationMobile />
             <NavigationDesktop />
             <article className="article ">{children}</article>
           </main>
+          {/* <Footer /> */}
         </Providers>
       </body>
     </html>

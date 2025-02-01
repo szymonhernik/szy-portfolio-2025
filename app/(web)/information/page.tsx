@@ -3,14 +3,14 @@ import Information from "@/components/screens/information";
 
 export async function generateMetadata() {
   return {
-    title: "Information | Szymon Eda Hernik",
+    title: "Szymon Eda Hernik | Information",
     description: "Information",
   };
 }
 
 export default function Page() {
   return (
-    <div className="flex flex-col ">
+    <div className="">
       <Information />
       <Footer />
     </div>

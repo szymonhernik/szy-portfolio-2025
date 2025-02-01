@@ -1,5 +1,5 @@
 import { CogIcon } from "@sanity/icons";
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const settings = defineType({
   name: "settings",
@@ -20,10 +20,17 @@ export const settings = defineType({
       rows: 3,
     }),
     defineField({
-      name: "featuredProjects",
-      title: "Featured Projects",
+      name: "showcaseProjects",
+      title: "Showcase projects",
+      description:
+        "These are the projects that will appear first on your landing page.",
       type: "array",
-      of: [{ type: "reference", to: { type: "project" } }],
+      of: [
+        defineArrayMember({
+          type: "reference",
+          to: [{ type: "project" }],
+        }),
+      ],
     }),
   ],
 });

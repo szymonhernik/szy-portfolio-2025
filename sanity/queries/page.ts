@@ -4,18 +4,24 @@ import { carouselFragment } from "./carousel";
 import { sectionContentFragment } from "./section-content";
 import { sectionHeaderFragment } from "./section-header";
 
-export const projectQuery = groq`*[_type == "project"] {
+export const projectQuery = groq`*[_type == "settings"][0] {
   _id,
-  _createdAt,
-  title,
-  "slug": slug.current,
-  mainImage {
-    "image": asset->url,
-    "lqip": asset->metadata.lqip,
-    "aspectRatio": asset->metadata.dimensions.aspectRatio,
-    alt,
-  },
- 
+  showcaseProjects[]{
+      _key,
+      ...@->{
+        _id,
+        _createdAt,
+        title,
+        subtitle,
+        "slug": slug.current,
+        mainImage {
+          "image": asset->url,
+          "lqip": asset->metadata.lqip,
+          "aspectRatio": asset->metadata.dimensions.aspectRatio,
+          alt,
+        },
+      }
+  }
 }`;
 
 export const gardenItemsQuery = groq`*[_type == "gardenItem"] {
@@ -28,6 +34,18 @@ export const singleGardenItemQuery = groq`*[_type == "gardenItem" && slug.curren
   title,
   "slug": slug.current,
   gardenBlocks[]{
+    _type == "richTextAndImageWithCaption" => {
+      _type,
+      _key,
+      text,
+      image {
+        "image": asset->url,
+        "lqip": asset->metadata.lqip,
+        "aspectRatio": asset->metadata.dimensions.aspectRatio,
+        alt,
+      },
+      caption
+    },
     _type == "imageWithCaption" => {
       _type,
       _key,
@@ -51,6 +69,7 @@ export const projectsAndSubprojectsQuery = groq`*[_type == "project" || _type ==
   _id,
   _type,
   title,
+  subtitle,
   "slug": slug.current,
   categories[]->{
     title,

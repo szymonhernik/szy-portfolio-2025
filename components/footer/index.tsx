@@ -1,7 +1,14 @@
+import Link from "next/link";
+
 const Footer = () => {
   return (
-    <div className="pt-24 ">
-      <div className="text-secondary text-small">2025 © Szymon Hernik</div>
+    <div className="mt-X ">
+      <div className="text-secondary text-small">
+        2025 ©{" "}
+        <Link href="/" className="hover:underline">
+          Szymon Hernik
+        </Link>
+      </div>
     </div>
   );
 };

@@ -79,7 +79,7 @@ export type Settings = {
   _rev: string;
   title?: string;
   overview?: string;
-  featuredProjects?: Array<{
+  showcaseProjects?: Array<{
     _ref: string;
     _type: "reference";
     _weak?: boolean;
@@ -388,6 +388,7 @@ export type Subproject = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  subtitle?: string;
   slug?: Slug;
   seoOverview?: string;
   mainImage?: {
@@ -429,6 +430,7 @@ export type Project = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  subtitle?: string;
   slug?: Slug;
   seoOverview?: string;
   hasSubprojects?: boolean;
@@ -521,6 +523,46 @@ export type GardenItem = {
   slug?: Slug;
   gardenBlocks?: Array<
     | {
+        text?: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+              listItem?: "bullet";
+              markDefs?: Array<
+                | {
+                    href?: string;
+                    _type: "link";
+                    _key: string;
+                  }
+                | {
+                    itemId?: string;
+                    _type: "garden-item";
+                    _key: string;
+                  }
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              alt?: string;
+              _type: "image";
+              _key: string;
+            }
+        >;
         image?: {
           asset?: {
             _ref: string;
@@ -532,7 +574,101 @@ export type GardenItem = {
           crop?: SanityImageCrop;
           _type: "image";
         };
-        caption?: string;
+        caption?: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+              listItem?: "bullet";
+              markDefs?: Array<
+                | {
+                    href?: string;
+                    _type: "link";
+                    _key: string;
+                  }
+                | {
+                    itemId?: string;
+                    _type: "garden-item";
+                    _key: string;
+                  }
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              alt?: string;
+              _type: "image";
+              _key: string;
+            }
+        >;
+        _type: "richTextAndImageWithCaption";
+        _key: string;
+      }
+    | {
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+        caption?: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+              listItem?: "bullet";
+              markDefs?: Array<
+                | {
+                    href?: string;
+                    _type: "link";
+                    _key: string;
+                  }
+                | {
+                    itemId?: string;
+                    _type: "garden-item";
+                    _key: string;
+                  }
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              alt?: string;
+              _type: "image";
+              _key: string;
+            }
+        >;
         _type: "imageWithCaption";
         _key: string;
       }
@@ -814,19 +950,24 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/queries/page.ts
 // Variable: projectQuery
-// Query: *[_type == "project"] {  _id,  _createdAt,  title,  "slug": slug.current,  mainImage {    "image": asset->url,    "lqip": asset->metadata.lqip,    "aspectRatio": asset->metadata.dimensions.aspectRatio,    alt,  }, }
-export type ProjectQueryResult = Array<{
+// Query: *[_type == "settings"][0] {  _id,  showcaseProjects[]{      _key,      ...@->{        _id,        _createdAt,        title,        subtitle,        "slug": slug.current,        mainImage {          "image": asset->url,          "lqip": asset->metadata.lqip,          "aspectRatio": asset->metadata.dimensions.aspectRatio,          alt,        },      }  }}
+export type ProjectQueryResult = {
   _id: string;
-  _createdAt: string;
-  title: string | null;
-  slug: string | null;
-  mainImage: {
-    image: string | null;
-    lqip: string | null;
-    aspectRatio: number | null;
-    alt: string | null;
-  } | null;
-}>;
+  showcaseProjects: Array<{
+    _key: string;
+    _id: string;
+    _createdAt: string;
+    title: string | null;
+    subtitle: string | null;
+    slug: string | null;
+    mainImage: {
+      image: string | null;
+      lqip: string | null;
+      aspectRatio: number | null;
+      alt: string | null;
+    } | null;
+  }> | null;
+} | null;
 // Variable: gardenItemsQuery
 // Query: *[_type == "gardenItem"] {  _id,  title,  "slug": slug.current,}
 export type GardenItemsQueryResult = Array<{
@@ -835,7 +976,7 @@ export type GardenItemsQueryResult = Array<{
   slug: string | null;
 }>;
 // Variable: singleGardenItemQuery
-// Query: *[_type == "gardenItem" && slug.current == $slug][0] {  _id,  title,  "slug": slug.current,  gardenBlocks[]{    _type == "imageWithCaption" => {      _type,      _key,      image {        "image": asset->url,        "lqip": asset->metadata.lqip,        "aspectRatio": asset->metadata.dimensions.aspectRatio,        alt,      },      caption    },    _type == "textGarden" => {      _key,      _type,      text    },  }}
+// Query: *[_type == "gardenItem" && slug.current == $slug][0] {  _id,  title,  "slug": slug.current,  gardenBlocks[]{    _type == "richTextAndImageWithCaption" => {      _type,      _key,      text,      image {        "image": asset->url,        "lqip": asset->metadata.lqip,        "aspectRatio": asset->metadata.dimensions.aspectRatio,        alt,      },      caption    },    _type == "imageWithCaption" => {      _type,      _key,      image {        "image": asset->url,        "lqip": asset->metadata.lqip,        "aspectRatio": asset->metadata.dimensions.aspectRatio,        alt,      },      caption    },    _type == "textGarden" => {      _key,      _type,      text    },  }}
 export type SingleGardenItemQueryResult = {
   _id: string;
   title: string | null;
@@ -850,7 +991,136 @@ export type SingleGardenItemQueryResult = {
           aspectRatio: number | null;
           alt: null;
         } | null;
-        caption: string | null;
+        caption: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+              listItem?: "bullet";
+              markDefs?: Array<
+                | {
+                    itemId?: string;
+                    _type: "garden-item";
+                    _key: string;
+                  }
+                | {
+                    href?: string;
+                    _type: "link";
+                    _key: string;
+                  }
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              alt?: string;
+              _type: "image";
+              _key: string;
+            }
+        > | null;
+      }
+    | {
+        _type: "richTextAndImageWithCaption";
+        _key: string;
+        text: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+              listItem?: "bullet";
+              markDefs?: Array<
+                | {
+                    itemId?: string;
+                    _type: "garden-item";
+                    _key: string;
+                  }
+                | {
+                    href?: string;
+                    _type: "link";
+                    _key: string;
+                  }
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              alt?: string;
+              _type: "image";
+              _key: string;
+            }
+        > | null;
+        image: {
+          image: string | null;
+          lqip: string | null;
+          aspectRatio: number | null;
+          alt: null;
+        } | null;
+        caption: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+              listItem?: "bullet";
+              markDefs?: Array<
+                | {
+                    itemId?: string;
+                    _type: "garden-item";
+                    _key: string;
+                  }
+                | {
+                    href?: string;
+                    _type: "link";
+                    _key: string;
+                  }
+              >;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              alt?: string;
+              _type: "image";
+              _key: string;
+            }
+        > | null;
       }
     | {
         _key: string;
@@ -899,12 +1169,13 @@ export type SingleGardenItemQueryResult = {
   > | null;
 } | null;
 // Variable: projectsAndSubprojectsQuery
-// Query: *[_type == "project" || _type == "subproject"] {  _id,  _type,  title,  "slug": slug.current,  categories[]->{    title,    "slug": slug.current  },  mainImage {    "image": asset->url,    "lqip": asset->metadata.lqip,    "aspectRatio": asset->metadata.dimensions.aspectRatio,    alt,  },  "parentSlug": select(    _type == "subproject" => *[_type == "project" && references(^._id)][0].slug.current,    null  ),}
+// Query: *[_type == "project" || _type == "subproject"] {  _id,  _type,  title,  subtitle,  "slug": slug.current,  categories[]->{    title,    "slug": slug.current  },  mainImage {    "image": asset->url,    "lqip": asset->metadata.lqip,    "aspectRatio": asset->metadata.dimensions.aspectRatio,    alt,  },  "parentSlug": select(    _type == "subproject" => *[_type == "project" && references(^._id)][0].slug.current,    null  ),}
 export type ProjectsAndSubprojectsQueryResult = Array<
   | {
       _id: string;
       _type: "project";
       title: string | null;
+      subtitle: string | null;
       slug: string | null;
       categories: Array<{
         title: string | null;
@@ -922,6 +1193,7 @@ export type ProjectsAndSubprojectsQueryResult = Array<
       _id: string;
       _type: "subproject";
       title: string | null;
+      subtitle: string | null;
       slug: string | null;
       categories: Array<{
         title: string | null;
@@ -1537,10 +1809,10 @@ export type SingleProjectQueryResult = {
 
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "project"] {\n  _id,\n  _createdAt,\n  title,\n  "slug": slug.current,\n  mainImage {\n    "image": asset->url,\n    "lqip": asset->metadata.lqip,\n    "aspectRatio": asset->metadata.dimensions.aspectRatio,\n    alt,\n  },\n \n}': ProjectQueryResult;
+    '*[_type == "settings"][0] {\n  _id,\n  showcaseProjects[]{\n      _key,\n      ...@->{\n        _id,\n        _createdAt,\n        title,\n        subtitle,\n        "slug": slug.current,\n        mainImage {\n          "image": asset->url,\n          "lqip": asset->metadata.lqip,\n          "aspectRatio": asset->metadata.dimensions.aspectRatio,\n          alt,\n        },\n      }\n  }\n}': ProjectQueryResult;
     '*[_type == "gardenItem"] {\n  _id,\n  title,\n  "slug": slug.current,\n}': GardenItemsQueryResult;
-    '*[_type == "gardenItem" && slug.current == $slug][0] {\n  _id,\n  title,\n  "slug": slug.current,\n  gardenBlocks[]{\n    _type == "imageWithCaption" => {\n      _type,\n      _key,\n      image {\n        "image": asset->url,\n        "lqip": asset->metadata.lqip,\n        "aspectRatio": asset->metadata.dimensions.aspectRatio,\n        alt,\n      },\n      caption\n    },\n    _type == "textGarden" => {\n      _key,\n      _type,\n      text\n    },\n  }\n}': SingleGardenItemQueryResult;
-    '*[_type == "project" || _type == "subproject"] {\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  categories[]->{\n    title,\n    "slug": slug.current\n  },\n  mainImage {\n    "image": asset->url,\n    "lqip": asset->metadata.lqip,\n    "aspectRatio": asset->metadata.dimensions.aspectRatio,\n    alt,\n  },\n  "parentSlug": select(\n    _type == "subproject" => *[_type == "project" && references(^._id)][0].slug.current,\n    null\n  ),\n}': ProjectsAndSubprojectsQueryResult;
+    '*[_type == "gardenItem" && slug.current == $slug][0] {\n  _id,\n  title,\n  "slug": slug.current,\n  gardenBlocks[]{\n    _type == "richTextAndImageWithCaption" => {\n      _type,\n      _key,\n      text,\n      image {\n        "image": asset->url,\n        "lqip": asset->metadata.lqip,\n        "aspectRatio": asset->metadata.dimensions.aspectRatio,\n        alt,\n      },\n      caption\n    },\n    _type == "imageWithCaption" => {\n      _type,\n      _key,\n      image {\n        "image": asset->url,\n        "lqip": asset->metadata.lqip,\n        "aspectRatio": asset->metadata.dimensions.aspectRatio,\n        alt,\n      },\n      caption\n    },\n    _type == "textGarden" => {\n      _key,\n      _type,\n      text\n    },\n  }\n}': SingleGardenItemQueryResult;
+    '*[_type == "project" || _type == "subproject"] {\n  _id,\n  _type,\n  title,\n  subtitle,\n  "slug": slug.current,\n  categories[]->{\n    title,\n    "slug": slug.current\n  },\n  mainImage {\n    "image": asset->url,\n    "lqip": asset->metadata.lqip,\n    "aspectRatio": asset->metadata.dimensions.aspectRatio,\n    alt,\n  },\n  "parentSlug": select(\n    _type == "subproject" => *[_type == "project" && references(^._id)][0].slug.current,\n    null\n  ),\n}': ProjectsAndSubprojectsQueryResult;
     '*[_type == "project" && slug.current == $slug][0] {\n  _id,\n  title,\n  seoOverview,\n  body,\n  mainImage,\n  categories[]->{\n    title,\n    "slug": slug.current\n  },\n  blocks[]{\n    _type == "section-content" => {\n      \n  _type,\n  body,\n\n    },\n    _type == "section-header" => {\n      \n  _type,\n  _key,\n  title,\n\n    },\n    _type == "carousel" => {\n      \n  _type,\n  _key,\n  defaultCaption,\n  items[]{\n    _type == "imageSlide" => {\n      _key,\n      caption,\n      image {\n        _type,\n        alt,\n        asset-> {\n          url,\n          metadata {\n            lqip,\n            dimensions {\n              width,\n              height,\n              aspectRatio\n            }\n          }\n        }\n      },\n      mobileImage {\n        _type,\n        alt,\n        asset-> {\n          url,\n          metadata {\n            lqip,\n            dimensions {\n              width,\n              height,\n              aspectRatio\n            }\n          }\n        }\n      }\n    },\n    _type == "videoSlide" => {\n    _key,\n      caption,\n      video {\n        asset->{\n            playbackId,\n            "aspectRatio": data.aspect_ratio\n        }\n      },\n      mobileVideo {\n        asset->{\n            playbackId,\n            "aspectRatio": data.aspect_ratio\n        }\n      }\n    },\n    _type == "contentSlide" => {\n    _key,\n      caption,\n      content\n    },\n  }\n\n    },\n  },\n  hasSubprojects,\n  subprojects[]->{\n    _id,\n    _key,\n    title,\n    categories[]->{\n      title,\n      "slug": slug.current\n    },\n    "slug": slug.current,\n    blocks[]{\n      _type == "section-content" => {\n      \n  _type,\n  body,\n\n      },\n      _type == "section-header" => {\n        \n  _type,\n  _key,\n  title,\n\n      },\n      _type == "carousel" => {\n        \n  _type,\n  _key,\n  defaultCaption,\n  items[]{\n    _type == "imageSlide" => {\n      _key,\n      caption,\n      image {\n        _type,\n        alt,\n        asset-> {\n          url,\n          metadata {\n            lqip,\n            dimensions {\n              width,\n              height,\n              aspectRatio\n            }\n          }\n        }\n      },\n      mobileImage {\n        _type,\n        alt,\n        asset-> {\n          url,\n          metadata {\n            lqip,\n            dimensions {\n              width,\n              height,\n              aspectRatio\n            }\n          }\n        }\n      }\n    },\n    _type == "videoSlide" => {\n    _key,\n      caption,\n      video {\n        asset->{\n            playbackId,\n            "aspectRatio": data.aspect_ratio\n        }\n      },\n      mobileVideo {\n        asset->{\n            playbackId,\n            "aspectRatio": data.aspect_ratio\n        }\n      }\n    },\n    _type == "contentSlide" => {\n    _key,\n      caption,\n      content\n    },\n  }\n\n      },\n    }\n  }\n  \n}': SingleProjectQueryResult;
   }
 }

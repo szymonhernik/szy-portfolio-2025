@@ -23,6 +23,48 @@ export const gardenItem = defineType({
       type: "array",
       of: [
         defineField({
+          title: "Rich text and Image with caption",
+          name: "richTextAndImageWithCaption",
+          type: "object",
+          fields: [
+            defineField({
+              name: "text",
+              type: "blockContent",
+            }),
+            defineField({
+              name: "image",
+              type: "image",
+            }),
+            defineField({
+              name: "caption",
+              type: "blockContent",
+            }),
+          ],
+          preview: {
+            select: {
+              text: "text",
+              image: "image",
+            },
+            prepare({ text = [], image }) {
+              const block = (text || []).find(
+                // @ts-ignore
+                (block) => block._type === "block",
+              );
+              return {
+                media: image,
+                title: block
+                  ? block.children
+                      // @ts-ignore
+                      .filter((child) => child._type === "span")
+                      // @ts-ignore
+                      .map((span) => span.text)
+                      .join("")
+                  : "No text",
+              };
+            },
+          },
+        }),
+        defineField({
           title: "Image with caption",
           name: "imageWithCaption",
           type: "object",
@@ -33,8 +75,7 @@ export const gardenItem = defineType({
             }),
             defineField({
               name: "caption",
-              type: "text",
-              rows: 2,
+              type: "blockContent",
             }),
           ],
           preview: {
@@ -42,10 +83,21 @@ export const gardenItem = defineType({
               caption: "caption",
               image: "image",
             },
-            prepare({ caption, image }) {
+            prepare({ caption = [], image }) {
+              const block = (caption || []).find(
+                // @ts-ignore
+                (block) => block._type === "block",
+              );
               return {
-                title: caption ? caption : "Image with no caption",
                 media: image,
+                title: block
+                  ? block.children
+                      // @ts-ignore
+                      .filter((child) => child._type === "span")
+                      // @ts-ignore
+                      .map((span) => span.text)
+                      .join("")
+                  : "No caption",
               };
             },
           },

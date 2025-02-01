@@ -1,5 +1,6 @@
 import type { ProjectsAndSubprojectsQueryResult } from "@/sanity.types";
 
+import { Footer } from "@/components/footer";
 import TagsSearchPage from "@/components/screens/tags-search";
 import { sanityFetch } from "@/sanity/lib/sanity.client";
 import { projectsAndSubprojectsQuery } from "@/sanity/queries/page";
@@ -9,7 +10,7 @@ import { Suspense } from "react";
 
 export async function generateMetadata() {
   return {
-    title: "Tags Search | Szymon Eda Hernik",
+    title: "Szymon Eda Hernik | Tags Search",
     description: "Search for projects by tags",
   };
 }
@@ -24,6 +25,7 @@ export default async function Page() {
   return (
     <Suspense fallback={<div>🌱</div>}>
       <TagsSearchPage data={data} />
+      <Footer />
     </Suspense>
   );
 }

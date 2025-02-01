@@ -13,10 +13,14 @@ function IntroText() {
       <br className="block md:hidden" />
       <span className="block md:inline ">
         They also form half of{" "}
-        <Link href="/iszszistudio" className="text-link hover:font-outline-1-secondary">
+        <OpenGardenItem slug="isz-szi-studio">isz szi studio</OpenGardenItem>,
+        {/* <Link
+          href="/iszszistudio"
+          className="text-link hover:font-outline-1-secondary"
+        >
           isz szi studio
-        </Link>
-        , an artistic design studio based in Brussels.
+        </Link> */}
+        an artistic design studio based in Brussels.
       </span>
     </p>
   );
@@ -24,8 +28,11 @@ function IntroText() {
 function ListSeed() {
   return (
     <p className="mt-0 ">
-      One random inspiration from a rather{" "}
-      <Link href="/garden" className="text-secondary hover:font-outline-1-secondary">
+      A random inspiration from a rather{" "}
+      <Link
+        href="/garden"
+        className="text-secondary hover:font-outline-1-secondary"
+      >
         unsorted list
       </Link>{" "}
       is: <OpenGardenItem slug="27-30-covers">27 30 @ Covers</OpenGardenItem>
@@ -33,25 +40,31 @@ function ListSeed() {
   );
 }
 
-export default function Home({ projects }: { projects: ProjectQueryResult }) {
+export default function Home({
+  showcaseProjects,
+}: {
+  showcaseProjects: NonNullable<ProjectQueryResult>["showcaseProjects"];
+}) {
   return (
     // <FadeIn.Container>
-    <section className="grid grid-cols-12 items-start">
-      <div className="col-span-12 md:col-span-10 ">
-        {/* <FadeIn.Item> */}
-        <div className="flex flex-col gap-8 md:flex-col-reverse">
-          <IntroText />
-          <ListSeed />
+    <>
+      <section className="grid grid-cols-12 items-start">
+        <div className="col-span-12 md:col-span-10 ">
+          {/* <FadeIn.Item> */}
+          <div className="flex flex-col gap-4 md:flex-col-reverse">
+            <IntroText />
+            <ListSeed />
+          </div>
+          {/* </FadeIn.Item> */}
         </div>
-        {/* </FadeIn.Item> */}
-      </div>
 
-      <div className="col-span-12 mt-24">
-        {/* <FadeIn.Item> */}
-        <HomeGrid projects={projects} />
-        {/* </FadeIn.Item> */}
-      </div>
-    </section>
+        <div className="col-span-12 mt-X">
+          {/* <FadeIn.Item> */}
+          <HomeGrid showcaseProjects={showcaseProjects} />
+          {/* </FadeIn.Item> */}
+        </div>
+      </section>
+    </>
     // </FadeIn.Container>
   );
   // <FadeIn.Container>

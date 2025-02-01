@@ -1,14 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { BreadcrumbsIszSzi } from "./BreadcrumbsIszSzi";
+
 export function IszSziStudioContent() {
   return (
     <section className="flex min-h-[calc(100dvh-2rem)] w-full flex-col justify-between overflow-y-auto">
       <div className="grid grid-cols-12 ">
+        <div className="col-span-12 mb-[24px]">
+          <BreadcrumbsIszSzi />
+        </div>
+
         <div className="col-span-12 md:col-span-10 lg:col-span-7">
           <p>
-            <Link href="https://iszszistudio.com">isz szi</Link> is an ambivalently focused studio that continues to find different ways of expression and
-            labour.
+            <Link href="https://iszszistudio.com" target="_blank">
+              isz szi
+            </Link>{" "}
+            is an ambivalently focused studio that continues to find different ways of expression and labour.
           </p>
           <p>
             In our work we always try to reflect on what's structurally at stake. We think a lot about what it means and how to collaborate, and how to sustain

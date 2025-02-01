@@ -118,6 +118,12 @@ const config: Config = {
           border: "var(--kbd-border)",
         },
       },
+      margin: {
+        X: "6rem",
+      },
+      gap: {
+        X: "6rem",
+      },
       fontFamily: {
         zimula: ["var(--font-zimula)"],
         apple: ["var(--font-apple)"],
@@ -131,9 +137,18 @@ const config: Config = {
         "3xl": "1920px",
       },
       fontSize: {
-        "fluid-base": ["clamp(1rem, 0.9375rem + 0.3vw, 1.35rem)", { lineHeight: "1.4" }],
-        "fluid-lg": ["clamp(1.5rem, 1.125rem + 0.8vw, 1.75rem)", { lineHeight: "1.4" }],
-        "fluid-xl": ["clamp(2rem, 1.65rem + 1.65vw, 2.6rem)", { lineHeight: "1.3" }],
+        "fluid-base": [
+          "clamp(1rem, 0.9375rem + 0.3vw, 1.35rem)",
+          { lineHeight: "1.4" },
+        ],
+        "fluid-lg": [
+          "clamp(1.5rem, 1.125rem + 0.8vw, 1.75rem)",
+          { lineHeight: "1.4" },
+        ],
+        "fluid-xl": [
+          "clamp(2rem, 1.65rem + 1.65vw, 2.6rem)",
+          { lineHeight: "1.3" },
+        ],
         small: "0.9rem",
       },
     },

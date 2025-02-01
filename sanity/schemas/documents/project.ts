@@ -12,6 +12,11 @@ export const project = defineType({
       type: "string",
     }),
     defineField({
+      name: "subtitle",
+      type: "string",
+      description: "A subtitle for the project",
+    }),
+    defineField({
       name: "slug",
       type: "slug",
       options: {
