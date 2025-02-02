@@ -1,6 +1,7 @@
 import type { ProjectQueryResult } from "@/sanity.types";
 
 import { Footer } from "@/components/footer";
+import * as FadeIn from "@/components/motion/staggers/fade";
 import Home from "@/components/screens/home";
 import { sanityFetch } from "@/sanity/lib/sanity.client";
 import { projectQuery } from "@/sanity/queries/page";
@@ -20,9 +21,11 @@ export default async function Page() {
     return <div>No projects found</div>;
   }
   return (
-    <>
-      <Home showcaseProjects={projects.showcaseProjects} />
-      <Footer />
-    </>
+    <FadeIn.Container>
+      <FadeIn.Item>
+        <Home showcaseProjects={projects.showcaseProjects} />
+        <Footer />
+      </FadeIn.Item>
+    </FadeIn.Container>
   );
 }

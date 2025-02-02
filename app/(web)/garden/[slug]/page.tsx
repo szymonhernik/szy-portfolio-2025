@@ -1,6 +1,7 @@
 import type { SingleGardenItemQueryResult } from "@/sanity.types";
 
 import { GardenBreadcrumb } from "@/components/breadcrumb/garden";
+import * as FadeIn from "@/components/motion/staggers/fade";
 import GardenItem from "@/components/screens/garden/gardenItem";
 import { sanityFetch } from "@/sanity/lib/sanity.client";
 import { generateStaticSlugs } from "@/sanity/loader/generateStaticSlugs";
@@ -28,10 +29,14 @@ export default async function Page({ params }: { params: { slug: string } }) {
   }
 
   return (
-    <div className="">
-      <GardenBreadcrumb title={gardenItem.title} />
+    <FadeIn.Container>
+      <FadeIn.Item>
+        <div className="">
+          <GardenBreadcrumb title={gardenItem.title} />
 
-      <GardenItem item={gardenItem} />
-    </div>
+          <GardenItem item={gardenItem} />
+        </div>
+      </FadeIn.Item>
+    </FadeIn.Container>
   );
 }

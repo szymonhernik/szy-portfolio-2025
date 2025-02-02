@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 const container = {
   hidden: {},
@@ -15,7 +16,7 @@ const container = {
 const item = {
   hidden: {
     opacity: 0,
-    y: 16,
+    // y: 16,
     filter: "blur(4px)",
   },
   show: {
@@ -33,8 +34,15 @@ const item = {
 };
 
 function Container({ children, className }: React.HTMLProps<HTMLDivElement>) {
+  const pathname = usePathname();
   return (
-    <motion.div variants={container} initial="hidden" animate="show" className={className}>
+    <motion.div
+      key={pathname}
+      variants={container}
+      initial="hidden"
+      animate="show"
+      className={className}
+    >
       {children}
     </motion.div>
   );

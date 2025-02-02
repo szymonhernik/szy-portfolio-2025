@@ -13,14 +13,19 @@ import { notFound } from "next/navigation";
 type Props = {
   params: Promise<{ slug: string }>;
 };
-export async function generateMetadata(props: Props, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata(
+  props: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
   const params = await props.params;
   const project: SingleProjectQueryResult = await sanityFetch({
     query: singleProjectQuery,
     tags: [`project:${params.slug}`],
     qParams: { slug: params.slug }, // add slug from next-js params
   });
-  const ogImage = project?.mainImage ? urlForOpenGraphImage(project.mainImage as Image) : undefined;
+  const ogImage = project?.mainImage
+    ? urlForOpenGraphImage(project.mainImage as Image)
+    : undefined;
 
   return {
     title: `${project?.title} | Szymon Eda Hernik`,

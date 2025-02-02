@@ -46,7 +46,6 @@ export default function Home({
   showcaseProjects: NonNullable<ProjectQueryResult>["showcaseProjects"];
 }) {
   return (
-    // <FadeIn.Container>
     <>
       <section className="grid grid-cols-12 items-start">
         <div className="col-span-12 md:col-span-10 ">

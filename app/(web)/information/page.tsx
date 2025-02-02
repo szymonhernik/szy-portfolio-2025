@@ -1,4 +1,5 @@
 import { Footer } from "@/components/footer";
+import * as FadeIn from "@/components/motion/staggers/fade";
 import Information from "@/components/screens/information";
 
 export async function generateMetadata() {
@@ -10,9 +11,11 @@ export async function generateMetadata() {
 
 export default function Page() {
   return (
-    <div className="">
-      <Information />
-      <Footer />
-    </div>
+    <FadeIn.Container>
+      <FadeIn.Item>
+        <Information />
+        <Footer />
+      </FadeIn.Item>
+    </FadeIn.Container>
   );
 }

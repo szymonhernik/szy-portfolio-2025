@@ -1,6 +1,7 @@
 import type { ProjectsAndSubprojectsQueryResult } from "@/sanity.types";
 
 import { Footer } from "@/components/footer";
+import * as FadeIn from "@/components/motion/staggers/fade";
 import TagsSearchPage from "@/components/screens/tags-search";
 import { sanityFetch } from "@/sanity/lib/sanity.client";
 import { projectsAndSubprojectsQuery } from "@/sanity/queries/page";
@@ -23,9 +24,13 @@ export default async function Page() {
     return notFound();
   }
   return (
-    <Suspense fallback={<div>🌱</div>}>
-      <TagsSearchPage data={data} />
-      <Footer />
-    </Suspense>
+    <FadeIn.Container>
+      <FadeIn.Item>
+        <Suspense fallback={<div>🌱</div>}>
+          <TagsSearchPage data={data} />
+          <Footer />
+        </Suspense>
+      </FadeIn.Item>
+    </FadeIn.Container>
   );
 }

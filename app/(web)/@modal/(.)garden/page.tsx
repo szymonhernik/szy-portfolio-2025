@@ -1,5 +1,6 @@
 import type { GardenItemsQueryResult } from "@/sanity.types";
 
+import * as FadeIn from "@/components/motion/staggers/fade";
 import { sanityFetch } from "@/sanity/lib/sanity.client";
 import { gardenItemsQuery } from "@/sanity/queries/page";
 
@@ -21,7 +22,11 @@ export default function Page() {
     <Modal>
       {/* plant emoji */}
       <Suspense fallback={<div>Loading...</div>}>
-        <GardenData />
+        <FadeIn.Container>
+          <FadeIn.Item>
+            <GardenData />
+          </FadeIn.Item>
+        </FadeIn.Container>
       </Suspense>
     </Modal>
   );
