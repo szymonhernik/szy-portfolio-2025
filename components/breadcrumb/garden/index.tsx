@@ -10,11 +10,7 @@ interface GardenBreadcrumbProps {
 
 export function GardenBreadcrumb({ title, onClick }: GardenBreadcrumbProps) {
   const GardenLink = onClick ? (
-    <button
-      type="button"
-      onClick={onClick}
-      className="text-secondary hover:font-outline-1-secondary"
-    >
+    <button type="button" onClick={onClick} className="text-secondary hover:font-outline-1-secondary">
       garden
     </button>
   ) : (

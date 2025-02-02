@@ -12,18 +12,10 @@ import { useCallback, useMemo } from "react";
 // Add "Click to randomise selection" button that will randomise the selection of filters
 // // Make sure that there is at least one result for each random selection of filters
 
-const getUniqueCategories = (
-  data: NonNullable<ProjectsAndSubprojectsQueryResult>,
-) => {
-  return Array.from(
-    new Set(
-      data.flatMap((item) => item.categories || []).map((cat) => cat.slug),
-    ),
-  )
+const getUniqueCategories = (data: NonNullable<ProjectsAndSubprojectsQueryResult>) => {
+  return Array.from(new Set(data.flatMap((item) => item.categories || []).map((cat) => cat.slug)))
     .map((slug) => {
-      const category = data
-        .flatMap((item) => item.categories || [])
-        .find((cat) => cat.slug === slug);
+      const category = data.flatMap((item) => item.categories || []).find((cat) => cat.slug === slug);
       if (!category) {
         return { slug: "", title: "" }; // or handle this case differently
       }
@@ -46,13 +38,7 @@ export default function TagsSearchPage({
   const allCategories = getUniqueCategories(projects);
 
   const filteredProjects = useMemo(() => {
-    return projects.filter((item) =>
-      filters.length === 0
-        ? true
-        : filters.every((filter) =>
-            item.categories?.some((category) => category.slug === filter),
-          ),
-    );
+    return projects.filter((item) => (filters.length === 0 ? true : filters.every((filter) => item.categories?.some((category) => category.slug === filter))));
   }, [projects, filters]);
 
   const createQueryString = useCallback(
@@ -86,21 +72,13 @@ export default function TagsSearchPage({
 
     while (!validCombinationFound) {
       // Random number between MIN_FILTERS and MAX_FILTERS (inclusive)
-      const numberOfFilters =
-        Math.floor(Math.random() * (MAX_FILTERS - MIN_FILTERS + 1)) +
-        MIN_FILTERS;
+      const numberOfFilters = Math.floor(Math.random() * (MAX_FILTERS - MIN_FILTERS + 1)) + MIN_FILTERS;
 
       // Get random filters
-      randomFilters = allCategories
-        .sort(() => Math.random() - 0.5)
-        .slice(0, numberOfFilters);
+      randomFilters = allCategories.sort(() => Math.random() - 0.5).slice(0, numberOfFilters);
 
       // Check if this combination returns any projects
-      const hasResults = projects.some((item) =>
-        randomFilters.every((filter) =>
-          item.categories?.some((category) => category.slug === filter.slug),
-        ),
-      );
+      const hasResults = projects.some((item) => randomFilters.every((filter) => item.categories?.some((category) => category.slug === filter.slug)));
 
       // Compare new combination with current filters
       const newFilterSlugs = randomFilters
@@ -113,11 +91,7 @@ export default function TagsSearchPage({
       }
     }
 
-    const randomisedQueryString = createQueryString(
-      "q",
-      randomFilters.map((filter) => filter.slug).join(","),
-      true,
-    );
+    const randomisedQueryString = createQueryString("q", randomFilters.map((filter) => filter.slug).join(","), true);
     router.replace(`${pathname}?${randomisedQueryString}`);
   };
 
@@ -125,35 +99,24 @@ export default function TagsSearchPage({
     <section>
       <div className="mb-X grid grid-cols-12 gap-8 overflow-x-hidden ">
         <div className="col-span-12 flex flex-col items-start justify-start gap-4 md:col-span-11 ">
-          <button
-            className="text-link hover:font-outline-1-secondary"
-            type="button"
-            onClick={() => randomiseFilters()}
-          >
+          <button className="text-link hover:font-outline-1-secondary" type="button" onClick={() => randomiseFilters()}>
             Click to randomise selection
           </button>
           <div className="max-w-full">
             {allCategories.map((category, index) => {
               if (!category.slug || !category.title) return null;
               return (
-                <div
-                  key={category.slug}
-                  className="inline whitespace-nowrap text-fluid-xl "
-                >
+                <div key={category.slug} className="inline whitespace-nowrap text-fluid-xl ">
                   <button
                     type="button"
                     onClick={() => {
                       if (category.slug) {
-                        router.replace(
-                          `${pathname}?${createQueryString("q", category.slug)}`,
-                        );
+                        router.replace(`${pathname}?${createQueryString("q", category.slug)}`);
                       }
                     }}
                     className={clsx(
                       "capitalize",
-                      filters.includes(category.slug)
-                        ? "text-primary hover:font-outline-1-black"
-                        : "text-secondary hover:font-outline-1-secondary",
+                      filters.includes(category.slug) ? "text-primary hover:font-outline-1-black" : "text-secondary hover:font-outline-1-secondary",
                     )}
                   >
                     {category.title}

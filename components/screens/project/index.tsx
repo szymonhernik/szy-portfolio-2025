@@ -1,8 +1,8 @@
 import type { SingleProjectQueryResult } from "@/sanity.types";
 import type { CarouselBlock } from "@/types/blocks";
 
-import Blocks from "@/components/blocks";
 import FullScreenCarousel from "@/components/FullScreenCarousel";
+import Blocks from "@/components/blocks";
 import * as FadeIn from "@/components/motion/staggers/fade";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import TagLink from "@/components/tag-link";
@@ -63,16 +63,11 @@ export default function ProjectPage({
               <section className="">
                 <h1 className="text-fluid-xl">{project.title}</h1>
                 {/* if project has subprojects dont check categories on project but on subprojects and combine them into an array */}
-                {project.hasSubprojects &&
-                project.subprojects &&
-                project.subprojects.length > 0 ? (
+                {project.hasSubprojects && project.subprojects && project.subprojects.length > 0 ? (
                   <div className="text-secondary sm:text-small lg:text-small-md">
                     {project.subprojects
                       .flatMap((subproject) => subproject.categories)
-                      .filter(
-                        (category): category is NonNullable<typeof category> =>
-                          category !== null,
-                      )
+                      .filter((category): category is NonNullable<typeof category> => category !== null)
                       .map((category, index, array) => (
                         <>
                           {/* biome-ignore lint/style/noNonNullAssertion: this is not null */}
@@ -106,9 +101,7 @@ export default function ProjectPage({
               {project.hasSubprojects &&
                 project.subprojects &&
                 project.subprojects.length > 0 &&
-                project.subprojects.map((subproject) => (
-                  <Subproject key={subproject._id} subproject={subproject} />
-                ))}
+                project.subprojects.map((subproject) => <Subproject key={subproject._id} subproject={subproject} />)}
               {/* <p className="text-[16px] text-secondary">Web Design, Full-Stack Development, Wordpress, Editorial Design, Graphic Design</p> */}
             </div>
           </article>
@@ -123,16 +116,10 @@ export default function ProjectPage({
 function Subproject({
   subproject,
 }: {
-  subproject: NonNullable<
-    NonNullable<SingleProjectQueryResult>["subprojects"]
-  >[number];
+  subproject: NonNullable<NonNullable<SingleProjectQueryResult>["subprojects"]>[number];
 }) {
   return (
-    <div
-      id={
-        subproject.slug && subproject.slug !== "" ? subproject.slug : undefined
-      }
-    >
+    <div id={subproject.slug && subproject.slug !== "" ? subproject.slug : undefined}>
       {/* @ts-ignore */}
       {subproject.blocks && <Blocks blocks={subproject.blocks} />}
     </div>

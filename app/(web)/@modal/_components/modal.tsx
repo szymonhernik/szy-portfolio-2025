@@ -4,7 +4,7 @@ import type { ElementRef } from "react";
 
 import { clearAllBodyScrollLocks, disableBodyScroll } from "body-scroll-lock";
 import { useRouter } from "next/navigation";
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
 export function Modal({ children }: { children: React.ReactNode }) {
@@ -14,15 +14,15 @@ export function Modal({ children }: { children: React.ReactNode }) {
   // content ref to disable body scroll
   const contentRef = useRef<ElementRef<"div">>(null);
 
-  // dismiss the modal
-  function onDismiss() {
+  // Wrap onDismiss with useCallback
+  const onDismiss = useCallback(() => {
     // Instead of using the dialog's built-in close,
     // we'll just handle the navigation and let Next.js
     // handle the unmounting
     router.back();
-  }
+  }, [router]);
 
-  // control the dialog open state
+  // Now the effect can safely depend on onDismiss
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog?.open) {
@@ -39,7 +39,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
 
     dialog?.addEventListener("keydown", handleKeyDown);
     return () => dialog?.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [onDismiss]);
 
   // Update the scroll lock effect
   useLayoutEffect(() => {
@@ -70,17 +70,8 @@ export function Modal({ children }: { children: React.ReactNode }) {
   if (!modalRoot) throw new Error("Modal root element not found");
 
   return createPortal(
-    <dialog
-      ref={dialogRef}
-      data-dialog-type="modal"
-      className="z-[10] m-0 h-[100dvh] w-screen overflow-y-scroll bg-background p-4"
-      onClose={onDismiss}
-    >
-      <button
-        type="button"
-        onClick={onDismiss}
-        className="fixed top-0 right-0 z-[20] p-4 text-fluid-xl hover:font-outline-1-black md:text-fluid-base"
-      >
+    <dialog ref={dialogRef} data-dialog-type="modal" className="z-[10] m-0 h-[100dvh] w-screen overflow-y-scroll bg-background p-4" onClose={onDismiss}>
+      <button type="button" onClick={onDismiss} className="fixed top-0 right-0 z-[20] p-4 text-fluid-xl hover:font-outline-1-black md:text-fluid-base">
         X
       </button>
       {/* content ref to disable body scroll */}

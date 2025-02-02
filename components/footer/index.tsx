@@ -29,7 +29,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <div className="mt-X w-full grid grid-cols-1 md:grid-cols-3 md:gap-4 sm:text-small lg:text-small-md">
+    <div className="mt-X grid w-full grid-cols-1 sm:text-small md:grid-cols-3 md:gap-4 lg:text-small-md">
       <div className="text-secondary">
         February 2025 ©{" "}
         <Link href="/" className="hover:font-outline-1-secondary">
@@ -37,10 +37,7 @@ const Footer = () => {
         </Link>
       </div>
       <div className="text-left md:text-center">
-        <Link
-          href="mailto:hello@szymonhernik.com"
-          className="text-secondary hover:font-outline-1-secondary"
-        >
+        <Link href="mailto:hello@szymonhernik.com" className="text-secondary hover:font-outline-1-secondary">
           hello@szymonhernik.com
         </Link>
       </div>
