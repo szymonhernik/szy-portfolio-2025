@@ -66,7 +66,7 @@ export default function ProjectPage({
                 {project.hasSubprojects &&
                 project.subprojects &&
                 project.subprojects.length > 0 ? (
-                  <div className="text-secondary text-small lg:text-xs">
+                  <div className="text-secondary sm:text-small lg:text-small-md">
                     {project.subprojects
                       .flatMap((subproject) => subproject.categories)
                       .filter(
@@ -85,7 +85,7 @@ export default function ProjectPage({
                   </div>
                 ) : (
                   project.categories && (
-                    <div className="text-secondary text-small lg:text-xs">
+                    <div className="text-secondary sm:text-small lg:text-small-md">
                       {project.categories.map((category, index, array) => (
                         <>
                           {/* biome-ignore lint/style/noNonNullAssertion: this is not null */}

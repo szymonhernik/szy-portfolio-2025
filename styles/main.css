@@ -115,7 +115,7 @@
     }
 
     /* sub {
-      @apply text-small;
+      @apply sm:text-small lg:text-small-md;
     } */
 
     a {

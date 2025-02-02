@@ -29,7 +29,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <div className="mt-X w-full grid grid-cols-1 md:grid-cols-3 md:gap-4 text-small">
+    <div className="mt-X w-full grid grid-cols-1 md:grid-cols-3 md:gap-4 sm:text-small lg:text-small-md">
       <div className="text-secondary">
         February 2025 ©{" "}
         <Link href="/" className="hover:font-outline-1-secondary">

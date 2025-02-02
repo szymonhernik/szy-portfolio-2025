@@ -150,6 +150,7 @@ const config: Config = {
           { lineHeight: "1.3" },
         ],
         small: "0.9rem",
+        "small-md": "0.84rem",
       },
     },
   },
@@ -162,9 +163,6 @@ const config: Config = {
         ".font-outline-1-black": {
           "-webkit-text-stroke": "1px black",
         },
-        // ".font-outline-0": {
-        //   "-webkit-text-stroke": "0px #adadad",
-        // },
       });
     }),
   ],

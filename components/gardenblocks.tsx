@@ -28,7 +28,10 @@ const componentMap: { [key: string]: React.ComponentType<any> } = {
   richTextAndImageWithCaption: RichTextAndImageWithCaption,
 };
 
-type ImageWithCaptionBlock = Extract<NonNullable<NonNullable<SingleGardenItemQueryResult>["gardenBlocks"]>[number], { _type: "imageWithCaption" }>;
+type ImageWithCaptionBlock = Extract<
+  NonNullable<NonNullable<SingleGardenItemQueryResult>["gardenBlocks"]>[number],
+  { _type: "imageWithCaption" }
+>;
 
 type RichTextAndImageWithCaptionBlock = Extract<
   NonNullable<NonNullable<SingleGardenItemQueryResult>["gardenBlocks"]>[number],
@@ -42,10 +45,18 @@ function ImageWithCaption({ image, caption }: ImageWithCaptionBlock) {
     // style={{ minHeight: "calc(100dvh - 2rem)" }}
     >
       <div>
-        {image?.image && <Image src={image.image} alt={image.alt || ""} width={600} height={600} className="w-1/2 lg:w-1/3" />}
+        {image?.image && (
+          <Image
+            src={image.image}
+            alt={image.alt || ""}
+            width={600}
+            height={600}
+            className="w-1/2 lg:w-1/3"
+          />
+        )}
 
         {caption && (
-          <div className="mt-0 text-small [&_p]:mb-0">
+          <div className="mt-0 sm:text-small lg:text-small-md [&_p]:mb-0">
             <PortableTextRenderer value={caption} />
           </div>
         )}
@@ -54,12 +65,23 @@ function ImageWithCaption({ image, caption }: ImageWithCaptionBlock) {
   );
 }
 
-type TextGardenBlock = Extract<NonNullable<NonNullable<SingleGardenItemQueryResult>["gardenBlocks"]>[number], { _type: "textGarden" }>;
+type TextGardenBlock = Extract<
+  NonNullable<NonNullable<SingleGardenItemQueryResult>["gardenBlocks"]>[number],
+  { _type: "textGarden" }
+>;
 function TextGarden({ text }: TextGardenBlock) {
-  return <div className="mt-4 text-fluid-xl">{text && <PortableTextRenderer value={text} />}</div>;
+  return (
+    <div className="mt-4 text-fluid-xl">
+      {text && <PortableTextRenderer value={text} />}
+    </div>
+  );
 }
 
-function RichTextAndImageWithCaption({ text, image, caption }: RichTextAndImageWithCaptionBlock) {
+function RichTextAndImageWithCaption({
+  text,
+  image,
+  caption,
+}: RichTextAndImageWithCaptionBlock) {
   return (
     <div className="flex h-full flex-col justify-between">
       {text && (
@@ -71,10 +93,16 @@ function RichTextAndImageWithCaption({ text, image, caption }: RichTextAndImageW
       )}
       {image?.image && (
         <div className="flex flex-col gap-2">
-          <Image src={image.image} alt={image.alt || ""} width={600} height={600} className="w-1/2 lg:w-1/3" />
+          <Image
+            src={image.image}
+            alt={image.alt || ""}
+            width={600}
+            height={600}
+            className="w-1/2 lg:w-1/3"
+          />
 
           {caption && (
-            <p className="mt-0 text-small [&_p]:mb-0">
+            <p className="mt-0 sm:text-small lg:text-small-md [&_p]:mb-0">
               <PortableTextRenderer value={caption} />
             </p>
           )}

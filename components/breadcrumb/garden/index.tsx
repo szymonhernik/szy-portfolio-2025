@@ -10,7 +10,11 @@ interface GardenBreadcrumbProps {
 
 export function GardenBreadcrumb({ title, onClick }: GardenBreadcrumbProps) {
   const GardenLink = onClick ? (
-    <button type="button" onClick={onClick} className="text-secondary hover:font-outline-1-secondary">
+    <button
+      type="button"
+      onClick={onClick}
+      className="text-secondary hover:font-outline-1-secondary"
+    >
       garden
     </button>
   ) : (
@@ -20,7 +24,7 @@ export function GardenBreadcrumb({ title, onClick }: GardenBreadcrumbProps) {
   );
 
   return (
-    <div className="flex max-w-[80%] items-start gap-2 text-small">
+    <div className="flex max-w-[80%] items-start gap-2 sm:text-small lg:text-small-md">
       <div className="flex items-center gap-2">
         {GardenLink}
         <span>

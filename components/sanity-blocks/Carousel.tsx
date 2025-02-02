@@ -186,7 +186,7 @@ export default function Carousel({ defaultCaption, items }: CarouselBlock) {
               onClick={scrollNext}
             />
           </div>
-          <div className="flex justify-between text-small lg:text-xs">
+          <div className="flex justify-between sm:text-small lg:text-small-md">
             <button
               className="text-secondary"
               type="button"
