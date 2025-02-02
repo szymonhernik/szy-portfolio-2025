@@ -34,8 +34,71 @@ export default function Information() {
           <p>
             Szy hones their multifaceted workspace to remain a site of perpetual
             inquiry. Their workspace is blessed to have welcomed collaborations
-            with: maok (soliloquy), warm winters, braids journal, and studio
-            rgbdog.
+            with:{" "}
+            <a
+              target="_blank"
+              href="https://www.monikablaszczak.com/"
+              className="text-link hover:font-outline-1-secondary"
+            >
+              maok (soliloquy)
+            </a>
+            ,{" "}
+            <a
+              target="_blank"
+              href="https://www.instagram.com/kaiwhiston/"
+              className="text-link hover:font-outline-1-secondary"
+            >
+              Kai Whiston
+            </a>
+            ,{" "}
+            <a
+              target="_blank"
+              href="https://komuna.warszawa.pl/"
+              className="text-link hover:font-outline-1-secondary"
+            >
+              Komuna Warszawa
+            </a>
+            ,{" "}
+            <a
+              target="_blank"
+              href="https://sanatoriumofsound.com/"
+              className="text-link hover:font-outline-1-secondary"
+            >
+              Sanatorium of Sound
+            </a>
+            ,{" "}
+            <a
+              target="_blank"
+              href="https://nargesmohammadi.com/"
+              className="text-link hover:font-outline-1-secondary"
+            >
+              Narges Mohammadi
+            </a>
+            ,{" "}
+            <a
+              target="_blank"
+              href="https://warmwintersltd.bandcamp.com/"
+              className="text-link hover:font-outline-1-secondary"
+            >
+              warm winters
+            </a>
+            ,{" "}
+            <a
+              target="_blank"
+              href="https://braidsjournal.com/"
+              className="text-link hover:font-outline-1-secondary"
+            >
+              braids journal
+            </a>
+            , and{" "}
+            <a
+              target="_blank"
+              href="https://rgbdog.studio/"
+              className="text-link hover:font-outline-1-secondary"
+            >
+              studio rgbdog
+            </a>
+            .
           </p>
           <p className="hidden md:block">
             Say hello via{" "}

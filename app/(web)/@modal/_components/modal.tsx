@@ -14,11 +14,31 @@ export function Modal({ children }: { children: React.ReactNode }) {
   // content ref to disable body scroll
   const contentRef = useRef<ElementRef<"div">>(null);
 
+  // dismiss the modal
+  function onDismiss() {
+    // Instead of using the dialog's built-in close,
+    // we'll just handle the navigation and let Next.js
+    // handle the unmounting
+    router.back();
+  }
+
   // control the dialog open state
   useEffect(() => {
-    if (!dialogRef.current?.open) {
-      dialogRef.current?.showModal();
+    const dialog = dialogRef.current;
+    if (!dialog?.open) {
+      dialog?.showModal();
     }
+
+    // Prevent default Escape key behavior
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onDismiss();
+      }
+    };
+
+    dialog?.addEventListener("keydown", handleKeyDown);
+    return () => dialog?.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   // Update the scroll lock effect
@@ -46,17 +66,21 @@ export function Modal({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  // dismiss the modal
-  function onDismiss() {
-    router.back();
-  }
-
   const modalRoot = document.getElementById("modal-root");
   if (!modalRoot) throw new Error("Modal root element not found");
 
   return createPortal(
-    <dialog ref={dialogRef} data-dialog-type="modal" className="z-[10] m-0 h-[100dvh] w-screen overflow-y-scroll bg-background p-4" onClose={onDismiss}>
-      <button type="button" onClick={onDismiss} className="fixed top-0 right-0 z-[20] p-4 text-fluid-xl hover:font-outline-1-black md:text-fluid-base">
+    <dialog
+      ref={dialogRef}
+      data-dialog-type="modal"
+      className="z-[10] m-0 h-[100dvh] w-screen overflow-y-scroll bg-background p-4"
+      onClose={onDismiss}
+    >
+      <button
+        type="button"
+        onClick={onDismiss}
+        className="fixed top-0 right-0 z-[20] p-4 text-fluid-xl hover:font-outline-1-black md:text-fluid-base"
+      >
         X
       </button>
       {/* content ref to disable body scroll */}

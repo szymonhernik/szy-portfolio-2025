@@ -24,16 +24,16 @@ export default function GardenClientModal({
   }
 
   return (
-    <FadeIn.Container>
-      <FadeIn.Item>
-        <Modal>
+    <Modal>
+      <FadeIn.Container>
+        <FadeIn.Item>
           <GardenBreadcrumb
             title={gardenItem.title}
             onClick={() => router.replace("/garden")}
           />
           <GardenBlocks blocks={gardenItem.gardenBlocks} />
-        </Modal>
-      </FadeIn.Item>
-    </FadeIn.Container>
+        </FadeIn.Item>
+      </FadeIn.Container>
+    </Modal>
   );
 }
