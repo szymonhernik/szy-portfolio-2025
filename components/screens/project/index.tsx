@@ -55,9 +55,9 @@ export default function ProjectPage({
   };
 
   return (
-    <FadeIn.Container>
-      <FadeIn.Item>
-        <CarouselProvider initialSlides={getAllSlides()}>
+    <CarouselProvider initialSlides={getAllSlides()}>
+      <FadeIn.Container>
+        <FadeIn.Item>
           <article className="grid grid-cols-12 items-start">
             <div className="col-span-12 flex flex-col gap-X lg:col-span-7">
               <section className="">
@@ -112,10 +112,11 @@ export default function ProjectPage({
               {/* <p className="text-[16px] text-secondary">Web Design, Full-Stack Development, Wordpress, Editorial Design, Graphic Design</p> */}
             </div>
           </article>
-          <FullScreenCarousel />
-        </CarouselProvider>
-      </FadeIn.Item>
-    </FadeIn.Container>
+        </FadeIn.Item>
+      </FadeIn.Container>
+
+      <FullScreenCarousel />
+    </CarouselProvider>
   );
 }
 
