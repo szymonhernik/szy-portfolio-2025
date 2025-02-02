@@ -36,6 +36,7 @@ export default function RootLayout({
             <NavigationDesktop />
             <article className="article ">{children}</article>
           </main>
+
           {/* <Footer /> */}
         </Providers>
       </body>

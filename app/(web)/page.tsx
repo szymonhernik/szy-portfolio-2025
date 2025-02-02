@@ -6,6 +6,8 @@ import Home from "@/components/screens/home";
 import { sanityFetch } from "@/sanity/lib/sanity.client";
 import { projectQuery } from "@/sanity/queries/page";
 
+import RandomAnimation from "./_components/RandomAnimation";
+
 export async function generateMetadata() {
   return {
     title: "Szymon Eda Hernik | Projects",
@@ -21,11 +23,14 @@ export default async function Page() {
     return <div>No projects found</div>;
   }
   return (
-    <FadeIn.Container>
-      <FadeIn.Item>
-        <Home showcaseProjects={projects.showcaseProjects} />
-        <Footer />
-      </FadeIn.Item>
-    </FadeIn.Container>
+    <>
+      <RandomAnimation />
+      <FadeIn.Container>
+        <FadeIn.Item>
+          <Home showcaseProjects={projects.showcaseProjects} />
+          <Footer />
+        </FadeIn.Item>
+      </FadeIn.Container>
+    </>
   );
 }

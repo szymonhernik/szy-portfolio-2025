@@ -2,7 +2,7 @@ import TagLink from "@/components/tag-link";
 
 export default function Information() {
   return (
-    <section className="grid grid-cols-12 items-start">
+    <section className="relative grid grid-cols-12 items-start">
       <div className="mb-36 text-fluid-xl md:hidden">SZY</div>
       <div className="col-span-12 flex flex-col gap-X md:col-span-10 lg:col-span-7 ">
         <div>
