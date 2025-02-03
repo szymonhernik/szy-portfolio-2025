@@ -15,7 +15,7 @@ export default function Page() {
   return (
     <>
       <FadeIn.Container>
-        <RandomAnimation />
+        <RandomAnimation expectedPath="/information" />
         <FadeIn.Item>
           <Information />
           <Footer />
