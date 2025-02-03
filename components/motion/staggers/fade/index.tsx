@@ -36,14 +36,24 @@ const item = {
 function Container({ children, className }: React.HTMLProps<HTMLDivElement>) {
   const pathname = usePathname();
   return (
-    <motion.div key={pathname} variants={container} initial="hidden" animate="show" className={className}>
+    <motion.div
+      key={pathname}
+      variants={container}
+      initial="hidden"
+      animate="show"
+      className={className}
+    >
       {children}
     </motion.div>
   );
 }
 
 function Item({ children }: { children: React.ReactNode }) {
-  return <motion.div variants={item}>{children}</motion.div>;
+  return (
+    <motion.div variants={item} className="h-full">
+      {children}
+    </motion.div>
+  );
 }
 
 export { Container, Item };
