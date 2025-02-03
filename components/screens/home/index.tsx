@@ -1,6 +1,7 @@
+import type { ProjectQueryResult } from "@/sanity.types";
+
 import HomeGrid from "@/components/home-grid";
 import { OpenGardenItem } from "@/components/open-garden-item";
-import type { ProjectQueryResult } from "@/sanity.types";
 
 import Link from "next/link";
 

@@ -11,14 +11,11 @@ export default function RandomAnimation({
   expectedPath: string;
 }) {
   const pathname = usePathname();
-  const [randomVideo, setRandomVideo] = useState(
-    videoLibrary[Math.floor(Math.random() * videoLibrary.length)],
-  );
+  const [randomVideo, setRandomVideo] = useState(videoLibrary[Math.floor(Math.random() * videoLibrary.length)]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: intentionally changing video on path change
   useEffect(() => {
-    setRandomVideo(
-      videoLibrary[Math.floor(Math.random() * videoLibrary.length)],
-    );
+    setRandomVideo(videoLibrary[Math.floor(Math.random() * videoLibrary.length)]);
   }, [pathname]);
 
   // Don't render if paths don't match
@@ -34,13 +31,7 @@ export default function RandomAnimation({
 
   return (
     <div className="fixed z-[0] " style={randomPosition}>
-      <video
-        src={randomVideo.url}
-        autoPlay
-        muted
-        controls={false}
-        className=" max-h-[30vh] max-w-[20vw]"
-      />
+      <video src={randomVideo.url} autoPlay muted controls={false} className=" max-h-[30vh] max-w-[20vw]" />
     </div>
   );
 }

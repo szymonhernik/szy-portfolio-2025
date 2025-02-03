@@ -27,10 +27,7 @@ export default function GardenClientModal({
     <Modal>
       <FadeIn.Container className="min-h-[calc(100%-1rem)]">
         <FadeIn.Item>
-          <GardenBreadcrumb
-            title={gardenItem.title}
-            onClick={() => router.replace("/garden")}
-          />
+          <GardenBreadcrumb title={gardenItem.title} onClick={() => router.replace("/garden")} />
           <GardenBlocks blocks={gardenItem.gardenBlocks} />
         </FadeIn.Item>
       </FadeIn.Container>
