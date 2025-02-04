@@ -146,7 +146,7 @@ export default function Carousel({ defaultCaption, items }: CarouselBlock) {
   return (
     <div className="relative my-4 w-full max-w-screen-lg">
       {mounted && (
-        <div className="embla flex max-h-[800px] flex-col gap-2">
+        <div className="embla flex max-h-[800px] flex-col gap-[0.65rem]">
           <div className="embla__viewport" ref={emblaRef} style={{ aspectRatio: getAspectRatio() }}>
             <div className="embla__container ">
               {items.map((slide, index) => (

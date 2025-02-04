@@ -27,6 +27,7 @@ export default function FullScreenCarousel() {
     {
       startIndex: currentSlideIndex,
       loop: true,
+      duration: 0,
     },
     [Fade()],
   );

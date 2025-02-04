@@ -1,6 +1,6 @@
 import type { Carousel as CarouselType, SectionContent as SectionContentType, SectionHeader as SectionHeaderType } from "../sanity.types";
 
-import Carousel from "./sanity-blocks/Carousel";
+import CarouselSimple from "./sanity-blocks/CarouselSimple";
 import SectionContent from "./sanity-blocks/SectionContent";
 import SectionHeader from "./sanity-blocks/SectionHeader";
 
@@ -10,7 +10,7 @@ type Block = ({ _key: string } & SectionHeaderType) | ({ _key: string } & Sectio
 const componentMap: { [key: string]: React.ComponentType<any> } = {
   "section-header": SectionHeader,
   "section-content": SectionContent,
-  carousel: Carousel,
+  carousel: CarouselSimple,
 };
 
 export default function Blocks({ blocks }: { blocks?: Block[] }) {
