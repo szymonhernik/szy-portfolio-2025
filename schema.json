@@ -1201,6 +1201,13 @@
                       },
                       "optional": true
                     },
+                    "allowAudio": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "boolean"
+                      },
+                      "optional": true
+                    },
                     "mobileVideo": {
                       "type": "objectAttribute",
                       "value": {

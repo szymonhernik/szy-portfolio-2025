@@ -90,6 +90,13 @@ export const carousel = defineType({
               type: "mux.video",
               title: "Video",
             },
+            // select whether to play with audio or not
+            {
+              name: "allowAudio",
+              type: "boolean",
+              title: "Allow audio",
+              initialValue: false,
+            },
             {
               name: "mobileVideo",
               type: "mux.video",

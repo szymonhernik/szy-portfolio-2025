@@ -24,21 +24,7 @@ export const carouselFragment = `
           }
         }
       },
-      mobileImage {
-        _type,
-        alt,
-        asset-> {
-          url,
-          metadata {
-            lqip,
-            dimensions {
-              width,
-              height,
-              aspectRatio
-            }
-          }
-        }
-      }
+      
     },
     _type == "videoSlide" => {
     _type,
@@ -50,12 +36,7 @@ export const carouselFragment = `
             "aspectRatio": data.aspect_ratio
         }
       },
-      mobileVideo {
-        asset->{
-            playbackId,
-            "aspectRatio": data.aspect_ratio
-        }
-      }
+      allowAudio,
     },
     _type == "contentSlide" => {
       _type,

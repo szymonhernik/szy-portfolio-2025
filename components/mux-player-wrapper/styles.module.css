@@ -1,6 +1,7 @@
 .muxPlayer {
   /* Hide all controls at once */
-  --controls: none;
+
+  /* --controls: none; */
 
   /* Hide the error dialog */
   --dialog: none;
@@ -9,11 +10,13 @@
   --loading-indicator: none;
 
   /* Target all sections by excluding the section prefix */
-  --play-button: none;
+
+  /* --play-button: none; */
   --live-button: none;
   --seek-backward-button: none;
   --seek-forward-button: none;
-  --mute-button: none;
+
+  /* --mute-button: none; */
   --captions-button: none;
   --airplay-button: none;
   --pip-button: none;
@@ -28,5 +31,11 @@
 
   /* Target a specific section by prefixing the CSS var with (top|center|bottom) */
   --center-controls: none;
-  --bottom-play-button: none;
+
+  /* --bottom-play-button: none; */
+
+  --controls-backdrop-color: rgb(0 0 0 / 60%);
+  --media-control-color: white;
+  --media-control-hover-color: white;
+  --media-tooltip-display: none;
 }
