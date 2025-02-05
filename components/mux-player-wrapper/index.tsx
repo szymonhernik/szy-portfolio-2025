@@ -3,6 +3,8 @@ import type { MuxVideoAssetOwn } from "@/types/mux";
 import MuxPlayer from "@mux/mux-player-react";
 import { useEffect, useRef, useState } from "react";
 
+import styles from "./styles.module.css";
+
 export default function MuxPlayerWrapper({
   video,
 }: {
@@ -43,7 +45,7 @@ export default function MuxPlayerWrapper({
   return (
     <MuxPlayer
       ref={playerRef}
-      className="h-full w-auto object-contain"
+      className={`h-full w-auto object-contain ${styles.muxPlayer}`}
       playbackId={video.playbackId}
       muted
       autoPlay={isInView}

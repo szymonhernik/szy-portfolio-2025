@@ -15,7 +15,8 @@ import PortableTextRenderer from "../portable-text-renderer";
 import { ImageSlide } from "./CarouselSimple";
 
 export default function FullScreenCarouselSimple() {
-  const { allSlides, currentSlideIndex, isFullScreen, closeFullScreen } = useCarousel();
+  const { allSlides, currentSlideIndex, isFullScreen, closeFullScreen } =
+    useCarousel();
 
   const dialogRef = useRef<ElementRef<"dialog">>(null);
 
@@ -57,7 +58,10 @@ export default function FullScreenCarouselSimple() {
       if (!isFullScreen) return;
 
       // Only handle Escape if there's no modal dialog open
-      if (e.key === "Escape" && !document.querySelector('dialog[data-dialog-type="modal"][open]')) {
+      if (
+        e.key === "Escape" &&
+        !document.querySelector('dialog[data-dialog-type="modal"][open]')
+      ) {
         closeFullScreen();
       }
       if (e.key === "ArrowRight") {
@@ -89,11 +93,21 @@ export default function FullScreenCarouselSimple() {
       return <ImageSlide image={slide.image} />;
     }
 
-    if ("video" in slide && (slide.video?.asset as unknown as MuxVideoAssetOwn)?.playbackId) {
-      const aspectRatio = (slide.video?.asset as unknown as MuxVideoAssetOwn).aspectRatio?.replace(":", "/");
+    if (
+      "video" in slide &&
+      (slide.video?.asset as unknown as MuxVideoAssetOwn)?.playbackId
+    ) {
+      const aspectRatio = (
+        slide.video?.asset as unknown as MuxVideoAssetOwn
+      ).aspectRatio?.replace(":", "/");
       return (
-        <div className="relative max-h-[80vh] w-full overflow-hidden" style={{ aspectRatio: aspectRatio }}>
-          <MuxPlayerWrapper video={slide.video?.asset as unknown as MuxVideoAssetOwn} />
+        <div
+          className="relative max-h-[80vh] w-full overflow-hidden"
+          style={{ aspectRatio: aspectRatio }}
+        >
+          <MuxPlayerWrapper
+            video={slide.video?.asset as unknown as MuxVideoAssetOwn}
+          />
         </div>
       );
     }
@@ -135,7 +149,10 @@ export default function FullScreenCarouselSimple() {
               }}
             >
               {allSlides.map((slide) => (
-                <div key={slide._key} className="h-full w-full flex-shrink-0 p-4">
+                <div
+                  key={slide._key}
+                  className="h-full w-full flex-shrink-0 p-4"
+                >
                   {renderSlide(slide)}
                 </div>
               ))}
@@ -147,7 +164,11 @@ export default function FullScreenCarouselSimple() {
               {allSlides[currentSlide]?.caption ? (
                 <PortableTextRenderer value={allSlides[currentSlide].caption} />
               ) : (
-                allSlides[currentSlide]?.defaultCaption && <p className="text-small [ md:text-small-md">{allSlides[currentSlide].defaultCaption}</p>
+                allSlides[currentSlide]?.defaultCaption && (
+                  <p className="text-small [ md:text-small-md">
+                    {allSlides[currentSlide].defaultCaption}
+                  </p>
+                )
               )}
             </div>
             <div className=" flex justify-center gap-3 md:justify-start">
@@ -163,7 +184,11 @@ export default function FullScreenCarouselSimple() {
 
 const PrevButton = ({ onClick }: { onClick: () => void }) => {
   return (
-    <button className="" type="button" onClick={onClick}>
+    <button
+      className="stroke-black hover:stroke-[5px]"
+      type="button"
+      onClick={onClick}
+    >
       <ArrowLeft width={16} height={16} />
     </button>
   );
@@ -171,7 +196,11 @@ const PrevButton = ({ onClick }: { onClick: () => void }) => {
 
 function NextButton({ onClick }: { onClick: () => void }) {
   return (
-    <button className="" type="button" onClick={onClick}>
+    <button
+      className="stroke-black hover:stroke-[5px]"
+      type="button"
+      onClick={onClick}
+    >
       <ArrowRight width={16} height={16} />
     </button>
   );
