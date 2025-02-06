@@ -208,14 +208,14 @@ export function CarouselNavigation({
           <button
             type="button"
             onClick={onPrev}
-            className="-translate-y-1/2 absolute top-1/2 left-4 rounded-full bg-white/50 p-2"
+            className="-translate-y-1/2 absolute z-[50] top-1/2 left-4 rounded-full bg-white/50 p-2"
           >
             Prev
           </button>
           <button
             type="button"
             onClick={onNext}
-            className="-translate-y-1/2 absolute top-1/2 right-4 rounded-full bg-white/50 p-2"
+            className="-translate-y-1/2 absolute z-[50] top-1/2 right-4 rounded-full bg-white/50 p-2"
           >
             Next
           </button>

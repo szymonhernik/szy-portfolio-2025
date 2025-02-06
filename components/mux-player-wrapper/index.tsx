@@ -15,8 +15,6 @@ export default function MuxPlayerWrapper({
   const [isInView, setIsInView] = useState(false);
   const playerRef = useRef(null);
 
-  // console.log("audio", allowAudio);
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -50,6 +48,7 @@ export default function MuxPlayerWrapper({
     <>
       <template
         id="media-theme-custom"
+        key={video.playbackId}
         // biome-ignore lint/security/noDangerouslySetInnerHtml: i want it
         dangerouslySetInnerHTML={{
           __html: `
@@ -73,9 +72,12 @@ export default function MuxPlayerWrapper({
                 align-items: center;
                 padding: 5px;
               }
+                 .hide-audio media-mute-button {
+                display: none;
+              }
             </style>
 
-            <media-controller>
+            <media-controller >
               <slot name="media" slot="media"></slot>
               
               <media-control-bar>
@@ -99,9 +101,7 @@ export default function MuxPlayerWrapper({
                       </g>
                     </svg>
                   </media-play-button>
-                  ${
-                    !allowAudio
-                      ? `
+                 
                   <media-mute-button>
                     <svg slot="high" xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
                       <g id="Group_204" data-name="Group_204" transform="translate(-10505 2914)">
@@ -125,9 +125,7 @@ export default function MuxPlayerWrapper({
                       </g>
                     </svg>
                   </media-mute-button>
-                  `
-                      : ""
-                  }
+                 
                 </div>
               </media-control-bar>
             </media-controller>
@@ -136,7 +134,7 @@ export default function MuxPlayerWrapper({
       />
       <MuxPlayer
         ref={playerRef}
-        className={`h-full w-auto object-contain ${styles.muxPlayer}`}
+        className={`h-full w-auto object-contain ${styles.muxPlayer} ${!allowAudio ? styles.hideAudio : ""}`}
         playbackId={video.playbackId}
         muted
         autoPlay={isInView}

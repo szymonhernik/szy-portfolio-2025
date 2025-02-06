@@ -39,3 +39,7 @@
   --media-control-hover-color: white;
   --media-tooltip-display: none;
 }
+
+.hideAudio {
+  --mute-button: none;
+}
