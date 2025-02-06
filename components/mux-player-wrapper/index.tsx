@@ -1,6 +1,7 @@
 import type { MuxVideoAssetOwn } from "@/types/mux";
 
 import MuxPlayer from "@mux/mux-player-react";
+import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 
 import styles from "./styles.module.css";
@@ -136,7 +137,7 @@ export default function MuxPlayerWrapper({
       />
       <MuxPlayer
         ref={playerRef}
-        className={`h-full w-auto object-contain ${styles.muxPlayer}${!allowAudio ? styles.hideAudio : ""}${controlsOff ? styles.controlsOff : ""}`}
+        className={clsx("h-full w-auto object-contain", styles.muxPlayer, !allowAudio && styles.hideAudio, controlsOff && styles.controlsOff)}
         playbackId={video.playbackId}
         muted
         autoPlay={isInView}
