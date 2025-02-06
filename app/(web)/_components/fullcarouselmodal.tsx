@@ -20,7 +20,8 @@ import {
 import { createPortal } from "react-dom";
 
 export function FullCarouselModal() {
-  const { allSlides, currentSlideIndex, closeFullScreen } = useCarousel();
+  const { allSlides, currentSlideIndex, isFullScreen, closeFullScreen } =
+    useCarousel();
 
   // dialog ref to control the dialog open state
   const dialogRef = useRef<ElementRef<"dialog">>(null);
@@ -29,7 +30,11 @@ export function FullCarouselModal() {
   const [mounted, setMounted] = useState(false);
 
   const [currentSlide, setCurrentSlide] = useState(currentSlideIndex || 0);
-
+  useEffect(() => {
+    if (isFullScreen) {
+      setCurrentSlide(currentSlideIndex || 0);
+    }
+  }, [isFullScreen, currentSlideIndex]);
   // Memoize navigation handlers
   const handleNext = useCallback(() => {
     setCurrentSlide((prev) => (prev === allSlides.length - 1 ? 0 : prev + 1));

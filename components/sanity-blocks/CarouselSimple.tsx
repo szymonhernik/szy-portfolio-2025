@@ -109,43 +109,45 @@ export default function CarouselSimple({
     }
   };
   return (
-    <div
-      className="relative my-4 mr-auto w-full max-w-3xl overflow-hidden"
-      style={{
-        cursor:
+    <>
+      <div
+        className="relative mt-4 mr-auto w-full max-w-3xl overflow-hidden"
+        style={{
+          cursor:
+            slides.length === 1
+              ? "default"
+              : cursor === "left"
+                ? "w-resize"
+                : cursor === "right"
+                  ? "e-resize"
+                  : "default",
+        }}
+        onMouseMove={slides.length === 1 ? undefined : handleMouseMove}
+        onMouseLeave={slides.length === 1 ? undefined : handleMouseLeave}
+        onClick={
           slides.length === 1
-            ? "default"
-            : cursor === "left"
-              ? "w-resize"
-              : cursor === "right"
-                ? "e-resize"
-                : "default",
-      }}
-      onMouseMove={slides.length === 1 ? undefined : handleMouseMove}
-      onMouseLeave={slides.length === 1 ? undefined : handleMouseLeave}
-      onClick={
-        slides.length === 1
-          ? undefined
-          : () => {
-              cursor === "left" ? prevSlide() : nextSlide();
-            }
-      }
-      onKeyDown={(e) => {
-        return;
-      }}
-    >
-      <CarouselSlides
-        slides={slides}
-        currentSlide={currentSlide}
-        slidingTransition={slidingTransition}
-      />
+            ? undefined
+            : () => {
+                cursor === "left" ? prevSlide() : nextSlide();
+              }
+        }
+        onKeyDown={(e) => {
+          return;
+        }}
+      >
+        <CarouselSlides
+          slides={slides}
+          currentSlide={currentSlide}
+          slidingTransition={slidingTransition}
+        />
 
-      {/* <CarouselNavigation
+        {/* <CarouselNavigation
         onPrev={prevSlide}
         onNext={nextSlide}
         slides={slides}
       /> */}
-      <div className="mt-[0.65rem] flex justify-between">
+      </div>
+      <div className="mt-[0.65rem] mb-4 flex justify-between">
         <button
           className="text-secondary text-small hover:font-outline-1-secondary md:text-small-md"
           type="button"
@@ -160,7 +162,7 @@ export default function CarouselSimple({
           totalSlides={slides.length}
         />
       </div>
-    </div>
+    </>
   );
 }
 interface CarouselSlidesProps {
