@@ -96,7 +96,7 @@ export default function TagsSearchPage({
   };
 
   return (
-    <section>
+    <section className="">
       <div className="mb-X grid grid-cols-12 gap-8 overflow-x-hidden ">
         <div className="col-span-12 flex flex-col items-start justify-start gap-4 md:col-span-11 ">
           <button className="text-link hover:font-outline-1-secondary" type="button" onClick={() => randomiseFilters()}>

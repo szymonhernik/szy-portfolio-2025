@@ -23,7 +23,7 @@ export async function generateMetadata(props: Props, parent: ResolvingMetadata):
   const ogImage = project?.mainImage ? urlForOpenGraphImage(project.mainImage as Image) : undefined;
 
   return {
-    title: `${project?.title} | Szymon Eda Hernik`,
+    title: `Szymon Eda Hernik | ${project?.title}`,
     description: project?.seoOverview,
     openGraph: ogImage
       ? {

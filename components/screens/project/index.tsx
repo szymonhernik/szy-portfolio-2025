@@ -1,10 +1,11 @@
 import type { SingleProjectQueryResult } from "@/sanity.types";
 import type { CarouselBlock } from "@/types/blocks";
 
+import { FullCarouselModal } from "@/app/(web)/_components/fullcarouselmodal";
 import Blocks from "@/components/blocks";
+import { Footer } from "@/components/footer";
 import * as FadeIn from "@/components/motion/staggers/fade";
 import PortableTextRenderer from "@/components/portable-text-renderer";
-import FullScreenCarouselSimple from "@/components/sanity-blocks/FullScreenCarouselSimple";
 import TagLink from "@/components/tag-link";
 import { CarouselProvider } from "@/contexts/CarouselContext";
 
@@ -105,10 +106,12 @@ export default function ProjectPage({
               {/* <p className="text-[16px] text-secondary">Web Design, Full-Stack Development, Wordpress, Editorial Design, Graphic Design</p> */}
             </div>
           </article>
+          <Footer />
         </FadeIn.Item>
       </FadeIn.Container>
 
-      <FullScreenCarouselSimple />
+      {/* <FullScreenCarouselSimple /> */}
+      <FullCarouselModal />
     </CarouselProvider>
   );
 }

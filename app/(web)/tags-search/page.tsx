@@ -27,8 +27,10 @@ export default async function Page() {
     <FadeIn.Container>
       <FadeIn.Item>
         <Suspense fallback={<div>🌱</div>}>
-          <TagsSearchPage data={data} />
-          <Footer />
+          <div className="flex min-h-[calc(100dvh-2rem)] flex-col justify-between">
+            <TagsSearchPage data={data} />
+            <Footer />
+          </div>
         </Suspense>
       </FadeIn.Item>
     </FadeIn.Container>

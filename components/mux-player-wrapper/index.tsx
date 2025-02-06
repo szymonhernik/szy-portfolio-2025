@@ -8,9 +8,11 @@ import styles from "./styles.module.css";
 export default function MuxPlayerWrapper({
   video,
   allowAudio,
+  controlsOff,
 }: {
   video: MuxVideoAssetOwn;
   allowAudio: boolean | null;
+  controlsOff?: boolean;
 }) {
   const [isInView, setIsInView] = useState(false);
   const playerRef = useRef(null);
@@ -134,7 +136,7 @@ export default function MuxPlayerWrapper({
       />
       <MuxPlayer
         ref={playerRef}
-        className={`h-full w-auto object-contain ${styles.muxPlayer}${!allowAudio ? styles.hideAudio : ""}`}
+        className={`h-full w-auto object-contain ${styles.muxPlayer}${!allowAudio ? styles.hideAudio : ""}${controlsOff ? styles.controlsOff : ""}`}
         playbackId={video.playbackId}
         muted
         autoPlay={isInView}

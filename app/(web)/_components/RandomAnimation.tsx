@@ -30,7 +30,7 @@ export default function RandomAnimation({
   };
 
   return (
-    <div className="fixed z-[0] " style={randomPosition}>
+    <div className="absolute z-[0] " style={randomPosition}>
       <video src={randomVideo.url} autoPlay muted controls={false} className=" max-h-[30vh] max-w-[20vw]" />
     </div>
   );

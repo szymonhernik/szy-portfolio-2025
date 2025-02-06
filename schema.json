@@ -896,6 +896,13 @@
                       },
                       "optional": true
                     },
+                    "fillContainer": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "boolean"
+                      },
+                      "optional": true
+                    },
                     "hideInProjectPageCarousel": {
                       "type": "objectAttribute",
                       "value": {

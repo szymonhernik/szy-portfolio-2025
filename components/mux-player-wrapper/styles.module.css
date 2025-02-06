@@ -43,3 +43,7 @@
 .hideAudio {
   --mute-button: none;
 }
+
+.controlsOff {
+  --controls: none;
+}

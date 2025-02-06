@@ -113,17 +113,19 @@ export default function FullScreenCarouselSimple() {
   };
 
   return (
-    <FocusLock returnFocus>
-      <dialog
-        open={isFullScreen}
-        ref={dialogRef}
-        data-dialog-type="carousel"
-        className="fixed inset-0 z-[300] h-screen w-screen overflow-y-auto overscroll-y-contain bg-background"
-      >
+    <dialog
+      open={isFullScreen}
+      ref={dialogRef}
+      aria-modal="true"
+      data-dialog-type="carousel"
+      className="fixed inset-0 z-[300] h-screen w-screen overflow-y-auto overscroll-y-contain bg-background"
+    >
+      <FocusLock>
         <div className="relative h-full w-full bg-background">
           <button
             type="button"
             onClick={closeFullScreen}
+            aria-label="Close fullscreen carousel"
             className="fixed top-0 right-0 z-[310] p-4 text-fluid-xl hover:font-outline-1-black md:text-fluid-base"
           >
             X
@@ -144,7 +146,7 @@ export default function FullScreenCarouselSimple() {
             </div>
           </div>
 
-          <div className="fixed right-4 bottom-4 left-4 flex items-center justify-between gap-2">
+          <div className="fixed right-4 bottom-4 left-4 z-[410] flex items-center justify-between gap-2">
             <div className="text-small md:text-small-md [&>p]:mb-0">
               {allSlides[currentSlide]?.caption ? (
                 <PortableTextRenderer value={allSlides[currentSlide].caption} />
@@ -158,14 +160,14 @@ export default function FullScreenCarouselSimple() {
             </div>
           </div>
         </div>
-      </dialog>
-    </FocusLock>
+      </FocusLock>
+    </dialog>
   );
 }
 
 const PrevButton = ({ onClick }: { onClick: () => void }) => {
   return (
-    <button className="stroke-black hover:stroke-[5px]" type="button" onClick={onClick}>
+    <button className="stroke-black hover:stroke-[5px]" type="button" onClick={onClick} aria-label="Previous slide">
       <ArrowLeft width={16} height={16} />
     </button>
   );
@@ -173,7 +175,12 @@ const PrevButton = ({ onClick }: { onClick: () => void }) => {
 
 function NextButton({ onClick }: { onClick: () => void }) {
   return (
-    <button className="stroke-black hover:stroke-[5px]" type="button" onClick={onClick}>
+    <button
+      className="stroke-black hover:stroke-[5px] focus:outline-none focus:ring-2 focus:ring-black"
+      type="button"
+      onClick={onClick}
+      aria-label="Next slide"
+    >
       <ArrowRight width={16} height={16} />
     </button>
   );

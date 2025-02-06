@@ -15,7 +15,16 @@ export default function ImageInProjectPage({ image }: ImageInProjectPageBlock) {
 
   return (
     <div style={{ aspectRatio: getAspectRatio(image) }} className={"relative h-auto w-full"}>
-      <Image src={image.asset.url} alt={image.alt || ""} fill className="h-full w-full" />
+      <Image
+        src={image.asset.url}
+        alt={image.alt || ""}
+        width={image.asset.metadata?.dimensions?.width ?? 4}
+        height={image.asset.metadata?.dimensions?.height ?? 3}
+        className="h-full w-full"
+        placeholder="blur"
+        blurDataURL={image.asset.metadata?.lqip || ""}
+        sizes="(max-width: 768px) 100vw, 50vw"
+      />
     </div>
   );
 }

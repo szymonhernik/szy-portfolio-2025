@@ -31,6 +31,7 @@ export default function RootLayout({
         <Providers>
           {modal}
           <div id="modal-root" />
+          <div id="full-screen-carousel-root" />
           <main className="px-4 py-4">
             <NavigationMobile />
             <NavigationDesktop />
