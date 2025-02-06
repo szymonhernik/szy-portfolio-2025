@@ -10,6 +10,7 @@ export const carouselFragment = `
       _key,
       caption,
       hideInProjectPageCarousel,
+      fillContainer,
       image {
         _type,
         alt,

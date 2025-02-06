@@ -58,11 +58,22 @@ export const carousel = defineType({
                 },
               ],
             },
+            // boolean whether the image should just fill the container
+            {
+              name: "fillContainer",
+              type: "boolean",
+              title: "Fill Container",
+              description:
+                "If true, the image will fill the container and not be constrained by the aspect ratio (use for decorative images)",
+              initialValue: false,
+            },
             // boolean whether to display it in project page carousel or not
             {
               name: "hideInProjectPageCarousel",
               type: "boolean",
               title: "Hide in Project Page Carousel",
+              description:
+                "If true, the image will not be displayed in the project page carousel (only full screen carousel)",
               initialValue: false,
             },
             {
