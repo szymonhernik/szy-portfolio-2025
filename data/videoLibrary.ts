@@ -36,7 +36,7 @@ export const videoLibrary = [
   },
   {
     id: 8,
-    url: "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3hhbsQVYM40GSK3yd5PDWbqMU8mYHlngivV9Ej",
+    url: "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3hBeBjPVm27HgCTMsxj3Xdn6WAewru0OaiZRI8",
     size: "lightweight",
   },
   {
