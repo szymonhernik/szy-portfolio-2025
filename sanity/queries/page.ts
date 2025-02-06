@@ -1,6 +1,7 @@
 import { groq } from "next-sanity";
 
 import { carouselFragment } from "./carousel";
+import { imageInProjectPageFragment } from "./image-in-project-page";
 import { sectionContentFragment } from "./section-content";
 import { sectionHeaderFragment } from "./section-header";
 
@@ -107,6 +108,9 @@ export const singleProjectQuery = groq`*[_type == "project" && slug.current == $
     _type == "carousel" => {
       ${carouselFragment}
     },
+    _type == "image-in-project-page" => {
+      ${imageInProjectPageFragment}
+    },
   },
   hasSubprojects,
   subprojects[]->{
@@ -128,6 +132,9 @@ export const singleProjectQuery = groq`*[_type == "project" && slug.current == $
       _type == "carousel" => {
         ${carouselFragment}
       },
+      _type == "image-in-project-page" => {
+      ${imageInProjectPageFragment}
+    },
     }
   }
   

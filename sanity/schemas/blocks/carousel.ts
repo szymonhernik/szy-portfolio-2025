@@ -58,6 +58,13 @@ export const carousel = defineType({
                 },
               ],
             },
+            // boolean whether to display it in project page carousel or not
+            {
+              name: "hideInProjectPageCarousel",
+              type: "boolean",
+              title: "Hide in Project Page Carousel",
+              initialValue: false,
+            },
             {
               name: "mobileImage",
               type: "image",

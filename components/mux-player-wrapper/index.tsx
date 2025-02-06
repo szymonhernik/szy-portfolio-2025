@@ -134,7 +134,7 @@ export default function MuxPlayerWrapper({
       />
       <MuxPlayer
         ref={playerRef}
-        className={`h-full w-auto object-contain ${styles.muxPlayer} ${!allowAudio ? styles.hideAudio : ""}`}
+        className={`h-full w-auto object-contain ${styles.muxPlayer}${!allowAudio ? styles.hideAudio : ""}`}
         playbackId={video.playbackId}
         muted
         autoPlay={isInView}

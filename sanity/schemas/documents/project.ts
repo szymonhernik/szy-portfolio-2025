@@ -87,6 +87,7 @@ export const project = defineType({
         { type: "section-header" },
         { type: "carousel" },
         { type: "section-content" },
+        { type: "image-in-project-page" },
       ],
     }),
   ],

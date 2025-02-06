@@ -45,8 +45,8 @@ export default function HomeGrid({
                   />
                 </div>
                 <div className="">
-                  <h3 className="">{project.title}</h3>
-                  {project.subtitle && <p className="mt-0 text-secondary">{project.subtitle}</p>}
+                  <h3 className="group-hover:font-outline-1-black">{project.title}</h3>
+                  {project.subtitle && <p className="mt-0 text-secondary ">{project.subtitle}</p>}
                 </div>
               </div>
             </Link>

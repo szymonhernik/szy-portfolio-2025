@@ -1,6 +1,7 @@
 import type { SchemaTypeDefinition } from "sanity";
 
 import { carousel } from "./blocks/carousel";
+import { imageInProjectPage } from "./blocks/image-in-project-page";
 import { sectionContent } from "./blocks/section-content";
 import { sectionHeader } from "./blocks/section-header";
 import { blockContent } from "./blocks/shared/blockContent";
@@ -23,5 +24,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     carousel,
     sectionContent,
     settings,
+    imageInProjectPage,
   ],
 };
