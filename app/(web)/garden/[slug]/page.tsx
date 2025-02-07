@@ -20,7 +20,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const slug = params.slug;
   const gardenItem: SingleGardenItemQueryResult = await sanityFetch({
     query: singleGardenItemQuery,
-    tags: [`gardenItem:${params.slug}`],
+    tags: [`gardenItem`],
     qParams: { slug }, // add slug from next-js params
   });
 

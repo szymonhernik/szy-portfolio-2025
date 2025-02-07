@@ -13,14 +13,19 @@ import { notFound } from "next/navigation";
 type Props = {
   params: Promise<{ slug: string }>;
 };
-export async function generateMetadata(props: Props, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata(
+  props: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
   const params = await props.params;
   const project: SingleProjectQueryResult = await sanityFetch({
     query: singleProjectQuery,
-    tags: [`project:${params.slug}`],
+    tags: [`project`],
     qParams: { slug: params.slug }, // add slug from next-js params
   });
-  const ogImage = project?.mainImage ? urlForOpenGraphImage(project.mainImage as Image) : undefined;
+  const ogImage = project?.mainImage
+    ? urlForOpenGraphImage(project.mainImage as Image)
+    : undefined;
 
   return {
     title: `Szymon Eda Hernik | ${project?.title}`,
@@ -40,7 +45,7 @@ export function generateStaticParams() {
 export default async function Page({ params }: { params: { slug: string } }) {
   const project: SingleProjectQueryResult = await sanityFetch({
     query: singleProjectQuery,
-    tags: [`project:${params.slug}`],
+    tags: ["project", "subproject"],
     qParams: { slug: params.slug }, // add slug from next-js params
   });
 
