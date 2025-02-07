@@ -5,21 +5,27 @@ import { videoLibrary } from "@/data/videoLibrary";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
+type Video = {
+  id: number;
+  url: string;
+  size: "lightweight" | "heavyweight";
+};
+
 export default function RandomAnimation({
   expectedPath,
 }: {
   expectedPath: string;
 }) {
   const pathname = usePathname();
-  const [randomVideo, setRandomVideo] = useState(videoLibrary[Math.floor(Math.random() * videoLibrary.length)]);
+  const [randomVideo, setRandomVideo] = useState<Video | null>(null);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: intentionally changing video on path change
   useEffect(() => {
-    setRandomVideo(videoLibrary[Math.floor(Math.random() * videoLibrary.length)]);
+    setRandomVideo(videoLibrary[Math.floor(Math.random() * videoLibrary.length)] as Video);
   }, [pathname]);
 
   // Don't render if paths don't match
-  if (pathname !== expectedPath) {
+  if (pathname !== expectedPath || !randomVideo) {
     return null;
   }
 
@@ -29,11 +35,13 @@ export default function RandomAnimation({
     left: `${Math.floor(Math.random() * 70)}vw`,
   };
 
-  const videoSize = randomVideo.size === "lightweight" ? "max-w-[20vw]" : "max-w-[10vw]";
+  const videoSize = randomVideo.size === "lightweight" ? "max-w-[240px] max-h-[240px]" : "max-w-[140px] max-h-[140px]";
+
+  console.log("randomVideo", randomVideo);
 
   return (
-    <div className="absolute z-[0] " style={randomPosition}>
-      <video src={randomVideo.url} autoPlay muted controls={false} className={`max-h-[30vh] ${videoSize}`} />
+    <div className="absolute z-[0] mix-blend-darken " style={randomPosition}>
+      <video src={randomVideo.url} playsInline autoPlay muted controls={false} className={`${videoSize}`} />
     </div>
   );
 }
