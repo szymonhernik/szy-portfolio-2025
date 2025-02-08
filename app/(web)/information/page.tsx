@@ -17,8 +17,10 @@ export default function Page() {
       <FadeIn.Container>
         <RandomAnimation expectedPath="/information" />
         <FadeIn.Item>
-          <Information />
-          <Footer />
+          <div className="flex min-h-[calc(100dvh-2rem)] flex-col justify-between">
+            <Information />
+            <Footer />
+          </div>
         </FadeIn.Item>
       </FadeIn.Container>
     </>
