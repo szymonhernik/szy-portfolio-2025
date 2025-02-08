@@ -1,9 +1,10 @@
 "use client";
 
+import clsx from "clsx";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const Footer = () => {
+export function Footer({ className }: { className?: string }) {
   const [time, setTime] = useState<string>("00:00");
 
   useEffect(() => {
@@ -29,7 +30,12 @@ const Footer = () => {
   }, []);
 
   return (
-    <div className="mt-X grid w-full grid-cols-1 sm:text-small md:grid-cols-3 md:gap-4 lg:text-small-md">
+    <div
+      className={clsx(
+        "mt-X grid w-full grid-cols-1 sm:text-small md:grid-cols-3 md:gap-4 lg:text-small-md",
+        className,
+      )}
+    >
       <div className="text-secondary">
         February 2025 ©{" "}
         <Link href="/" className="hover:font-outline-1-secondary">
@@ -37,13 +43,14 @@ const Footer = () => {
         </Link>
       </div>
       <div className="text-left md:text-center">
-        <Link href="mailto:hello@szymonhernik.com" className="text-secondary hover:font-outline-1-secondary">
+        <Link
+          href="mailto:hello@szymonhernik.com"
+          className="text-secondary hover:font-outline-1-secondary"
+        >
           hello@szymonhernik.com
         </Link>
       </div>
       <div className="text-left md:text-right">It's {time} in Brussels</div>
     </div>
   );
-};
-
-export { Footer };
+}
