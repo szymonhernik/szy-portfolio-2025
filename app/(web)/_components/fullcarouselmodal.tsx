@@ -46,7 +46,7 @@ export function FullCarouselModal() {
   const renderSlide = (slide: (typeof allSlides)[number], isVisible: boolean) => {
     if (!slide) return null;
     if ("image" in slide && slide.image?.asset?.url) {
-      return <ImageSlide image={slide.image} heightClass="h-auto lg:h-full" />;
+      return <ImageSlide image={slide.image} heightClass="h-auto lg:h-full" sizes="(max-width: 768px) 100vw, 70vw" />;
     }
 
     if ("video" in slide && (slide.video?.asset as unknown as MuxVideoAssetOwn)?.playbackId) {

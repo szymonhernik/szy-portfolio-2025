@@ -12,19 +12,31 @@ import { useState } from "react";
 
 import MuxPlayerWrapper from "../mux-player-wrapper";
 
-type CarouselBlock = Extract<NonNullable<NonNullable<SingleProjectQueryResult>["blocks"]>[number], { _type: "carousel" }> & {
+type CarouselBlock = Extract<
+  NonNullable<NonNullable<SingleProjectQueryResult>["blocks"]>[number],
+  { _type: "carousel" }
+> & {
   defaultCaption?: string;
   slideTransition?: boolean;
 };
 
-export default function CarouselSimple({ items, slideTransition = false }: CarouselBlock) {
+export default function CarouselSimple({
+  items,
+  slideTransition = false,
+}: CarouselBlock) {
   const [slidingTransition, setSlidingTransition] = useState(slideTransition);
   const { openFullScreen, allSlides } = useCarousel();
   const [currentSlide, setCurrentSlide] = useState(0);
   if (!items) return null;
 
   // Remove console.log and update the filtering logic
-  const slides = items.filter((slide) => !("hideInProjectPageCarousel" in slide && slide.hideInProjectPageCarousel === true) && !("content" in slide));
+  const slides = items.filter(
+    (slide) =>
+      !(
+        "hideInProjectPageCarousel" in slide &&
+        slide.hideInProjectPageCarousel === true
+      ) && !("content" in slide),
+  );
 
   const nextSlide = () => {
     if (!slideTransition) {
@@ -66,7 +78,9 @@ export default function CarouselSimple({ items, slideTransition = false }: Carou
     const currentSlideKey = slides[localIndex]._key;
 
     // Find the index in allSlides based on the current slide's key
-    const globalIndex = allSlides.findIndex((slide) => slide._key === currentSlideKey);
+    const globalIndex = allSlides.findIndex(
+      (slide) => slide._key === currentSlideKey,
+    );
 
     return globalIndex;
   };
@@ -99,7 +113,14 @@ export default function CarouselSimple({ items, slideTransition = false }: Carou
       <div
         className="relative mt-4 mr-auto w-full max-w-3xl overflow-hidden"
         style={{
-          cursor: slides.length === 1 ? "default" : cursor === "left" ? "w-resize" : cursor === "right" ? "e-resize" : "default",
+          cursor:
+            slides.length === 1
+              ? "default"
+              : cursor === "left"
+                ? "w-resize"
+                : cursor === "right"
+                  ? "e-resize"
+                  : "default",
         }}
         onMouseMove={slides.length === 1 ? undefined : handleMouseMove}
         onMouseLeave={slides.length === 1 ? undefined : handleMouseLeave}
@@ -114,7 +135,11 @@ export default function CarouselSimple({ items, slideTransition = false }: Carou
           return;
         }}
       >
-        <CarouselSlides slides={slides} currentSlide={currentSlide} slidingTransition={slidingTransition} />
+        <CarouselSlides
+          slides={slides}
+          currentSlide={currentSlide}
+          slidingTransition={slidingTransition}
+        />
 
         {/* <CarouselNavigation
         onPrev={prevSlide}
@@ -126,11 +151,16 @@ export default function CarouselSimple({ items, slideTransition = false }: Carou
         <button
           className="text-secondary text-small hover:font-outline-1-secondary md:text-small-md"
           type="button"
-          onClick={() => openFullScreen(allSlides, getGlobalIndex(currentSlide))}
+          onClick={() =>
+            openFullScreen(allSlides, getGlobalIndex(currentSlide))
+          }
         >
           Click to view full-screen
         </button>
-        <CarouselIndex currentSlide={currentSlide} totalSlides={slides.length} />
+        <CarouselIndex
+          currentSlide={currentSlide}
+          totalSlides={slides.length}
+        />
       </div>
     </>
   );
@@ -140,12 +170,19 @@ interface CarouselSlidesProps {
   currentSlide: number;
   slidingTransition: boolean;
 }
-export function CarouselSlides({ slides, currentSlide, slidingTransition }: CarouselSlidesProps) {
+export function CarouselSlides({
+  slides,
+  currentSlide,
+  slidingTransition,
+}: CarouselSlidesProps) {
   const getAspectRatio = () => {
     if (!slides?.[0]) return "3 / 2"; // default fallback
     const firstSlide = slides[0];
 
-    if ("image" in firstSlide && firstSlide.image?.asset?.metadata?.dimensions) {
+    if (
+      "image" in firstSlide &&
+      firstSlide.image?.asset?.metadata?.dimensions
+    ) {
       const { width, height } = firstSlide.image.asset.metadata.dimensions;
       return `${width} / ${height}`;
     }
@@ -168,7 +205,11 @@ export function CarouselSlides({ slides, currentSlide, slidingTransition }: Caro
   if (slides.length === 1) {
     return (
       <div style={{ aspectRatio: getAspectRatio() }}>
-        <Slide key={slides[0]._key} slide={slides[0]} carouselAspectRatio={getAspectRatio()} />
+        <Slide
+          key={slides[0]._key}
+          slide={slides[0]}
+          carouselAspectRatio={getAspectRatio()}
+        />
       </div>
     );
   }
@@ -188,14 +229,23 @@ export function CarouselSlides({ slides, currentSlide, slidingTransition }: Caro
 
   return (
     <div
-      className={clsx("flex", slidingTransition && "transition-transform duration-300 ease-out")}
+      className={clsx(
+        "flex",
+        slidingTransition && "transition-transform duration-300 ease-out",
+      )}
       style={{
         transform: `translateX(${getTransformValue()})`,
         aspectRatio: getAspectRatio(),
       }}
     >
       {extendedSlides.map((slide, index) => {
-        return <Slide key={`${slide._key}-${index}`} slide={slide} carouselAspectRatio={getAspectRatio()} />;
+        return (
+          <Slide
+            key={`${slide._key}-${index}`}
+            slide={slide}
+            carouselAspectRatio={getAspectRatio()}
+          />
+        );
       })}
     </div>
   );
@@ -206,10 +256,15 @@ interface CarouselIndexProps {
   totalSlides: number;
 }
 
-export function CarouselIndex({ currentSlide, totalSlides }: CarouselIndexProps) {
+export function CarouselIndex({
+  currentSlide,
+  totalSlides,
+}: CarouselIndexProps) {
   return (
     <div className="text-small md:text-small-md">
-      {currentSlide + 1}–{totalSlides}
+      {currentSlide + 1}
+      {` / `}
+      {totalSlides}
     </div>
   );
 }
@@ -220,12 +275,20 @@ interface SlideProps {
 }
 
 type CarouselItems = NonNullable<CarouselBlock["items"]>;
-type CarouselImage = Extract<CarouselItems[number], { _type: "imageSlide" }>["image"];
+type CarouselImage = Extract<
+  CarouselItems[number],
+  { _type: "imageSlide" }
+>["image"];
 
-type CarouselVideo = Extract<CarouselItems[number], { _type: "videoSlide" }>["video"];
+type CarouselVideo = Extract<
+  CarouselItems[number],
+  { _type: "videoSlide" }
+>["video"];
 
 const getImageAspectRatio = (image: CarouselImage) => {
-  return image?.asset?.metadata?.dimensions?.aspectRatio ? decimalToRatio(image.asset.metadata.dimensions.aspectRatio) : "16/9";
+  return image?.asset?.metadata?.dimensions?.aspectRatio
+    ? decimalToRatio(image.asset.metadata.dimensions.aspectRatio)
+    : "16/9";
 };
 
 export const ImageSlide = ({
@@ -233,11 +296,13 @@ export const ImageSlide = ({
   carouselAspectRatio,
   fillContainer,
   heightClass,
+  sizes,
 }: {
   image: CarouselImage;
   carouselAspectRatio?: string;
   fillContainer?: boolean;
   heightClass?: string;
+  sizes?: string;
 }) => {
   if (!image?.asset || !image.asset.url) return null;
 
@@ -252,7 +317,10 @@ export const ImageSlide = ({
       style={{ aspectRatio: carouselAspectRatio }}
     >
       <div
-        className={clsx("relative h-auto", fillContainer ? "w-full" : "max-w-full")}
+        className={clsx(
+          "relative h-auto",
+          fillContainer ? "w-full" : "max-w-full",
+        )}
         style={{
           aspectRatio: imageAspectRatio,
           maxHeight: "100%",
@@ -267,7 +335,7 @@ export const ImageSlide = ({
           height={image.asset.metadata?.dimensions?.height || 300}
           placeholder="blur"
           blurDataURL={image.asset.metadata?.lqip || ""}
-          sizes="(max-width: 768px) 100vw, 50vw"
+          sizes={sizes || "(max-width: 768px) 100vw, 50vw"}
         />
       </div>
     </div>
@@ -286,7 +354,11 @@ const VideoSlide = ({
   if (!video?.asset) return null;
   return (
     <div className="relative h-full w-full shrink-0">
-      <MuxPlayerWrapper controlsOff={true} allowAudio={allowAudio} video={video?.asset as unknown as MuxVideoAssetOwn} />
+      <MuxPlayerWrapper
+        controlsOff={true}
+        allowAudio={allowAudio}
+        video={video?.asset as unknown as MuxVideoAssetOwn}
+      />
     </div>
   );
 };
@@ -297,12 +369,24 @@ export function Slide({ slide, carouselAspectRatio }: SlideProps) {
   if ("image" in slide) {
     if (!slide.image) return null;
     const fillContainer = slide.fillContainer ?? false;
-    return <ImageSlide image={slide.image} carouselAspectRatio={carouselAspectRatio} fillContainer={fillContainer} />;
+    return (
+      <ImageSlide
+        image={slide.image}
+        carouselAspectRatio={carouselAspectRatio}
+        fillContainer={fillContainer}
+      />
+    );
   }
 
   if ("video" in slide) {
     if (!slide.video) return null;
-    return <VideoSlide video={slide.video} carouselAspectRatio={carouselAspectRatio} allowAudio={slide.allowAudio ?? false} />;
+    return (
+      <VideoSlide
+        video={slide.video}
+        carouselAspectRatio={carouselAspectRatio}
+        allowAudio={slide.allowAudio ?? false}
+      />
+    );
   }
 
   if ("content" in slide && slide.content) {
