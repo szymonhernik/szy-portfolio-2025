@@ -21,7 +21,9 @@ export default function RandomAnimation({
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: intentionally changing video on path change
   useEffect(() => {
-    setRandomVideo(videoLibrary[Math.floor(Math.random() * videoLibrary.length)] as Video);
+    setRandomVideo(
+      videoLibrary[Math.floor(Math.random() * videoLibrary.length)] as Video,
+    );
   }, [pathname]);
 
   // Don't render if paths don't match
@@ -35,13 +37,23 @@ export default function RandomAnimation({
     left: `${Math.floor(Math.random() * 70)}vw`,
   };
 
-  const videoSize = randomVideo.size === "lightweight" ? "max-w-[240px] max-h-[240px]" : "max-w-[140px] max-h-[140px]";
+  const videoSize =
+    randomVideo.size === "lightweight"
+      ? "max-w-[240px] max-h-[240px]"
+      : "max-w-[140px] max-h-[140px]";
 
   console.log("randomVideo", randomVideo);
 
   return (
     <div className="absolute z-[0] mix-blend-darken " style={randomPosition}>
-      <video src={randomVideo.url} playsInline autoPlay muted controls={false} className={`${videoSize}`} />
+      <video
+        src={randomVideo.url}
+        playsInline
+        autoPlay
+        muted
+        controls={false}
+        className={`${videoSize}`}
+      />
     </div>
   );
 }
