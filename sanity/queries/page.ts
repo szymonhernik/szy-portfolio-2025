@@ -93,10 +93,17 @@ export const singleProjectQuery = groq`*[_type == "project" && slug.current == $
   title,
   seoOverview,
   body,
+  "slug": slug.current,
   mainImage,
   categories[]->{
     title,
     "slug": slug.current
+  },
+  "showcaseProjects": *[_type == "settings"][0].showcaseProjects[] {
+      ...@->{
+        title,
+        "slug": slug.current
+      }
   },
   blocks[]{
     _type == "section-content" => {
@@ -122,6 +129,7 @@ export const singleProjectQuery = groq`*[_type == "project" && slug.current == $
       "slug": slug.current
     },
     "slug": slug.current,
+    
     blocks[]{
       _type == "section-content" => {
       ${sectionContentFragment}
@@ -134,8 +142,8 @@ export const singleProjectQuery = groq`*[_type == "project" && slug.current == $
       },
       _type == "image-in-project-page" => {
       ${imageInProjectPageFragment}
+      },
     },
-    }
-  }
+  },
   
 }`;

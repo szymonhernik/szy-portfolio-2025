@@ -40,9 +40,12 @@ export function generateStaticParams() {
 export default async function Page({ params }: { params: { slug: string } }) {
   const project: SingleProjectQueryResult = await sanityFetch({
     query: singleProjectQuery,
-    tags: ["project", "subproject"],
+    tags: ["project", "subproject", "settings"],
     qParams: { slug: params.slug }, // add slug from next-js params
   });
+
+  // console.log("Next project: ", project?.nextProject);
+  // console.log("DEBUG DEBUG project: ", project?.debug);
 
   if (!project) {
     return notFound();

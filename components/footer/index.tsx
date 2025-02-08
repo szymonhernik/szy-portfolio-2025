@@ -30,12 +30,7 @@ export function Footer({ className }: { className?: string }) {
   }, []);
 
   return (
-    <div
-      className={clsx(
-        "mt-X grid w-full grid-cols-1 sm:text-small md:grid-cols-3 md:gap-4 lg:text-small-md",
-        className,
-      )}
-    >
+    <div className={clsx("mt-X grid w-full grid-cols-1 sm:text-small md:grid-cols-3 md:gap-4 lg:text-small-md", className)}>
       <div className="text-secondary">
         February 2025 ©{" "}
         <Link href="/" className="hover:font-outline-1-secondary">
@@ -43,10 +38,7 @@ export function Footer({ className }: { className?: string }) {
         </Link>
       </div>
       <div className="text-left md:text-center">
-        <Link
-          href="mailto:hello@szymonhernik.com"
-          className="text-secondary hover:font-outline-1-secondary"
-        >
+        <Link href="mailto:hello@szymonhernik.com" className="text-secondary hover:font-outline-1-secondary">
           hello@szymonhernik.com
         </Link>
       </div>
