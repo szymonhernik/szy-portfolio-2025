@@ -5,6 +5,35 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export function Footer({ className }: { className?: string }) {
+  return (
+    <div
+      className={clsx(
+        "mt-X grid w-full grid-cols-1 sm:text-small md:grid-cols-3 md:gap-4 lg:text-small-md",
+        className,
+      )}
+    >
+      <div className="text-secondary">
+        February 2025 ©{" "}
+        <Link href="/" className="hover:font-outline-1-secondary">
+          Szymon Hernik
+        </Link>
+      </div>
+      <div className="max-md:hidden text-left md:text-center">
+        <Link
+          href="mailto:hello@szymonhernik.com"
+          className="text-secondary hover:font-outline-1-secondary"
+        >
+          hello@szymonhernik.com
+        </Link>
+      </div>
+      <div className="max-md:hidden text-left md:text-right">
+        <TimeInBrussels />
+      </div>
+    </div>
+  );
+}
+
+export function TimeInBrussels() {
   const [time, setTime] = useState<string>("00:00");
 
   useEffect(() => {
@@ -29,20 +58,5 @@ export function Footer({ className }: { className?: string }) {
     return () => clearInterval(interval);
   }, []);
 
-  return (
-    <div className={clsx("mt-X grid w-full grid-cols-1 sm:text-small md:grid-cols-3 md:gap-4 lg:text-small-md", className)}>
-      <div className="text-secondary">
-        February 2025 ©{" "}
-        <Link href="/" className="hover:font-outline-1-secondary">
-          Szymon Hernik
-        </Link>
-      </div>
-      <div className="text-left md:text-center">
-        <Link href="mailto:hello@szymonhernik.com" className="text-secondary hover:font-outline-1-secondary">
-          hello@szymonhernik.com
-        </Link>
-      </div>
-      <div className="text-left md:text-right">It's {time} in Brussels</div>
-    </div>
-  );
+  return <>It's {time} in Brussels</>;
 }
