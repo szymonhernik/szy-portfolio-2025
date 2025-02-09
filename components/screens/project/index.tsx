@@ -48,7 +48,7 @@ export default function ProjectPage({
       for (const subproject of project.subprojects) {
         if (subproject.blocks) {
           for (const block of subproject.blocks) {
-            if (block._type === "carousel" && block.items) {
+            if ('_type' in block && block._type === "carousel" && block.items) {
               // Add caption to each slide from this carousel
               const slidesWithCaption = block.items.map((slide) => ({
                 ...slide,

@@ -71,6 +71,11 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type VideoInProjectPage = {
+  _type: "video-in-project-page";
+  video?: MuxVideo;
+};
+
 export type ImageInProjectPage = {
   _type: "image-in-project-page";
   image?: {
@@ -224,6 +229,7 @@ export type Carousel = {
     | {
         video?: MuxVideo;
         allowAudio?: boolean;
+        hideInProjectPageCarousel?: boolean;
         mobileVideo?: MuxVideo;
         caption?: Array<
           | {
@@ -437,10 +443,13 @@ export type Subproject = {
       } & Carousel)
     | ({
         _key: string;
+      } & SectionContent)
+    | ({
+        _key: string;
       } & ImageInProjectPage)
     | ({
         _key: string;
-      } & SectionContent)
+      } & VideoInProjectPage)
   >;
 };
 
@@ -534,6 +543,9 @@ export type Project = {
     | ({
         _key: string;
       } & ImageInProjectPage)
+    | ({
+        _key: string;
+      } & VideoInProjectPage)
   >;
 };
 
@@ -948,6 +960,7 @@ export type AllSanitySchemaTypes =
   | SanityImageDimensions
   | SanityFileAsset
   | Geopoint
+  | VideoInProjectPage
   | ImageInProjectPage
   | Settings
   | SectionContent
@@ -1234,7 +1247,7 @@ export type ProjectsAndSubprojectsQueryResult = Array<
     }
 >;
 // Variable: singleProjectQuery
-// Query: *[_type == "project" && slug.current == $slug][0] {  _id,  title,  seoOverview,  body,  "slug": slug.current,  mainImage,  categories[]->{    title,    "slug": slug.current  },  "showcaseProjects": *[_type == "settings"][0].showcaseProjects[] {      ...@->{        title,        "slug": slug.current      }  },  blocks[]{    _type == "section-content" => {        _type,  body,    },    _type == "section-header" => {        _type,  _key,  title,    },    _type == "carousel" => {        _type,  _key,  defaultCaption,  items[]{    _type == "imageSlide" => {      _type,      _key,      caption,      hideInProjectPageCarousel,      fillContainer,      image {        _type,        alt,        asset-> {          url,          metadata {            lqip,            dimensions {              width,              height,              aspectRatio            }          }        }      },          },    _type == "videoSlide" => {    _type,    _key,      caption,      video {        asset->{            playbackId,            "aspectRatio": data.aspect_ratio        }      },      allowAudio,    },    _type == "contentSlide" => {      _type,      _key,      caption,      content    },  }    },    _type == "image-in-project-page" => {        _type,  image {    _type,    alt,    asset-> {        url,        metadata {        lqip,        dimensions {            width,            height,            aspectRatio,        },      },    },  },    },  },  hasSubprojects,  subprojects[]->{    _id,    _key,    title,    categories[]->{      title,      "slug": slug.current    },    "slug": slug.current,        blocks[]{      _type == "section-content" => {        _type,  body,      },      _type == "section-header" => {          _type,  _key,  title,      },      _type == "carousel" => {          _type,  _key,  defaultCaption,  items[]{    _type == "imageSlide" => {      _type,      _key,      caption,      hideInProjectPageCarousel,      fillContainer,      image {        _type,        alt,        asset-> {          url,          metadata {            lqip,            dimensions {              width,              height,              aspectRatio            }          }        }      },          },    _type == "videoSlide" => {    _type,    _key,      caption,      video {        asset->{            playbackId,            "aspectRatio": data.aspect_ratio        }      },      allowAudio,    },    _type == "contentSlide" => {      _type,      _key,      caption,      content    },  }      },      _type == "image-in-project-page" => {        _type,  image {    _type,    alt,    asset-> {        url,        metadata {        lqip,        dimensions {            width,            height,            aspectRatio,        },      },    },  },      },    },  },  }
+// Query: *[_type == "project" && slug.current == $slug][0] {  _id,  title,  seoOverview,  body,  "slug": slug.current,  mainImage,  categories[]->{    title,    "slug": slug.current  },  "showcaseProjects": *[_type == "settings"][0].showcaseProjects[] {      ...@->{        title,        "slug": slug.current      }  },  blocks[]{    _type == "section-content" => {        _type,  body,    },    _type == "section-header" => {        _type,  _key,  title,    },    _type == "carousel" => {        _type,  _key,  defaultCaption,  items[]{    _type == "imageSlide" => {      _type,      _key,      caption,      hideInProjectPageCarousel,      fillContainer,      image {        _type,        alt,        asset-> {          url,          metadata {            lqip,            dimensions {              width,              height,              aspectRatio            }          }        }      },          },    _type == "videoSlide" => {      _type,      _key,      hideInProjectPageCarousel,        caption,      video {        asset->{            playbackId,            "aspectRatio": data.aspect_ratio        }      },      allowAudio,    },    _type == "contentSlide" => {      _type,      _key,      caption,      content    },  }    },    _type == "image-in-project-page" => {        _type,  image {    _type,    alt,    asset-> {        url,        metadata {        lqip,        dimensions {            width,            height,            aspectRatio,        },      },    },  },    },    _type == "video-in-project-page" => {          _type,    _key,    caption,    video {        asset->{            playbackId,            "aspectRatio": data.aspect_ratio        }    },    allowAudio,    },  },  hasSubprojects,  subprojects[]->{    _id,    _key,    title,    categories[]->{      title,      "slug": slug.current    },    "slug": slug.current,        blocks[]{      _type == "section-content" => {        _type,  body,      },      _type == "section-header" => {          _type,  _key,  title,      },      _type == "carousel" => {          _type,  _key,  defaultCaption,  items[]{    _type == "imageSlide" => {      _type,      _key,      caption,      hideInProjectPageCarousel,      fillContainer,      image {        _type,        alt,        asset-> {          url,          metadata {            lqip,            dimensions {              width,              height,              aspectRatio            }          }        }      },          },    _type == "videoSlide" => {      _type,      _key,      hideInProjectPageCarousel,        caption,      video {        asset->{            playbackId,            "aspectRatio": data.aspect_ratio        }      },      allowAudio,    },    _type == "contentSlide" => {      _type,      _key,      caption,      content    },  }      },      _type == "image-in-project-page" => {        _type,  image {    _type,    alt,    asset-> {        url,        metadata {        lqip,        dimensions {            width,            height,            aspectRatio,        },      },    },  },      },    },  },  }
 export type SingleProjectQueryResult = {
   _id: string;
   title: string | null;
@@ -1454,6 +1467,7 @@ export type SingleProjectQueryResult = {
           | {
               _type: "videoSlide";
               _key: string;
+              hideInProjectPageCarousel: boolean | null;
               caption: Array<
                 | {
                     children?: Array<{
@@ -1505,6 +1519,15 @@ export type SingleProjectQueryResult = {
         _type: "section-header";
         _key: string;
         title: string | null;
+      }
+    | {
+        _type: "video-in-project-page";
+        _key: string;
+        caption: null;
+        video: {
+          asset: null;
+        } | null;
+        allowAudio: null;
       }
     | {
         _type: "image-in-project-page";
@@ -1595,7 +1618,13 @@ export type SingleProjectQueryResult = {
                         _type: "span";
                         _key: string;
                       }>;
-                      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+                      style?:
+                        | "blockquote"
+                        | "h1"
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "normal";
                       listItem?: "bullet";
                       markDefs?: Array<
                         | {
@@ -1635,7 +1664,13 @@ export type SingleProjectQueryResult = {
                         _type: "span";
                         _key: string;
                       }>;
-                      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+                      style?:
+                        | "blockquote"
+                        | "h1"
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "normal";
                       listItem?: "bullet";
                       markDefs?: Array<
                         | {
@@ -1679,7 +1714,13 @@ export type SingleProjectQueryResult = {
                         _type: "span";
                         _key: string;
                       }>;
-                      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+                      style?:
+                        | "blockquote"
+                        | "h1"
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "normal";
                       listItem?: "bullet";
                       markDefs?: Array<
                         | {
@@ -1732,6 +1773,7 @@ export type SingleProjectQueryResult = {
             | {
                 _type: "videoSlide";
                 _key: string;
+                hideInProjectPageCarousel: boolean | null;
                 caption: Array<
                   | {
                       children?: Array<{
@@ -1740,7 +1782,13 @@ export type SingleProjectQueryResult = {
                         _type: "span";
                         _key: string;
                       }>;
-                      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+                      style?:
+                        | "blockquote"
+                        | "h1"
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "normal";
                       listItem?: "bullet";
                       markDefs?: Array<
                         | {
@@ -1845,6 +1893,7 @@ export type SingleProjectQueryResult = {
               }
           > | null;
         }
+      | {}
     > | null;
   }> | null;
 } | null;
@@ -1855,6 +1904,6 @@ declare module "@sanity/client" {
     '*[_type == "gardenItem"] {\n  _id,\n  title,\n  "slug": slug.current,\n}': GardenItemsQueryResult;
     '*[_type == "gardenItem" && slug.current == $slug][0] {\n  _id,\n  title,\n  "slug": slug.current,\n  gardenBlocks[]{\n    _type == "richTextAndImageWithCaption" => {\n      _type,\n      _key,\n      text,\n      image {\n        "image": asset->url,\n        "lqip": asset->metadata.lqip,\n        "aspectRatio": asset->metadata.dimensions.aspectRatio,\n        alt,\n      },\n      caption\n    },\n    _type == "imageWithCaption" => {\n      _type,\n      _key,\n      image {\n        "image": asset->url,\n        "lqip": asset->metadata.lqip,\n        "aspectRatio": asset->metadata.dimensions.aspectRatio,\n        alt,\n      },\n      caption\n    },\n    _type == "textGarden" => {\n      _key,\n      _type,\n      text\n    },\n  }\n}': SingleGardenItemQueryResult;
     '*[_type == "project" || _type == "subproject"] {\n  _id,\n  _type,\n  title,\n  subtitle,\n  "slug": slug.current,\n  categories[]->{\n    title,\n    "slug": slug.current\n  },\n  mainImage {\n    "image": asset->url,\n    "lqip": asset->metadata.lqip,\n    "aspectRatio": asset->metadata.dimensions.aspectRatio,\n    alt,\n  },\n  "parentSlug": select(\n    _type == "subproject" => *[_type == "project" && references(^._id)][0].slug.current,\n    null\n  ),\n}': ProjectsAndSubprojectsQueryResult;
-    '*[_type == "project" && slug.current == $slug][0] {\n  _id,\n  title,\n  seoOverview,\n  body,\n  "slug": slug.current,\n  mainImage,\n  categories[]->{\n    title,\n    "slug": slug.current\n  },\n  "showcaseProjects": *[_type == "settings"][0].showcaseProjects[] {\n      ...@->{\n        title,\n        "slug": slug.current\n      }\n  },\n  blocks[]{\n    _type == "section-content" => {\n      \n  _type,\n  body,\n\n    },\n    _type == "section-header" => {\n      \n  _type,\n  _key,\n  title,\n\n    },\n    _type == "carousel" => {\n      \n  _type,\n  _key,\n  defaultCaption,\n  items[]{\n    _type == "imageSlide" => {\n      _type,\n      _key,\n      caption,\n      hideInProjectPageCarousel,\n      fillContainer,\n      image {\n        _type,\n        alt,\n        asset-> {\n          url,\n          metadata {\n            lqip,\n            dimensions {\n              width,\n              height,\n              aspectRatio\n            }\n          }\n        }\n      },\n      \n    },\n    _type == "videoSlide" => {\n    _type,\n    _key,\n      caption,\n      video {\n        asset->{\n            playbackId,\n            "aspectRatio": data.aspect_ratio\n        }\n      },\n      allowAudio,\n    },\n    _type == "contentSlide" => {\n      _type,\n      _key,\n      caption,\n      content\n    },\n  }\n\n    },\n    _type == "image-in-project-page" => {\n      \n  _type,\n  image {\n    _type,\n    alt,\n    asset-> {\n        url,\n        metadata {\n        lqip,\n        dimensions {\n            width,\n            height,\n            aspectRatio,\n        },\n      },\n    },\n  },\n\n    },\n  },\n  hasSubprojects,\n  subprojects[]->{\n    _id,\n    _key,\n    title,\n    categories[]->{\n      title,\n      "slug": slug.current\n    },\n    "slug": slug.current,\n    \n    blocks[]{\n      _type == "section-content" => {\n      \n  _type,\n  body,\n\n      },\n      _type == "section-header" => {\n        \n  _type,\n  _key,\n  title,\n\n      },\n      _type == "carousel" => {\n        \n  _type,\n  _key,\n  defaultCaption,\n  items[]{\n    _type == "imageSlide" => {\n      _type,\n      _key,\n      caption,\n      hideInProjectPageCarousel,\n      fillContainer,\n      image {\n        _type,\n        alt,\n        asset-> {\n          url,\n          metadata {\n            lqip,\n            dimensions {\n              width,\n              height,\n              aspectRatio\n            }\n          }\n        }\n      },\n      \n    },\n    _type == "videoSlide" => {\n    _type,\n    _key,\n      caption,\n      video {\n        asset->{\n            playbackId,\n            "aspectRatio": data.aspect_ratio\n        }\n      },\n      allowAudio,\n    },\n    _type == "contentSlide" => {\n      _type,\n      _key,\n      caption,\n      content\n    },\n  }\n\n      },\n      _type == "image-in-project-page" => {\n      \n  _type,\n  image {\n    _type,\n    alt,\n    asset-> {\n        url,\n        metadata {\n        lqip,\n        dimensions {\n            width,\n            height,\n            aspectRatio,\n        },\n      },\n    },\n  },\n\n      },\n    },\n  },\n  \n}': SingleProjectQueryResult;
+    '*[_type == "project" && slug.current == $slug][0] {\n  _id,\n  title,\n  seoOverview,\n  body,\n  "slug": slug.current,\n  mainImage,\n  categories[]->{\n    title,\n    "slug": slug.current\n  },\n  "showcaseProjects": *[_type == "settings"][0].showcaseProjects[] {\n      ...@->{\n        title,\n        "slug": slug.current\n      }\n  },\n  blocks[]{\n    _type == "section-content" => {\n      \n  _type,\n  body,\n\n    },\n    _type == "section-header" => {\n      \n  _type,\n  _key,\n  title,\n\n    },\n    _type == "carousel" => {\n      \n  _type,\n  _key,\n  defaultCaption,\n  items[]{\n    _type == "imageSlide" => {\n      _type,\n      _key,\n      caption,\n      hideInProjectPageCarousel,\n      fillContainer,\n      image {\n        _type,\n        alt,\n        asset-> {\n          url,\n          metadata {\n            lqip,\n            dimensions {\n              width,\n              height,\n              aspectRatio\n            }\n          }\n        }\n      },\n      \n    },\n    _type == "videoSlide" => {\n      _type,\n      _key,\n      hideInProjectPageCarousel,  \n      caption,\n      video {\n        asset->{\n            playbackId,\n            "aspectRatio": data.aspect_ratio\n        }\n      },\n      allowAudio,\n    },\n    _type == "contentSlide" => {\n      _type,\n      _key,\n      caption,\n      content\n    },\n  }\n\n    },\n    _type == "image-in-project-page" => {\n      \n  _type,\n  image {\n    _type,\n    alt,\n    asset-> {\n        url,\n        metadata {\n        lqip,\n        dimensions {\n            width,\n            height,\n            aspectRatio,\n        },\n      },\n    },\n  },\n\n    },\n    _type == "video-in-project-page" => {\n      \n    _type,\n    _key,\n    caption,\n    video {\n        asset->{\n            playbackId,\n            "aspectRatio": data.aspect_ratio\n        }\n    },\n    allowAudio,\n\n    },\n  },\n  hasSubprojects,\n  subprojects[]->{\n    _id,\n    _key,\n    title,\n    categories[]->{\n      title,\n      "slug": slug.current\n    },\n    "slug": slug.current,\n    \n    blocks[]{\n      _type == "section-content" => {\n      \n  _type,\n  body,\n\n      },\n      _type == "section-header" => {\n        \n  _type,\n  _key,\n  title,\n\n      },\n      _type == "carousel" => {\n        \n  _type,\n  _key,\n  defaultCaption,\n  items[]{\n    _type == "imageSlide" => {\n      _type,\n      _key,\n      caption,\n      hideInProjectPageCarousel,\n      fillContainer,\n      image {\n        _type,\n        alt,\n        asset-> {\n          url,\n          metadata {\n            lqip,\n            dimensions {\n              width,\n              height,\n              aspectRatio\n            }\n          }\n        }\n      },\n      \n    },\n    _type == "videoSlide" => {\n      _type,\n      _key,\n      hideInProjectPageCarousel,  \n      caption,\n      video {\n        asset->{\n            playbackId,\n            "aspectRatio": data.aspect_ratio\n        }\n      },\n      allowAudio,\n    },\n    _type == "contentSlide" => {\n      _type,\n      _key,\n      caption,\n      content\n    },\n  }\n\n      },\n      _type == "image-in-project-page" => {\n      \n  _type,\n  image {\n    _type,\n    alt,\n    asset-> {\n        url,\n        metadata {\n        lqip,\n        dimensions {\n            width,\n            height,\n            aspectRatio,\n        },\n      },\n    },\n  },\n\n      },\n    },\n  },\n  \n}': SingleProjectQueryResult;
   }
 }

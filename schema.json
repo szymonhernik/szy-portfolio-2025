@@ -326,6 +326,30 @@
     }
   },
   {
+    "name": "video-in-project-page",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "video-in-project-page"
+          }
+        },
+        "video": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "mux.video"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
     "name": "image-in-project-page",
     "type": "type",
     "value": {
@@ -1294,6 +1318,13 @@
                       "optional": true
                     },
                     "allowAudio": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "boolean"
+                      },
+                      "optional": true
+                    },
+                    "hideInProjectPageCarousel": {
                       "type": "objectAttribute",
                       "value": {
                         "type": "boolean"
@@ -2713,6 +2744,21 @@
                 },
                 "rest": {
                   "type": "inline",
+                  "name": "section-content"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
                   "name": "image-in-project-page"
                 }
               },
@@ -2728,7 +2774,7 @@
                 },
                 "rest": {
                   "type": "inline",
-                  "name": "section-content"
+                  "name": "video-in-project-page"
                 }
               }
             ]
@@ -3314,6 +3360,21 @@
                 "rest": {
                   "type": "inline",
                   "name": "image-in-project-page"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "video-in-project-page"
                 }
               }
             ]

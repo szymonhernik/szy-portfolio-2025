@@ -60,8 +60,9 @@ export const subProject = defineType({
       of: [
         { type: "section-header" },
         { type: "carousel" },
-        { type: "image-in-project-page" },
         { type: "section-content" },
+        { type: "image-in-project-page" },
+        { type: "video-in-project-page" },
       ],
     }),
   ],

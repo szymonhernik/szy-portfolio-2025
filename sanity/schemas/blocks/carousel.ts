@@ -116,6 +116,14 @@ export const carousel = defineType({
               initialValue: false,
             },
             {
+              name: "hideInProjectPageCarousel",
+              type: "boolean",
+              title: "Hide in Project Page Carousel",
+              description:
+                "If true, the image will not be displayed in the project page carousel (only full screen carousel)",
+              initialValue: false,
+            },
+            {
               name: "mobileVideo",
               type: "mux.video",
               title: "Mobile Video (Optional)",

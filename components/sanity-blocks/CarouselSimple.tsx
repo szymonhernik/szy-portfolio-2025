@@ -97,7 +97,7 @@ export default function CarouselSimple({ items, slideTransition = false }: Carou
   return (
     <>
       <div
-        className="relative mt-4 mr-auto w-full max-w-3xl overflow-hidden"
+        className="relative mt-4 mr-auto w-full overflow-hidden"
         style={{
           cursor: slides.length === 1 ? "default" : cursor === "left" ? "w-resize" : cursor === "right" ? "e-resize" : "default",
         }}
@@ -130,7 +130,7 @@ export default function CarouselSimple({ items, slideTransition = false }: Carou
         >
           Click to view full-screen
         </button>
-        <CarouselIndex currentSlide={currentSlide} totalSlides={slides.length} />
+        {slides.length > 1 && <CarouselIndex currentSlide={currentSlide} totalSlides={slides.length} />}
       </div>
     </>
   );

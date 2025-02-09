@@ -88,6 +88,7 @@ export const project = defineType({
         { type: "carousel" },
         { type: "section-content" },
         { type: "image-in-project-page" },
+        { type: "video-in-project-page" },
       ],
     }),
   ],

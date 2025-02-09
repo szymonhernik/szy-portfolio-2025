@@ -29,8 +29,9 @@ export const carouselFragment = `
       
     },
     _type == "videoSlide" => {
-    _type,
-    _key,
+      _type,
+      _key,
+      hideInProjectPageCarousel,  
       caption,
       video {
         asset->{

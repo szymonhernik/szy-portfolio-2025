@@ -4,6 +4,7 @@ import { carouselFragment } from "./carousel";
 import { imageInProjectPageFragment } from "./image-in-project-page";
 import { sectionContentFragment } from "./section-content";
 import { sectionHeaderFragment } from "./section-header";
+import { videoInProjectPageFragment } from "./video-in-project-page";
 
 export const projectQuery = groq`*[_type == "settings"][0] {
   _id,
@@ -117,6 +118,9 @@ export const singleProjectQuery = groq`*[_type == "project" && slug.current == $
     },
     _type == "image-in-project-page" => {
       ${imageInProjectPageFragment}
+    },
+    _type == "video-in-project-page" => {
+      ${videoInProjectPageFragment}
     },
   },
   hasSubprojects,
