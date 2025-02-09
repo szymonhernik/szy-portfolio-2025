@@ -40,8 +40,8 @@ export default function RandomAnimation({
   console.log("randomVideo", randomVideo);
 
   return (
-    <div className="absolute z-[0] mix-blend-darken " style={randomPosition}>
-      <video src={randomVideo.url} playsInline autoPlay muted controls={false} className={`${videoSize}`} />
+    <div className="absolute top-0 left-0 z-[0] mix-blend-darken w-screen h-screen max-w-screen max-h-screen overflow-hidden" >
+      <video src={randomVideo.url} playsInline autoPlay muted controls={false} className={`${videoSize} absolute `} style={randomPosition} />
     </div>
   );
 }

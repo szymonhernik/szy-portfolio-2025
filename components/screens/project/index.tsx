@@ -131,7 +131,7 @@ export default function ProjectPage({
       <Footer className="max-lg:mt-4" />
 
       {/* <FullScreenCarouselSimple /> */}
-      <FullCarouselModal />
+      {/* <FullCarouselModal /> */}
     </CarouselProvider>
   );
 }
