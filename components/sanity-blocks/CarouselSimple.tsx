@@ -289,8 +289,8 @@ const VideoSlide = ({
 }) => {
   if (!video?.asset) return null;
   return (
-    <div className="relative h-full w-full shrink-0">
-      <MuxPlayerWrapper controlsOff={true} allowAudio={allowAudio} video={video?.asset as unknown as MuxVideoAssetOwn} />
+    <div className="relative h-full w-full shrink-0 overflow-hidden" style={{ aspectRatio: carouselAspectRatio }}>
+      <MuxPlayerWrapper  controlsOff={true} allowAudio={allowAudio} video={video?.asset as unknown as MuxVideoAssetOwn} />
     </div>
   );
 };
