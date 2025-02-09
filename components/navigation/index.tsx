@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function NavigationDesktop() {
   return (
@@ -19,12 +19,40 @@ export default function NavigationDesktop() {
 
 export function NavigationMobile() {
   const [isOpen, setIsOpen] = useState(false);
+  const [windowHeight, setWindowHeight] = useState(0);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [buttonHeight, setButtonHeight] = useState(0);
+
+  useEffect(() => {
+    // Set initial height
+    setWindowHeight(window.innerHeight);
+    if (buttonRef.current) {
+      setButtonHeight(buttonRef.current.offsetHeight);
+    }
+
+    // Update heights on resize
+    function handleResize() {
+      setWindowHeight(window.innerHeight);
+      if (buttonRef.current) {
+        setButtonHeight(buttonRef.current.offsetHeight);
+      }
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <>
       <button
+        ref={buttonRef}
+        style={{ 
+          '--window-height': `${windowHeight}px`,
+          '--button-height': `${buttonHeight}px`
+        } as React.CSSProperties}
         className={clsx(
           "fixed top-4 right-4 z-[100] overscroll-none pl-4 text-fluid-xl transition-transform duration-300 md:hidden",
-          isOpen ? "translate-y-[calc(100svh-170px)]" : "translate-y-0",
+          isOpen ? "translate-y-[calc(var(--window-height)_-_var(--button-height)_-_32px)]" : "translate-y-0",
         )}
         onClick={() => setIsOpen(true)}
         type="button"
@@ -58,7 +86,7 @@ function MobileSheet({
         X
       </button>
       <nav>
-        <ul className="list-none text-center text-fluid-xl">
+        <ul className="list-none text-center text-fluid-xl space-y-8">
           <li>
             <Link href="/information" onClick={() => toggle(false)} className="hover:font-outline-1-black">
               Information
