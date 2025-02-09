@@ -72,10 +72,10 @@ export default function ProjectPage({
           <article className="grid grid-cols-12 items-start ">
             <div className="col-span-12 flex flex-col gap-X lg:col-span-7">
               <section className="">
-                <h1 className="text-fluid-xl">{project.title}</h1>
+                <h1 className="text-fluid-xl max-md:pr-6">{project.title}</h1>
                 {/* if project has subprojects dont check categories on project but on subprojects and combine them into an array */}
                 {project.hasSubprojects && project.subprojects && project.subprojects.length > 0 ? (
-                  <div className="text-secondary sm:text-small lg:text-small-md">
+                  <div className="text-secondary sm:text-small lg:text-small-md max-md:pr-6">
                     {project.subprojects
                       .flatMap((subproject) => subproject.categories)
                       .filter((category): category is NonNullable<typeof category> => category !== null)
@@ -91,7 +91,7 @@ export default function ProjectPage({
                   </div>
                 ) : (
                   project.categories && (
-                    <div className="text-secondary sm:text-small lg:text-small-md">
+                    <div className="text-secondary sm:text-small lg:text-small-md max-md:pr-6">
                       {project.categories.map((category, index, array) => (
                         <>
                           {/* biome-ignore lint/style/noNonNullAssertion: this is not null */}
@@ -131,7 +131,7 @@ export default function ProjectPage({
       <Footer className="max-lg:mt-4" />
 
       {/* <FullScreenCarouselSimple /> */}
-      {/* <FullCarouselModal /> */}
+      <FullCarouselModal />
     </CarouselProvider>
   );
 }
