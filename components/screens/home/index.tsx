@@ -7,8 +7,8 @@ import Link from "next/link";
 
 function IntroText() {
   return (
-    <p className="text-fluid-xl ">
-      <span className=" block max-md:pr-4">Szymon Eda Hernik is a graphic designer and front-end web developer.</span>
+    <p className="text-fluid-xl max-md:pr-4">
+      Szymon Eda Hernik is a graphic designer and front-end web developer.
       <br className="block md:hidden" />
       <br className="block md:hidden" />
       <span className="block md:inline ">
