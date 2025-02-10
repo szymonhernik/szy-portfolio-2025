@@ -1,7 +1,7 @@
 import type { SingleProjectQueryResult } from "@/sanity.types";
 import type { CarouselBlock } from "@/types/blocks";
 
-import { FullCarouselModal } from "@/app/(web)/_components/fullcarouselmodal";
+import { FullCarouselModal } from "@/app/(web)/_components/FullCarouselModal";
 import Blocks from "@/components/blocks";
 import { Footer } from "@/components/footer";
 import * as FadeIn from "@/components/motion/staggers/fade";
@@ -16,14 +16,11 @@ export default function ProjectPage({
 }: {
   project: NonNullable<SingleProjectQueryResult>;
 }) {
-  const currentProjectIndex = project.showcaseProjects?.findIndex(
-    (showcaseProject) => showcaseProject.slug === project.slug,
-  );
+  const currentProjectIndex = project.showcaseProjects?.findIndex((showcaseProject) => showcaseProject.slug === project.slug);
 
   // if the current project index is the last in the array get the first one
   const nextProject =
-    currentProjectIndex === undefined ||
-    currentProjectIndex === (project.showcaseProjects?.length ?? 0) - 1
+    currentProjectIndex === undefined || currentProjectIndex === (project.showcaseProjects?.length ?? 0) - 1
       ? project.showcaseProjects?.[0]
       : project.showcaseProjects?.[currentProjectIndex + 1];
 
@@ -77,16 +74,11 @@ export default function ProjectPage({
               <section className="">
                 <h1 className="text-fluid-xl max-md:pr-6">{project.title}</h1>
                 {/* if project has subprojects dont check categories on project but on subprojects and combine them into an array */}
-                {project.hasSubprojects &&
-                project.subprojects &&
-                project.subprojects.length > 0 ? (
-                  <div className="text-secondary sm:text-small lg:text-small-md max-md:pr-6">
+                {project.hasSubprojects && project.subprojects && project.subprojects.length > 0 ? (
+                  <div className="text-secondary max-md:pr-6 sm:text-small lg:text-small-md">
                     {project.subprojects
                       .flatMap((subproject) => subproject.categories)
-                      .filter(
-                        (category): category is NonNullable<typeof category> =>
-                          category !== null,
-                      )
+                      .filter((category): category is NonNullable<typeof category> => category !== null)
                       .map((category, index, array) => (
                         <>
                           {/* biome-ignore lint/style/noNonNullAssertion: this is not null */}
@@ -99,7 +91,7 @@ export default function ProjectPage({
                   </div>
                 ) : (
                   project.categories && (
-                    <div className="text-secondary sm:text-small lg:text-small-md max-md:pr-6">
+                    <div className="text-secondary max-md:pr-6 sm:text-small lg:text-small-md">
                       {project.categories.map((category, index, array) => (
                         <>
                           {/* biome-ignore lint/style/noNonNullAssertion: this is not null */}
@@ -120,9 +112,7 @@ export default function ProjectPage({
               {project.hasSubprojects &&
                 project.subprojects &&
                 project.subprojects.length > 0 &&
-                project.subprojects.map((subproject) => (
-                  <Subproject key={subproject._id} subproject={subproject} />
-                ))}
+                project.subprojects.map((subproject) => <Subproject key={subproject._id} subproject={subproject} />)}
               {/* <p className="text-[16px] text-secondary">Web Design, Full-Stack Development, Wordpress, Editorial Design, Graphic Design</p> */}
             </div>
           </article>
@@ -132,10 +122,7 @@ export default function ProjectPage({
         {nextProject && (
           <div>
             Next:{" "}
-            <Link
-              href={`/projects/${nextProject.slug}`}
-              className="text-secondary hover:font-outline-1-secondary"
-            >
+            <Link href={`/projects/${nextProject.slug}`} className="text-secondary hover:font-outline-1-secondary">
               {nextProject.title}
             </Link>
           </div>
@@ -152,16 +139,10 @@ export default function ProjectPage({
 function Subproject({
   subproject,
 }: {
-  subproject: NonNullable<
-    NonNullable<SingleProjectQueryResult>["subprojects"]
-  >[number];
+  subproject: NonNullable<NonNullable<SingleProjectQueryResult>["subprojects"]>[number];
 }) {
   return (
-    <div
-      id={
-        subproject.slug && subproject.slug !== "" ? subproject.slug : undefined
-      }
-    >
+    <div id={subproject.slug && subproject.slug !== "" ? subproject.slug : undefined}>
       {/* @ts-ignore */}
       {subproject.blocks && <Blocks blocks={subproject.blocks} />}
     </div>

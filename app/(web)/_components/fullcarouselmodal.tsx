@@ -10,18 +10,11 @@ import { ImageSlide } from "@/components/sanity-blocks/CarouselSimple";
 import { useCarousel } from "@/contexts/CarouselContext";
 
 import { clearAllBodyScrollLocks, disableBodyScroll } from "body-scroll-lock";
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 export function FullCarouselModal() {
-  const { allSlides, currentSlideIndex, isFullScreen, closeFullScreen } =
-    useCarousel();
+  const { allSlides, currentSlideIndex, isFullScreen, closeFullScreen } = useCarousel();
 
   // dialog ref to control the dialog open state
   const dialogRef = useRef<ElementRef<"dialog">>(null);
@@ -50,34 +43,17 @@ export function FullCarouselModal() {
   }, [closeFullScreen]);
 
   // Slide rendering logic with focus management
-  const renderSlide = (
-    slide: (typeof allSlides)[number],
-    isVisible: boolean,
-  ) => {
+  const renderSlide = (slide: (typeof allSlides)[number], isVisible: boolean) => {
     if (!slide) return null;
     if ("image" in slide && slide.image?.asset?.url) {
-      return (
-        <ImageSlide
-          image={slide.image}
-          heightClass="h-auto lg:h-full"
-          sizes="(max-width: 768px) 100vw, 70vw"
-        />
-      );
+      return <ImageSlide image={slide.image} heightClass="h-auto lg:h-full" sizes="(max-width: 768px) 100vw, 70vw" />;
     }
 
-    if (
-      "video" in slide &&
-      (slide.video?.asset as unknown as MuxVideoAssetOwn)?.playbackId
-    ) {
-      const aspectRatio = (
-        slide.video?.asset as unknown as MuxVideoAssetOwn
-      ).aspectRatio?.replace(":", "/");
+    if ("video" in slide && (slide.video?.asset as unknown as MuxVideoAssetOwn)?.playbackId) {
+      const aspectRatio = (slide.video?.asset as unknown as MuxVideoAssetOwn).aspectRatio?.replace(":", "/");
 
       return (
-        <div
-          className="relative max-h-[80vh] w-full overflow-hidden"
-          style={{ aspectRatio: aspectRatio }}
-        >
+        <div className="relative max-h-[80vh] w-full overflow-hidden" style={{ aspectRatio: aspectRatio }}>
           <MuxPlayerWrapper
             allowAudio={slide.allowAudio}
             video={slide.video?.asset as unknown as MuxVideoAssetOwn}
@@ -170,7 +146,7 @@ export function FullCarouselModal() {
     <dialog
       ref={dialogRef}
       data-dialog-type="modal"
-      className="z-[300] m-0 h-[100dvh] w-screen overflow-y-scroll bg-white lg:bg-background p-4"
+      className="z-[300] m-0 h-[100dvh] w-screen overflow-y-scroll bg-white p-4 lg:bg-background"
       onClose={handleDismiss}
     >
       <div className="relative h-full w-full ">
@@ -208,25 +184,16 @@ export function FullCarouselModal() {
           </div>
         </div>
 
-        <div className="fixed right-4 bottom-4 left-4 z-[410] flex flex-col items-center justify-between gap-6 md:gap-2 lg:flex-row lg:items-end lg:justify-between text-center lg:text-left">
+        <div className="fixed right-4 bottom-4 left-4 z-[410] flex flex-col items-center justify-between gap-6 text-center md:gap-2 lg:flex-row lg:items-end lg:justify-between lg:text-left">
           <div className="text-small md:text-small-md [&>p]:mb-0">
             {allSlides[currentSlide]?.caption ? (
               <PortableTextRenderer value={allSlides[currentSlide].caption} />
             ) : (
-              allSlides[currentSlide]?.defaultCaption && (
-                <p className="text-small md:text-small-md">
-                  {allSlides[currentSlide].defaultCaption}
-                </p>
-              )
+              allSlides[currentSlide]?.defaultCaption && <p className="text-small md:text-small-md">{allSlides[currentSlide].defaultCaption}</p>
             )}
           </div>
-          <div className="flex justify-center gap-2 lg:justify-start max-lg:justify-between w-full lg:w-auto">
-            <button
-              className="stroke-black p-1 hover:stroke-[5px]"
-              type="button"
-              onClick={handlePrev}
-              aria-label="Previous slide"
-            >
+          <div className="flex w-full justify-center gap-2 max-lg:justify-between lg:w-auto lg:justify-start">
+            <button className="stroke-black p-1 hover:stroke-[5px]" type="button" onClick={handlePrev} aria-label="Previous slide">
               <div className="max-lg:hidden">
                 <ArrowLeft width={16} height={16} />
               </div>
@@ -234,12 +201,7 @@ export function FullCarouselModal() {
                 <ArrowLeft width={24} height={24} />
               </div>
             </button>
-            <button
-              className="stroke-black p-1 hover:stroke-[5px]"
-              type="button"
-              onClick={handleNext}
-              aria-label="Next slide"
-            >
+            <button className="stroke-black p-1 hover:stroke-[5px]" type="button" onClick={handleNext} aria-label="Next slide">
               <div className="max-lg:hidden">
                 <ArrowRight width={16} height={16} />
               </div>

@@ -75,10 +75,11 @@
 
   html,
   main {
+    overflow-x: hidden;
+
     /* scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track); */
 
     scrollbar-gutter: stable;
-    overflow-x: hidden;
     scroll-behavior: smooth;
   }
 

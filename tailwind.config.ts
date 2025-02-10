@@ -137,18 +137,9 @@ const config: Config = {
         "3xl": "1920px",
       },
       fontSize: {
-        "fluid-base": [
-          "clamp(1.075rem, 0.9375rem + 0.3vw, 1.35rem)",
-          { lineHeight: "1.48" },
-        ],
-        "fluid-lg": [
-          "clamp(1.5rem, 1.125rem + 0.8vw, 1.75rem)",
-          { lineHeight: "1.4" },
-        ],
-        "fluid-xl": [
-          "clamp(2rem, 1.6rem + 1.65vw, 2.6rem)",
-          { lineHeight: "1.29" },
-        ],
+        "fluid-base": ["clamp(1.075rem, 0.9375rem + 0.3vw, 1.35rem)", { lineHeight: "1.48" }],
+        "fluid-lg": ["clamp(1.5rem, 1.125rem + 0.8vw, 1.75rem)", { lineHeight: "1.4" }],
+        "fluid-xl": ["clamp(2rem, 1.6rem + 1.65vw, 2.6rem)", { lineHeight: "1.29" }],
         small: "0.9rem",
         "small-md": "0.84rem",
       },

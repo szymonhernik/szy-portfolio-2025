@@ -1,6 +1,5 @@
 import type { ProjectsAndSubprojectsQueryResult } from "@/sanity.types";
 
-import { Footer } from "@/components/footer";
 import * as FadeIn from "@/components/motion/staggers/fade";
 import TagsSearchPage from "@/components/screens/tags-search";
 import { sanityFetch } from "@/sanity/lib/sanity.client";

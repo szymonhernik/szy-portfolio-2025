@@ -54,15 +54,15 @@
 }
 
 .muxPlayer::part(poster) {
-  opacity: 1;
-  transition: opacity var(--media-poster-image-transition-duration)
-    var(--media-poster-image-transition-timing-function);
   filter: blur(30px);
+  opacity: 1;
+  transition: opacity var(--media-poster-image-transition-duration) var(--media-poster-image-transition-timing-function);
 }
 
 .muxPlayer::part(poster-image) {
-  object-fit: cover;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+
   /* add blur */
 }
