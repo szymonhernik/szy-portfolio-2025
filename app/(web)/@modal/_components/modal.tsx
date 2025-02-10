@@ -97,12 +97,12 @@ export function Modal({ children }: { children: React.ReactNode }) {
     <dialog
       ref={dialogRef}
       data-dialog-type="modal"
-      className="z-[10] m-0 h-[100dvh] w-screen  bg-background p-4 "
+      className="z-[10] m-0 h-[100dvh] w-screen  bg-background "
       onClose={onDismiss}
     >
       <div
         ref={scrollableRef}
-        className="relative h-full w-full overflow-y-auto"
+        className="relative h-full w-full p-4 overflow-y-auto"
       >
         <button
           type="button"
