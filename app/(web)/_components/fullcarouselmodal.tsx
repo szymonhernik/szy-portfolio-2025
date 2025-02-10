@@ -93,7 +93,7 @@ export function FullCarouselModal() {
     if ("content" in slide) {
       if (!slide.content) return null;
       return (
-        <div className="h-full w-full overflow-auto text-fluid-xl">
+        <div className="h-full w-full overflow-auto text-fluid-lg md:text-fluid-xl">
           <PortableTextRenderer value={slide.content} />
         </div>
       );
@@ -170,10 +170,10 @@ export function FullCarouselModal() {
     <dialog
       ref={dialogRef}
       data-dialog-type="modal"
-      className="z-[300] m-0 h-[100dvh] w-screen overflow-y-scroll bg-background p-4"
+      className="z-[300] m-0 h-[100dvh] w-screen overflow-y-scroll bg-white lg:bg-background p-4"
       onClose={handleDismiss}
     >
-      <div className="relative h-full w-full bg-background">
+      <div className="relative h-full w-full ">
         <button
           type="button"
           onClick={handleDismiss}
@@ -208,7 +208,7 @@ export function FullCarouselModal() {
           </div>
         </div>
 
-        <div className="fixed right-4 bottom-4 left-4 z-[410] flex flex-col items-center justify-between gap-8 md:gap-2 md:flex-row md:items-end md:justify-between text-center md:text-left">
+        <div className="fixed right-4 bottom-4 left-4 z-[410] flex flex-col items-center justify-between gap-6 md:gap-2 lg:flex-row lg:items-end lg:justify-between text-center lg:text-left">
           <div className="text-small md:text-small-md [&>p]:mb-0">
             {allSlides[currentSlide]?.caption ? (
               <PortableTextRenderer value={allSlides[currentSlide].caption} />
@@ -220,17 +220,17 @@ export function FullCarouselModal() {
               )
             )}
           </div>
-          <div className="flex justify-center gap-2 md:justify-start max-md:justify-between w-full md:w-auto">
+          <div className="flex justify-center gap-2 lg:justify-start max-lg:justify-between w-full lg:w-auto">
             <button
               className="stroke-black p-1 hover:stroke-[5px]"
               type="button"
               onClick={handlePrev}
               aria-label="Previous slide"
             >
-              <div className="max-md:hidden">
+              <div className="max-lg:hidden">
                 <ArrowLeft width={16} height={16} />
               </div>
-              <div className="md:hidden">
+              <div className="lg:hidden">
                 <ArrowLeft width={24} height={24} />
               </div>
             </button>
@@ -240,10 +240,10 @@ export function FullCarouselModal() {
               onClick={handleNext}
               aria-label="Next slide"
             >
-              <div className="max-md:hidden">
+              <div className="max-lg:hidden">
                 <ArrowRight width={16} height={16} />
               </div>
-              <div className="md:hidden">
+              <div className="lg:hidden">
                 <ArrowRight width={24} height={24} />
               </div>
             </button>
