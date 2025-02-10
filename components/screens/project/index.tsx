@@ -145,7 +145,6 @@ export default function ProjectPage({
       <Footer className="max-lg:mt-4" />
       <OpenGardenItem slug={"isz-szi-studio"}>isz szi studio </OpenGardenItem>
 
-      {/* <FullScreenCarouselSimple /> */}
       <FullCarouselModal />
     </CarouselProvider>
   );

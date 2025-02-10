@@ -149,7 +149,11 @@ export function FullCarouselModal() {
         document.body.style.position = "";
         document.body.style.top = "";
         document.body.style.width = "";
-        window.scrollTo(0, scrollY); // Use the captured scrollY value instead of state
+        // Use instant scroll behavior to match Modal component
+        window.scrollTo({
+          top: scrollY,
+          behavior: "instant",
+        });
       };
     }
   }, [isFullScreen]); // Remove scrollPosition dependency

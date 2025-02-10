@@ -52,29 +52,23 @@ export function Modal({ children }: { children: React.ReactNode }) {
 
   // Handle scroll locking
   useLayoutEffect(() => {
-    // Only store the scroll position if body isn't already locked
+    // Always store scroll position and lock if we haven't already
     if (!isBodyLockedRef.current && initialScrollRef.current === null) {
       initialScrollRef.current = window.scrollY;
       isBodyLockedRef.current = true;
-      console.log("Initial scroll position stored:", initialScrollRef.current);
-    }
 
-    // Lock the body only if not already locked
-    if (!isBodyLockedRef.current) {
+      // Lock the body
       document.body.style.position = "fixed";
       document.body.style.top = `-${initialScrollRef.current}px`;
       document.body.style.width = "100%";
+      document.body.style.overflow = "hidden"; // Add this to ensure no scrolling
     }
 
     return () => {
-      console.log(
-        "Cleanup running, stored position:",
-        initialScrollRef.current,
-      );
-      const scrollTarget = initialScrollRef.current;
-
       // Only proceed with cleanup if we were the ones who locked it
       if (isBodyLockedRef.current) {
+        const scrollTarget = initialScrollRef.current;
+
         // Reset refs
         initialScrollRef.current = null;
         isBodyLockedRef.current = false;
@@ -83,13 +77,12 @@ export function Modal({ children }: { children: React.ReactNode }) {
         document.body.style.position = "";
         document.body.style.top = "";
         document.body.style.width = "";
+        document.body.style.overflow = ""; // Reset overflow
 
         if (scrollTarget !== null) {
-          console.log("Attempting to restore to:", scrollTarget);
           setTimeout(() => {
             requestAnimationFrame(() => {
               window.scrollTo(0, scrollTarget);
-              console.log("Scroll restoration complete");
             });
           }, 0);
         }
