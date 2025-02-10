@@ -145,7 +145,7 @@ export default function MuxPlayerWrapper({
       <MuxPlayer
         ref={playerRef}
         className={clsx(
-          "h-full min-h-full w-full min-w-full object-cover",
+          "h-full min-h-full w-full min-w-full object-cover overflow-hidden",
           styles.muxPlayer,
           !allowAudio && styles.hideAudio,
           controlsOff && styles.controlsOff,
