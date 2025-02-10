@@ -33,7 +33,7 @@ export default function MuxPlayerWrapper({
           }
         }
       },
-      { threshold: 0.5 }, // Trigger when 50% of the player is visible
+      { threshold: 0.1 }, // Trigger when 50% of the player is visible
     );
 
     if (playerRef.current) {
@@ -48,7 +48,9 @@ export default function MuxPlayerWrapper({
   }, []);
 
   const thumbnailWidth = 16;
-  const thumbnailHeight = Math.round(thumbnailWidth / (Number(video.aspectRatio) || 16 / 9));
+  const thumbnailHeight = Math.round(
+    thumbnailWidth / (Number(video.aspectRatio) || 16 / 9),
+  );
   const placeholderUrl = `https://image.mux.com/${video.playbackId}/thumbnail.webp?width=${thumbnailWidth}&height=${thumbnailHeight}`;
 
   return (
@@ -152,7 +154,6 @@ export default function MuxPlayerWrapper({
         muted
         autoPlay={isInView}
         placeholder={placeholderUrl}
-        poster={placeholderUrl}
         accentColor="transparent"
         theme="media-theme-custom"
         style={{ aspectRatio: video.aspectRatio }}

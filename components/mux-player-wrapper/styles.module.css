@@ -49,14 +49,15 @@
 }
 
 .muxPlayer {
-  --media-poster-image-transition-duration: 500ms;
-  --media-poster-image-transition-timing-function: ease-out;
+  /* --media-poster-image-transition-duration: 500ms; */
+  /* --media-poster-image-transition-timing-function: ease-out; */
 }
 
 .muxPlayer::part(poster) {
-  filter: blur(30px);
+  filter: blur(20px);
   opacity: 1;
-  transition: opacity var(--media-poster-image-transition-duration) var(--media-poster-image-transition-timing-function);
+  /* transition: opacity var(--media-poster-image-transition-duration)
+    var(--media-poster-image-transition-timing-function); */
 }
 
 .muxPlayer::part(poster-image) {

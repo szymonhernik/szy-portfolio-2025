@@ -5,6 +5,7 @@ import Blocks from "@/components/blocks";
 import { Footer } from "@/components/footer";
 import { FullCarouselModal } from "@/components/FullCarouselModal";
 import * as FadeIn from "@/components/motion/staggers/fade";
+import { OpenGardenItem } from "@/components/open-garden-item";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import TagLink from "@/components/tag-link";
 import { CarouselProvider } from "@/contexts/CarouselContext";
@@ -142,6 +143,7 @@ export default function ProjectPage({
         )}
       </div>
       <Footer className="max-lg:mt-4" />
+      <OpenGardenItem slug={"isz-szi-studio"}>isz szi studio </OpenGardenItem>
 
       {/* <FullScreenCarouselSimple /> */}
       <FullCarouselModal />

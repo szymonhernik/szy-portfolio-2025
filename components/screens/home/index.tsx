@@ -7,12 +7,13 @@ import Link from "next/link";
 
 function IntroText() {
   return (
-    <p className="text-fluid-xl max-md:pr-4">
+    <p className="text-fluid-xl max-md:pr-1">
       Szymon Eda Hernik is a graphic designer and front-end web developer.
       <br className="block md:hidden" />
       <br className="block md:hidden" />
       <span className="block md:inline ">
-        They also form half of <OpenGardenItem slug="isz-szi-studio">isz szi studio</OpenGardenItem>,
+        They also form half of{" "}
+        <OpenGardenItem slug="isz-szi-studio">isz szi studio</OpenGardenItem>,
         {/* <Link
           href="/iszszistudio"
           className="text-link hover:font-outline-1-secondary"
@@ -28,7 +29,10 @@ function ListSeed() {
   return (
     <p className="mt-0 ">
       A random inspiration from a rather{" "}
-      <Link href="/garden" className="text-secondary hover:font-outline-1-secondary">
+      <Link
+        href="/garden"
+        className="text-secondary hover:font-outline-1-secondary"
+      >
         unsorted list
       </Link>{" "}
       is: <OpenGardenItem slug="27-30-covers">27 30 @ Covers</OpenGardenItem>

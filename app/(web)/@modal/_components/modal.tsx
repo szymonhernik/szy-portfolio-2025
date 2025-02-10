@@ -2,9 +2,14 @@
 
 import type { ElementRef } from "react";
 
-import { clearAllBodyScrollLocks, disableBodyScroll } from "body-scroll-lock";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { createPortal } from "react-dom";
 
 export function Modal({ children }: { children: React.ReactNode }) {
@@ -13,6 +18,10 @@ export function Modal({ children }: { children: React.ReactNode }) {
   const dialogRef = useRef<ElementRef<"dialog">>(null);
   // content ref to disable body scroll
   const contentRef = useRef<ElementRef<"div">>(null);
+  const initialScrollRef = useRef<number | null>(null);
+  const isBodyLockedRef = useRef(false);
+
+  const scrollableRef = useRef<ElementRef<"div">>(null);
 
   // Wrap onDismiss with useCallback
   const onDismiss = useCallback(() => {
@@ -41,28 +50,50 @@ export function Modal({ children }: { children: React.ReactNode }) {
     return () => dialog?.removeEventListener("keydown", handleKeyDown);
   }, [onDismiss]);
 
-  // Update the scroll lock effect
+  // Handle scroll locking
   useLayoutEffect(() => {
-    if (dialogRef.current) {
-      // Store original requestAnimationFrame
-      const storedRequestAnimationFrame = window.requestAnimationFrame;
+    // Only store the scroll position if body isn't already locked
+    if (!isBodyLockedRef.current && initialScrollRef.current === null) {
+      initialScrollRef.current = window.scrollY;
+      isBodyLockedRef.current = true;
+      console.log("Initial scroll position stored:", initialScrollRef.current);
+    }
 
-      // Temporarily override requestAnimationFrame
-      window.requestAnimationFrame = () => 42;
-
-      disableBodyScroll(dialogRef.current, {
-        reserveScrollBarGap: true,
-        allowTouchMove: (el) => {
-          return el.classList.contains("overflow-auto");
-        },
-      });
-
-      // Restore original requestAnimationFrame
-      window.requestAnimationFrame = storedRequestAnimationFrame;
+    // Lock the body only if not already locked
+    if (!isBodyLockedRef.current) {
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${initialScrollRef.current}px`;
+      document.body.style.width = "100%";
     }
 
     return () => {
-      clearAllBodyScrollLocks();
+      console.log(
+        "Cleanup running, stored position:",
+        initialScrollRef.current,
+      );
+      const scrollTarget = initialScrollRef.current;
+
+      // Only proceed with cleanup if we were the ones who locked it
+      if (isBodyLockedRef.current) {
+        // Reset refs
+        initialScrollRef.current = null;
+        isBodyLockedRef.current = false;
+
+        // Reset body styles
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.width = "";
+
+        if (scrollTarget !== null) {
+          console.log("Attempting to restore to:", scrollTarget);
+          setTimeout(() => {
+            requestAnimationFrame(() => {
+              window.scrollTo(0, scrollTarget);
+              console.log("Scroll restoration complete");
+            });
+          }, 0);
+        }
+      }
     };
   }, []);
 
@@ -70,13 +101,27 @@ export function Modal({ children }: { children: React.ReactNode }) {
   if (!modalRoot) throw new Error("Modal root element not found");
 
   return createPortal(
-    <dialog ref={dialogRef} data-dialog-type="modal" className="z-[10] m-0 h-[100dvh] w-screen overflow-y-scroll bg-background p-4" onClose={onDismiss}>
-      <button type="button" onClick={onDismiss} className="fixed top-0 right-0 z-[20] p-4 text-fluid-xl hover:font-outline-1-black md:text-fluid-base">
-        X
-      </button>
-      {/* content ref to disable body scroll */}
-      <div ref={contentRef} className="flex h-full flex-col justify-between">
-        {children}
+    <dialog
+      ref={dialogRef}
+      data-dialog-type="modal"
+      className="z-[10] m-0 h-[100dvh] w-screen  bg-background p-4 "
+      onClose={onDismiss}
+    >
+      <div
+        ref={scrollableRef}
+        className="relative h-full w-full overflow-y-auto"
+      >
+        <button
+          type="button"
+          onClick={onDismiss}
+          className="fixed top-0 right-0 z-[20] p-4 text-fluid-xl hover:font-outline-1-black md:text-fluid-base"
+        >
+          X
+        </button>
+        {/* content ref to disable body scroll */}
+        <div ref={contentRef} className="flex h-full flex-col justify-between">
+          {children}
+        </div>
       </div>
     </dialog>,
     modalRoot,
