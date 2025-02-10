@@ -73,11 +73,12 @@
     background-color: var(--selection-background);
   } */
 
-  html {
+  html,
+  main {
     /* scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track); */
 
-    /* scrollbar-gutter: stable; */
-
+    scrollbar-gutter: stable;
+    overflow-x: hidden;
     scroll-behavior: smooth;
   }
 
