@@ -47,6 +47,12 @@ export default function MuxPlayerWrapper({
     };
   }, []);
 
+  const thumbnailWidth = 16;
+  const thumbnailHeight = Math.round(
+    thumbnailWidth / (Number(video.aspectRatio) || 16 / 9),
+  );
+  const placeholderUrl = `https://image.mux.com/${video.playbackId}/thumbnail.webp?width=${thumbnailWidth}&height=${thumbnailHeight}`;
+
   return (
     <>
       <template
@@ -81,7 +87,8 @@ export default function MuxPlayerWrapper({
             </style>
 
             <media-controller >
-              <slot name="media" slot="media"></slot>
+            <slot name="media" slot="media"></slot>
+            <slot name="poster" slot="poster"></slot>
               
               <media-control-bar>
                 <div class="controls-wrapper">
@@ -137,12 +144,20 @@ export default function MuxPlayerWrapper({
       />
       <MuxPlayer
         ref={playerRef}
-        className={clsx("min-h-full min-w-full h-full w-full object-cover", styles.muxPlayer, !allowAudio && styles.hideAudio, controlsOff && styles.controlsOff)}
+        className={clsx(
+          "min-h-full min-w-full h-full w-full object-cover",
+          styles.muxPlayer,
+          !allowAudio && styles.hideAudio,
+          controlsOff && styles.controlsOff,
+        )}
         playbackId={video.playbackId}
         muted
         autoPlay={isInView}
+        placeholder={placeholderUrl}
+        poster={placeholderUrl}
         accentColor="transparent"
         theme="media-theme-custom"
+        style={{ aspectRatio: video.aspectRatio }}
       />
     </>
   );

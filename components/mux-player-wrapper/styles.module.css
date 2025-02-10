@@ -38,10 +38,6 @@
   --media-control-color: white;
   --media-control-hover-color: white;
   --media-tooltip-display: none;
- 
-
-
-  
 }
 
 .hideAudio {
@@ -50,4 +46,23 @@
 
 .controlsOff {
   --controls: none;
+}
+
+.muxPlayer {
+  --media-poster-image-transition-duration: 500ms;
+  --media-poster-image-transition-timing-function: ease-out;
+}
+
+.muxPlayer::part(poster) {
+  opacity: 1;
+  transition: opacity var(--media-poster-image-transition-duration)
+    var(--media-poster-image-transition-timing-function);
+  filter: blur(30px);
+}
+
+.muxPlayer::part(poster-image) {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  /* add blur */
 }
