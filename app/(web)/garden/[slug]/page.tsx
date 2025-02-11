@@ -1,4 +1,5 @@
 import type { SingleGardenItemQueryResult } from "@/sanity.types";
+import type { Metadata, ResolvingMetadata } from "next";
 
 import { GardenBreadcrumb } from "@/components/breadcrumb/garden";
 import * as FadeIn from "@/components/motion/staggers/fade";
@@ -11,6 +12,21 @@ import { singleGardenItemQuery } from "@/sanity/queries/page";
 //   // const slugs = ["1", "2", "3", "4", "5", "6"];
 //   // return slugs.map((slug) => ({ id: slug }));
 // }
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+export async function generateMetadata(props: Props, parent: ResolvingMetadata): Promise<Metadata> {
+  const params = await props.params;
+  const slug = params.slug;
+  const gardenItem: SingleGardenItemQueryResult = await sanityFetch({
+    query: singleGardenItemQuery,
+    tags: ["gardenItem"],
+    qParams: { slug: slug }, // add slug from next-js params
+  });
+  return {
+    title: `Szymon Eda Hernik | ${gardenItem?.title}`,
+  };
+}
 
 export function generateStaticParams() {
   return generateStaticSlugs("gardenItem");

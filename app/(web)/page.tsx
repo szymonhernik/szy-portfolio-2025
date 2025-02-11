@@ -11,6 +11,8 @@ import RandomAnimation from "./_components/RandomAnimation";
 export async function generateMetadata() {
   return {
     title: "Szymon Eda Hernik | Projects",
+    description:
+      "Szymon Eda Hernik is a graphic designer and front-end web developer.They also form half of isz szi studio, an artistic design studio based in Brussels.",
   };
 }
 export default async function Page() {

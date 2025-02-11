@@ -7,6 +7,13 @@ import { gardenItemsQuery } from "@/sanity/queries/page";
 
 import { Suspense } from "react";
 
+export async function generateMetadata() {
+  return {
+    title: "Szymon Eda Hernik | Garden",
+    description: "An archive of ideas, thoughts, photographs, and other documents.",
+  };
+}
+
 export default async function Page() {
   const gardenItems: GardenItemsQueryResult = await sanityFetch({
     query: gardenItemsQuery,
