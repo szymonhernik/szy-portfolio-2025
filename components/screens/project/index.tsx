@@ -130,6 +130,7 @@ export default function ProjectPage({
         </FadeIn.Item>
       </FadeIn.Container>
       <div className="max-lg:mt-X max-lg:text-fluid-lg lg:sticky lg:bottom-4 lg:z-[0] lg:mt-[-2.45rem] lg:ml-auto lg:w-fit">
+        {/* <div className="max-lg:mt-X max-lg:text-fluid-lg lg:sticky lg:bottom-4  lg:left-auto lg:z-[0] lg:right-4 lg:mt-[-2.45rem] lg:ml-auto lg:w-fit"> */}
         {nextProject && (
           <div>
             Next:{" "}
@@ -143,7 +144,6 @@ export default function ProjectPage({
         )}
       </div>
       <Footer className="max-lg:mt-4" />
-      <OpenGardenItem slug={"isz-szi-studio"}>isz szi studio </OpenGardenItem>
 
       <FullCarouselModal />
     </CarouselProvider>
