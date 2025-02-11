@@ -8,10 +8,10 @@ export function Footer({ className }: { className?: string }) {
   return (
     <div className={clsx("mt-X grid w-full grid-cols-1 sm:text-small md:grid-cols-3 md:gap-4 lg:text-small-md", className)}>
       <div className="text-secondary">
-        February 2025 ©{" "}
         <Link href="/" className="hover:font-outline-1-secondary">
-          Szymon Hernik
-        </Link>
+          Szymon Eda Hernik
+        </Link>{" "}
+        <span className="text-secondary">©</span> February 2025
       </div>
       <div className="text-left max-md:hidden md:text-center">
         <Link href="mailto:hello@szymonhernik.com" className="text-secondary hover:font-outline-1-secondary">
