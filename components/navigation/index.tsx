@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 export default function NavigationDesktop() {
   return (
@@ -75,16 +75,76 @@ function MobileSheet({
   toggle: (isOpen: boolean) => void;
 }) {
   const pathname = usePathname();
+  const initialScrollRef = useRef<number | null>(null);
+  const isBodyLockedRef = useRef(false);
+  const isClosingRef = useRef(false);
+
+  // Handle scroll locking
+  useLayoutEffect(() => {
+    if (isOpen) {
+      if (!isBodyLockedRef.current && initialScrollRef.current === null) {
+        initialScrollRef.current = window.scrollY;
+        isBodyLockedRef.current = true;
+
+        document.body.style.position = "fixed";
+        document.body.style.top = `-${initialScrollRef.current}px`;
+        document.body.style.width = "100%";
+        document.body.style.overflow = "hidden";
+      }
+    } else {
+      if (isBodyLockedRef.current) {
+        const scrollTarget = initialScrollRef.current;
+
+        initialScrollRef.current = null;
+        isBodyLockedRef.current = false;
+
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.width = "";
+        document.body.style.overflow = "";
+
+        if (scrollTarget !== null) {
+          window.scrollTo({
+            top: scrollTarget,
+            behavior: "instant",
+          });
+        }
+      }
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
+
+  const handleClose = (e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Prevent double-closing
+    if (isClosingRef.current) return;
+    isClosingRef.current = true;
+
+    toggle(false);
+
+    // Reset the closing ref after a short delay
+    setTimeout(() => {
+      isClosingRef.current = false;
+    }, 100);
+  };
 
   return (
     <div
       className={clsx(
-        "fixed inset-0 z-[90] flex h-[100dvh] w-screen flex-col items-center justify-center overscroll-none overscroll-y-contain bg-background transition-transform duration-300 md:hidden",
+        "fixed inset-0 z-[90] flex h-[100dvh] w-screen flex-col items-center justify-center overscroll-none bg-background transition-transform duration-300 md:hidden",
         "translate-y-0",
       )}
+      onTouchMove={(e) => e.preventDefault()}
     >
-      <button type="button" className="absolute top-4 right-4 text-fluid-xl hover:font-outline-1-black" onClick={() => toggle(false)}>
+      <button
+        type="button"
+        className="absolute top-0 right-0 z-[100] p-4 text-fluid-xl hover:font-outline-1-black"
+        onClick={handleClose}
+        onTouchEnd={handleClose}
+      >
         X
       </button>
       <nav>
