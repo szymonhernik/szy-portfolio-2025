@@ -34,11 +34,11 @@ export const videoLibrary = [
     url: "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3hY9b9KntPJVlAuI0ioqLGfWy9bS1Hp4tmsCzh",
     size: "lightweight",
   },
-  {
-    id: 8,
-    url: "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3hBeBjPVm27HgCTMsxj3Xdn6WAewru0OaiZRI8",
-    size: "lightweight",
-  },
+  // {
+  //   id: 8,
+  //   url: "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3hBeBjPVm27HgCTMsxj3Xdn6WAewru0OaiZRI8",
+  //   size: "lightweight",
+  // },
   {
     id: 9,
     url: "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3haPsAJi6B6Eym7ngTVl83vurtqASXhwxsfkIM",
