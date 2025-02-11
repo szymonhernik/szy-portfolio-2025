@@ -68,14 +68,14 @@
     text-rendering: optimizelegibility;
   }
 
-  /* *::selection {
-    color: var(--selection-foreground);
-    background-color: var(--selection-background);
-  } */
+  *::selection {
+    color: #000000;
+    background: #adadad;
+  }
 
   html,
   main {
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 
     /* scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track); */
 
