@@ -48,9 +48,7 @@ export default function MuxPlayerWrapper({
   }, []);
 
   const thumbnailWidth = 16;
-  const thumbnailHeight = Math.round(
-    thumbnailWidth / (Number(video.aspectRatio) || 16 / 9),
-  );
+  const thumbnailHeight = Math.round(thumbnailWidth / (Number(video.aspectRatio) || 16 / 9));
   const placeholderUrl = `https://image.mux.com/${video.playbackId}/thumbnail.webp?width=${thumbnailWidth}&height=${thumbnailHeight}`;
 
   return (
@@ -145,7 +143,7 @@ export default function MuxPlayerWrapper({
       <MuxPlayer
         ref={playerRef}
         className={clsx(
-          "h-full min-h-full w-full min-w-full object-cover overflow-hidden",
+          "h-full min-h-full w-full min-w-full overflow-hidden object-cover",
           styles.muxPlayer,
           !allowAudio && styles.hideAudio,
           controlsOff && styles.controlsOff,

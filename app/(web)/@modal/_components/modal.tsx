@@ -3,13 +3,7 @@
 import type { ElementRef } from "react";
 
 import { useRouter } from "next/navigation";
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
 export function Modal({ children }: { children: React.ReactNode }) {
@@ -94,21 +88,9 @@ export function Modal({ children }: { children: React.ReactNode }) {
   if (!modalRoot) throw new Error("Modal root element not found");
 
   return createPortal(
-    <dialog
-      ref={dialogRef}
-      data-dialog-type="modal"
-      className="z-[10] m-0 h-[100dvh] w-screen  bg-background "
-      onClose={onDismiss}
-    >
-      <div
-        ref={scrollableRef}
-        className="relative h-full w-full p-4 overflow-y-auto"
-      >
-        <button
-          type="button"
-          onClick={onDismiss}
-          className="fixed top-0 right-0 z-[20] p-4 text-fluid-xl hover:font-outline-1-black md:text-fluid-base"
-        >
+    <dialog ref={dialogRef} data-dialog-type="modal" className="z-[10] m-0 h-[100dvh] w-screen bg-background " onClose={onDismiss}>
+      <div ref={scrollableRef} className="relative h-full w-full overflow-y-auto p-4">
+        <button type="button" onClick={onDismiss} className="fixed top-0 right-0 z-[20] p-4 text-fluid-xl hover:font-outline-1-black md:text-fluid-base">
           X
         </button>
         {/* content ref to disable body scroll */}

@@ -42,24 +42,12 @@ const portableTextComponents: PortableTextProps["components"] = {
     // },
   },
   block: {
-    normal: ({ children }) => (
-      <p style={{ marginBottom: "1rem" }}>{children}</p>
-    ),
-    h1: ({ children }) => (
-      <h1 style={{ marginBottom: "1rem", marginTop: "1rem" }}>{children}</h1>
-    ),
-    h2: ({ children }) => (
-      <h2 style={{ marginBottom: "1rem", marginTop: "1rem" }}>{children}</h2>
-    ),
-    h3: ({ children }) => (
-      <h3 style={{ marginBottom: "1rem", marginTop: "1rem" }}>{children}</h3>
-    ),
-    h4: ({ children }) => (
-      <h4 style={{ marginBottom: "1rem", marginTop: "1rem" }}>{children}</h4>
-    ),
-    h5: ({ children }) => (
-      <h5 style={{ marginBottom: "1rem", marginTop: "1rem" }}>{children}</h5>
-    ),
+    normal: ({ children }) => <p style={{ marginBottom: "1rem" }}>{children}</p>,
+    h1: ({ children }) => <h1 style={{ marginBottom: "1rem", marginTop: "1rem" }}>{children}</h1>,
+    h2: ({ children }) => <h2 style={{ marginBottom: "1rem", marginTop: "1rem" }}>{children}</h2>,
+    h3: ({ children }) => <h3 style={{ marginBottom: "1rem", marginTop: "1rem" }}>{children}</h3>,
+    h4: ({ children }) => <h4 style={{ marginBottom: "1rem", marginTop: "1rem" }}>{children}</h4>,
+    h5: ({ children }) => <h5 style={{ marginBottom: "1rem", marginTop: "1rem" }}>{children}</h5>,
     blockquote: ({ children }) => (
       <blockquote
         style={
@@ -78,10 +66,7 @@ const portableTextComponents: PortableTextProps["components"] = {
   },
   marks: {
     link: ({ value, children }) => {
-      const isExternal =
-        (value?.href || "").startsWith("http") ||
-        (value?.href || "").startsWith("https") ||
-        (value?.href || "").startsWith("mailto");
+      const isExternal = (value?.href || "").startsWith("http") || (value?.href || "").startsWith("https") || (value?.href || "").startsWith("mailto");
       const target = isExternal ? "_blank" : undefined;
       return (
         <Link
@@ -127,12 +112,8 @@ const portableTextComponents: PortableTextProps["components"] = {
     ),
   },
   listItem: {
-    bullet: ({ children }) => (
-      <li style={{ marginBottom: "0.5rem" }}>{children}</li>
-    ),
-    number: ({ children }) => (
-      <li style={{ marginBottom: "0.5rem" }}>{children}</li>
-    ),
+    bullet: ({ children }) => <li style={{ marginBottom: "0.5rem" }}>{children}</li>,
+    number: ({ children }) => <li style={{ marginBottom: "0.5rem" }}>{children}</li>,
   },
 };
 
