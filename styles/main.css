@@ -73,6 +73,10 @@
     background: #adadad;
   }
 
+  main {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
   html,
   main {
     /* overflow-x: hidden; */

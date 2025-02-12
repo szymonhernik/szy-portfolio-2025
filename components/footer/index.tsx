@@ -6,7 +6,12 @@ import { useEffect, useState } from "react";
 
 export function Footer({ className }: { className?: string }) {
   return (
-    <div className={clsx("mt-X grid w-full grid-cols-1 sm:text-small md:grid-cols-3 md:gap-4 lg:text-small-md", className)}>
+    <div
+      className={clsx(
+        "mt-X grid w-full grid-cols-1 sm:text-small md:grid-cols-3 md:gap-4 lg:text-small-md",
+        className,
+      )}
+    >
       <div className="text-secondary">
         <Link href="/" className="hover:font-outline-1-secondary">
           Szymon Eda Hernik
@@ -14,12 +19,16 @@ export function Footer({ className }: { className?: string }) {
         <span className="text-secondary">©</span> February 2025
       </div>
       <div className="text-left max-md:hidden md:text-center">
-        <Link href="mailto:hello@szymonhernik.com" className="text-secondary hover:font-outline-1-secondary">
+        {" "}
+        <Link
+          href="mailto:hello@szymonhernik.com"
+          className="text-secondary hover:font-outline-1-secondary"
+        >
           hello@szymonhernik.com
         </Link>
       </div>
       <div className="text-left max-md:hidden md:text-right">
-        <TimeInBrussels />
+        {/* <TimeInBrussels /> */}
       </div>
     </div>
   );
