@@ -1,29 +1,81 @@
 import type { SingleProjectQueryResult } from "@/sanity.types";
-import type { CarouselBlock } from "@/types/blocks";
 
+import { FullCarouselModal } from "@/components/FullCarouselModal";
 import Blocks from "@/components/blocks";
 import { Footer } from "@/components/footer";
-import { FullCarouselModal } from "@/components/FullCarouselModal";
 import * as FadeIn from "@/components/motion/staggers/fade";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import TagLink from "@/components/tag-link";
 import { CarouselProvider } from "@/contexts/CarouselContext";
+import type { CarouselBlock } from "@/types/blocks";
 
 import Link from "next/link";
+
+// export default function ProjectPage({
+//   project,
+// }: {
+//   project: NonNullable<SingleProjectQueryResult>;
+// }) {
+//   const currentProjectIndex = project.showcaseProjects?.findIndex(
+//     (showcaseProject) => showcaseProject.slug === project.slug,
+//   );
+
+//   // if the current project index is the last in the array get the first one
+//   const nextProject =
+//     currentProjectIndex === undefined ||
+//     currentProjectIndex === (project.showcaseProjects?.length ?? 0) - 1
+//       ? project.showcaseProjects?.[0]
+//       : project.showcaseProjects?.[currentProjectIndex + 1];
+
+//   return (
+//     <CarouselProvider>
+//       <main className="relative px-4 grid grid-cols-12 ">
+//         <div className="col-span-7 items-start py-4">
+//           <div className="col-span-12 flex flex-col gap-X lg:col-span-7">
+//             <section className="">
+//               <h1 className="text-fluid-xl max-md:pr-6">{project.title}</h1>
+
+//               {project.body && <PortableTextRenderer value={project.body} />}
+//             </section>
+//             {project.blocks && <Blocks blocks={project.blocks} />}
+//             {project.hasSubprojects &&
+//               project.subprojects &&
+//               project.subprojects.length > 0 &&
+//               project.subprojects.map((subproject) => (
+//                 <Subproject key={subproject._id} subproject={subproject} />
+//               ))}
+//           </div>
+//         </div>
+//         <div className="sticky top-0 right-0 left-auto text-right flex flex-col col-span-5 pb-2 justify-end h-screen ">
+//           {nextProject && (
+//             <div>
+//               Next:{" "}
+//               <Link
+//                 href={`/projects/${nextProject.slug}`}
+//                 className="text-secondary hover:font-outline-1-secondary"
+//               >
+//                 {nextProject.title}
+//               </Link>
+//             </div>
+//           )}
+//         </div>
+//       </main>
+
+//       <Footer className="max-lg:mt-4 col-span-12" />
+//     </CarouselProvider>
+//   );
+// }
 
 export default function ProjectPage({
   project,
 }: {
   project: NonNullable<SingleProjectQueryResult>;
 }) {
-  const currentProjectIndex = project.showcaseProjects?.findIndex(
-    (showcaseProject) => showcaseProject.slug === project.slug,
-  );
+  const currentProjectIndex = project.showcaseProjects?.findIndex((showcaseProject) => showcaseProject.slug === project.slug);
 
   // if the current project index is the last in the array get the first one
   const nextProject =
-    currentProjectIndex === undefined ||
-    currentProjectIndex === (project.showcaseProjects?.length ?? 0) - 1
+    currentProjectIndex === undefined || currentProjectIndex === (project.showcaseProjects?.length ?? 0) - 1
       ? project.showcaseProjects?.[0]
       : project.showcaseProjects?.[currentProjectIndex + 1];
 
@@ -72,21 +124,16 @@ export default function ProjectPage({
     <CarouselProvider initialSlides={getAllSlides()}>
       <FadeIn.Container>
         <FadeIn.Item>
-          <article className="grid grid-cols-12 items-start ">
-            <div className="col-span-12 flex flex-col gap-X lg:col-span-7">
+          <main className="relative grid grid-cols-12 px-4 ">
+            <article className="col-span-12 flex flex-col gap-X py-4 lg:col-span-7">
               <section className="">
                 <h1 className="text-fluid-xl max-md:pr-6">{project.title}</h1>
                 {/* if project has subprojects dont check categories on project but on subprojects and combine them into an array */}
-                {project.hasSubprojects &&
-                project.subprojects &&
-                project.subprojects.length > 0 ? (
+                {project.hasSubprojects && project.subprojects && project.subprojects.length > 0 ? (
                   <div className="text-secondary max-md:pr-6 sm:text-small lg:text-small-md">
                     {project.subprojects
                       .flatMap((subproject) => subproject.categories)
-                      .filter(
-                        (category): category is NonNullable<typeof category> =>
-                          category !== null,
-                      )
+                      .filter((category): category is NonNullable<typeof category> => category !== null)
                       .map((category, index, array) => (
                         <>
                           {/* biome-ignore lint/style/noNonNullAssertion: this is not null */}
@@ -114,36 +161,27 @@ export default function ProjectPage({
                 )}
                 {project.body && <PortableTextRenderer value={project.body} />}
               </section>
-              {/* ignore ts warning in the line below */}
+
               {/* @ts-ignore */}
               {project.blocks && <Blocks blocks={project.blocks} />}
               {project.hasSubprojects &&
                 project.subprojects &&
                 project.subprojects.length > 0 &&
-                project.subprojects.map((subproject) => (
-                  <Subproject key={subproject._id} subproject={subproject} />
-                ))}
-              {/* <p className="text-[16px] text-secondary">Web Design, Full-Stack Development, Wordpress, Editorial Design, Graphic Design</p> */}
+                project.subprojects.map((subproject) => <Subproject key={subproject._id} subproject={subproject} />)}
+            </article>
+            <div className="col-span-12 max-lg:mt-X max-lg:text-fluid-lg lg:sticky lg:top-0 lg:col-span-5 lg:flex lg:h-screen lg:flex-col lg:justify-end lg:pb-4 lg:text-right">
+              {nextProject && (
+                <div>
+                  Next:{" "}
+                  <Link href={`/projects/${nextProject.slug}`} className="text-secondary hover:font-outline-1-secondary">
+                    {nextProject.title}
+                  </Link>
+                </div>
+              )}
             </div>
-          </article>
+          </main>
         </FadeIn.Item>
       </FadeIn.Container>
-
-      <div className="max-lg:mt-X max-lg:text-fluid-lg lg:fixed lg:right-4  lg:bottom-4 lg:z-[0] lg:mt-[-2.45rem] lg:ml-auto lg:w-fit">
-        {/* <div className="max-lg:mt-X max-lg:text-fluid-lg lg:sticky lg:bottom-4  lg:left-auto lg:z-[0] lg:right-4 lg:mt-[-2.45rem] lg:ml-auto lg:w-fit"> */}
-        {nextProject && (
-          <div>
-            Next:{" "}
-            <Link
-              href={`/projects/${nextProject.slug}`}
-              className="text-secondary hover:font-outline-1-secondary"
-            >
-              {nextProject.title}
-            </Link>
-          </div>
-        )}
-      </div>
-      {/* <NextProjectLink nextProject={nextProject} /> */}
 
       <Footer className="max-lg:mt-4" />
 
@@ -155,16 +193,10 @@ export default function ProjectPage({
 function Subproject({
   subproject,
 }: {
-  subproject: NonNullable<
-    NonNullable<SingleProjectQueryResult>["subprojects"]
-  >[number];
+  subproject: NonNullable<NonNullable<SingleProjectQueryResult>["subprojects"]>[number];
 }) {
   return (
-    <div
-      id={
-        subproject.slug && subproject.slug !== "" ? subproject.slug : undefined
-      }
-    >
+    <div id={subproject.slug && subproject.slug !== "" ? subproject.slug : undefined}>
       {/* @ts-ignore */}
       {subproject.blocks && <Blocks blocks={subproject.blocks} />}
     </div>

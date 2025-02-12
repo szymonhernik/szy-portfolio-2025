@@ -37,10 +37,8 @@ export default function RandomAnimation({
 
   const videoSize = randomVideo.size === "lightweight" ? "max-w-[240px] max-h-[240px]" : "md:max-w-[140px] md:max-h-[140px] max-w-[90px] max-h-[90px]";
 
-  console.log("randomVideo", randomVideo);
-
   return (
-    <div className="absolute top-0 left-0 z-[0] h-screen max-h-screen w-screen max-w-screen overflow-hidden mix-blend-darken">
+    <div className="absolute top-0 left-0 z-[0] h-screen max-h-screen w-full max-w-full overflow-hidden mix-blend-darken">
       <video src={randomVideo.url} playsInline autoPlay muted controls={false} className={`${videoSize} absolute `} style={randomPosition} />
     </div>
   );

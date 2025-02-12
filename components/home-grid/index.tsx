@@ -24,16 +24,14 @@ export default function HomeGrid({
               : `/projects/${project.slug}`;
 
           return (
-            <Link key={project._id} href={href} className="group block">
-              <div className="flex h-full flex-col justify-end">
-                {/* <div className="relative mb-4 w-full"> */}
+            <Link key={project._id} href={href} className="">
+              <div className="flex h-full flex-col justify-end ">
                 <div
                   className="relative mb-4 w-full"
                   style={{
                     aspectRatio: project.mainImage?.aspectRatio ?? "4 / 3",
                   }}
                 >
-                  {/* if not main image dont render the image at all */}
                   <Image
                     src={project.mainImage?.image ?? ""}
                     alt={"TODO: temporary alt text"}

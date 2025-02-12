@@ -1,10 +1,9 @@
 import "@/styles/main.css";
 
-import type { Metadata } from "next";
-
 import NavigationDesktop, { NavigationMobile } from "@/components/navigation";
 import { Providers } from "@/components/providers";
 import { OpenGraph } from "@/lib/og";
+import type { Metadata } from "next";
 
 import clsx from "clsx";
 import localFont from "next/font/local";
@@ -27,18 +26,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={clsx(zimula.className)} suppressHydrationWarning>
       <head>{/* <script src="https://unpkg.com/react-scan/dist/auto.global.js" /> */}</head>
-      <body className="w-screen overflow-x-hidden">
+      <body className="">
         <Providers>
           {modal}
           <div id="modal-root" />
           <div id="full-screen-carousel-root" />
-          <main className="px-4 py-4">
-            <NavigationMobile />
-            <NavigationDesktop />
-            <article className="article ">{children}</article>
-          </main>
 
-          {/* <Footer /> */}
+          <NavigationMobile />
+          <NavigationDesktop />
+          {children}
         </Providers>
       </body>
     </html>

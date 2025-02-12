@@ -22,8 +22,7 @@ export default function NextProjectLink({
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
       const scrollPosition = window.scrollY;
-      const distanceFromBottom =
-        documentHeight - (scrollPosition + windowHeight);
+      const distanceFromBottom = documentHeight - (scrollPosition + windowHeight);
 
       // When we're within 140px of the bottom, adjust the position
       if (distanceFromBottom < 140) {
@@ -40,17 +39,11 @@ export default function NextProjectLink({
   }, []);
 
   return nextProject ? (
-    <div
-      className={`max-lg:hidden lg:fixed lg:right-4 lg:z-[0] lg:ml-auto lg:w-fit`}
-      style={{ bottom: `${bottomOffset}px` }}
-    >
+    <div className={"max-lg:hidden lg:fixed lg:right-4 lg:z-[0] lg:ml-auto lg:w-fit"} style={{ bottom: `${bottomOffset}px` }}>
       {nextProject && (
         <div>
           Next:{" "}
-          <Link
-            href={`/projects/${nextProject.slug}`}
-            className="text-secondary hover:font-outline-1-secondary"
-          >
+          <Link href={`/projects/${nextProject.slug}`} className="text-secondary hover:font-outline-1-secondary">
             {nextProject.title}
           </Link>
         </div>

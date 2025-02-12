@@ -29,7 +29,9 @@ export default async function Page() {
       <RandomAnimation expectedPath="/" />
       <FadeIn.Container>
         <FadeIn.Item>
-          <Home showcaseProjects={projects.showcaseProjects} />
+          <main className="p-4">
+            <Home showcaseProjects={projects.showcaseProjects} />
+          </main>
           <Footer />
         </FadeIn.Item>
       </FadeIn.Container>

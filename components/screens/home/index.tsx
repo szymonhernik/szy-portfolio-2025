@@ -12,8 +12,7 @@ function IntroText() {
       <br className="block md:hidden" />
       <br className="block md:hidden" />
       <span className="block md:inline ">
-        They also form half of{" "}
-        <OpenGardenItem slug="isz-szi-studio">isz szi studio</OpenGardenItem>,
+        They also form half of <OpenGardenItem slug="isz-szi-studio">isz szi studio</OpenGardenItem>,
         {/* <Link
           href="/iszszistudio"
           className="text-link hover:font-outline-1-secondary"
@@ -29,10 +28,7 @@ function ListSeed() {
   return (
     <p className="mt-0 ">
       A random inspiration from a rather{" "}
-      <Link
-        href="/garden"
-        className="text-secondary hover:font-outline-1-secondary"
-      >
+      <Link href="/garden" className="text-secondary hover:font-outline-1-secondary">
         unsorted list
       </Link>{" "}
       is: <OpenGardenItem slug="27-30-covers">27 30 @ Covers</OpenGardenItem>
@@ -46,48 +42,17 @@ export default function Home({
   showcaseProjects: NonNullable<ProjectQueryResult>["showcaseProjects"];
 }) {
   return (
-    <section className="grid grid-cols-12 items-start">
+    <section className="grid w-full max-w-full grid-cols-12 items-start">
       <div className="col-span-12 md:col-span-10 ">
-        {/* <FadeIn.Item> */}
         <div className="flex flex-col gap-4 md:flex-col-reverse">
           <IntroText />
           <ListSeed />
         </div>
-        {/* </FadeIn.Item> */}
       </div>
 
-      <div className="col-span-12 mt-X">
-        {/* <FadeIn.Item> */}
+      <div className="col-span-12 mt-X max-w-full ">
         <HomeGrid showcaseProjects={showcaseProjects} />
-        {/* </FadeIn.Item> */}
       </div>
     </section>
-
-    // </FadeIn.Container>
   );
-  // <FadeIn.Container>
-  // {/* <FadeIn.Item>
-  //   <div className="flex justify-between">
-  //     <div>
-  //       <h1>Sylph</h1>
-  //       <h2>Next.js Portfolio Starter</h2>
-  //     </div>
-  //   </div>
-  // </FadeIn.Item>
-  // <Spacer /> */}
-  // {/* <FadeIn.Item>
-  //   <Link href="/information">Information</Link>
-  // </FadeIn.Item> */}
-  // {/* <FadeIn.Item>
-  //   <Posts category="guides" />
-  // </FadeIn.Item>
-  // <FadeIn.Item>
-  //   <Posts category="examples" />
-  // </FadeIn.Item>
-  // <Spacer />
-  // <FadeIn.Item>
-  //   <Footer />
-  // </FadeIn.Item>
-  //  */}
-  // </FadeIn.Container>
 }
