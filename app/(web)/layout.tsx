@@ -1,10 +1,12 @@
 import "@/styles/main.css";
 
+import type { Metadata } from "next";
+
 import NavigationDesktop, { NavigationMobile } from "@/components/navigation";
 import { Providers } from "@/components/providers";
 import { OpenGraph } from "@/lib/og";
-import type { Metadata } from "next";
 
+import { Analytics } from "@vercel/analytics/react";
 import clsx from "clsx";
 import localFont from "next/font/local";
 
@@ -25,7 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={clsx(zimula.className)} suppressHydrationWarning>
-      <head>{/* <script src="https://unpkg.com/react-scan/dist/auto.global.js" /> */}</head>
+      <head>
+        {/* <script src="https://unpkg.com/react-scan/dist/auto.global.js" /> */}
+      </head>
       <body className="">
         <Providers>
           {modal}
@@ -36,6 +40,7 @@ export default function RootLayout({
           <NavigationDesktop />
           {children}
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
