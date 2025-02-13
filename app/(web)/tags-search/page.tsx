@@ -12,6 +12,27 @@ export async function generateMetadata() {
   return {
     title: "Szymon Eda Hernik | Tags Search",
     description: "Search for projects by tags",
+    openGraph: {
+      title: "Szymon Eda Hernik | Tags Search",
+      description:
+        "Szymon Eda Hernik is a graphic designer and front-end web developer.They also form half of isz szi studio, an artistic design studio based in Brussels.",
+      images: [
+        {
+          url: "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3h0u9niebQjxyeDUGSL6shz8biAqZE7mlRkpw0",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Szymon Eda Hernik | Tags Search",
+      description:
+        "Szymon Eda Hernik is a graphic designer and front-end web developer.They also form half of isz szi studio, an artistic design studio based in Brussels.",
+      images: [
+        {
+          url: "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3h0u9niebQjxyeDUGSL6shz8biAqZE7mlRkpw0",
+        },
+      ],
+    },
   };
 }
 export default async function Page() {
