@@ -46,7 +46,9 @@ export default async function Page() {
     <FadeIn.Container>
       <FadeIn.Item>
         <Suspense>
-          <GardenItems mode="static" items={gardenItems} />
+          <main className="p-4">
+            <GardenItems mode="static" items={gardenItems} />
+          </main>
         </Suspense>
       </FadeIn.Item>
     </FadeIn.Container>
