@@ -27,9 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={clsx(zimula.className)} suppressHydrationWarning>
-      <head>
-        {/* <script src="https://unpkg.com/react-scan/dist/auto.global.js" /> */}
-      </head>
+      <head>{/* <script src="https://unpkg.com/react-scan/dist/auto.global.js" /> */}</head>
       <body className="">
         <Providers>
           {modal}

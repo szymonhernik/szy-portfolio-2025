@@ -10,12 +10,10 @@ import { Suspense } from "react";
 export async function generateMetadata() {
   return {
     title: "Szymon Eda Hernik | Garden",
-    description:
-      "An archive of ideas, thoughts, photographs, and other documents.",
+    description: "An archive of ideas, thoughts, photographs, and other documents.",
     openGraph: {
       title: "Szymon Eda Hernik | Garden",
-      description:
-        "An archive of ideas, thoughts, photographs, and other documents.",
+      description: "An archive of ideas, thoughts, photographs, and other documents.",
       images: [
         {
           url: "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3h0u9niebQjxyeDUGSL6shz8biAqZE7mlRkpw0",
@@ -25,8 +23,7 @@ export async function generateMetadata() {
     twitter: {
       card: "summary_large_image",
       title: "Szymon Eda Hernik | Garden",
-      description:
-        "An archive of ideas, thoughts, photographs, and other documents.",
+      description: "An archive of ideas, thoughts, photographs, and other documents.",
       images: [
         {
           url: "https://gmri4o54mi.ufs.sh/f/xbYCNI2PzB3h0u9niebQjxyeDUGSL6shz8biAqZE7mlRkpw0",

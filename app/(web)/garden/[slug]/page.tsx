@@ -15,10 +15,7 @@ import { singleGardenItemQuery } from "@/sanity/queries/page";
 type Props = {
   params: Promise<{ slug: string }>;
 };
-export async function generateMetadata(
-  props: Props,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata(props: Props, parent: ResolvingMetadata): Promise<Metadata> {
   const params = await props.params;
   const slug = params.slug;
   const gardenItem: SingleGardenItemQueryResult = await sanityFetch({
@@ -50,7 +47,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   return (
     <FadeIn.Container className="">
       <FadeIn.Item>
-        <main className="p-4 min-h-screen flex h-full flex-col ">
+        <main className="flex h-full min-h-screen flex-col p-4 ">
           <GardenBreadcrumb title={gardenItem.title} />
 
           <GardenItem item={gardenItem} />

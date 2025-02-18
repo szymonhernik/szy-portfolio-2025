@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://szy-portfolio-2025.vercel.app/
+Host: https://szymonhernik.com
 
 # Sitemaps
-Sitemap: https://szy-portfolio-2025.vercel.app/sitemap.xml
+Sitemap: https://szymonhernik.com/sitemap.xml

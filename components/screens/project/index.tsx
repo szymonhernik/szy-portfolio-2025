@@ -1,4 +1,5 @@
 import type { SingleProjectQueryResult } from "@/sanity.types";
+import type { CarouselBlock } from "@/types/blocks";
 
 import { FullCarouselModal } from "@/components/FullCarouselModal";
 import Blocks from "@/components/blocks";
@@ -7,7 +8,6 @@ import * as FadeIn from "@/components/motion/staggers/fade";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import TagLink from "@/components/tag-link";
 import { CarouselProvider } from "@/contexts/CarouselContext";
-import type { CarouselBlock } from "@/types/blocks";
 
 import Link from "next/link";
 

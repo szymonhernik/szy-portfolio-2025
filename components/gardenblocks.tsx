@@ -28,10 +28,7 @@ const componentMap: { [key: string]: React.ComponentType<any> } = {
   richTextAndImageWithCaption: RichTextAndImageWithCaption,
 };
 
-type ImageWithCaptionBlock = Extract<
-  NonNullable<NonNullable<SingleGardenItemQueryResult>["gardenBlocks"]>[number],
-  { _type: "imageWithCaption" }
->;
+type ImageWithCaptionBlock = Extract<NonNullable<NonNullable<SingleGardenItemQueryResult>["gardenBlocks"]>[number], { _type: "imageWithCaption" }>;
 
 type RichTextAndImageWithCaptionBlock = Extract<
   NonNullable<NonNullable<SingleGardenItemQueryResult>["gardenBlocks"]>[number],
@@ -41,7 +38,7 @@ type RichTextAndImageWithCaptionBlock = Extract<
 function ImageWithCaption({ image, caption }: ImageWithCaptionBlock) {
   return (
     <div
-      className="flex flex-1 h-full flex-col justify-between"
+      className="flex h-full flex-1 flex-col justify-between"
       // style={{ minHeight: "calc(100dvh - 2rem)" }}
     >
       <div className="" />
@@ -67,25 +64,14 @@ function ImageWithCaption({ image, caption }: ImageWithCaptionBlock) {
   );
 }
 
-type TextGardenBlock = Extract<
-  NonNullable<NonNullable<SingleGardenItemQueryResult>["gardenBlocks"]>[number],
-  { _type: "textGarden" }
->;
+type TextGardenBlock = Extract<NonNullable<NonNullable<SingleGardenItemQueryResult>["gardenBlocks"]>[number], { _type: "textGarden" }>;
 function TextGarden({ text }: TextGardenBlock) {
-  return (
-    <div className="mt-4 text-fluid-xl pb-4">
-      {text && <PortableTextRenderer value={text} />}
-    </div>
-  );
+  return <div className="mt-4 pb-4 text-fluid-xl">{text && <PortableTextRenderer value={text} />}</div>;
 }
 
-function RichTextAndImageWithCaption({
-  text,
-  image,
-  caption,
-}: RichTextAndImageWithCaptionBlock) {
+function RichTextAndImageWithCaption({ text, image, caption }: RichTextAndImageWithCaptionBlock) {
   return (
-    <div className="flex flex-1 h-full flex-col justify-between">
+    <div className="flex h-full flex-1 flex-col justify-between">
       {text && (
         <div className="mt-4 grid grid-cols-12">
           <div className="col-span-12 md:col-span-10 lg:col-span-7">

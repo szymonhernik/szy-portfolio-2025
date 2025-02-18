@@ -17,10 +17,7 @@ export function GardenItems({ mode, onItemSelect, items }: GardenItemsProps) {
 
       <div>
         {items.map((item, index) => (
-          <div
-            key={item.slug}
-            className="inline text-fluid-xl hover:font-outline-1-black"
-          >
+          <div key={item.slug} className="inline text-fluid-xl hover:font-outline-1-black">
             {mode === "modal" ? (
               // biome-ignore lint/a11y/useSemanticElements: using span for interactive element
               <span
