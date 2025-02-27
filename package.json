@@ -73,7 +73,8 @@
     "styled-components": "6",
     "tailwind-highlightjs": "^2.0.1",
     "tailwind-merge": "^2.6.0",
-    "unified": "^11.0.5"
+    "unified": "^11.0.5",
+    "typescript": "^5.0.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.3",
