@@ -2,7 +2,10 @@ import type { SingleProjectQueryResult } from "@/sanity.types";
 
 import Image from "next/image";
 
-type ImageInProjectPageBlock = Extract<NonNullable<NonNullable<SingleProjectQueryResult>["blocks"]>[number], { _type: "image-in-project-page" }>;
+type ImageInProjectPageBlock = Extract<
+  NonNullable<NonNullable<SingleProjectQueryResult>["blocks"]>[number],
+  { _type: "image-in-project-page" }
+>;
 export default function ImageInProjectPage({ image }: ImageInProjectPageBlock) {
   if (!image || !image.asset || !image.asset.url) return null;
   function getAspectRatio(image: ImageInProjectPageBlock["image"]) {
@@ -14,7 +17,10 @@ export default function ImageInProjectPage({ image }: ImageInProjectPageBlock) {
   }
 
   return (
-    <div style={{ aspectRatio: getAspectRatio(image) }} className={"relative h-auto w-full"}>
+    <div
+      style={{ aspectRatio: getAspectRatio(image) }}
+      className={"relative h-auto w-full"}
+    >
       <Image
         src={image.asset.url}
         alt={image.alt || ""}
@@ -23,7 +29,7 @@ export default function ImageInProjectPage({ image }: ImageInProjectPageBlock) {
         className="h-full w-full"
         placeholder="blur"
         blurDataURL={image.asset.metadata?.lqip || ""}
-        sizes="(max-width: 768px) 100vw, 50vw"
+        sizes="(max-width: 1024px) 100vw, 50vw"
       />
     </div>
   );
