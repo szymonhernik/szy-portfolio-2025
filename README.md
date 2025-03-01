@@ -19,6 +19,8 @@
 
 ### Carousels
 
+/sync
+
 - [x] style full page carousel
 - [x] in sanity, add a mobile alternative for video and image types
 - [x] add captions in the full page carousel
